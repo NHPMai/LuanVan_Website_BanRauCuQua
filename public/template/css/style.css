@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body, .main-menu > li > a, .ltext-102 {
+    font-family: 'Roboto', sans-serif ;
+}
+.hidden  {
+    display: none !important;
+}
+.breadcrumb-section {
+    display: flex;
+    align-items: center;
+    padding: 70px 0 30px;
+    font-weight: bolder;
+}
+
+.set-bg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+}
