@@ -9,14 +9,14 @@
         <div class="card-body">
 
             <div class="form-group">
-                <label for="menu">Tên Danh Mục</label>
+                <label for="menu">Tên Danh Mục <span class="text-danger">(*)</span></label>
                 <input type="text" name="name" class="form-control"  placeholder="Nhập tên danh mục">
             </div>
 
             <div class="form-group">
                 <label>Danh Mục</label>
                 <select class="form-control" name="parent_id">
-                    <option value="0"> Danh Mục Cha </option>
+                    <option value="0"> Danh Mục Cha </span></option>
                     @foreach($menus as $menu)
                     <option value="{{ $menu->id }}">{{ $menu->name }}</option>
                     @endforeach
@@ -24,18 +24,18 @@
             </div>
 
             <div class="form-group">
-                <label>Mô Tả </label>
+                <label>Mô Tả <span class="text-danger">(*)</span></label>
                 <textarea name="description" class="form-control"></textarea>
             </div>
 
             <div class="form-group">
-                <label>Mô Tả Chi Tiết</label>
+                <label>Mô Tả Chi Tiết <span class="text-danger">(*)</span></label>
                 <textarea name="content" id="content" class="form-control"></textarea>
             </div>
 
 
             <div class="form-group">
-                <label>Kích Hoạt</label>
+                <label>Kích Hoạt <span class="text-danger">(*)</span></label>
                 <div class="custom-control custom-radio">
                     <input class="custom-control-input" value="1" type="radio" id="active" name="active" checked="">
                     <label for="active" class="custom-control-label">Có</label>

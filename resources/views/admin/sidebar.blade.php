@@ -151,22 +151,23 @@
                     </ul>
                 </li>
 
+                <!-- Phiếu Nhập -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-arrows-alt-v"></i>
-                        <p> Kho Hàng
+                        <p> Phiếu Nhập
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/admin/warehousings/add" class="nav-link">
+                            <a href="/admin/warehouses/add" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Dữ Liệu Phiếu Nhập</p>
+                                <p>Thêm Phiếu Nhập</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/warehousings/list" class="nav-link">
+                            <a href="/admin/warehouses/list" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh Sách Phiếu Nhập</p>
                             </a>

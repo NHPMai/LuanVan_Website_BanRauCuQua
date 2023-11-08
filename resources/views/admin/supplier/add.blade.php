@@ -10,14 +10,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="menu">Tên Nhà Cung Cấp</label>
+                    <label for="menu">Tên Nhà Cung Cấp <span class="text-danger">(*)</span></label>
                     <input type="text" name="ncc_ten" value="{{ old('ncc_ten') }}" class="form-control" placeholder="Nhập tên nhà cung cấp">
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="menu">Email</label>
+                    <label for="menu">Email <span class="text-danger">(*)</span></label>
                     <input type="email" name="ncc_email" value="{{ old('ncc_email') }}" class="form-control" placeholder="Nhập Email">
                 </div>
             </div>
@@ -26,28 +26,28 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="menu">Số Điện Thoại</label>
+                    <label for="menu">Số Điện Thoại <span class="text-danger">(*)</span></label>
                     <input type="number" name="ncc_sodienthoai" value="{{ old('ncc_sodienthoai') }}" class="form-control" placeholder="Nhập Số Điện Thoại">
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="menu">Website</label>
+                    <label for="menu">Website <span class="text-danger">(*)</span></label>
                     <input type="text" name="ncc_website" value="{{ old('ncc_website') }}" class="form-control" placeholder="Nhập Website">
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="menu">Địa Chỉ</label>
+            <label for="menu">Địa Chỉ <span class="text-danger">(*)</span></label>
             <input type="text" name="ncc_diachi" value="{{ old('ncc_diachi') }}" class="form-control" placeholder="Nhập địa chỉ">
         </div>
 
 
 
         <div class="form-group">
-            <label>Kích Hoạt</label>
+            <label>Kích Hoạt<span class="text-danger">(*)</span></label>
             <div class="custom-control custom-radio">
                 <input class="custom-control-input" value="1" type="radio" id="active" name="ncc_trangthai" checked="">
                 <label for="active" class="custom-control-label">Có</label>

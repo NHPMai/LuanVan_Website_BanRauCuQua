@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\MagiamgiaController;
 use App\Http\Controllers\Admin\VanChuyenController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\WarehouseController;
 use App\Models\Product;
 use App\Models\Role;
 
@@ -100,13 +101,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         #Phiếu Nhập
-        Route::prefix('brands')->group(function () {
-            Route::get('add', [BrandController::class, 'create']);
-            Route::post('add', [BrandController::class, 'store']);
-            Route::get('list', [BrandController::class, 'index']);
-            Route::get('edit/{brand}', [BrandController::class, 'show']);
-            Route::post('edit/{brand}', [BrandController::class, 'update']);
-            Route::DELETE('destroy', [BrandController::class, 'destroy']);
+        Route::prefix('warehouses')->group(function () {
+            Route::get('add', [WarehouseController::class, 'create']);
+            Route::post('add', [WarehouseController::class, 'store']);
+            Route::get('list', [WarehouseController::class, 'index']);
+            Route::get('edit/{brand}', [WarehouseController::class, 'show']);
+            Route::post('edit/{brand}', [WarehouseController::class, 'update']);
+            Route::DELETE('destroy', [WarehouseController::class, 'destroy']);
         });
 
         // ##Upload

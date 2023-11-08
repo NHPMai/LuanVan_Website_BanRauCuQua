@@ -9,17 +9,17 @@
             <div class="card-body">
 
                 <div class="form-group">
-                    <label for="menu">Tên Thương Hiệu</label>
+                    <label for="menu">Tên Thương Hiệu<span class="text-danger">(*)</span></label>
                     <input type="text" name="ten" value="{{$brand->ten}}" class="form-control"  placeholder="Nhập tên thương hiệu">
                 </div>
 
                 <div class="form-group">
-                    <label >Mô tả</label>
+                    <label >Mô tả <span class="text-danger">(*)</span></label>
                     <textarea name ="mota" class="form-control">{{$brand->mota}}</textarea>
                 </div>
                 
                 <div class="form-group">
-                    <lable>Kích Hoạt</lable>
+                    <lable>Kích Hoạt <span class="text-danger">(*)</span></lable>
                     <div class="custom-control custom-radio">
                         <input class="custom-control-input" value="1" type="radio" id="active" 
                             name="hoatdong"  {{$brand->hoatdong == 1 ? 'checked=""' : ''}}>

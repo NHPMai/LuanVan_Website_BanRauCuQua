@@ -9,17 +9,17 @@
         <div class="card-body">
 
             <div class="form-group">
-                <label for="menu">Tên Thương Hiệu</label>
+                <label for="menu">Tên Thương Hiệu<span class="text-danger">(*)</span></label>
                 <input type="text" name="ten" class="form-control"  placeholder="Nhập tên thương hiệu">
             </div>
 
             <div class="form-group">
-                <label>Mô Tả </label>
+                <label>Mô Tả <span class="text-danger">(*)</span></label>
                 <textarea name="mota" class="form-control"></textarea>
             </div>
 
             <div class="form-group">
-                <label>Kích Hoạt</label>
+                <label>Kích Hoạt <span class="text-danger">(*)</span></label>
                 <div class="custom-control custom-radio">
                     <input class="custom-control-input" value="1" type="radio" id="active" name="hoatdong" checked="">
                     <label for="active" class="custom-control-label">Có</label>
