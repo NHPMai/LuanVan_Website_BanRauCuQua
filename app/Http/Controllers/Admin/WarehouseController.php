@@ -8,10 +8,25 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\NhanVien;
+use App\Models\Product;
 
 class WarehouseController extends Controller
 {
-    
+    public function getProducts()
+    {
+        $products = Product::where('hoatdong',1)->get();
+
+        $output = '<option value=""> Sản Phẩm </option>';
+
+        foreach ($products as $key => $val){
+            $imagePath = asset('/storage/uploads/' . $val->hinhanh);
+            $formattedPrice = number_format($val->gia,0,',','.');
+            $output.= '
+            <option value="' . $val->id . '" data-image="'.$imagePath.'" data-price="'.$formattedPrice.'" >
+            </option>';
+        }
+    }
+
     public function index()
     {
         // $brands = Brand::orderbyDesc('id')->paginate(20);
@@ -58,7 +73,7 @@ class WarehouseController extends Controller
     
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
    

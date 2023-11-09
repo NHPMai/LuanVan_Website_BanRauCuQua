@@ -68,7 +68,7 @@ class MagiamgiaController extends Controller
 
             ],
             [
-                'mgg_tengiamgia.required' => 'Vui lòng nhập tên thương hiệu',
+                'mgg_tengiamgia.required' => 'Vui lòng nhập tên mã giảm giá',
                 'mgg_magiamgia.required' => 'Vui lòng nhập mã giảm giá',
                 'mgg_soluongma.required' => 'Vui lòng nhập số lượng mã',
                 'mgg_loaigiamgia.required' => 'Vui lòng nhập loại giảm giá',
@@ -113,7 +113,7 @@ class MagiamgiaController extends Controller
         return view('admin.coupon.edit', [
             'magiamgia' => $magiamgia,
             'nhanvien' => $nhanvien,
-            'title' => 'Chỉnh Sửa Thương Hiệu ' . $magiamgia->mgg_tengiamgia,
+            'title' => 'Chỉnh Sửa Mã Giảm Giá ' . $magiamgia->mgg_tengiamgia,
         ]);
     }
 
@@ -148,7 +148,7 @@ class MagiamgiaController extends Controller
 
             ],
             [
-                'mgg_tengiamgia.required' => 'Vui lòng nhập tên thương hiệu',
+                'mgg_tengiamgia.required' => 'Vui lòng nhập tên mã giảm giá',
                 'mgg_magiamgia.required' => 'Vui lòng nhập mã giảm giá',
                 'mgg_soluongma.required' => 'Vui lòng nhập số lượng mã',
                 'mgg_loaigiamgia.required' => 'Vui lòng nhập loại giảm giá',
@@ -176,7 +176,7 @@ class MagiamgiaController extends Controller
         $mgg->save();
 
 
-        Session::flash('success', 'Cập nhật thương hiệu thành công!');
+        Session::flash('success', 'Cập nhật mã giảm giá thành công!');
         return redirect('/admin/coupons/list');
     }
 
@@ -186,7 +186,7 @@ class MagiamgiaController extends Controller
         if ($result) {
             return response()->json([
                 'error' => false,
-                'message' => 'Xoá Thương Thiệu Thành Công!'
+                'message' => 'Xoá Mã Giảm Giá Thành Công!'
             ]);
         }
 

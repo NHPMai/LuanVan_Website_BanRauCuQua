@@ -23,4 +23,9 @@ class Phieunhap extends Model
         return $this->hasOne(Nhanvien::class, 'nhanvien_id', 'id')
             ->withDefault(['hoten'=>'']);
     }
+    public function nhacungcaps()
+    {
+        return $this->hasOne(Nhacungcap::class, 'nhacungcap_id', 'id');
+            // ->withDefault(['hoten'=>'']);
+    }
 }

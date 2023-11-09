@@ -30,6 +30,9 @@
 <script src="/template/admin/dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/template/admin/dist/js/pages/dashboard.js"></script>
+<!-- select2 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 <script type="text/javascript">
 $.ajaxSetup({
@@ -267,5 +270,82 @@ $.ajaxSetup({
         })
     </script>
 
+<!-- SELECT2 -->
+<script type="text/javascript">
+    $('#productSelect').select2({
+        templateResult: function(data){
+            if(!data.id){
+                return data.text;
+            }
+            var $template = $('<div class"product-option"></div>');
+            $template.append(data.text);
+            return $template;
+        }
+    });
 
+    //khi người dùng mở custom select box
+    $('#productSelect').on('select2:opening', function(e){
+        $.ajax({
+            url: "{{url('/admin/warehouses/getProducts')}}",
+            method: "GET",
+            success:function (data){
+                //Xóa tất cả các tùy chọn hiện có trong select2
+                $('#productSelect').empty();
+
+                //Thêm tùy chọn mới vào selet2
+                $('#productSelect').append(data);
+            }
+        })
+    });
+
+    $(document).ready(function(){
+        //biến để lưu trữ tổng số lượng và tổng tiền
+        var totalQuantity = 0;
+        var totalPrice = 0;
+
+        //Hàm để cập nhật tổng số lượng và tổng tiền
+        function updateTotals(){
+            totalQuantity = 0;
+
+            //Duyệt qua từng sản phẩm trong bản và tính tổng
+            $('#product-table tbody tr').each(function(){
+                var quantity = parseInt($(this).find('.quantity-input').val());
+
+                if(!isNaN(quantity) && quantity>=1){
+                    totalQuantity +=quantity;
+                }
+            });
+
+            //Cập nhật giá trị vào bảng
+            $('#total-quantity').text(totalQuantity);
+
+            //Cập nhật giá trị của các trường ctpn_soluongnhap và pnn_tongtien
+            $('[name="ctpn_soluong"]').val(totalQuantity);
+            $('[name="pn_tongtiennhap"]').val(totalPrice);
+        }
+    })
+
+    var selectProductPrice;
+    $('#productSelect').on('select2.select', function(e){
+        var selectProduct = e.params.data;
+        //Lấy giá sản phẩm
+        selectProductPrice = parseFloat(selectProduct.element.getAttribute('data-price'));
+        //Lấy tên sản phẩm 
+        var productName = selectProduct.text.split(' - ')[1].trim();
+
+        var productImage = selectProduct.element.getAttribute('data-image');
+
+        //kiểm tra xem sản phẩm có trg bảng chưa
+        var $existingRow = $('#product-table tbody').find('[data-product-id]');
+
+        if($existingRow, length >0){
+            //sản phẩm đã có trong bảng, tăng số lượng
+            var $quantityInput = $existingRow.find('.quantity-input');
+        } else{
+            //dữ liệu chưa có trong bảng, thêm dòng mới
+            var newRow = 'tr data-product-id="' +selectProduct.id + '">'
+                '<td style="text-align: center;">#' +selectProduct.id
+        }
+    })
+</script>
 @yield('footer')

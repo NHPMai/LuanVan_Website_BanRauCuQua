@@ -20,38 +20,50 @@ class LoginNhanvienController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->input());
+        
+        // $this->validate($request, [
+        //     'email' => 'required|email:filter',
+        //     'password' => 'required'
+        // ]);
 
-        $this->validate($request, [
-            'email' => 'required|email:filter',
-            'password' => 'required'
-        ]);
-
-        $check = $request->only('email','password');
-        if (Auth::guard('admin')->attempt($check)){
-            return redirect()->route('admin.home')->with('success');
-        } else {
-            return redirect()->back()->with('error','Đăng nhập không thành công');
-        }
-
-
-        // if (Auth::attempt([
-        //     'email' => $request->input('email'),
-        //     'password' => $request->input('password'),
-        //     // 'level' => 0
-        // ], $request->input('remember'))) {
-        //     return redirect()->route('admin');
+        // $check = $request->only('email','password');
+        // if (Auth::guard('admin')->attempt($check)){
+        //     return redirect()->route('admin.home')->with('success');
+        // } else {
+        //     return redirect()->back()->with('error','Đăng nhập không thành công');
         // }
 
-        // // elseif (Auth::attempt([
-        // //     'email' => $request->input('email'),
-        // //     'password' => $request->input('password'),
-        // //     'level' => 1
-        // // ], $request->input('remember'))) {
-        // //     return redirect()->route('user');
-        // // }
-        // Session::flash('error', 'Email hoặc Password không đúng');
-        // return redirect()->back();
+        $request->validate(
+            [
+                'email' => 'required|email',
+                'password' => 'required|min:6|max:15'
+            ],
+            [
+                'email.required' => 'Vui lòng nhập email',
+                'email.email' => 'Không đúng định dạng email',
+                'email.unique' => 'Email đã được đăng kí',
+                'password.required' => 'Vui lòng nhập passwod',
+                'password.min' => 'Mật khẩu ít nhất 6 kí tự',
+            ]
+        );
+
+        if (Auth::guard('admin')->attempt([
+            'email' => $request->input(key: 'email'),
+            'password' => $request->input(key: 'password'),
+        ], $request->input(key: 'remember'))) {
+            $user = Auth::guard('admin')->user();
+            // Kiểm tra giá trị trangthai của người dùng
+            if ($user->hoatdong == 0) {
+                // Tài khoản bị khóa, hiển thị thông báo và đăng xuất
+                Auth::guard('admin')->logout();
+                session()->flash('error', 'Tài khoản của bạn đã bị khóa');
+                return redirect()->back();
+            }
+            return redirect()->route('admin.home');
+        }
+        session()->flash('error', 'Email hoặc password không đúng !!!');
+        return redirect()->back();
+
     }
 
     

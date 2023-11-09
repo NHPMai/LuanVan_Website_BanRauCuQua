@@ -272,21 +272,27 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon 	fas fa-user-circle"></i>
-                        <p> Thông Tin Quản Trị
+                        <p> Quản lí nhân viên
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/admin/products/add" class="nav-link">
+                            <a href="/admin/staffs/add" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Quản Trị Viên</p>
+                                <p>Thêm nhân viên</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/products/list" class="nav-link">
+                            <a href="/admin/staffs/list" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Vai Trò Thành Viên</p>
+                                <p>Danh Sách Thành Viên</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/staffs/permission" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Phân Quyền Nhân Viên</p>
                             </a>
                         </li>
 

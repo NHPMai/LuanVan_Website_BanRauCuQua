@@ -126,7 +126,7 @@ class LogincustomerController extends Controller
         if ($req) {
             return back()->with('success','Bạn đã đăng kí thành công!!!');
         }else{
-            return back()->with('fail','Lỗi gì đó');
+            return back()->with('fail','Lỗi vui lòng đăng kí lại!');
         }
 
         // Session::put('khachhang_id',$khachhang);

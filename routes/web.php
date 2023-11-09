@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\Nhanviens\LoginNhanvienController;
 use App\Http\Controllers\Admin\Nhanviens\LogoutController;
-
+use App\Http\Controllers\Admin\Nhanviens\NhanvienController;
 use App\Http\Controllers\Users\LogincustomerController;
 use App\Http\Controllers\Users\LogoutcustomerController;
 
@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\MagiamgiaController;
 use App\Http\Controllers\Admin\VanChuyenController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\WarehouseController;
+use App\Models\Nhanvien;
 use App\Models\Product;
 use App\Models\Role;
 
@@ -48,6 +49,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         //ĐĂNG XUẤT ADMIN
         Route::get('/logout', [LogoutController::class, 'logout'])->name('logout'); //Dang Xuat
+
+         #Nhân viên
+         Route::prefix('staffs')->group(function () {
+            Route::get('add', [NhanvienController::class, 'create']);
+            Route::post('add', [NhanvienController::class, 'store']);
+            Route::get('list', [NhanvienController::class, 'index']);
+            Route::get('permission', [NhanvienController::class, 'permission']);
+            Route::get('edit_permission', [NhanvienController::class, 'edit_permission']);
+            // Route::post('active', [NhanvienController::class, 'active']);
+            // Route::post('unactive', [NhanvienController::class, 'active']);
+            Route::get('edit/{staff}', [NhanvienController::class, 'show']);
+            Route::post('edit/{staff}', [NhanvienController::class, 'update']);
+            Route::DELETE('destroy', [NhanvienController::class, 'destroy']);
+        });
 
         // #Menu
         Route::prefix('menus')->group(function () {
@@ -102,6 +117,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         #Phiếu Nhập
         Route::prefix('warehouses')->group(function () {
+            Route::get('getProducts', [WarehouseController::class, 'getProducts']);
             Route::get('add', [WarehouseController::class, 'create']);
             Route::post('add', [WarehouseController::class, 'store']);
             Route::get('list', [WarehouseController::class, 'index']);
@@ -109,6 +125,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('edit/{brand}', [WarehouseController::class, 'update']);
             Route::DELETE('destroy', [WarehouseController::class, 'destroy']);
         });
+
+       
 
         // ##Upload
         Route::post('upload/services', [\App\Http\Controllers\Admin\UploadController::class, 'store']);
