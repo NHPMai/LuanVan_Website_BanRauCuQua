@@ -12,15 +12,15 @@ class Chitietquyen extends Model
     protected $fillable = [
         "coquyen",
         "nhanvien_id",
-        "role_id",
+        "quyen_id",
     ];
     
     public function nhanviens()
     {
-        return $this->hasOne(Nhanvien::class, 'id', 'nhanvien_id');
+        return $this->hasMany(Nhanvien::class, 'id', 'nhanvien_id');
     }
     public function quyens()
     {
-        return $this->hasOne(Quyen::class, 'id', 'quyen_id');
+        return $this->hasMany(Quyen::class, 'id', 'quyen_id');
     }
 }

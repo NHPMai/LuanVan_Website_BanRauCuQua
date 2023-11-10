@@ -88,19 +88,17 @@
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-5 col-form-label text-end">Email</label>
                         <div class="col-sm-7">
-                            <input type="email" class="form-control" id="inputPassword" placeholder="Email">
+                            <input type="email" value="{{$nhanvien->email}}" class="form-control" id="inputPassword" placeholder="Email" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row" style="margin-left: 60px">
+                        <label for="inputPassword" class="col-sm-5 col-form-label">Họ và tên</label>
+                        <div class="col-sm-7">
+                            <input type="text" value="{{$nhanvien->hoten}}" class="form-control" id="inputPassword" placeholder="Họ và tên" disabled>
                         </div>
                     </div>
                 </form>
 
-                <form class="form-inline">
-                    <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-5 col-form-label">Họ và tên</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" id="inputPassword" placeholder="Họ và tên">
-                        </div>
-                    </div>
-                </form>
 
                 <!-- <div class="form-group">
                     <label for="menu">Họ và tên <span class="text-danger">(*)</span></label>
@@ -109,46 +107,37 @@
             </div>
             <table id="product-table">
                 <thead>
-                    @foreach($quyens as $key => $quyen)
                     <tr style="background-color: lightskyblue;">
-                        <!-- <th style="text-align:center">Email</th>
-                        <th style="text-align:center" value="{{$quyen->id ==1}}">Quyền Sản Phẩm</th>
-                        <th style="text-align:center">Quyền Nhập Kho</th>
-                        <th style="text-align:center">Quyền Sản Phẩm</th>
-                        <th style="text-align:center">Quyền Nhân Sự</th>
-                        <th style="text-align:center">Thay Đổi Quyền</th> -->
-                        @if( $quyen->id == 1)
-                        <td style="text-align:center">Quyền Đơn hàng</td>
-                        @elseif ($quyen->id == 2)
-                        <td style="text-align:center">Quyền Sản Phẩm</td>
-                        @elseif ($quyen->id == 3)
-                        <td style="text-align:center">Quyền Nhân Sự</td>
-                        @elseif ($quyen->id == 4)
-                        <td style="text-align:center">Quyền Bài Viết</td>
-                        @elseif ($quyen->id == 5)
-                        <td style="text-align:center">Quyền Kho Hàng</td>
-                        @endif
+                        <th style="text-align:center">Quyền bài viết</th>
+                        <th style="text-align:center">Quyền đơn hàng</td>
+                        <th style="text-align:center">Quyền kho hàng</th>
+                        <th style="text-align:center">Quyền nhân sự </th>
+                        <th style="text-align:center">Quyền sản phẩm </th>
+
                     </tr>
-                    @endforeach
+
                 </thead>
                 <tbody>
-                    @foreach($nhanviens as $key => $nhanvien)
                     <tr>
+                        <td>
+                            @php $donhangquyen = $nhanvien->chitietquyen->where('quyen_id',1)->first(); @endphp
 
-                        <td style="text-align:center">{{$nhanvien->email}}</td>
-                        <td style="text-align:center"></td>
-                        <td style="text-align:center"></td>
-                        <td style="text-align:center"></td>
-                        <td style="text-align:center"></td>
-                        <td style="text-align: center;vertical-align: middle;">
-                            <a class="btn btn-primary btn-sm" href="/admin/staffs/edit/{{ $nhanvien->id }}">
-                                <i class="fas fa-edit"></i>
-                            </a>
-
+                            @if ($donhangquyen)
+                                @if($donhangquyen->coquyen == 1)
+                                    <a href="/admin/staffs/auth/{{$donhangquyen->id}}" onclick="return confirm('is_active?')">
+                                        <span class="fa fa-check"></span>
+                                    </a>
+                                @else
+                                    <a href="/admin/staffs/unauth/{{$donhangquyen->id}}" onclick="return confirm('is_active?')">
+                                        <span class="far fa-times-circle"></span>
+                                    </a>
+                                @endif
+                            @else
+                             Không xác định
+                            @endif
                         </td>
 
                     </tr>
-                    @endforeach
                 </tbody>
 
 
@@ -159,5 +148,5 @@
     </div>
 </div>
 
-{!! $quyens->links() !!}
+
 @endsection

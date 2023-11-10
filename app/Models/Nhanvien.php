@@ -31,10 +31,13 @@ class Nhanvien extends Authenticatable
     // {
     //     return $this->hasMany(Warehousing::class, 'nhanvien_id','id');
     // }
-    // public function roledetail()
-    // {
-    //     return $this->hasOne(Roledetail::class, 'id', 'roledetail_id')
-    //         ->withDefault(['coquyen'=>'']);
-    // }
+    public function chitietquyen()
+    {
+        return $this->hasOne(Chitietquyen::class, 'id', 'chitietquyen_id')
+            ->withDefault(['quyen_id'=>'']);
+            // ->withDefault(['sodienthoai'=>''])
+            // ->withDefault(['email'=>''])
+            // ->withDefault(['diachi'=>'']);
+    }
     
 }

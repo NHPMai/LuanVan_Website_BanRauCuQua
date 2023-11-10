@@ -456,15 +456,18 @@ class DonhangController extends Controller
     public function calculate_fee(Request $request){
         $data = $request->all();
         // dd($request);
-        if($data['tinh_thanhpho_id']){
+        // if($data['tinh_thanhpho_id']){
             $feeship = Phivanchuyen::where('tinh_thanhpho_id',$data['tinh_thanhpho_id'])
                                     ->where('quan_huyen_id',$data['quan_huyen_id'])
-                                    ->where('xa_phuong_thitran_id',$data['xa_phuong_thitran_id']);
-            foreach($feeship as $key => $fee){
-                Session::put('fee',$fee->pvc_phivanchuyen);
-                Session::save();
-            }
-        }
+                                    ->where('xa_phuong_thitran_id',$data['xa_phuong_thitran_id'])->first();
+            // foreach($feeship as $key => $fee){
+            //     Session::put('fee',$fee->pvc_phivanchuyen);
+            //     Session::save();
+            // }
+            $output = '';
+            $output.='<li value="">'.$feeship->pvc_phivanchuyen.'</li>';
+            echo $output;
+        // }
     }
 
     

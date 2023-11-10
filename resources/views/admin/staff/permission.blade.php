@@ -87,24 +87,23 @@
                 <thead>
                     <tr style="background-color: lightskyblue;">
                         <th style="text-align:center">Email</th>
-                        <th style="text-align:center">Quyền Sản Phẩm</th>
-                        <th style="text-align:center">Quyền Nhập Kho</th>
-                        <th style="text-align:center">Quyền Sản Phẩm</th>
-                        <th style="text-align:center">Quyền Nhân Sự</th>
+                        <th style="text-align:center">Quyền bài viết</th>
+                        <th style="text-align:center">Quyền đơn hàng</td>
+                        <th style="text-align:center">Quyền kho hàng</th>
+                        <th style="text-align:center">Quyền nhân sự </th>
+                        <th style="text-align:center">Quyền sản phẩm</th>
                         <th style="text-align:center">Thay Đổi Quyền</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($nhanviens as $key => $nhanvien)
+                    @foreach($nhanvien as $key => $nhanvien)
                     <tr>
 
                         <td style="text-align:center">{{$nhanvien->email}}</td>
                         <td style="text-align:center"></td>
-                        <td style="text-align:center"></td>
-                        <td style="text-align:center"></td>
-                        <td style="text-align:center"></td>
+                       
                         <td style="text-align: center;vertical-align: middle;">
-                            <a class="btn btn-primary btn-sm" href="/admin/staffs/edit/{{ $nhanvien->id }}">
+                            <a class="btn btn-primary btn-sm" href="/admin/staffs/edit_permission/{{$nhanvien->id}}">
                                 <i class="fas fa-edit"></i>
                             </a>
 
@@ -172,5 +171,5 @@
     </div>
 </div>
 
-{!! $nhanviens->links() !!}
+
 @endsection

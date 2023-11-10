@@ -469,7 +469,7 @@
 						_token: _token
 					},
 					success: function(data) {
-						$('#' + result).html(data);
+						$('#phivanchuyen'  ).html(data);
 					}
 				});
 			}

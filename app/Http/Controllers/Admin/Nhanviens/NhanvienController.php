@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Nhanviens;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\Chitietquyen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -66,18 +66,37 @@ class NhanvienController extends Controller
             'hoatdong.required' => 'Vui lòng chọn trạng thái',
         ]);
 
-        $nv = new Nhanvien();
-        $nv->hoten = $request->hoten;
-        $nv->avata = $request->avata;
-        $nv->sodienthoai = $request->sodienthoai;
-        $nv->email = $request->email;
-        $nv->gioitinh = $request->gioitinh;
-        $nv->ngaysinh = $request->ngaysinh;
-        $nv->diachi = $request->diachi;
-        $nv->password = bcrypt($request->password);
-        $nv->hoatdong = $request->hoatdong;
-        $nv->save();
+        // $nv = new Nhanvien();
+        // $nv->hoten = $request->hoten;
+        // $nv->avata = $request->avata;
+        // $nv->sodienthoai = $request->sodienthoai;
+        // $nv->email = $request->email;
+        // $nv->gioitinh = $request->gioitinh;
+        // $nv->ngaysinh = $request->ngaysinh;
+        // $nv->diachi = $request->diachi;
+        // $nv->password = bcrypt($request->password);
+        // $nv->hoatdong = $request->hoatdong;
+        // $nv->save();
+        $nhanvien = Nhanvien::create([
+            'hoten' => $request->hoten,
+            'avata' => $request->avata,
+            'sodienthoai' => $request->sodienthoai,
+            'email' => $request->email,
+            'gioitinh' => $request->gioitinh,
+            'ngaysinh' => $request->ngaysinh,
+            'diachi' => $request->diachi,
+            'password' => bcrypt($request->password),
+            'hoatdong' => $request->hoatdong,
+        ]);
 
+        for ($quyenId = 1; $quyenId<=5; $quyenId++){
+            Chitietquyen::create([
+                'quyen_id' => $quyenId,
+                'nhanvien_id' => $nhanvien->id,
+                'coquyen' =>0,
+            ]);
+        }
+       
         Session::flash('success', 'Thêm nhân viên thành công!');
         return redirect('admin/staffs/list');
 
@@ -175,44 +194,73 @@ class NhanvienController extends Controller
     }
 
     public function permission(){
-        $nhanviens = Nhanvien::orderbyDesc('id')->paginate(20);
-        $quyens = Quyen::orderbyDesc('id')->paginate(20);
+        
+        $nhanvien = Nhanvien::all()->sortByDesc("id");
+     
         return view('admin.staff.permission',[
             'title' => 'Danh Sách Phân Quyền Nhân Viên',
-            'nhanviens' => $nhanviens,
-            '$quyens' => $quyens,
+            'nhanvien' => $nhanvien,
         ]);
     }
 
-    public function edit_permission(){
-        $nhanviens = Nhanvien::orderbyDesc('id')->paginate(20);
-        $quyens = Quyen::orderbyDesc('id')->paginate(20);
+    public function edit_permission( $id){
+        // dd($id);
+        $nhanvien = Nhanvien::find($id);
+        $chitietquyen = Chitietquyen::find($id);
+        
+        // dd($nhanviens);
         return view('admin.staff.edit_permission',[
             'title' => 'Phân Quyền Nhân Viên',
-            'nhanviens' => $nhanviens,
-            '$quyens' => $quyens,
+            'nhanvien' => $nhanvien,
+            'chitietquyen' => $chitietquyen,
         ]);
     }
     
-    public function active($id)
+    // public function active($id)
+    // {
+    //     $nhanvien = Nhanvien::find($id)
+    //         ->update(
+    //             ['hoatdong' => 0],
+    //     );
+       
+    //     Session::flash('success', 'Thay đổi trạng thái thành công!');
+    //     return redirect('list');
+    // }
+
+    public function auth($id)
     {
-        $nhanvien = Nhanvien::find($id)
+        $chitietquyen = Chitietquyen::find($id);
+        $nv_id = $chitietquyen->nhanvien_id;
+        $chitietquyen = Chitietquyen::find($id)
             ->update(
-                ['hoatdong' => 0],
+                ['coquyen' => 0],
         );
        
-        Session::flash('success', 'Thay đổi trạng thái thành công!');
-        return redirect('list');
+        Session::flash('success', 'Thay đổi quyền thành công!');
+        return redirect()->route('admin.staffs.edit_permission',['id' => $nv_id]);
     }
 
-    public function unactive($id)
+    public function unauth($id)
     {
-        $nhanvien = Nhanvien::find($id)
+        $chitietquyen = Chitietquyen::find($id);
+        $nv_id = $chitietquyen->nhanvien_id;
+        $chitietquyen = Chitietquyen::find($id)
             ->update(
-                ['hoatdong' => 1],
+                ['coquyen' => 1],
         );
-      
-        Session::flash('success', 'Thay đổi trạng thái thành công!');
-        return redirect('list');
+       
+        Session::flash('success', 'Thay đổi quyền thành công!');
+        return redirect()->route('admin.staffs.edit_permission',['id' => $nv_id]);
     }
+
+    // public function unactive($id)
+    // {
+    //     $nhanvien = Nhanvien::find($id)
+    //         ->update(
+    //             ['hoatdong' => 1],
+    //     );
+      
+    //     Session::flash('success', 'Thay đổi trạng thái thành công!');
+    //     return redirect('list');
+    // }
 }

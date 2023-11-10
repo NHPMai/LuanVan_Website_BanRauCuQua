@@ -142,15 +142,16 @@
                         <div class="flex-w flex-t bor12 p-t-15 p-b-30">
                             <div class="size-209 w-full-ssm">
                                 <span class="stext-110 cl2">
-                                    Vận chuyển:
+                                    Phí vận chuyển:
                                 </span>
                             </div>
 
-                            <div class="size-208" style="text-align: right;">
-                                <span class="mtext-110 cl2">
-                                @if(Session::get('fee'))
-                                <li><span>{{number_format(Session::get('fee'),0,',','.')}}</span></li>
-                                @endif
+                            <!-- <div class="phivanchuyen" id="phivanchuyen">
+
+                            </div> -->
+                            <div class="size-208 " style="text-align: right;">
+                                <span class="mtext-110 cl2 phivanchuyen" id="phivanchuyen">
+                              
                                 </span>
                             </div>
 

@@ -55,13 +55,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('add', [NhanvienController::class, 'create']);
             Route::post('add', [NhanvienController::class, 'store']);
             Route::get('list', [NhanvienController::class, 'index']);
-            Route::get('permission', [NhanvienController::class, 'permission']);
-            Route::get('edit_permission', [NhanvienController::class, 'edit_permission']);
-            // Route::post('active', [NhanvienController::class, 'active']);
-            // Route::post('unactive', [NhanvienController::class, 'active']);
             Route::get('edit/{staff}', [NhanvienController::class, 'show']);
             Route::post('edit/{staff}', [NhanvienController::class, 'update']);
             Route::DELETE('destroy', [NhanvienController::class, 'destroy']);
+
+            Route::get('permission', [NhanvienController::class, 'permission']);
+            Route::get('edit_permission/{id}', [NhanvienController::class, 'edit_permission']);
+            // Route::post('edit_permission/{id}', [NhanvienController::class, 'edit_permission']);
+            Route::get('auth', [NhanvienController::class, 'auth']);
+            Route::get('unauth', [NhanvienController::class, 'unauth']);
+            
         });
 
         // #Menu
