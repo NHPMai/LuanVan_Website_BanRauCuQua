@@ -15,8 +15,9 @@ class Brand extends Model
         'hoatdong'
     ];
     protected $primaryKey = 'id';
+    
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'brand_id','id');
     }
 }

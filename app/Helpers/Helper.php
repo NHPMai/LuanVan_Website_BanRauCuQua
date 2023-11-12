@@ -86,6 +86,36 @@ class Helper
         return false;
     }
 
+
+    //BRAND
+    public static function brands($brands) :string
+    {
+        $html = '';
+        foreach ($brands as $key => $brand) {
+           
+                $html .= '
+                    <li>
+                        <a href="/thuong-hieu/' . $brand->id . '-' . Str::slug($brand->ten, '-') . '.html">
+                            ' . $brand->ten . ' 
+                        </a>';
+                    
+                unset($brands[$key]); //Xoa nhung cai lay ra roi -> nhe mang
+
+              
+                    $html .= '<ul class="sub-menu">';
+                    $html .= self::brands($brands, $brand->id);
+                    $html .= '</ul>';
+               
+
+                $html .= '</li>';
+           
+        }
+
+        return $html;
+    }
+
+  
+
     // public static function price($price = 0, $priceSale = 0)
     // {
     //     if ($priceSale != 0) return number_format($priceSale);
@@ -100,4 +130,5 @@ class Helper
         return '<a href="/lien-he.html">Liên Hệ</a>';
     }
 
+    
 }

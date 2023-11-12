@@ -190,4 +190,6 @@ class BrandController extends Controller
         Session::flash('success', 'Thay đổi trạng thái thành công!');
         return redirect('edit/{brand}');
     }
+
+   
 }

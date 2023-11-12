@@ -1,5 +1,6 @@
 <section >
 @php $menusHtml = \App\Helpers\Helper::menus($menus); @endphp
+@php $brandsHtml = \App\Helpers\Helper::brands($brands); @endphp
 	<div class="left-sidebar" style="width: 225;">
 		<h2>Danh Mục</h2>
 		<div class="panel-group category-products" id="accordian"><!--category-productsr-->
@@ -12,7 +13,7 @@
 	
 
 		<!--BRAND-PRODUCT-->
-		<h2>Thương Hiệu</h2>
+		<!-- <h2>Thương Hiệu</h2>
 		<div class="brands_products" style="text-align: center;">
 			<div class="brands-name">
 				<ul >
@@ -24,6 +25,14 @@
 						@endforeach
 					</li>
 				</ul>
+			</div>
+		</div> -->
+		<h2>Thương Hiệu</h2>
+		<div class="panel-group category-products" id="accordian">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title" style="text-align: center;"><a href="#"></a> {!! $brandsHtml !!} </h4>
+				</div>
 			</div>
 		</div>
 
