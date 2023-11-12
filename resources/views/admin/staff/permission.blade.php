@@ -59,12 +59,12 @@
             </div>
 
             <div class="text-end">
-                <a href="/admin/staffs/add" class="btn btn-warning" > <i class="fa fa-remove"></i></i> + Thêm mới</a>
+                <a href="/admin/staffs/add" class="btn btn-warning"> <i class="fa fa-remove"></i></i> + Thêm mới</a>
             </div>
         </div>
     </div>
     <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">Excel</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -81,33 +81,123 @@
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
-        </nav>
+        </nav> -->
         <div style="padding: 10px;">
             <table id="product-table">
                 <thead>
                     <tr style="background-color: lightskyblue;">
                         <th style="text-align:center">Email</th>
-                        <th style="text-align:center">Quyền bài viết</th>
-                        <th style="text-align:center">Quyền đơn hàng</td>
-                        <th style="text-align:center">Quyền kho hàng</th>
-                        <th style="text-align:center">Quyền nhân sự </th>
-                        <th style="text-align:center">Quyền sản phẩm</th>
+                        <th style="text-align:center">Quyền đơn hàng</th>
+                        <th style="text-align:center">Quyền sản phẩm</td>
+                        <th style="text-align:center">Quyền nhân sự</th>
+                        <th style="text-align:center">Quyền bài viết </th>
+                        <th style="text-align:center">Quyền kho hàng </th>
                         <th style="text-align:center">Thay Đổi Quyền</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($nhanvien as $key => $nhanvien)
+                    @foreach($nhanvien as $key => $nv)
                     <tr>
 
-                        <td style="text-align:center">{{$nhanvien->email}}</td>
-                        <td style="text-align:center"></td>
-                       
+                        <td style="text-align:center">{{$nv->email}}</td>
+
+
+                        <td style="text-align:center">
+
+                            @foreach($chitietquyen as $key => $ctq)
+                            @if($ctq->coquyen == 1 && $ctq->nhanvien_id == $nv->id && $ctq->quyen_id == 1)
+                            <a href="/admin/staffs/coquyen/" onclick="return confirm('Bạn muốn thay đổi quyền?')">
+                                <span class="fa fa-check"></span>
+                            </a>
+                            @elseif ($ctq->coquyen == 0 && $ctq->nhanvien_id == $nv->id && $ctq->quyen_id == 1)
+                            <a href="/admin/staffs/khongquyen/" onclick="return confirm('Bạn muốn thay đổi quyền?')" style="color:red">
+                                <span class="far fa-times-circle"></span>
+                            </a>
+                            @endif
+                            @endforeach
+
+
+
+                        </td>
+
+                        <td style="text-align:center">
+
+                            @foreach($chitietquyen as $key => $ctq)
+                            @if($ctq->coquyen == 1 && $ctq->nhanvien_id == $nv->id && $ctq->quyen_id == 2)
+                            <a href="/admin/staffs/coquyen/" onclick="return confirm('Bạn muốn thay đổi quyền?')">
+                                <span class="fa fa-check"></span>
+                            </a>
+                            @elseif ($ctq->coquyen == 0 && $ctq->nhanvien_id == $nv->id && $ctq->quyen_id == 2)
+                            <a href="/admin/staffs/khongquyen/" onclick="return confirm('Bạn muốn thay đổi quyền?')" style="color:red">
+                                <span class="far fa-times-circle"></span>
+                            </a>
+                            @endif
+                            @endforeach
+
+                        </td>
+
+                        <td style="text-align:center">
+
+                            @foreach($chitietquyen as $key => $ctq)
+                            @if($ctq->coquyen == 1 && $ctq->nhanvien_id == $nv->id && $ctq->quyen_id == 3)
+                            <a href="/admin/staffs/coquyen/" onclick="return confirm('Bạn muốn thay đổi quyền?')">
+                                <span class="fa fa-check"></span>
+                            </a>
+                            @elseif ($ctq->coquyen == 0 && $ctq->nhanvien_id == $nv->id && $ctq->quyen_id == 3)
+                            <a href="/admin/staffs/khongquyen/" onclick="return confirm('Bạn muốn thay đổi quyền?')" style="color:red">
+                                <span class="far fa-times-circle"></span>
+                            </a>
+                            @endif
+                            @endforeach
+
+                        </td>
+
+                        <td style="text-align:center">
+
+                            @foreach($chitietquyen as $key => $ctq)
+                            @if($ctq->coquyen == 1 && $ctq->nhanvien_id == $nv->id && $ctq->quyen_id == 4)
+                            <a href="/admin/staffs/coquyen/" onclick="return confirm('Bạn muốn thay đổi quyền?')">
+                                <span class="fa fa-check"></span>
+                            </a>
+                            @elseif ($ctq->coquyen == 0 && $ctq->nhanvien_id == $nv->id && $ctq->quyen_id == 4)
+                            <a href="/admin/staffs/khongquyen/" onclick="return confirm('Bạn muốn thay đổi quyền?')" style="color:red">
+                                <span class="far fa-times-circle"></span>
+                            </a>
+                            @endif
+                            @endforeach
+
+                        </td>
+
+                        <td style="text-align:center">
+
+                            @foreach($chitietquyen as $key => $ctq)
+                            @if($ctq->coquyen == 1 && $ctq->nhanvien_id == $nv->id && $ctq->quyen_id == 5)
+                            <a href="/admin/staffs/coquyen/" onclick="return confirm('Bạn muốn thay đổi quyền?')">
+                                <span class="fa fa-check"></span>
+                            </a>
+                            @elseif ($ctq->coquyen == 0 && $ctq->nhanvien_id == $nv->id && $ctq->quyen_id == 5)
+                            <a href="/admin/staffs/khongquyen/" onclick="return confirm('Bạn muốn thay đổi quyền?')" style="color:red">
+                                <span class="far fa-times-circle"></span>
+                            </a>
+                            @endif
+                            @endforeach
+
+                        </td>
+
+
+
+                        @if ($nv->id == 9){
+                            <td>dfdsfs</td>
+                        }
+                        @else{
                         <td style="text-align: center;vertical-align: middle;">
-                            <a class="btn btn-primary btn-sm" href="/admin/staffs/edit_permission/{{$nhanvien->id}}">
+                            <a class="btn btn-primary btn-sm" href="/admin/staffs/edit_permission/{{$nv->id}}">
                                 <i class="fas fa-edit"></i>
                             </a>
 
                         </td>
+                        }
+                        @endif
 
                     </tr>
                     @endforeach
@@ -117,59 +207,8 @@
             </table>
         </div>
 
-        <!-- Modal -->
-        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content" style="width: 800px;">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Cấp quyền cho nhân viên</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
 
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="menu">Email <span class="text-danger">(*)</span></label>
-                            <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Nhập tên email" disabled>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="menu">Họ và tên <span class="text-danger">(*)</span></label>
-                            <input type="text" name="hoten" value="{{ old('hoten') }}" class="form-control" placeholder="Nhập họ và tên" disabled>
-                        </div>
-                    </div>
-                    <div class="m-2">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Quyền Sản Phẩm</th>
-                                    <th>Quyền Nhân Sự</th>
-                                    <th>Quyền Đơn Hàng</th>
-                                    <th>Quyền Nhập Kho</th>
-                                    <th>Quyền Bài Viết</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th>Quyền</th>
-                                    <th>Quyền</th>
-                                    <th>Quyền</th>
-                                    <th>Quyền</th>
-                                    <th>Quyền</th>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
 </div>
-
 
 @endsection

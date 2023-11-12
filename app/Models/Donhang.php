@@ -37,8 +37,8 @@ class Donhang extends Model
     public function khachhangs()
     {
         return $this->hasOne(khachhang::class, 'id', 'khachhang_id')
-            ->withDefault(['hoten'=>'']);
-            // ->withDefault(['sodienthoai'=>''])
+            ->withDefault(['hoten'=>''])
+            ->withDefault(['sodienthoai'=>'']);
             // ->withDefault(['email'=>''])
             // ->withDefault(['diachi'=>'']);
     }

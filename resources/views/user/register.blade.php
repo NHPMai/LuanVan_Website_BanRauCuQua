@@ -29,7 +29,7 @@
       <div class="card-body login-card-body">
         <p class="login-box-msg">Register to start your session</p>
 
-        <form action="{{route('create')}}" method="post">
+        <form action="{{route('user.create')}}" method="post">
           @if(Session::has('success'))
           <div class="alert alert-success">{{Session::get('success')}}</div>
           @endif
@@ -150,7 +150,7 @@
           </div>
 
           <br>
-          <a href="{{route('logincustomer')}}">Login Here</a>
+          <a href="{{route('user.login')}}">Login Here</a>
           @csrf
         </form>
 

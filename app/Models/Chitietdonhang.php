@@ -21,4 +21,10 @@ class Chitietdonhang extends Model
             // ->withDefault(['ten'=>''])
             // ->withDefault(['hinhanh'=>'']);
     }
+    public function donhang()
+    {
+        return $this->hasOne(Donhang::class, 'id', 'donhang_id');
+            // ->withDefault(['ten'=>''])
+            // ->withDefault(['hinhanh'=>'']);
+    }
 }

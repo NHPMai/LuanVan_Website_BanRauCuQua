@@ -64,24 +64,7 @@
         </div>
     </div>
     <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Excel</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">PDF <span class="sr-only">(current)</span></a>
-                    </li>
-                </ul>
-                <form action="{{ url('admin/search')}}" method="GET" class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
-        </nav>
+  
         <div style="padding: 10px;">
             <div class="pb-3">
                 <form class="form-inline pb-2">
@@ -99,44 +82,93 @@
                     </div>
                 </form>
 
-
-                <!-- <div class="form-group">
-                    <label for="menu">Họ và tên <span class="text-danger">(*)</span></label>
-                    <input type="text" name="hoten" value="{{ old('hoten') }}" class="form-control" placeholder="Nhập họ và tên" disabled>
-                </div> -->
             </div>
             <table id="product-table">
                 <thead>
                     <tr style="background-color: lightskyblue;">
-                        <th style="text-align:center">Quyền bài viết</th>
-                        <th style="text-align:center">Quyền đơn hàng</td>
-                        <th style="text-align:center">Quyền kho hàng</th>
-                        <th style="text-align:center">Quyền nhân sự </th>
-                        <th style="text-align:center">Quyền sản phẩm </th>
+                        <th style="text-align:center">Quyền đơn hàng</th>
+                        <th style="text-align:center">Quyền sản phẩm</td>
+                        <th style="text-align:center">Quyền nhân sự</th>
+                        <th style="text-align:center">Quyền bài viết </th>
+                        <th style="text-align:center">Quyền kho hàng </th>
 
                     </tr>
 
                 </thead>
                 <tbody>
                     <tr>
-                        <td>
-                            @php $donhangquyen = $nhanvien->chitietquyen->where('quyen_id',1)->first(); @endphp
-
-                            @if ($donhangquyen)
-                                @if($donhangquyen->coquyen == 1)
-                                    <a href="/admin/staffs/auth/{{$donhangquyen->id}}" onclick="return confirm('is_active?')">
+                        <td style="text-align:center">
+                           
+                            
+                                @if($nhanvien1->coquyen == 1)
+                                    <a href="/admin/staffs/coquyen/{{$nhanvien1->id}}" onclick="return confirm('Bạn muốn thay đổi quyền?')">
                                         <span class="fa fa-check"></span>
                                     </a>
                                 @else
-                                    <a href="/admin/staffs/unauth/{{$donhangquyen->id}}" onclick="return confirm('is_active?')">
+                                    <a href="/admin/staffs/khongquyen/{{$nhanvien1->id}}" onclick="return confirm('Bạn muốn thay đổi quyền?')" style="color:red">
                                         <span class="far fa-times-circle"></span>
                                     </a>
                                 @endif
-                            @else
-                             Không xác định
-                            @endif
+                            
+                            
+                           
                         </td>
 
+                        <td style="text-align:center">
+                           
+                                @if($nhanvien2->coquyen == 1)
+                                    <a href="/admin/staffs/coquyen/{{$nhanvien2->id}}" onclick="return confirm('Bạn muốn thay đổi quyền?')">
+                                        <span class="fa fa-check"></span>
+                                    </a>
+                                @else
+                                    <a href="/admin/staffs/khongquyen/{{$nhanvien2->id}}" onclick="return confirm('Bạn muốn thay đổi quyền?')" style="color:red">
+                                        <span class="far fa-times-circle"></span>
+                                    </a>
+                                @endif
+                           
+                        </td>
+
+                        <td style="text-align:center">
+                          
+                                @if($nhanvien3->coquyen == 1)
+                                    <a href="/admin/staffs/coquyen/{{$nhanvien3->id}}" onclick="return confirm('Bạn muốn thay đổi quyền?')">
+                                        <span class="fa fa-check"></span>
+                                    </a>
+                                @else
+                                    <a href="/admin/staffs/khongquyen/{{$nhanvien3->id}}" onclick="return confirm('Bạn muốn thay đổi quyền?')" style="color:red">
+                                        <span class="far fa-times-circle"></span>
+                                    </a>
+                                @endif
+                           
+                        </td>
+
+                        <td style="text-align:center">
+                            
+                                @if($nhanvien4->coquyen == 1)
+                                    <a href="/admin/staffs/coquyen/{{$nhanvien4->id}}" onclick="return confirm('Bạn muốn thay đổi quyền?')">
+                                        <span class="fa fa-check"></span>
+                                    </a>
+                                @else
+                                    <a href="/admin/staffs/khongquyen/{{$nhanvien4->id}}" onclick="return confirm('Bạn muốn thay đổi quyền?')" style="color:red">
+                                        <span class="far fa-times-circle"></span>
+                                    </a>
+                                @endif
+                          
+                        </td>
+
+                        <td style="text-align:center">
+                           
+                                @if($nhanvien5->coquyen == 1)
+                                    <a href="/admin/staffs/coquyen/{{$nhanvien5->id}}" onclick="return confirm('Bạn muốn thay đổi quyền?')">
+                                        <span class="fa fa-check"></span>
+                                    </a>
+                                @else
+                                    <a href="/admin/staffs/khongquyen/{{$nhanvien5->id}}" onclick="return confirm('Bạn muốn thay đổi quyền?')" style="color:red">
+                                        <span class="far fa-times-circle"></span>
+                                    </a>
+                                @endif
+                           
+                        </td>
                     </tr>
                 </tbody>
 

@@ -33,7 +33,7 @@ class Nhanvien extends Authenticatable
     // }
     public function chitietquyen()
     {
-        return $this->hasOne(Chitietquyen::class, 'id', 'chitietquyen_id')
+        return $this->hasMany(Chitietquyen::class, 'id', 'chitietquyen_id')
             ->withDefault(['quyen_id'=>'']);
             // ->withDefault(['sodienthoai'=>''])
             // ->withDefault(['email'=>''])

@@ -17,7 +17,7 @@ class Chitietquyen extends Model
     
     public function nhanviens()
     {
-        return $this->hasMany(Nhanvien::class, 'id', 'nhanvien_id');
+        return $this->hasOne(Nhanvien::class, 'id', 'nhanvien_id');
     }
     public function quyens()
     {

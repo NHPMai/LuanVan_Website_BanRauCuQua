@@ -28,11 +28,9 @@ class CartController extends Controller
 
     public function show(Donhang $donhang)
     {
-       
+    //    dd($donhang);
         $chitietdonhang = Chitietdonhang::where('donhang_id',$donhang->id)->get();
-    //    dd($chitietdonhang);
-        // $chitietdonhangs = $this->getProductForCart($donhang);
-
+ 
         return view('admin.carts.detail', [
             'title' => 'Chi Tiết Đơn Hàng: ' . $donhang->khachhangs->hoten,
             'donhang' => $donhang,

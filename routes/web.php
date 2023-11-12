@@ -60,11 +60,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::DELETE('destroy', [NhanvienController::class, 'destroy']);
 
             Route::get('permission', [NhanvienController::class, 'permission']);
-            Route::get('edit_permission/{id}', [NhanvienController::class, 'edit_permission']);
-            // Route::post('edit_permission/{id}', [NhanvienController::class, 'edit_permission']);
-            Route::get('auth', [NhanvienController::class, 'auth']);
-            Route::get('unauth', [NhanvienController::class, 'unauth']);
-            
+            Route::get('edit_permission/{id}', [NhanvienController::class, 'edit_permission'])->name('admin.staffs.edit_permission');
+            Route::get('coquyen/{id}', [NhanvienController::class, 'coquyen']);
+            Route::get('khongquyen/{id}', [NhanvienController::class, 'khongquyen']);
         });
 
         // #Menu
@@ -216,7 +214,7 @@ Route::prefix('user')->name('user.')->group(function () {
         
         //lịch sử đơn hàng
         Route::get('order_history', [\App\Http\Controllers\Users\DonhangController::class, 'order_history'])->name('order_history');
-        Route::get('order_history_detail', [\App\Http\Controllers\Users\DonhangController::class, 'order_history_detail'])->name('order_history_detail');
+        Route::get('order_history_detail/{donhang}', [\App\Http\Controllers\Users\DonhangController::class, 'order_history_detail'])->name('order_history_detail');
 
         //Tài khoản
         Route::get('account', [\App\Http\Controllers\Users\TaikhoanController::class, 'account'])->name('account');

@@ -479,22 +479,37 @@ class DonhangController extends Controller
     }
 
     //LỊCH SỬ ĐƠN HÀNG
-    public function order_history(Donhang $donhang)
+    public function order_history()
     {
         $idkh = Auth::user()->id;
-        $b = Donhang::where('khachhang_id', $idkh)->get();
+        $b = Donhang::where('khachhang_id', $idkh)->orderByDesc('id')->paginate(15);
         // dd($b);
         return view('lichsudathangs.danhsach', [
             'title' => 'Lịch Sử Đặt Hàng Của Bạn',
-            'donhang' => $donhang,
             'b' => $b
         ]);
     }
 
-    public function order_history_detail()
+    public function order_history_detail(Donhang $donhang)
     {
+        // dd($donhang);
+        $idkh = Auth::user()->id;
+        
+        $chitietlichsu = Donhang::where('khachhang_id', $idkh)->get();
+        $chitietdonhang = Chitietdonhang::where('donhang_id',$donhang->id)->get();
+        // $chitietlichsu = DB::table('donhangs')
+        //     ->join('chitietdonhangs', 'donhangs.id', '=', 'chitietdonhangs.donhang_id')
+        //     ->join('khachhangs', 'donhangs.khachhang_id', '=', 'khachhangs.id')
+        //     ->where('donhangs.khachhang_id','=' ,$idkh)
+        //     ->select('donhangs.*', 'chitietdonhangs.*', 'khachhangs.*')
+        //     ->get();
+        
+    // dd($chitietdonhang);
         return view('lichsudathangs.chitiet', [
             'title' => 'Lịch Sử Đặt Hàng Của Bạn',
+            'chitietlichsu'=>$chitietlichsu,
+            'donhang' =>$donhang,
+            'chitietdonhangs' =>$chitietdonhang,
         ]);
     }
 }

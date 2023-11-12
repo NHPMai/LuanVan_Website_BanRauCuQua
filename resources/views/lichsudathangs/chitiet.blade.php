@@ -93,6 +93,7 @@
   #progressbar-2 li:nth-child(4) {
     left: 0;
     width: 37px;
+    /* background: #c5cae9 !important; */
   }
 
   #progressbar-2 li:nth-child(4):after {
@@ -111,12 +112,12 @@
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 p-t-20">
         <div class="card card-stepper text-black" style="border-radius: 16px;">
-
+        
           <div class="card-body p-5">
-
+         
             <div class="d-flex justify-content-between align-items-center mb-5">
               <div>
-                <h3 class="mb-0"> Thông tin chi tiết của đơn hàng ID <span class="text-primary font-weight-bold">#Y34XDHR</span></h>
+                <h3 class="mb-0"> Thông tin chi tiết của đơn hàng ID: <span class="text-primary font-weight-bold">{{$donhang->id}}</span></h>
               </div>
               <div class="text-end">
                 <a href="#" class="btn btn-warning" data-abc="true"> <i class="fa fa-remove"></i></i> Hủy đơn hàng</a>
@@ -125,10 +126,10 @@
 
             <article class="card ">
               <div class="card-body row">
-                <div class="col"> <strong>Thời gian đặt hàng:</strong> <br>29 nov 2019 </div>
-                <div class="col"> <strong>Giao bởi:</strong> <br> Chưa xác định, | <i class="fa fa-phone"></i> +1598675986 </div>
-                <div class="col"> <strong>Trạng thái:</strong> <br> Picked by the courier </div>
-                <div class="col"> <strong>Theo dõi #:</strong> <br> BD045903594059 </div>
+                <div class="col"> <strong>Thời gian đặt hàng:</strong> <br>{{$donhang->dh_thoigiandathang}} </div>
+                <div class="col"> <strong>Giao bởi:</strong> <br> Chưa xác định, | <i class="fa fa-phone"></i> {{$donhang->khachhangs->sodienthoai}} </div>
+                <div class="col"> <strong>Trạng thái:</strong> <br> {{$donhang->dh_trangthai}} </div>
+                <div class="col"> <strong>Theo dõi #:</strong> <br>{{$donhang->id}}</div>
               </div>
             </article>
 
@@ -171,34 +172,41 @@
             </div>
 
           </div>
-
+         
           <div class="p-5">
-            <div class="row itemside mb-3 p-5" style="border-top: 1px solid #e6e6e6; ">
+          @php $total = 0; @endphp
+            @foreach($chitietdonhangs as $key => $chitietdonhang)
+            @php
+            $price = $chitietdonhang->ctdh_gia * $chitietdonhang->ctdh_soluong;
+            $total += $price;
+            @endphp
+            <div class="row itemside  p-1" style="border-top: 1px solid #e6e6e6; ">
               <div class="col-2 ">
-                <img src="/template/images/slider-1.jpg" alt="IMG" style="width: 100px">
+                <img src="{{ $chitietdonhang->product->hinhanh}}" alt="IMG" style="width: 100px">
               </div>
               <div class="col-10 info align-self-center">
-                <p class="title">Dell Laptop with 500GB HDD <br> 8GB RAM</p> <span class="text-muted">$950 </span>
+             
+                <p class="title" style="font-size: larger; font-weight:700"> <br> {{ $chitietdonhang->product->ten}}</p> <span class="text-muted">{{ $chitietdonhang->product->gia}} </span>
+             
               </div>
             </div>
+            @endforeach
             <hr>
             <div class="row">
               <div class="col-6">
-                <a href="#" class="btn btn-warning text-start" data-abc="true"> <i class="fa fa-chevron-left"></i> Back to orders</a>
+                <a href="/user/order_history" class="btn btn-warning text-start" data-abc="true"> <i class="fa fa-chevron-left"></i> Back to orders</a>
               </div>
 
               <div class="col-6">
-                <h4 class="mb-0" style="text-align: right; font-size:">Tổng tiền: <span>1.000.000</span> VNĐ</h4>
+                <h4 class="mb-0" style="text-align: right; font-size:">Tổng tiền: <span>{{$donhang->dh_thanhtien}}</span> VNĐ</h4>
               </div>
-
-
 
             </div>
 
 
           </div>
 
-
+        
         </div>
 
       </div>
