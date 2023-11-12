@@ -138,7 +138,7 @@
                             <div class="dropdown-menu" role="menu">
 
                                 @if (Auth::check())
-                                <a>Xin chào {{ Auth('web')->user()->hoten }}</a>
+                                <a>{{ Auth('web')->user()->hoten }}</a>
                                 <div class="dropdown-divider"></div>
                                 <a href="{{ route('user.logoutcustomer') }}" class="dropdown-item">
                                     Log Out

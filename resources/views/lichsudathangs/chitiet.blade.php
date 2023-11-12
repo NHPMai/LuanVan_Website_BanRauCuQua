@@ -87,7 +87,7 @@
   #progressbar-2 li:nth-child(3):after {
     left: 1%;
     width: 100%;
-    background: #c5cae9 !important;
+    /* background: #c5cae9 !important; */
   }
 
   #progressbar-2 li:nth-child(4) {
@@ -105,6 +105,177 @@
   #progressbar-2 li.active:after {
     background: #6520ff;
   }
+
+
+  /* cuc */
+  body {
+            background-color:
+                #eeeeee;
+            font-family: 'Open Sans', serif
+        }
+
+        .container_order {
+            margin-top: 50px;
+            margin-bottom: 50px
+        }
+
+        .card {
+            position:
+                relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction:
+                normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color:
+                #fff;
+            background-clip: border-box;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius:
+                0.10rem
+        }
+
+        .card-header:first-child {
+            border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0
+        }
+
+        .card-header {
+            padding:
+                0.75rem 1.25rem;
+            margin-bottom: 0;
+            background-color: #fff;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+        }
+
+        .track {
+            position:
+                relative;
+            background-color: #ddd;
+            height: 7px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            margin-bottom:
+                60px;
+            margin-top: 50px
+        }
+
+        .track .step {
+            -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            width: 25%;
+            margin-top:
+                -18px;
+            text-align: center;
+            position: relative
+        }
+
+        .track .step.active:before {
+            background: #FF5722
+        }
+
+        .track .step::before {
+            height: 7px;
+            position: absolute;
+            content: "";
+            width: 100%;
+            left: 0;
+            top: 18px
+        }
+
+        .track .step.active .icon {
+            background: #ee5435;
+            color: #fff
+        }
+
+        .track .icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height:
+                40px;
+            position: relative;
+            border-radius: 100%;
+            background: #ddd
+        }
+
+        .track .step.active .text {
+            font-weight: 400;
+            color:
+                #000
+        }
+
+        .track .text {
+            display: block;
+            margin-top: 7px
+        }
+
+        .itemside {
+            position: relative;
+            display: -webkit-box;
+            display:
+                -ms-flexbox;
+display: flex;
+            width: 100%
+        }
+
+        .itemside .aside {
+            position: relative;
+            -ms-flex-negative: 0;
+            flex-shrink:
+                0
+        }
+
+        .img-sm {
+            width: 80px;
+            height: 80px;
+            padding: 7px
+        }
+
+        ul.row,
+        ul.row-sm {
+            list-style: none;
+            padding: 0
+        }
+
+        .itemside .info {
+            padding-left: 15px;
+            padding-right: 7px
+        }
+
+        .itemside .title {
+            display: block;
+            margin-bottom: 5px;
+            color:
+                #212529
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1rem
+        }
+
+        .btn-warning {
+            color: #ffffff;
+            background-color: #ee5435;
+            border-color:
+                #ee5435;
+            border-radius: 1px
+        }
+
+        .btn-warning:hover {
+            color: #ffffff;
+            background-color: #ff2b00;
+            border-color:
+                #ff2b00;
+            border-radius: 1px
+        }
 </style>
 
 <section class="vh-100" style="background-color: #8c9eff; font-size:medium">
@@ -119,25 +290,60 @@
               <div>
                 <h3 class="mb-0"> Thông tin chi tiết của đơn hàng ID: <span class="text-primary font-weight-bold">{{$donhang->id}}</span></h>
               </div>
+              @if ($donhang->dh_trangthai == 1 )
               <div class="text-end">
                 <a href="#" class="btn btn-warning" data-abc="true"> <i class="fa fa-remove"></i></i> Hủy đơn hàng</a>
               </div>
+              @endif
             </div>
 
             <article class="card ">
               <div class="card-body row">
                 <div class="col"> <strong>Thời gian đặt hàng:</strong> <br>{{$donhang->dh_thoigiandathang}} </div>
                 <div class="col"> <strong>Giao bởi:</strong> <br> Chưa xác định, | <i class="fa fa-phone"></i> {{$donhang->khachhangs->sodienthoai}} </div>
-                <div class="col"> <strong>Trạng thái:</strong> <br> {{$donhang->dh_trangthai}} </div>
+                <div class="col"> <strong>Trạng thái:</strong> <br>
+                  @if ($donhang->dh_trangthai == 1)
+                      Chờ duyệt
+                  @elseif ($donhang->dh_trangthai == 2)
+                      Đã duyệt
+                  @elseif ($donhang->dh_trangthai == 3)
+                      Đang vận chuyển
+                  @elseif ($donhang->dh_trangthai == 4)
+                      Giao hàng thành công
+                  @endif
+                </div>
                 <div class="col"> <strong>Theo dõi #:</strong> <br>{{$donhang->id}}</div>
               </div>
             </article>
 
+            @php
+              $status_confirmed = '';
+              $status_picked = '';
+              $status_way = '';
+              $status_ready = '';
+
+              if ($donhang->dh_trangthai == 4) {
+                  $status_confirmed = 'active';
+                  $status_picked = 'active';
+                  $status_way = 'active';
+                  $status_ready = 'active';
+              } elseif ($donhang->dh_trangthai == 3) {
+                  $status_confirmed = 'active';
+                  $status_picked = 'active';
+                  $status_way = 'active';
+              } elseif ($donhang->dh_trangthai == 2) {
+                  $status_confirmed = 'active';
+                  $status_picked = 'active';
+              } else {
+                  $status_confirmed = 'active';
+              }
+          @endphp
+
             <ul id="progressbar-2" class="d-flex justify-content-between mx-0 mt-0 mb-5 px-0 pt-5 pb-2">
-              <li class="step0 active text-center" id="step1"></li>
-              <li class="step0 active text-center" id="step2"></li>
-              <li class="step0 active text-center" id="step3"></li>
-              <li class="step0 text-muted text-end" id="step4"></li>
+              <li class="step0 {{ $status_confirmed }} text-center" id="step1"></li>
+              <li class="step0 {{ $status_picked }} text-center" id="step2"></li>
+              <li class="step0 {{ $status_way }} text-center" id="step3"></li>
+              <li class="step0 {{ $status_ready }}  text-center" id="step4"></li>
             </ul>
 
             <div class="d-flex justify-content-between">
@@ -198,7 +404,7 @@
               </div>
 
               <div class="col-6">
-                <h4 class="mb-0" style="text-align: right; font-size:">Tổng tiền: <span>{{$donhang->dh_thanhtien}}</span> VNĐ</h4>
+                <h4 class="mb-0" style="text-align: right;">Tổng tiền: <span>{{$donhang->dh_thanhtien}}</span> VNĐ</h4>
               </div>
 
             </div>
