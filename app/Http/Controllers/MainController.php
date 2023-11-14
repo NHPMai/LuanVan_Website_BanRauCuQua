@@ -108,5 +108,22 @@ class MainController extends Controller
     //     });
     // }
 
+    public function autocomplete_ajax(Request $request){
+        $data = $request->all();
+
+        if($data['query']){
+            $product = Product::where('hoatdong',1)->where('ten','LIKE','%'.$data['query'].'%')->get();
+
+            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+
+            foreach($product as $key => $val){
+                $output.='
+                <li class="li_search_ajax"><a href="#">'.$val->ten.'</a></li>';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
+    }
+
    
 }

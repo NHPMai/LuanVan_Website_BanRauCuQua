@@ -110,4 +110,14 @@ class ProductController extends Controller
             'title' => 'Danh Sách Sản Phẩm'
         ],compact('products'));
     }
+
+    // Tìm kiếm ajax
+    // public function search_ajax()
+    // {
+    //     $data = Product::search()->get();
+    //     dd($data);
+    //     return view('admin.product.Ajax_search',[
+    //         'title' => "Tim Kiếm Sản Phẩm"
+    //     ], compact('data'));
+    // }
 }

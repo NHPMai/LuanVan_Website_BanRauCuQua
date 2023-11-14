@@ -17,9 +17,9 @@ class SupplierController extends Controller
     
     public function index()
     {
-        $nhacungcaps = Nhacungcap::orderbyDesc('id')->paginate(20);
+        $nhacungcaps = Nhacungcap::orderbyDesc('id')->get();
         return view('admin.supplier.list',[
-            'title' => 'Danh Sách Thương Hiệu Mới Nhất',
+            'title' => 'Danh Sách Nhà Cung Cấp',
             'nhacungcaps' => $nhacungcaps,
         ]);
     }
@@ -125,7 +125,7 @@ class SupplierController extends Controller
         $ncc->ncc_trangthai = $request->ncc_trangthai;
         $ncc->save();
 
-        Session::flash('success', 'Cập nhật thương hiệu thành công!');
+        Session::flash('success', 'Cập nhật nhà cung cấp thành công!');
         return redirect('/admin/suppliers/list');
     }
 

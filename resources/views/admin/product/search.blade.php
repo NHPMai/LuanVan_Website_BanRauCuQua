@@ -2,8 +2,15 @@
 
 @section('content')
 
-<table class="table">
-        <thead>
+<style>
+    th,
+    td {
+        border: 1px solid LightGray;
+    }
+</style>
+
+<table class="table" >
+        <thead style="background-color:blanchedalmond;">
         <tr>
                 <th style="width: 50px">ID</th>
                 <th style="vertical-align: middle;text-align: center;">Tên Sản Phẩm</th>
@@ -28,7 +35,7 @@
                     <td style="vertical-align: middle;text-align: center;">{{ $product->menu->name }}</td>
                     <td style="vertical-align: middle;text-align: center;">{{ $product->brand->ten }}</td>
                     <td style="vertical-align: middle;text-align: center;">{{ $product->soluongsp }}</td>
-                    <td style="vertical-align: middle;text-align: center;">{{ $product->mota }}</td>
+                    <td style="vertical-align: middle;">{{ $product->mota }}</td>
                     <td style="vertical-align: middle;text-align: center;">{!! \App\Helpers\Helper::active($product->hoatdong) !!}</td>
                     <td style="vertical-align: middle;text-align: center;">{{ $product->updated_at }}</td>
                     <td style="vertical-align: middle;text-align: center;">

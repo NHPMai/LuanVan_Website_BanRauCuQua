@@ -270,6 +270,14 @@ $.ajaxSetup({
         })
     </script>
 
+
+<!-- Tìm kiếm theo Data -->
+<script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    let table = new DataTable('#myTable');
+</script>
+
+
 <!-- SELECT2 -->
 <script type="text/javascript">
     $('#productSelect').select2({

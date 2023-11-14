@@ -52,30 +52,20 @@
 
 
 <div style="  border-radius: 5px;">
-    <div style="padding: 10px; font-weight:700">
-        <div class="d-flex justify-content-between align-items-center p-2">
-            <div style="font-weight:bold; font-size: 20px; ">
-                <p>Tổng Số Nhân Viên: </p>
-            </div>
-
-            <div class="text-end">
-                <a href="/admin/staffs/add" class="btn btn-warning"> <i class="fa fa-remove"></i></i> + Thêm mới</a>
-            </div>
-        </div>
-    </div>
+    
     <div>
   
         <div style="padding: 10px;">
-            <div class="pb-3">
-                <form class="form-inline pb-2">
+            <div class="pt-3 pb-3" style=" margin-left: 150px;" >
+                <form class=" pb-2" style="width: 700px;">
                     <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-5 col-form-label text-end">Email</label>
+                        <label for="inputPassword" class="col-sm-5 col-form-label text-end"  style="text-align: right;">Email</label>
                         <div class="col-sm-7">
                             <input type="email" value="{{$nhanvien->email}}" class="form-control" id="inputPassword" placeholder="Email" disabled>
                         </div>
                     </div>
-                    <div class="form-group row" style="margin-left: 60px">
-                        <label for="inputPassword" class="col-sm-5 col-form-label">Họ và tên</label>
+                    <div class="form-group row" >
+                        <label for="inputPassword" class="col-sm-5 col-form-label" style="text-align: right;">Họ và tên</label>
                         <div class="col-sm-7">
                             <input type="text" value="{{$nhanvien->hoten}}" class="form-control" id="inputPassword" placeholder="Họ và tên" disabled>
                         </div>
@@ -177,6 +167,15 @@
         </div>
 
 
+    </div>
+
+    <div style="padding: 10px; font-weight:700">
+        <div class="d-flex justify-content-between align-items-center p-2">
+           
+            <div class="text-end">
+                <a href="/admin/staffs/permission" class="btn btn-warning"> <i class="fas fa-chevron-left"></i></i>&nbsp Trở về</a>
+            </div>
+        </div>
     </div>
 </div>
 

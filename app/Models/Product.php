@@ -33,4 +33,15 @@ class Product extends Model
         return $this->hasOne(Brand::class, 'id', 'brand_id')
             ->withDefault(['ten'=>'']);
     }
+
+    public function scopeSearch($query){
+        if(request('key')){
+            $key = request('key');
+            $query = $query->where('ten','like','%'.$key.'%');
+        }
+        if (request('menu_id')){
+            $query = $query->where('menu_id',request('menu_id'));
+        }
+        return $query;
+    }
 }

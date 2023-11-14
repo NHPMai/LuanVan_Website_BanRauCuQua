@@ -19,7 +19,7 @@ class NhanvienController extends Controller
 
     public function index()
     {
-        $nhanviens = Nhanvien::orderbyDesc('id')->paginate(20);
+        $nhanviens = Nhanvien::orderbyDesc('id')->get();
         return view('admin.staff.list', [
             'title' => 'Danh Sách Nhân Viên',
             'nhanviens' => $nhanviens,

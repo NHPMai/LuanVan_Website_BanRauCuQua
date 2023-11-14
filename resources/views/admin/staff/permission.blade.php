@@ -59,7 +59,7 @@
             </div>
 
             <div class="text-end">
-                <a href="/admin/staffs/add" class="btn btn-warning"> <i class="fa fa-remove"></i></i> + Thêm mới</a>
+                <a href="/admin/staffs/add" class="btn btn-warning"> <i class="	fas fa-plus"></i><b>&nbsp;Thêm nhân viên</b></a>
             </div>
         </div>
     </div>
@@ -83,7 +83,7 @@
             </div>
         </nav> -->
         <div style="padding: 10px;">
-            <table id="product-table">
+            <table id="myTable">
                 <thead>
                     <tr style="background-color: lightskyblue;">
                         <th style="text-align:center">Email</th>
@@ -186,17 +186,17 @@
 
 
 
-                        @if ($nv->id == 9){
-                            <td>dfdsfs</td>
-                        }
-                        @else{
+                        @if ($nv->id == 9)
+                            <!-- <td> <button  style="color: red;">Quản lí cấp cao</button></td> -->
+                            <td style="text-align:center" ><button style="background-color: red; border-radius: 8px; color:white; font-weight:600; ">Quản lí cấp cao</button></td>
+                        @else
                         <td style="text-align: center;vertical-align: middle;">
                             <a class="btn btn-primary btn-sm" href="/admin/staffs/edit_permission/{{$nv->id}}">
                                 <i class="fas fa-edit"></i>
                             </a>
 
                         </td>
-                        }
+                        
                         @endif
 
                     </tr>

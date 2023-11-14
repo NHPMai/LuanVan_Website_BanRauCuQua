@@ -22,14 +22,14 @@
     }
 
     .account-settings .user-profile .user-avatar img {
-        width: 90px;
-        height: 90px;
+        width: 120px;
+        height: 120px;
         -webkit-border-radius: 100px;
         -moz-border-radius: 100px;
         border-radius: 100px;
     }
 
-    .account-settings .user-profile h5.user-name {
+    .account-settings .user-profile h4.user-name {
         margin: 0 0 0.5rem 0;
     }
 
@@ -45,13 +45,13 @@
         text-align: center;
     }
 
-    .account-settings .about h5 {
+    .account-settings .about h4 {
         margin: 0 0 15px 0;
         color: #007ae1;
     }
 
     .account-settings .about p {
-        font-size: 0.825rem;
+        font-size: 15px;
     }
 
     .form-control {
@@ -59,7 +59,7 @@
         -webkit-border-radius: 2px;
         -moz-border-radius: 2px;
         border-radius: 2px;
-        font-size: .825rem;
+        font-size: 13px;
         background: #ffffff;
         color: #2e323c;
     }
@@ -81,9 +81,14 @@
             <div class="card h-40">
                 <div class="card-body">
                     <div class="account-settings">
-                        <div class="about">
-                            <h5>About</h5>
-                            <p>I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
+                        <div class="about" style="margin-top: 10px;">
+                            <h4 style="text-decoration:underline" >Cài đặt</h4>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action list-group-item-primary" style="font-size: 16px; font-weight:500">Tài khoản</a>
+                                <a href="#" class="list-group-item list-group-item-action list-group-item-secondary" style="font-size: 16px; font-weight:500">Mật khẩu</a>
+                               
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -95,16 +100,17 @@
                 <div class="card-body">
                     <div class="border-bottom-5px"></div>
                     <div class="account-settings">
-                        <div class="user-profile">
+                        <h4 style="text-align:center; color:#007ae1; magin-top:20px;  text-decoration:underline">Ảnh đại diện</h4>
+                        <div class="user-profile pt-2" style=" padding-bottom: 0px; margin-bottom: 5px;" >
                             <div class="user-avatar">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" style="border-radius: 50%; border: 2px solid #a1a1a1;"  alt="Maxwell Admin">
                             </div>
-                            <h5 class="user-name">Yuki Hayashi</h5>
-                            <h6 class="user-email">yuki@Maxwell.com</h6>
+                            <!-- <h5 class="user-name">{{Auth('web')->user()->hoten}}</h5> -->
                         </div>
                         <div class="about">
-                            <h5>About</h5>
-                            <p>I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
+                            <i class='fas fa-image' style='font-size:36px'></i>
+                            <h5>Ảnh đại diện</h5>
+                            <p>Hãy tải ảnh lên với kích thước <br>150px x 150px <br>(Tỉ lệ 1x1)</p>
                         </div>
                     </div>
                 </div>
@@ -113,59 +119,54 @@
         <div class="col-xl-7 col-lg-9 col-md-12 col-sm-12 col-12">
             <div class="card h-100">
                 <div class="card-body">
+                    <h4 style="text-align:center; color:#007ae1; magin-top:20px; text-decoration:underline">THÔNG TIN CÁ NHÂN</h4>
                     <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <h6 class="mb-2 text-primary">Personal Details</h6>
-                        </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="fullName">Họ tên</label>
-                                <input type="text" class="form-control" id="fullName" placeholder="Enter full name">
+                                <input type="text" class="form-control" id="fullName" placeholder="Nhập họ tên">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="eMail">Email</label>
-                                <input type="email" class="form-control" id="eMail" placeholder="Enter email ID">
+                                <input type="email" class="form-control" id="eMail" placeholder="Nhập email">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="phone">Số điện thoại</label>
-                                <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
+                                <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="website">Tổng tiền đã mua</label>
-                                <input type="url" class="form-control" id="website" placeholder="Website url">
+                                <input type="url" class="form-control" id="website" placeholder="">
                             </div>
                         </div>
                     </div>
                     <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <h6 class="mt-3 mb-2 text-primary">Địa chỉ</h6>
-                        </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="Street">Địa chỉ 1</label>
-                                <input type="name" class="form-control" id="Street" placeholder="Enter Street">
+                                <input type="name" class="form-control" id="Street" placeholder="">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="ciTy">Địa chỉ 2</label>
-                                <input type="name" class="form-control" id="ciTy" placeholder="Enter City">
+                                <input type="name" class="form-control" id="ciTy" placeholder="">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="sTate">Địa chỉ 3</label>
-                                <input type="text" class="form-control" id="sTate" placeholder="Enter State">
+                                <input type="text" class="form-control" id="sTate" placeholder="">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 ">
+                            <button type="submit" class="flex-c-m stext-103 cl0 size-103 bg1 bor1 hov-btn1 p-lr-15 trans-04 ">
                                 Thêm địa chỉ
                             </button>
                         </div>

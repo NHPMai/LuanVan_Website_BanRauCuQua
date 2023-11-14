@@ -52,14 +52,14 @@
 
 
 <div style="  border-radius: 5px;">
-    <div style="padding: 10px; font-weight:700">
+    <div style="font-weight:700">
         <div class="d-flex justify-content-between align-items-center p-2">
             <div style="font-weight:bold; font-size: 20px; ">
-                <p>Tổng Số Nhân Viên: </p>
+                <p>Tổng Số Nhân Viên: {{$nhanviens->count()}}</p>
             </div>
 
             <div class="text-end">
-                <a href="/admin/staffs/add" class="btn btn-warning" data-abc="true"> <i class="fa fa-remove"></i></i> + Thêm mới</a>
+                <a href="/admin/staffs/add" class="btn btn-warning" data-abc="true"> <i class="fas fa-plus"></i></i>&nbsp;<b>Thêm mới</b></a>
             </div>
         </div>
     </div>
@@ -83,7 +83,7 @@
             </div>
         </nav> -->
         <div style="padding: 10px;">
-            <table id="product-table">
+            <table id="myTable">
                 <thead>
                     <tr style="background-color: lightskyblue;">
                         <th style="text-align:center">ID</th>
@@ -138,5 +138,5 @@
     </div>
 </div>
 
-{!! $nhanviens->links() !!}
+
 @endsection

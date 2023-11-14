@@ -1,9 +1,17 @@
 @extends('admin.main')
 
 @section('content')
+
+<style>
+    th,
+    td {
+        border: 1px solid LightGray;
+    }
+</style>
+
 <!-- <p style="font-weight:bold; font-size: 20px; ">Tổng Số Sản Phẩm: </p> -->
-    <table class="table">
-        <thead>
+    <table class="table pt-2" id="myTable">
+        <thead style="background-color:blanchedalmond;">
             <tr>
                 <th style="vertical-align: middle;text-align: center;">ID</th>
                 <th style="vertical-align: middle;text-align: center;">Tên Thương Hiệu</th>
@@ -37,5 +45,5 @@
     </table>
 
 
-{!! $brands->links() !!}
+
 @endsection

@@ -122,9 +122,73 @@
                 </div>
 
 
-
+                <!-- Search product -->
 
                 <div class="wrap-icon-header flex-w flex-r-m">
+                    <!-- <form id="search-form" action="{{ url('/searchProductMicrophone')}}" class="d-flex" method="get">
+                        <div class="btn btn-white input-group-text border-0" type="submit" id="">
+                            <span class="microphone">
+                                <i class="fas fa-microphone"></i>
+                                <span class="recording-icon"></span>
+                            </span>
+                            <div style="display:none">
+                                <input id="search-input" name="keywork" type="text">
+
+                            </div>
+
+                        </div>
+                    </form>
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 ">
+
+                        <form class="form-inline" action="{{ url('search') }}" method="get" style="width: 250px;">
+                            <input id="keywords" class="mtext-110 cl2 size-114 plh2 p-r-15" type="search" name="query"  placeholder="Tìm Kiếm Sản Phâm">
+                            <div id="search-ajax"></div>
+                            <button type="submit" class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+                                <i class="zmdi zmdi-search"></i>
+                            </button>
+                        </form>
+
+                    </div> -->
+
+                    <form id="search-form" action="{{ url('/searchProductMicrophone')}}" class="d-flex" method="get">
+                        <div class="btn btn-white input-group-text border-0" type="submit" id="">
+                            <span class="microphone">
+                                <i class="fas fa-microphone"></i>
+                                <span class="recording-icon"></span>
+                            </span>
+                            <div style="display:none">
+                                <input id="search-input" name="keywork" type="text">
+
+                            </div>
+
+                        </div>
+                    </form>
+                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 ">
+
+                        <form class="form-inline" action="{{ url('search') }}" autocomplete="off" method="get" style="width: 250px;">
+                            <div class="search_box">
+                                <input type="text" id="keywords" class="mtext-110 cl2 size-114 plh2 p-r-15"  name="query" placeholder="Tìm Kiếm Sản Phâm">
+                                <div id="search_ajax"></div>
+                            </div>
+
+                            <button type="submit" class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+                                <i class="zmdi zmdi-search"></i>
+                            </button>
+                        </form>
+
+                    </div>
+
+                    <!-- <div class="col-sm-5">
+                        <form action="{{URL::to('/search')}}" autocomplete="off" method="POST">
+                        
+                            <div class="search_box">
+                                <input type="text" name="keywords_submit" style="width: 100%;" id="keywords" placeholder="tim kiem san pham"></input>
+                                <div id="search_ajax"></div>
+
+                                <input type="submit" style="margin-top: 0;color:burlywood" name="search_items" class="btn btn-primary btn-sm" value="Tim kiem">
+                            </div>
+                        </form>
+                    </div> -->
 
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ !is_null(\Session::get('chitietdonhangs')) ? count(\Session::get('chitietdonhangs')) : 0 }}">
                         <i class="zmdi zmdi-shopping-cart"></i>
@@ -178,3 +242,32 @@
     </div>
 
 </header>
+
+<!--********************TÌM KIẾM AUTOCOMPLETE**********************-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $('#keywords').keyup(function() {
+        var query = $(this).val();
+        if (query != '') {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{url('/autocomplete_ajax')}}",
+                method: "POST",
+                data: {
+                    query: query,
+                    token: _token
+                },
+                success: function(data) {
+                    $('#search_ajax').fadeIn();
+                    $('#search_ajax').html(data);
+                }
+            });
+        } else {
+            $('#search_ajax').fadeOut();
+        }
+    });
+    $(document).on('click', 'li', function() {
+        $('#keywords').val($(this).text());
+        $('#search_ajax').fadeOut();
+    })
+</script>

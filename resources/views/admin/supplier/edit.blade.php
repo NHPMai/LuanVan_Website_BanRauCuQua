@@ -40,7 +40,7 @@
         </div>
 
         <div class="form-group">
-            <label for="menu">Website<span class="text-danger">(*)</span></label>
+            <label for="menu">Địa chỉ<span class="text-danger">(*)</span></label>
             <input type="text" name="ncc_diachi" value="{{ $nhacungcap->ncc_diachi }}" class="form-control" placeholder="Nhập địa chỉ">
         </div>
 

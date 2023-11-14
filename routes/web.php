@@ -27,21 +27,22 @@ use Illuminate\Support\Facades\Route;
 //--------------------ADMIN---------------------//
 
 Route::prefix('admin')->name('admin.')->group(function () {
-   
-    Route::middleware(['guest:admin'])->group(function(){
+
+    Route::middleware(['guest:admin'])->group(function () {
         Route::get('/login', [LoginNhanvienController::class, 'index'])->name('login');
         Route::post('/store', [LoginNhanvienController::class, 'store'])->name('store');
     });
 
     //ADMIN - ĐÃ ĐĂNG NHẬP
     Route::middleware(['auth:admin'])->group(function () {
-        
+
         Route::get('/', [MainController::class, 'index'])->name('home');
         Route::get('/main', [MainController::class, 'index'])->name('main');
 
         #TÌM KIẾM GIỌNG NÓI_SẢN PHẨM
         Route::get('/searchProductMicrophone', [ProductController::class, 'searchProductMicrophone']);
         Route::get('/search', [ProductController::class, 'search']);   //Tim kiem spadmin
+        // Route::get('/search_ajax',[ProductController::class,'search_ajax'])->name('search_ajax');
 
         #TÌM KIẾM GIỌNG NÓI_ĐƠN HÀNG
         Route::get('/searchProductMicrophonedonhang', [CartController::class, 'searchProductMicrophonedonhang']);
@@ -50,8 +51,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
         //ĐĂNG XUẤT ADMIN
         Route::get('/logout', [LogoutController::class, 'logout'])->name('logout'); //Dang Xuat
 
-         #Nhân viên
-         Route::prefix('staffs')->group(function () {
+
+        // #Tài Khoản
+        // Route::prefix('accounts')->group(function () {
+        //     Route::get('add', [MenuController::class, 'create']);
+        //     Route::post('add', [MenuController::class, 'store']);
+        //     Route::get('list', [MenuController::class, 'index']);
+        //     Route::get('edit/{menu}', [MenuController::class, 'show']);
+        //     Route::post('edit/{menu}', [MenuController::class, 'update']);
+        //     Route::DELETE('destroy', [MenuController::class, 'destroy']);
+        // });
+
+        #Nhân viên
+        Route::prefix('staffs')->group(function () {
             Route::get('add', [NhanvienController::class, 'create']);
             Route::post('add', [NhanvienController::class, 'store']);
             Route::get('list', [NhanvienController::class, 'index']);
@@ -66,6 +78,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         // #Menu
+        Route::prefix('menus')->group(function () {
+            Route::get('add', [MenuController::class, 'create']);
+            Route::post('add', [MenuController::class, 'store']);
+            Route::get('list', [MenuController::class, 'index']);
+            Route::get('edit/{menu}', [MenuController::class, 'show']);
+            Route::post('edit/{menu}', [MenuController::class, 'update']);
+            Route::DELETE('destroy', [MenuController::class, 'destroy']);
+        });
+
+        // #Bài viết
         Route::prefix('menus')->group(function () {
             Route::get('add', [MenuController::class, 'create']);
             Route::post('add', [MenuController::class, 'store']);
@@ -96,13 +118,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         // #Nha Cung Cap
-        Route::prefix('suppliers')->group(function(){
-            Route::get('add',[SupplierController::class, 'create']);
+        Route::prefix('suppliers')->group(function () {
+            Route::get('add', [SupplierController::class, 'create']);
             Route::post('add', [SupplierController::class, 'store']);
             Route::get('list', [SupplierController::class, 'index']);
             Route::get('edit/{supplier}', [SupplierController::class, 'show']);
             Route::post('edit/{supplier}', [SupplierController::class, 'update']);
-            Route::DELETE('destroy',[SupplierController::class, 'destroy']);
+            Route::DELETE('destroy', [SupplierController::class, 'destroy']);
         });
 
 
@@ -127,7 +149,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::DELETE('destroy', [WarehouseController::class, 'destroy']);
         });
 
-       
 
         // ##Upload
         Route::post('upload/services', [\App\Http\Controllers\Admin\UploadController::class, 'store']);
@@ -207,11 +228,11 @@ Route::prefix('user')->name('user.')->group(function () {
         //Phi van chuyen
         Route::post('select_delivery_home', [App\Http\Controllers\Users\DonhangController::class, 'select_delivery_home'])->name('select_delivery_home'); //Chọn nơi vận chuyển
         Route::post('calculate_fee', [App\Http\Controllers\Users\DonhangController::class, 'calculate_fee'])->name('calculate_fee');  //Tính phí vận chuyển
-        
+
         //thanh toan
         Route::get('checkout', [App\Http\Controllers\Users\DonhangController::class, 'showcheckout'])->name(name: 'showcheckout');
         Route::post('add_order', [App\Http\Controllers\Users\DonhangController::class, 'add_order'])->name('add_order');
-        
+
         //lịch sử đơn hàng
         Route::get('order_history', [\App\Http\Controllers\Users\DonhangController::class, 'order_history'])->name('order_history');
         Route::get('order_history_detail/{donhang}', [\App\Http\Controllers\Users\DonhangController::class, 'order_history_detail'])->name('order_history_detail');
@@ -243,6 +264,8 @@ Route::get('san-pham/{id}-{slug}.html', [App\Http\Controllers\ProductController:
 //TÌM KIẾM - KHÁCH HÀNG
 Route::get('/search', [App\Http\Controllers\ProductController::class, 'search']);
 Route::get('/searchProductMicrophone', [App\Http\Controllers\ProductController::class, 'searchProductMicrophone']);
+Route::post('/autocomplete_ajax', [App\Http\Controllers\MainController::class, 'autocomplete_ajax']);
+// Route::get('/search_ajax_api',[App\Http\Controllers\MainController::class,'search_ajax_api'])->name('search_ajax_api');
 
 // //Email
 // Route::get('test-email', [App\Http\Controllers\MainController::class, 'testEmail']);

@@ -63,7 +63,7 @@
         font-size: :medium;
         font-weight: 700;
         color: #0a0a0a;
-        background: #f3de4487;
+        background: blanchedalmond;
     }
 
     .row.green {
@@ -130,41 +130,41 @@
         <!-- <h3 class="mb-0"> Thông tin chi tiết của đơn hàng ID <span class="text-primary font-weight-bold">#Y34XDHR</span></h> -->
     </div>
     <div class="text-end">
-        <a href="/admin/coupons/add" class="btn btn-warning" data-abc="true"> <i class="fa fa-remove"></i></i> + Thêm mã mới</a>
+        <a href="/admin/coupons/add" class="btn btn-warning" data-abc="true"> <i class="fas fa-plus"></i></i>&nbsp; <b>Thêm mã mới</b></a>
     </div>
 </div>
 
-<div class="table">
+<div class="table"  >
     <div class="hang header" style="font-size: medium;">
-        <div class="cell">
+        <div class="cell" style=" vertical-align: middle;text-align: center;">
             #ID
         </div>
 
-        <div class="cell">
+        <div class="cell" style=" vertical-align: middle;text-align: center;">
             Tên giảm giá
         </div>
 
-        <div class="cell">
+        <div class="cell" style=" vertical-align: middle;text-align: center;">
             Mã giảm giá
         </div>
 
-        <div class="cell">
+        <div class="cell" style=" vertical-align: middle;text-align: center;">
             Số lượng mã
         </div>
 
-        <div class="cell">
+        <div class="cell" style=" vertical-align: middle;text-align: center;">
             Loại giảm
         </div>
 
-        <div class="cell">
+        <div class="cell" style=" vertical-align: middle;text-align: center;">
             Giá trị
         </div>
 
-        <div class="cell">
+        <div class="cell" style=" vertical-align: middle;text-align: center;">
             Tình trạng
         </div>
 
-        <div class="cell">
+        <div class="cell" style=" vertical-align: middle;text-align: center;">
             Hành động
         </div>
     </div>
@@ -172,26 +172,26 @@
     @foreach($magiamgias as $key => $magiamgia)
 
     <div class="hang">
-        <div class="cell" data-title="Username">
+        <div class="cell" data-title="Username" style=" vertical-align: middle;text-align: center;">
             {{ $magiamgia->id }}
         </div>
-        <div class="cell" data-title="Username">
+        <div class="cell" data-title="Username" style=" vertical-align: middle;text-align: center;">
             {{ $magiamgia->mgg_tengiamgia }}
         </div>
-        <div class="cell" data-title="Username">
+        <div class="cell" data-title="Username" style=" vertical-align: middle;text-align: center;">
             {{ $magiamgia->mgg_magiamgia }}
         </div>
-        <div class="cell" data-title="Username">
+        <div class="cell" data-title="Username" style=" vertical-align: middle;text-align: center;">
             {{ $magiamgia->mgg_soluongma }}
         </div>
-        <div class="cell" data-title="Username">
+        <div class="cell" data-title="Username" style=" vertical-align: middle;text-align: center;">
             @if( $magiamgia->mgg_loaigiamgia == 1)
             <p class="column-6">Giảm theo phần trăm</p>
             @elseif($magiamgia->mgg_loaigiamgia == 2)
             <p class="column-6">Giảm theo tiền</p>
             @endif
         </div>
-        <div class="cell" data-title="Email">
+        <div class="cell" data-title="Email" style=" vertical-align: middle;text-align: center;">
             <?php
             if ($magiamgia->mgg_loaigiamgia == 1) {
             ?>
@@ -205,19 +205,19 @@
             ?>
         </div>
 
-        <div class="cell" data-title="Password">
+        <div class="cell" data-title="Password" style=" vertical-align: middle;text-align: center;">
             @if ($magiamgia->mgg_soluongma <= 0 )
-                    <p style = ""><b>Hết mã</b></p>
+                <p ><button style="background-color:navy; color:#FFFFFF; font-weight:600; border-radius:10%">Hết mã</button></p>
             @elseif ($magiamgia->mgg_soluongma > 0)
                 @if (\Carbon\Carbon::parse($magiamgia->mgg_ngayketthuc) > \Carbon\Carbon::now())
-                    <p style = ""><b>Khả dụng</b></p>
+                    <p ><button style="background-color:lime; color:black; font-weight:600; border-radius:10%">Khả dụng</button></p>
                 @else (\Carbon\Carbon::parse($magiamgia->mgg_ngayketthuc) < \Carbon\Carbon::now())
-                    <p style=""><b>Hết hạn</b></p>
+                    <p ><button style="background-color:crimson; color:#FFFFFF; font-weight:600; border-radius:10%">Hết hạn</button></p>
                 @endif
             @endif            
         </div>
 
-        <div class="cell" data-title="Active">
+        <div class="cell" data-title="Active" style=" vertical-align: middle;text-align: center;">
             <a class="btn btn-primary btn-sm" href="/admin/coupons/edit/{{ $magiamgia->id }}">
                 <i class="fas fa-edit"></i>
             </a>

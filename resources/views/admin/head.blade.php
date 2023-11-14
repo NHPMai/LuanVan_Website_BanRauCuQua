@@ -39,6 +39,7 @@
 {{--    <link rel="stylesheet" href="/resources/demos/style.css">--}}
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 
-
+<!-- Tìm kiếm theo database -->
+<link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 
     

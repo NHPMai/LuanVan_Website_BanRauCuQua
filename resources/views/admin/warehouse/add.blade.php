@@ -52,6 +52,34 @@
     td {
         padding: 15px;
     }
+
+    /* Timf kiếm */
+    .form-search .form-group {
+        width: 100%;
+        position: relative;
+    }
+
+    .form-search .form-group .form-control {
+        width: 100%;
+    }
+
+    .form-search .search_ajax_result {
+        position: absolute;
+        background-color: #fff;
+        padding: 10px;
+        z-index: 1000;
+        width: 200px;
+    }
+
+    .form-search .search_ajax_result h4 {
+        font-size: 14px;
+    }
+
+    .form-search .search_ajax_result p {
+        margin: 0;
+        font-size: 11px;
+        font-style: italic;
+    }
 </style>
 
 @section('content')
@@ -68,14 +96,18 @@
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Người lập phiếu<span class="text-danger">(*)</span></label>
                             <div class="col-sm-8">
-                                <input type="password" class="form-control" id="inputPassword">
+                                <input type="text" class="form-control" id="inputPassword" value="{{Auth::user()->hoten}}" disabled>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Chọn nhà cung cấp<span class="text-danger">(*)</span></label>
                             <div class="col-sm-8">
-                                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                <select class="form-control" name="menu_id">
+                                    @foreach($warehouse as $warehouse)
+                                    <option value="{{ $warehouse->id }}">{{ $warehouse->ncc_ten }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </form>
@@ -90,7 +122,7 @@
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-4 col-form-label">Ghi chú</label>
                         <div class="col-sm-8">
-                            <textarea type="password" class="form-control" id="inputPassword"></textarea>
+                            <textarea type="text" class="form-control" id="inputPassword"></textarea>
                         </div>
                     </div>
                 </div>
@@ -114,14 +146,25 @@
                             </div>
                         </div>
                         <div class="col-11">
-                            <form action="{{ url('admin/search')}}" method="GET" class="form-inline" style="margin-bottom:0" >
-                                <div class="form-group" >
+                            <!-- <form action="{{ url('admin/search')}}" method="GET" class="form-inline" style="margin-bottom:0">
+                                <div class="form-group">
                                     <input style="width: 1086px;" class="form-control form-control-sidebar" name="query" type="search" placeholder="Search" aria-label="Search">
+                                    
                                 </div>
 
                                 <button type="submit" class="btn btn-light" style=" height: 34px; width: 61px;">
                                     <i class="fas fa-search fa-fw"></i>
                                 </button>
+                            </form> -->
+
+                            <form class="navbar-form navbar-left form-search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-search-ajax"   placeholder="Search">
+
+                                    <div class="search_ajax_result">
+
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -159,67 +202,7 @@
             </div>
         </div>
 
-        <!-- <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="user_id">Nội Dung Phiếu Nhập</label>
-                        <input type="text" name="name" value="{{ old('name') }}" class="form-control"  placeholder="Nhập tên nhà cung cấp">
-                    </div>
-                </div>
 
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Nhân Viên Nhập</label>
-                        <select class="form-control" name="user_id">
-                           
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="user_id">Số lượng</label>
-                        <input type="number" name="soluong" value="{{ old('soluong') }}" class="form-control"  placeholder="Nhập số lượng">
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Đơn Vị</label>
-                        <input type="text" name="donvi" value="{{ old('donvi') }}" class="form-control"  placeholder="Nhập đơn vị">
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Giá Nhập Hàng</label>
-                        <input type="number" name="gianhaphang" value="{{ old('gianhaphang') }}" class="form-control"  placeholder="Nhập giá">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="user_id">Ngày sản xuất</label>
-                        <input type="date" name="ngaysanxuat" value="{{ old('ngaysanxuat') }}" class="form-control"  placeholder="Nhập ngay san xuat">
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Ngày hết hạn</label>
-                        <input type="date" name="ngayhethan" value="{{ old('ngayhethan') }}" class="form-control"  placeholder="Nhập ngay het han">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="user_id">Ghi Chú</label>
-                <textarea name="note" class="form-control">{{ old('note') }}</textarea>
-            </div> -->
 
 
     </div>
@@ -234,5 +217,56 @@
 @section('footer')
 <script>
     CKEDITOR.replace('content');
+</script>
+
+<!-- Timf kiếm  -->
+<script>
+    $('.search_ajax_result').hide()
+
+    $('.input-search-ajax').keyup(function() {
+        var _text = $(this).val();
+        var _url = "{{url('')}}"
+
+        if (_text != '') {
+            $.ajax({
+                url: "{{route('search_ajax')}}?key=" + _text,
+                type: 'GET',
+                success: function(res) {
+
+                    var _html = '';
+
+                    for (var pro of res) {
+                        var slug = convertToSlug(pro.ten);
+                        _html += '<div class="media">';
+                        _html += '<a class="pull-left" href="#">';
+                        _html += '<img class="media-object" width="50" style="margin-right: 15px;" src="' + _url + '/' + pro.hinhanh + '">';
+                        _html += '</a>';
+                        _html += '<div class="media-body">';
+                        _html += '<h4 class="media-heading"><a href="http://phuongmai.localhost/san-pham/' +
+                            pro.id + '-' + slug + '.html' + '">' +
+                            pro.ten + '</a></h4>';
+                        _html += '<p>' + pro.mota + '</p>';
+                        _html += '</div>';
+                        _html += '</div>';
+                    }
+
+                    $('.search_ajax_result').show();
+                    $('.search_ajax_result').html(_html)
+
+                }
+            });
+        } else {
+            $('.search_ajax_result').html('');
+            $('.search_ajax_result').hide()
+        }
+
+    });
+
+    function convertToSlug(Text) {
+        return Text
+            .toLowerCase()
+            .replace(/ /g, '-')
+            .replace(/[^\w-]+/g, '');
+    }
 </script>
 @endsection

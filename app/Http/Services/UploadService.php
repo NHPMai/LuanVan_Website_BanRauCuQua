@@ -33,7 +33,7 @@ class UploadService
         if ($request->hasFile('file')){
             try{
                 $name = $request->file('file')->getClientOriginalName();
-                $pathFull = 'uploads/' . date("Y/m/d");
+                $pathFull = 'uploads' ;
 
                 $request->file('file')->storeAs(
                     'public/' . $pathFull, $name

@@ -167,7 +167,7 @@
                         <div class="col-md-12">
                             <!-- jquery validation -->
                             <div class="card  mt-3">
-                                <div class="panel-heading">
+                                <div class="panel-heading" style="margin-bottom: 10px;">
                                     <h3 class="panel-heading">{{ $title }}</h3>
                                 </div>
 

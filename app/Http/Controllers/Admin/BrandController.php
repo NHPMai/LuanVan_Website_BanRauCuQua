@@ -49,7 +49,7 @@ class BrandController extends Controller
         //     // dd($nhanvien);
         // }
         // $brands = Brand::all()->sortByDesc("id")->paginate(20);
-        $brands = Brand::orderbyDesc('id')->paginate(20);
+        $brands = Brand::orderbyDesc('id')->get();
         return view('admin.brand.list',[
             'title' => 'Danh Sách Thương Hiệu Mới Nhất',
             'brands' => $brands,

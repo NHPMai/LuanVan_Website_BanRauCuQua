@@ -70,7 +70,7 @@ class VanChuyenController extends Controller
         $feeship = Phivanchuyen::orderby('id','DESC')->get();
         $output ='';
         $output.= '<div class="table-responsive">
-            <table class="table table-bordered" style="width:80%;margin-left: 120px;">
+            <table class="table table-bordered" style="width:80%;margin-left: 120px;" >
                 <thread">
                     <tr style="background-color:#80bfff; font-weight:500; font-size:20px">
                         <th>Tên thành phố</th>
