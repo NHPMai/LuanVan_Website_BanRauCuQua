@@ -157,15 +157,32 @@
                                 </button>
                             </form> -->
 
-                            <form class="navbar-form navbar-left form-search">
+
+
+                            <form class="form-inline" action="{{ url('admin/search') }}" autocomplete="off" method="get" style="width: 250px;">
+                                <div class="search_box">
+                                    <input type="text" id="keywords" class="mtext-110 cl2 size-114 plh2 p-r-15" name="query" placeholder="Tìm Kiếm Sản Phâm">
+                                    <div id="search_ajax"></div>
+                                </div>
+
+                                <button type="submit" class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+                                    <i class="zmdi zmdi-search"></i>
+                                </button>
+
+                            </form>
+
+
+
+                            <!-- <form class="navbar-form navbar-left form-search">
                                 <div class="form-group">
-                                    <input type="text" class="form-control input-search-ajax"   placeholder="Search">
+                                    <input type="text" class="form-control input-search-ajax" placeholder="Search">
 
                                     <div class="search_ajax_result">
 
                                     </div>
                                 </div>
-                            </form>
+                            </form> -->
+
                         </div>
                     </div>
                 </div>
@@ -182,7 +199,7 @@
                         <tr>
                             <td style="text-align:center">Peter</td>
                             <td style="text-align:center">Griffin</td>
-                            <td style="text-align:center">$100</td>
+                            <td style="text-align:center">jjh</td>
                             <td style="text-align:center">
                                 <input type="number" id="fname" name="fname" style="width: 150px;">
                             </td>
@@ -201,10 +218,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
 
     <div class="card-footer">
@@ -219,8 +232,41 @@
     CKEDITOR.replace('content');
 </script>
 
+
+<!--********************TÌM KIẾM AUTOCOMPLETE**********************-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $('#keywords').keyup(function() {
+        var query = $(this).val();
+        if (query != '') {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{url('admin/warehouses/autocomplete_ajax')}}",
+                method: "POST",
+                data: {
+                    query: query,
+                    token: _token
+                },
+                success: function(data) {
+                    $('#search_ajax').fadeIn();
+                    $('#search_ajax').html(data);
+                }
+            });
+        } else {
+            $('#search_ajax').fadeOut();
+        }
+    });
+    $(document).on('click', 'li', function() {
+        $('#keywords').val($(this).text());
+        $('#search_ajax').fadeOut();
+    })
+</script>
+
 <!-- Timf kiếm  -->
-<script>
+<!-- <script>
     $('.search_ajax_result').hide()
 
     $('.input-search-ajax').keyup(function() {
@@ -248,6 +294,7 @@
                         _html += '<p>' + pro.mota + '</p>';
                         _html += '</div>';
                         _html += '</div>';
+
                     }
 
                     $('.search_ajax_result').show();
@@ -268,5 +315,9 @@
             .replace(/ /g, '-')
             .replace(/[^\w-]+/g, '');
     }
-</script>
+</script> -->
+
+
+
+
 @endsection

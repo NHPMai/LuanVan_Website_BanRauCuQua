@@ -41,8 +41,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         #TÌM KIẾM GIỌNG NÓI_SẢN PHẨM
         Route::get('/searchProductMicrophone', [ProductController::class, 'searchProductMicrophone']);
+
         Route::get('/search', [ProductController::class, 'search']);   //Tim kiem spadmin
         // Route::get('/search_ajax',[ProductController::class,'search_ajax'])->name('search_ajax');
+     
 
         #TÌM KIẾM GIỌNG NÓI_ĐƠN HÀNG
         Route::get('/searchProductMicrophonedonhang', [CartController::class, 'searchProductMicrophonedonhang']);
@@ -147,6 +149,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('edit/{brand}', [WarehouseController::class, 'show']);
             Route::post('edit/{brand}', [WarehouseController::class, 'update']);
             Route::DELETE('destroy', [WarehouseController::class, 'destroy']);
+            Route::post('/autocomplete_ajax', [WarehouseController::class, 'autocomplete_ajax']);
+            Route::get('/search', [App\Http\Controllers\WarehouseController::class, 'search']);
         });
 
 

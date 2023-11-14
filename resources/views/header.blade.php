@@ -1,3 +1,33 @@
+<style>
+    /* Timf kiếm */
+    .form-search .form-group {
+        width: 100%;
+        position: relative;
+    }
+
+    .form-search .form-group .form-control {
+        width: 100%;
+    }
+
+    .form-search .search_ajax_r {
+        position: absolute;
+        background-color: #fff;
+        padding: 10px;
+        z-index: 1000;
+        width: 200px;
+    }
+
+    .form-search .search_ajax_r h4 {
+        font-size: 14px;
+    }
+
+    .form-search .search_ajax_r p {
+        margin: 0;
+        font-size: 11px;
+        font-style: italic;
+    }
+</style>
+
 <header class="header-v2">
     @php $menusHtml = \App\Helpers\Helper::menus($menus); @endphp
     <!-- Header desktop -->
@@ -163,8 +193,8 @@
 
                         </div>
                     </form>
-                    <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 ">
 
+                    <!-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 ">
                         <form class="form-inline" action="{{ url('search') }}" autocomplete="off" method="get" style="width: 250px;">
                             <div class="search_box">
                                 <input type="text" id="keywords" class="mtext-110 cl2 size-114 plh2 p-r-15"  name="query" placeholder="Tìm Kiếm Sản Phâm">
@@ -175,20 +205,19 @@
                                 <i class="zmdi zmdi-search"></i>
                             </button>
                         </form>
-
-                    </div>
-
-                    <!-- <div class="col-sm-5">
-                        <form action="{{URL::to('/search')}}" autocomplete="off" method="POST">
-                        
-                            <div class="search_box">
-                                <input type="text" name="keywords_submit" style="width: 100%;" id="keywords" placeholder="tim kiem san pham"></input>
-                                <div id="search_ajax"></div>
-
-                                <input type="submit" style="margin-top: 0;color:burlywood" name="search_items" class="btn btn-primary btn-sm" value="Tim kiem">
-                            </div>
-                        </form>
                     </div> -->
+
+
+
+                    <form class="navbar-form navbar-left form-search">
+                        <div class="form-group">
+                            <input type="text" class="form-control input-search-ajax" placeholder="Search">
+
+                            <div class="search_ajax_r">
+
+                            </div>
+                        </div>
+                    </form>
 
                     <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ !is_null(\Session::get('chitietdonhangs')) ? count(\Session::get('chitietdonhangs')) : 0 }}">
                         <i class="zmdi zmdi-shopping-cart"></i>
@@ -243,9 +272,64 @@
 
 </header>
 
-<!--********************TÌM KIẾM AUTOCOMPLETE**********************-->
+
+<!--********************TÌM KIẾM AJAX**********************-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type="text/javascript">
+<script>
+    $('.search_ajax_r').hide()
+
+    $('.input-search-ajax').keyup(function() {
+        var _text = $(this).val();
+        var _url = "{{url('')}}"
+
+        if (_text != '') {
+            $.ajax({
+                url: "{{route('search_ajax')}}?key=" + _text,
+                type: 'GET',
+                success: function(res) {
+
+                    var _html = '';
+
+                    for (var pro of res) {
+                        var slug = convertToSlug(pro.ten);
+                        _html += '<div class="media">';
+                        _html += '<a class="pull-left" href="#">';
+                        _html += '<img class="media-object" width="50" style="margin-right: 15px;" src="' + _url + '/' + pro.hinhanh + '">';
+                        _html += '</a>';
+                        _html += '<div class="media-body">';
+                        _html += '<h4 class="media-heading"><a href="http://phuongmai.localhost/san-pham/' +
+                            pro.id + '-' + slug + '.html' + '">' +
+                            pro.ten + '</a></h4>';
+                        _html += '<p>' + pro.mota + '</p>';
+                        _html += '</div>';
+                        _html += '</div>';
+
+                    }
+
+                    $('.search_ajax_r').show();
+                    $('.search_ajax_r').html(_html)
+
+                }
+            });
+        } else {
+            $('.search_ajax_r').html('');
+            $('.search_ajax_r').hide()
+        }
+
+    });
+
+    function convertToSlug(Text) {
+        return Text
+            .toLowerCase()
+            .replace(/ /g, '-')
+            .replace(/[^\w-]+/g, '');
+    }
+</script>
+
+
+<!--********************TÌM KIẾM AUTOCOMPLETE**********************-->
+
+<!-- <script type="text/javascript">
     $('#keywords').keyup(function() {
         var query = $(this).val();
         if (query != '') {
@@ -270,4 +354,6 @@
         $('#keywords').val($(this).text());
         $('#search_ajax').fadeOut();
     })
-</script>
+</script> -->
+
+
