@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('phieunhaps', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('nhanvien_id');
-            $table->string('pn_ten');
+            $table->unsignedBigInteger('nhacungcap_id');
             $table->string('pn_ghichu');
             $table->timestamp('pn_ngaylapphieu');
             $table->timestamp('pn_ngayxacnhan');
@@ -24,6 +24,10 @@ return new class extends Migration
             $table->foreign('nhanvien_id')
                 ->references('id')
                 ->on('nhanviens')
+                ->onDelete('cascade');
+            $table->foreign('nhacungcap_id')
+                ->references('id')
+                ->on('nhacungcaps')
                 ->onDelete('cascade');
             $table->timestamps();
         });

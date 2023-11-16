@@ -17,6 +17,9 @@ class Diachi extends Model
         'quan_huyen_id',
         'tinh_thanhpho_id'
     ];
+    public function khachhangs(){ //thuoc model thành phố, với mã id thanhpho tương ứng với tinh_thanhpho_id trong bảng Phivanchuyen
+        return $this->belongsTo('App\Models\khachhang','khachhang_id'); 
+    }
     public function tinh_thanhpho(){ //thuoc model thành phố, với mã id thanhpho tương ứng với tinh_thanhpho_id trong bảng Phivanchuyen
         return $this->belongsTo('App\Models\tinh_thanhpho','tinh_thanhpho_id'); 
     }

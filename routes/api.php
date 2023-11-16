@@ -21,4 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/search_ajax',[ApiController::class,'search_ajax'])->name('search_ajax');
 
-Route::get('/warehouse_ajax',[ApiController::class,'warehouse_ajax'])->name('warehouse_ajax');
+

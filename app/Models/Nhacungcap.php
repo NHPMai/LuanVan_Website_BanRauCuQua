@@ -17,4 +17,5 @@ class Nhacungcap extends Model
         'ncc_diachi',
         'ncc_trangthai',
     ];
+    protected $primaryKey = 'id';
 }

@@ -97,7 +97,7 @@
                     </div>
 
                     <div class="flex-w flex-t bor12 p-t-15 p-b-30">
-                        <div class="size-209 w-full-ssm">
+                        <!-- <div class="size-209 w-full-ssm">
                             <span class="stext-110 cl2">
                                 Vận chuyển:
                             </span>
@@ -107,7 +107,7 @@
                             <span class="mtext-110 cl2">
                                 0
                             </span>
-                        </div>
+                        </div> -->
 
                         <div style="width: 100%">
                             @if(Session::get('coupon'))

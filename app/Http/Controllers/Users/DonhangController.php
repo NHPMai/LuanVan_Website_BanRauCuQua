@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
 use App\Models\Chitietdonhang;
+use App\Models\Diachi;
 use App\Models\Donhang;
 use App\Models\khachhang;
 use App\Models\Product;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use PhpParser\Node\Stmt\Echo_;
 use Carbon\Carbon;
+use Illuminate\Console\View\Components\Alert;
 
 class DonhangController extends Controller
 {
@@ -164,7 +166,7 @@ class DonhangController extends Controller
     }
 
 
-//MÃ GIẢM GIÁ
+    //MÃ GIẢM GIÁ
 
     public function check_coupon(Request $request)
     {
@@ -178,7 +180,7 @@ class DonhangController extends Controller
         // dd($magiamgia);
         if ($magiamgia) {
             $dem_magiamgia = $magiamgia->count(); //Đếm mã giảm giá
-            if ($dem_magiamgia > 0){
+            if ($dem_magiamgia > 0) {
                 $magiamgia_session = Session::get('coupon');
                 if ($magiamgia_session == true) {     //Đã nhập mã
                     $is_avaiable = 0;
@@ -206,18 +208,19 @@ class DonhangController extends Controller
                 Session::flash('flash_message', 'Thêm mã giảm giá thành công');
                 return redirect()->back();
             }
-        }else {
+        } else {
             Session::flash('flash_message_error', 'Mã giảm giá không đúng hoặc hết hạn');
             return redirect()->back();
         }
     }
 
 
-// XÓA MÃ GIẢM GIÁ
+    // XÓA MÃ GIẢM GIÁ
 
-    public function delete_coupon(){
-        $coupon= Session::get('coupon');
-        if($coupon == true){
+    public function delete_coupon()
+    {
+        $coupon = Session::get('coupon');
+        if ($coupon == true) {
             Session::forget('coupon');
             Session::flash('flash_message', 'Xóa mã giảm giá thành công');
             return redirect()->back();
@@ -230,15 +233,19 @@ class DonhangController extends Controller
     {
         $idkh = Auth::user()->id;
         $khachhang = khachhang::find($idkh);
+        $a = $khachhang->id;
+        $diachi = Diachi::where('khachhang_id', $a)->get();
+        // dd($diachi);
         $products = $this->getProduct();
-        $tinh_thanhpho = Tinh_thanhpho::orderby('id','ASC')->get();
-        $phivanchuyens = Phivanchuyen::orderby('id','ASC')->get();
+        $tinh_thanhpho = Tinh_thanhpho::orderby('id', 'ASC')->get();
+        $phivanchuyens = Phivanchuyen::orderby('id', 'ASC')->get();
         return view('chitietdonhangs.donhang', [
             'products' => $products,
             'chitietdonhangs' => session()->get('chitietdonhangs'),
             'khachhang' => $khachhang,
             'coupons' => session()->get('coupon'),
             'tinh_thanhpho' => $tinh_thanhpho,
+            'diachi' => $diachi,
         ]);
     }
 
@@ -250,7 +257,7 @@ class DonhangController extends Controller
             $request,
             [
                 'sodienthoai' => 'required',
-               
+
             ],
             [
                 'sodienthoai.required' => 'Vui lòng nhập số điện thoại',
@@ -290,10 +297,10 @@ class DonhangController extends Controller
                     $chitietdonhangs[$product_id] = $quantity_purchased;
                 }
             }
-        
+
             // Lưu giỏ hàng đã cập nhật vào session
             session()->put('chitietdonhangs', $chitietdonhangs);
-            
+
             $products = Product::select('id', 'ten', 'gia', 'hinhanh', 'soluongsp', 'soluongban')
                 ->where('hoatdong', 1)
                 ->whereIn('id', $productId)
@@ -308,7 +315,7 @@ class DonhangController extends Controller
             date_default_timezone_set('Asia/Ho_Chi_Minh');
 
             $idkh = Auth('web')->user()->id;
-           
+
             //$id_dc = $request->dc_DiaChi;
             //$dc = DiaChi::find($id_dc);
             //$pdh_DiaChiGiao = $dc->dc_DiaChi;
@@ -344,109 +351,109 @@ class DonhangController extends Controller
             //dd('cod');
             if ($coupons) {
                 foreach ($coupons as $key => $cou)
-                if ($cou['mgg_loaigiamgia'] == 1) {
-                    $total_coupon = ($total * $cou['mgg_giatrigiamgia']) / 100;
-                    $tien_end = $total - $total_coupon ;
-                    // dd($tien_end);
-                } elseif ($cou['mgg_loaigiamgia'] == 2) {
-                        $tien_end = $total - $cou['mgg_giatrigiamgia'] ;
+                    if ($cou['mgg_loaigiamgia'] == 1) {
+                        $total_coupon = ($total * $cou['mgg_giatrigiamgia']) / 100;
+                        $tien_end = $total - $total_coupon;
+                        // dd($tien_end);
+                    } elseif ($cou['mgg_loaigiamgia'] == 2) {
+                        $tien_end = $total - $cou['mgg_giatrigiamgia'];
                         //dd($tien_end);
-                }
-                  
-                    $chitietdonhang = new Donhang();
-                    $chitietdonhang->khachhang_id = $idkh;
-                    $chitietdonhang->magiamgia_id = $coupons[0]['id'];
-                    $chitietdonhang->dh_ghichu = $request->dh_ghichu;
-                    $chitietdonhang->dh_giamgia = $coupons[0]['mgg_magiamgia'];
-                    $chitietdonhang->dh_diachigiaohang = 1;
-                    $chitietdonhang->dh_thoigiandathang = $today;
-                    $chitietdonhang->dh_thanhtien = $tien_end;
-                    $chitietdonhang->dh_trangthai = 1;
-                    // $cart->phuong_thuc_thanh_toan_id = $request->phuong_thuc_thanh_toan_id;
-                    $chitietdonhang->save();
-                    
+                    }
+
+                $chitietdonhang = new Donhang();
+                $chitietdonhang->khachhang_id = $idkh;
+                $chitietdonhang->magiamgia_id = $coupons[0]['id'];
+                $chitietdonhang->dh_ghichu = $request->dh_ghichu;
+                $chitietdonhang->dh_giamgia = $coupons[0]['mgg_magiamgia'];
+                $chitietdonhang->dh_diachigiaohang = 1;
+                $chitietdonhang->dh_thoigiandathang = $today;
+                $chitietdonhang->dh_thanhtien = $tien_end;
+                $chitietdonhang->dh_trangthai = 1;
+                // $cart->phuong_thuc_thanh_toan_id = $request->phuong_thuc_thanh_toan_id;
+                $chitietdonhang->save();
 
 
-                    // Cập nhật trường mgg_SoLuongMa
-                    $newSoLuongMa = $cou['mgg_soluongma'] - 1;
-                    
-                    MaGiamGia::where('id', $cou['id'])
-                        ->update(['mgg_soluongma' => $newSoLuongMa]);
 
-                } else {
-                    // $tien_end = $total + $phi ;
-                    $tien_end = $total ;
+                // Cập nhật trường mgg_SoLuongMa
+                $newSoLuongMa = $cou['mgg_soluongma'] - 1;
 
-                    $chitietdonhang = new Donhang;
-                    $chitietdonhang->khachhang_id = $idkh;
-                    $chitietdonhang->dh_ghichu = $request->dh_ghichu;
-                    $chitietdonhang->dh_diachigiaohang = 1;
-                    $chitietdonhang->dh_thoigiandathang = $today;
-                    $chitietdonhang->dh_thanhtien = $tien_end;
-                    $chitietdonhang->dh_trangthai = 1;
-                    // $chitietdonhang->phuong_thuc_thanh_toan_id = $request->phuong_thuc_thanh_toan_id;
+                MaGiamGia::where('id', $cou['id'])
+                    ->update(['mgg_soluongma' => $newSoLuongMa]);
+            } else {
+                // $tien_end = $total + $phi ;
+                $tien_end = $total;
 
-                    $chitietdonhang->save();
-                    // dd($chitietdonhang);
-                }
+                $chitietdonhang = new Donhang;
+                $chitietdonhang->khachhang_id = $idkh;
+                $chitietdonhang->dh_ghichu = $request->dh_ghichu;
+                $chitietdonhang->dh_diachigiaohang = 1;
+                $chitietdonhang->dh_thoigiandathang = $today;
+                $chitietdonhang->dh_thanhtien = $tien_end;
+                $chitietdonhang->dh_trangthai = 1;
+                // $chitietdonhang->phuong_thuc_thanh_toan_id = $request->phuong_thuc_thanh_toan_id;
 
-                $kh = KhachHang::find($idkh);
-                $kh->sodienthoai = $request->sodienthoai;
-                $tien = $kh->tongtienmua;
-                $kh->tongtienmua = $tien + $tien_end;
-                $kh->save();
+                $chitietdonhang->save();
+                // dd($chitietdonhang);
+            }
 
-                foreach ($products as $product) {
-                    DB::table('chitietdonhangs')->insert([
-                        'donhang_id' => $chitietdonhang->id,
-                        'product_id' => $product->id,
-                        'ctdh_soluong' => $chitietdonhangs[$product->id],
-                        'ctdh_gia' => $product->gia
-                    ]);
-                }
-            
-                $name = Auth::user();
-                Mail::send('emails.test', compact('chitietdonhang', 'name'), function ($email) use ($name) {
-                    $email->subject('Cửa Hàng Vegetable Family - Xác Nhận Đơn Hàng');
-                    $email->to($name->email, $name->hoten);
-                });
+            //CẬP NHẬT THÔNG TIN KHÁCH HÀNG
+            $kh = KhachHang::find($idkh);
+            $kh->sodienthoai = $request->sodienthoai;
+            $tien = $kh->tongtienmua;
+            $kh->tongtienmua = $tien + $tien_end;
+            $kh->save();
+
+            foreach ($products as $product) {
+                DB::table('chitietdonhangs')->insert([
+                    'donhang_id' => $chitietdonhang->id,
+                    'product_id' => $product->id,
+                    'ctdh_soluong' => $chitietdonhangs[$product->id],
+                    'ctdh_gia' => $product->gia
+                ]);
+            }
+
+            $name = Auth::user();
+            Mail::send('emails.test', compact('chitietdonhang', 'name'), function ($email) use ($name) {
+                $email->subject('Cửa Hàng Vegetable Family - Xác Nhận Đơn Hàng');
+                $email->to($name->email, $name->hoten);
+            });
 
 
-                if ($coupons == true) {
-                    Session::forget('coupon');
-                }
+            if ($coupons == true) {
+                Session::forget('coupon');
+            }
 
-                DB::commit();
-                session()->forget('chitietdonhangs');
-                session()->forget('data_get');
-                // session()->forget('total_paypal');
-            } 
-        catch (\Exception $err) {
+            DB::commit();
+            session()->forget('chitietdonhangs');
+            session()->forget('data_get');
+            // session()->forget('total_paypal');
+        } catch (\Exception $err) {
             DB::rollBack();
             Session::flash('error', 'Đặt Hàng Lỗi, Vui lòng thử lại sau');
             return false;
         }
         Session::flash('success', 'Đặt hàng thành công!');
-        return redirect("/");
+
+        return redirect("/")->with('success', 'Thao tác thành công');
     }
 
     //PHI VAN CHUYEN
-    public function select_delivery_home(Request $request){
+    public function select_delivery_home(Request $request)
+    {
         $data = $request->all();
-        if($data['action']){
+        if ($data['action']) {
             $output = '';
-            if($data['action'] == "tinh_thanhpho"){
-                $select_quanhuyen = Quan_huyen::where('tinh_thanhpho_id',$data['ma_id'])->orderby('id','ASC')->get();
-                    $output.= '<option>----Chọn quận huyện----</option>';
-                foreach($select_quanhuyen as $key => $quan_huyen){
-                $output.='<option value="'.$quan_huyen->id.'">'.$quan_huyen->qh_ten.'</option>';
+            if ($data['action'] == "tinh_thanhpho") {
+                $select_quanhuyen = Quan_huyen::where('tinh_thanhpho_id', $data['ma_id'])->orderby('id', 'ASC')->get();
+                $output .= '<option>----Chọn quận huyện----</option>';
+                foreach ($select_quanhuyen as $key => $quan_huyen) {
+                    $output .= '<option value="' . $quan_huyen->id . '">' . $quan_huyen->qh_ten . '</option>';
                 }
-
-            } else{
-                $select_xa = Xa_phuong_thitran::where('quan_huyen_id',$data['ma_id'])->orderby('id','ASC')->get();
-                    $output.= '<option>----Chọn xã phường----</option>';
-                foreach($select_xa as $key => $xa){
-                $output.='<option value="'.$xa->id.'">'.$xa->xa_ten.'</option>';
+            } else {
+                $select_xa = Xa_phuong_thitran::where('quan_huyen_id', $data['ma_id'])->orderby('id', 'ASC')->get();
+                $output .= '<option>----Chọn xã phường----</option>';
+                foreach ($select_xa as $key => $xa) {
+                    $output .= '<option value="' . $xa->id . '">' . $xa->xa_ten . '</option>';
                 }
             }
         }
@@ -454,24 +461,25 @@ class DonhangController extends Controller
     }
 
     //Tinh phi van chuyen
-    public function calculate_fee(Request $request){
+    public function calculate_fee(Request $request)
+    {
         $data = $request->all();
         // dd($request);
         // if($data['tinh_thanhpho_id']){
-            $feeship = Phivanchuyen::where('tinh_thanhpho_id',$data['tinh_thanhpho_id'])
-                                    ->where('quan_huyen_id',$data['quan_huyen_id'])
-                                    ->where('xa_phuong_thitran_id',$data['xa_phuong_thitran_id'])->first();
-            // foreach($feeship as $key => $fee){
-            //     Session::put('fee',$fee->pvc_phivanchuyen);
-            //     Session::save();
-            // }
-            $output = '';
-            $output.='<li value="">'.$feeship->pvc_phivanchuyen.'</li>';
-            echo $output;
+        $feeship = Phivanchuyen::where('tinh_thanhpho_id', $data['tinh_thanhpho_id'])
+            ->where('quan_huyen_id', $data['quan_huyen_id'])
+            ->where('xa_phuong_thitran_id', $data['xa_phuong_thitran_id'])->first();
+        // foreach($feeship as $key => $fee){
+        //     Session::put('fee',$fee->pvc_phivanchuyen);
+        //     Session::save();
+        // }
+        $output = '';
+        $output .= '<li value="">' . $feeship->pvc_phivanchuyen . '</li>';
+        echo $output;
         // }
     }
 
-    
+
 
     //GỬI MAIL
     public function xacnhanemail($id, $token)
@@ -495,22 +503,22 @@ class DonhangController extends Controller
     {
         // dd($donhang);
         $idkh = Auth::user()->id;
-        
+
         $chitietlichsu = Donhang::where('khachhang_id', $idkh)->get();
-        $chitietdonhang = Chitietdonhang::where('donhang_id',$donhang->id)->get();
+        $chitietdonhang = Chitietdonhang::where('donhang_id', $donhang->id)->get();
         // $chitietlichsu = DB::table('donhangs')
         //     ->join('chitietdonhangs', 'donhangs.id', '=', 'chitietdonhangs.donhang_id')
         //     ->join('khachhangs', 'donhangs.khachhang_id', '=', 'khachhangs.id')
         //     ->where('donhangs.khachhang_id','=' ,$idkh)
         //     ->select('donhangs.*', 'chitietdonhangs.*', 'khachhangs.*')
         //     ->get();
-        
-    // dd($chitietdonhang);
+
+        // dd($chitietdonhang);
         return view('lichsudathangs.chitiet', [
             'title' => 'Lịch Sử Đặt Hàng Của Bạn',
-            'chitietlichsu'=>$chitietlichsu,
-            'donhang' =>$donhang,
-            'chitietdonhangs' =>$chitietdonhang,
+            'chitietlichsu' => $chitietlichsu,
+            'donhang' => $donhang,
+            'chitietdonhangs' => $chitietdonhang,
         ]);
     }
 }

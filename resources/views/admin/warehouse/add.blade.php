@@ -55,7 +55,7 @@
 
     /* TIM KIEM */
 
-    .form-search .form-group {
+    /* .form-search .form-group {
         width: 100%;
         position: relative;
     }
@@ -64,7 +64,7 @@
         width: 100%;
     }
 
-    .form-search .warehouse_ajax {
+    .form-search #search_ajax {
         position: absolute;
         background-color: #fff;
         padding: 10px;
@@ -72,20 +72,19 @@
         width: 200px;
     }
 
-    .form-search .warehouse_ajaxh4 {
+    .form-search #search_ajax h4 {
         font-size: 14px;
     }
 
-    .form-search .warehouse_ajax p {
+    .form-search #search_ajax p {
         margin: 0;
         font-size: 11px;
         font-style: italic;
-    }
-
+    } */
 </style>
 
 @section('content')
-<form action="" method="POST">
+<form action="/admin/warehouses/add" method="POST">
     <div class="card-body">
 
         <div class="box">
@@ -94,7 +93,7 @@
                     Thông tin
                 </div>
                 <div style="padding: 10px;">
-                    <form>
+                    <div>
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Người lập phiếu<span class="text-danger">(*)</span></label>
                             <div class="col-sm-8">
@@ -105,14 +104,14 @@
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-4 col-form-label">Chọn nhà cung cấp<span class="text-danger">(*)</span></label>
                             <div class="col-sm-8">
-                                <select class="form-control" name="menu_id">
-                                    @foreach($warehouse as $warehouse)
-                                    <option value="{{ $warehouse->id }}">{{ $warehouse->ncc_ten }}</option>
+                                <select class="form-control" name="nhacungcap_id">
+                                    @foreach($nhacungcap as $ncc)
+                                    <option value="{{ $ncc->id }}">{{ $ncc->ncc_ten }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
 
@@ -124,7 +123,7 @@
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-4 col-form-label">Ghi chú</label>
                         <div class="col-sm-8">
-                            <textarea type="text" class="form-control" id="inputPassword"></textarea>
+                            <textarea name="ctpn_ghichu" value="{{ old('ctpn_ghichu') }}" type="text" class="form-control" id="inputPassword"></textarea>
                         </div>
                     </div>
                 </div>
@@ -135,7 +134,25 @@
         <div class="mt-4">
             <div style=" border:1px solid #999;">
                 <div style="border:1px solid #999; font-weight:700">
-                    <div class="row">
+
+                    <div class="card" style="margin: 0;">
+                        <div class="card-body" style="padding: 0; margin-left:5px">
+                            <div class="row">
+                                <div style="display: flex; justify-content: flex-start; align-items: center;">
+                                    <div style="display: flex; align-items: center;">
+                                        <button class="text-success" type="button"><b>Sản phẩm</b></button>
+                                        <input autocomplete="off" type="text" style="width: 290px" placeholder="Tìm kiếm sản phẩm" id="keywords">
+                                        <button type="button" id="clear-input"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <div id="search-ajax"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- <div class="row">
                         <div class="col-1">
                             <div class="btn-group" role="group">
                                 <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -148,37 +165,27 @@
                             </div>
                         </div>
                         <div class="col-11">
-
-                            <form autocomplete="off" method="GET" class="form-inline navbar-form navbar-left form-search" style="margin-bottom:0">
-                                <div class="form-group">
-                                    <input  type="text" id="keywords" style="width: 1000px;" class="warehouse  form-control input-search-ajax" name="query" type="search" placeholder="Search" aria-label="Tìm Kiếm Sản Phẩm">
-                                    <div id="search_ajax"></div>
+                            <div class="card" style="margin: 0;">
+                                <div class="card-body" style="padding: 0;">
+                                    <div class="row">
+                                        <div style="display: flex; justify-content: flex-start; align-items: center;">
+                                            <div style="display: flex; align-items: center;">
+                                                <button class="text-success" type="button"><b>Sản phẩm</b></button>
+                                                <input autocomplete="off" type="text" style="width: 290px" placeholder="Tìm kiếm sản phẩm" id="keywords">
+                                                <button type="button" id="clear-input"><i class="fa fa-times"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <button onclick="getProduct()"  type="button" class="btn btn-light" style=" height: 34px; width: 61px;">
-                                    <i class="fas fa-search fa-fw"></i>
-                                </button>
-                            </form>
-
-
-
-                            <!-- <form class="form-inline" autocomplete="off" method="get" style="width: 250px;">
-                                <div class="search_box">
-                                    <input type="text" id="keywords" class="warehouse mtext-110 cl2 size-114 plh2 p-r-15" name="query" placeholder="Tìm Kiếm Sản Phâm">
-                                    <div id="search_ajax"></div>
+                                <div style="display: flex; align-items: center;">
+                                    <div id="search-ajax"></div>
                                 </div>
-
-                                <button onclick="getProduct()" id="get" type="button" class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </form> -->
-
-
+                            </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div style="padding: 10px;">
-                    <table>
+                    <!-- <table>
                         <tr>
                             <th style="text-align:center">Mã SP</th>
                             <th style="text-align:center">Hình ảnh</th>
@@ -188,19 +195,23 @@
                             <th style="text-align:center">Xóa</th>
                         </tr>
                         <tr>
-                         
-                            <td class="idsp" name='idsp' id="idsp" style="text-align:center"> </td>
-                            <td class="hasp" name='hasp' id="hasp" style="text-align:center"> </td>
-                            <td class="tensp" name='tensp' id="tensp" style="text-align:center"> </td>
+
+                            <td class="idsp" name='product_id' id="idsp" value="{{ old('product_id') }}" style="text-align:center; font-weight:600; font-size:larger; color:blue"> </td>
+                            <td class="hasp" name='hasp' id="hasp" style="text-align:center; font-weight:600; font-size:larger; color:blue"> </td>
+                            <td class="tensp" name='tensp' id="tensp" style="text-align:center; font-weight:600; font-size:larger; color:blue"> </td>
 
                             <td style="text-align:center">
-                                <input type="text" id="fname" name="fname" style="width: 150px;">
+                                <input type="number" id="ctpn_gianhap" name="ctpn_gianhap" value="{{ old('ctpn_gianhap') }}" style="width: 150px;">
                             </td>
 
                             <td style="text-align:center">
-                                <input type="text" id="fname" name="fname" style="width: 80px;">
+                                <input type="number" id="ctpn_soluong" name="ctpn_soluong" value="{{ old('ctpn_soluong') }}" style="width: 80px;">
                             </td>
-                            <td style="text-align:center">$100</td>
+                            <td style="text-align:center">
+                                <a href="#" class="btn btn-danger btn-sm" onclick="removeRow( )">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="4" style="text-align: end; color:red; font-weight:700">Tổng tiền: </td>
@@ -208,14 +219,49 @@
                             <td></td>
                         </tr>
 
-                    </table>
+                    </table> -->
+
+
+
+                    <div class="card">
+                        <table class="table table-bordered" id="product-table">
+                            <thead style="text-align: center;">
+                                <tr role="row" style="background-color: #1E90FF; color: white">
+                                    <th>Mã sản phẩm</th>
+                                    <th>Tên sản phẩm</th>
+                                    <!-- <th>Hình ảnh</th> -->
+                                    <th>Giá nhập</th>
+                                    <th>Số lượng</th>
+                                    <th>Tùy biến</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <!-- Tổng số lượng -->
+                        <div style="text-align: right; font-weight: bold;">
+                            Tổng số lượng:
+                            <span id="total-quantity">0</span>
+                            <input type="hidden" name="ctpn_soluong" id="ctpn_soluong">
+                        </div>
+
+                        <!-- Tổng tiền -->
+                        <div style="text-align: right; font-weight: bold;">
+                            Tổng tiền:
+                            <span id="total-price">0</span>
+                            <input type="hidden" name="pn_tongtiennhap" id="pn_tongtiennhap">
+                        </div>
+                    </div>
+
+
+
+
                 </div>
             </div>
         </div>
     </div>
 
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Thêm Dữ liệu Nhập</button>
+        <button type="submit" class="btn btn-primary">Thêm phiếu nhập</button>
     </div>
     @csrf
 </form>
@@ -229,7 +275,7 @@
 
 <!--********************TÌM KIẾM AUTOCOMPLETE**********************-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $('#keywords').keyup(function() {
         var query = $(this).val();
         if (query != '') {
@@ -317,40 +363,8 @@
         });
 
     }
-</script>
-
-
-
-
-<!-- <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<script>
-    aData={}
-    $("#country_name").autocomplete({
-        source:function(request, response){
-            $.ajax({
-                url:"{{url('admin/warehouses/autocomplete_ajax')}}",
-                type:'GET',
-                dataType:'json',
-                success:function(data){
-                    aData = $.map(data,function(value, key){
-                        return {
-                            id: value.id,
-                            label: value.ten,
-                            capital: value.hinhanh
-                        };
-                    });
-                    var results = $.ui.autocomplete.filter(aData, request.term);
-                    response(results);
-                }
-            })
-        },
-        select:function(event,ui){
-            console.log(ui.item.capital);
-            $('#cappital').text(ui.item.capital);
-        }
-    });
 </script> -->
+
 
 
 
@@ -407,6 +421,227 @@
 </script> -->
 
 
+<script type="text/javascript">
+    $('#keywords').keyup(function() {
+        var query = $(this).val();
+        // alert(query);
+        if (query != '') {
+            var _token = $('input[name="_token"]').val();
 
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{url('admin/warehouses/autocomplete_ajax')}}",
+                method: "POST",
+                data: {
+                    query: query,
+                    _token: _token
+                },
+                success: function(data) {
+                    $('#search-ajax').fadeIn();
+                    $('#search-ajax').html(data);
+                }
+            });
+            // alert(query);
+        } else {
+            $('#search-ajax').fadeOut();
+        }
+    });
+
+    $(document).on('click', 'li', function() {
+        $('#keywords').val($(this).text());
+        $('#search-ajax').fadeOut();
+    });
+
+    var inputField = $('#keywords');
+
+    var clearButton = $('#clear-input'); // Nút xóa nội dung
+    // Bắt sự kiện khi nút xóa nội dung được bấm
+    clearButton.on('click', function() {
+        inputField.val(''); // Xóa nội dung trường nhập liệu
+    });
+
+
+    $(document).ready(function() {
+        // Biến để lưu trữ tổng số lượng và tổng tiền
+        var totalQuantity = 0;
+        var totalPrice = 0;
+
+        // Hàm để cập nhật tổng số lượng và tổng tiền
+        function updateTotals() {
+            totalQuantity = 0;
+            //totalPrice = 0;
+
+            // Duyệt qua từng sản phẩm trong bảng và tính tổng
+            $('#product-table tbody tr').each(function() {
+                var quantity = parseInt($(this).find('.quantity-input').val());
+                //alert(quantity);
+                if (!isNaN(quantity) && quantity >= 1) {
+                    totalQuantity += quantity;
+                }
+            });
+
+            // Cập nhật giá trị vào bảng
+            $('#total-quantity').text(totalQuantity);
+            //$('#total-price').text(new Intl.NumberFormat('vi-VN').format(totalPrice));
+
+            // Cập nhật giá trị của các trường ctpn_soluong và pn_tongtiennhap
+            $('[name="ctpn_soluong"]').val(totalQuantity);
+            $('[name="pn_tongtiennhap"]').val(totalPrice);
+        }
+
+        // Bắt sự kiện khi nút "Thêm" được bấm
+        $(document).on('click', '.btn-add-product', function() {
+            var productId = $(this).data('product-id');
+            var productName = $(this).data('product-name');
+            // var productImage = $(this).data('product-image');
+            // var imageUrl = "{{ url('/storage/images/products/') }}" + '/' + productImage;
+
+            // Kiểm tra xem sản phẩm đã có trong bảng chưa
+            var $existingRow = $('#product-table tbody').find('[data-product-id="' + productId + '"]');
+
+            if ($existingRow.length > 0) {
+                // Sản phẩm đã có trong bảng, tăng số lượng
+                var $quantityInput = $existingRow.find('.quantity-input');
+                var currentQuantity = parseInt($quantityInput.val());
+                $quantityInput.val(currentQuantity + 1);
+            } else {
+                // Sản phẩm chưa có trong bảng, thêm dòng mới
+                var newRow = '<tr data-product-id="' + productId + '">' +
+                    '<td style="text-align: center;">#' + productId + '</td>' +
+                    '<td style="text-align: center;">' + productName + '</td>' +
+                    // '<td style="text-align: center;">' +
+                    // '<a><img src="' + imageUrl + '" height="40px"></a>' +
+                    // '</td>' +
+                    '<td style="text-align: center;"><input type="text" autocomplete="off" required class="price-input" style="width: 80px" name="product_price[' + productId + ']" value=""></td>' +
+                    '<td style="text-align: center;"><input type="number" style="width: 40px" class="quantity-input" name="product_quantity[' + productId + ']" value="1" min="1"></td>' +
+                    '<td style="text-align: center;">' +
+                    '<button type="button" class="btn btn-primary btn-update-product" data-product-id="' + productId + '">Cập nhật</button>' +
+                    '<span style="margin: 0 5px;"></span>' + // Khoảng cách giữa nút
+                    '<button class="btn btn-danger btn-remove-product" data-product-id="' + productId + '">Xóa</button>' +
+                    '</td>' +
+                    '</tr>';
+
+                $('#product-table tbody').append(newRow);
+            }
+
+            // Cập nhật tổng số lượng và tổng tiền
+            updateTotals();
+
+        });
+
+        // Hàm định dạng số thành tiền tệ Việt Nam (VND)
+        function formatCurrency(number) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(number);
+        }
+
+
+        // Bắt sự kiện khi người dùng thay đổi giá trị trường nhập liệu
+        $(document).on('input', '.price-input', function() {
+            // Lấy giá trị nhập liệu từ trường nhập liệu
+            var inputValue = $(this).val();
+
+            // Loại bỏ tất cả dấu phẩy và dấu chấm
+            var numericValue = inputValue.replace(/[,\.]/g, '');
+
+            // Chuyển đổi giá trị thành số
+            var numericPrice = parseFloat(numericValue);
+
+            // Kiểm tra xem số lượng có hợp lệ hay không
+            if (!isNaN(numericPrice) && numericPrice >= 0) {
+                // Lấy số lượng của sản phẩm
+                var $quantityInput = $(this).closest('tr').find('.quantity-input');
+                var quantity = parseInt($quantityInput.val());
+
+                // Kiểm tra xem số lượng có hợp lệ hay không
+                if (!isNaN(quantity) && quantity >= 1) {
+                    // Tính toán tổng tiền cho sản phẩm
+                    var totalProductPrice = numericPrice * quantity;
+
+                    // Cập nhật giá trị đã định dạng vào trường giá nhập
+                    $(this).val(new Intl.NumberFormat('vi-VN').format(numericPrice));
+
+                    // Cập nhật tổng tiền cho sản phẩm
+                    var $totalProductPrice = $(this).closest('tr').find('.total-product-price');
+                    $totalProductPrice.text(new Intl.NumberFormat('vi-VN').format(totalProductPrice));
+                    //alert(totalProductPrice);
+                    //$('#total-price').text(formatCurrency(totalProductPrice));
+                    updateTotal();
+                    // Cập nhật tổng tiền toàn bộ
+                    updateTotal();
+                }
+            }
+        });
+
+        // Hàm để cập nhật tổng tiền và tổng số lượng
+        function updateTotal() {
+            totalQuantity = 0;
+            totalPrice = 0;
+
+            // Duyệt qua từng sản phẩm trong bảng và tính tổng
+            $('#product-table tbody tr').each(function() {
+                var quantity = parseInt($(this).find('.quantity-input').val());
+                var price = parseFloat($(this).find('.price-input').val().replace(/[,\.]/g, '').replace(/[^0-9\.]/g, ''));
+
+                if (!isNaN(quantity) && quantity >= 1 && !isNaN(price) && price >= 0) {
+                    totalQuantity += quantity;
+                    totalPrice += price * quantity;
+                }
+            });
+
+            // Cập nhật giá trị vào bảng
+            $('#total-quantity').text(totalQuantity);
+            $('#total-price').text(new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(totalPrice));
+            // $('#total-price').text(new Intl.NumberFormat('vi-VN').format(totalPrice));
+
+            // Cập nhật giá trị của các trường ctpn_soluong và pn_tongtiennhap
+            $('[name="ctpn_soluong"]').val(totalQuantity);
+            $('[name="pn_tongtiennhap"]').val(totalPrice);
+        }
+
+        // Bắt sự kiện khi nút "Xóa" trên bảng sản phẩm được bấm
+        $(document).on('click', '.btn-remove-product', function() {
+            var productId = $(this).data('product-id');
+            // Xóa dòng sản phẩm khỏi bảng
+            alert('Bạn có chắc chắn xóa sản phẩm');
+            $('#product-table tbody').find('[data-product-id="' + productId + '"]').remove();
+
+            updateTotal();
+            // Cập nhật tổng tiền toàn bộ
+            updateTotal();
+        });
+
+        // Bắt sự kiện khi nút "Cập nhật" trên bảng sản phẩm được bấm
+        $(document).on('click', '.btn-update-product', function() {
+            var productId = $(this).data('product-id');
+            var productName = $(this).data('product-name');
+            var $quantityInput = $('[data-product-id="' + productId + '"]').find('input[name^="product_quantity"]');
+            // Lấy giá trị số lượng từ trường nhập liệu
+            var newQuantity = parseInt($quantityInput.val());
+
+            updateTotal();
+            // Cập nhật tổng tiền toàn bộ
+            updateTotal();
+
+            // Kiểm tra giá trị số lượng mới và thực hiện các thao tác cập nhật dựa trên nó
+            if (!isNaN(newQuantity) && newQuantity >= 1) {
+                // Thực hiện các thao tác cập nhật ở đây
+                // Ví dụ: có thể gửi dữ liệu cập nhật lên máy chủ thông qua AJAX
+                alert('Đã cập nhật số lượng sản phẩm thành công');
+            } else {
+                alert('Số lượng không hợp lệ.');
+            }
+
+
+        });
+    });
+</script>
 
 @endsection

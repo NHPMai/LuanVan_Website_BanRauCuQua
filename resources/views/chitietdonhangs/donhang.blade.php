@@ -7,6 +7,7 @@
 
 
 
+
     <div class="container  p-t-50 p-l-50" style="border-radius: 5px;  background-color:aliceblue">
 
         <div class="row">
@@ -23,7 +24,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="menu">Email</label>
-                            <input type="text" name="email" required value="{{$khachhang->email}}" class="form-control" placeholder="Nhập họ và tên">
+                            <input type="text" name="email" required value="{{$khachhang->email}}" class="form-control" placeholder="Nhập họ và tên" disabled>
                         </div>
                     </div>
                 </div>
@@ -46,18 +47,22 @@
 
                 <div class="form-group">
                     <label for="menu">Địa chỉ</label>
-                    <input type="text" name="diachi" required value="{{$khachhang->diachi}}" class="form-control" placeholder="Nhập địa chỉ">
+                    <select class="form-control" name="diachi_id" style="height: 30px;">
+                        @foreach($diachi as $dc)
+                        <option value="{{ $dc->id }}">{{ $dc->dc_diachi . ',' . $dc->xa_phuong_thitran->xa_ten . ', ' . $dc->quan_huyen->qh_ten . ', ' . $dc->tinh_thanhpho->tp_ten  }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div>
-                    <button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 ">
-                        Thêm địa chỉ
+                    <button type="button" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 ">
+                        <a href="{{URL::to('/user/account')}}" style="color: white;">Thêm địa chỉ</a>
                     </button></br>
                 </div>
 
 
                 <div style="width:100%">
-                    <form>
+                    <!-- <form>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-6">
@@ -97,13 +102,10 @@
                             <div>
                                 <input type="botton" value="Tính phí vận chuyển" name= "calculate_delivery" class="btn btn-primary btn-sm calculate_delivery">
                             </div>
-                            <!-- <div style="text-align: right;">
-                                <button type="button" name="add_delivery" class="btn btn-primary add_delivery">Thêm</button>
-                            </div> -->
+                           
                             @csrf
-                            <!-- </form> -->
                         </div>
-                    </form>
+                    </form> -->
                 </div>
 
 
@@ -146,10 +148,10 @@
                                 </span>
                             </div>
 
-                           
+
                             <div class="size-208 " style="text-align: right;">
                                 <span class="mtext-110 cl2 phivanchuyen" id="phivanchuyen">
-                              
+
                                 </span>
                             </div>
 

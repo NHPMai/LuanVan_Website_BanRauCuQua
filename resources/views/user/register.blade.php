@@ -19,10 +19,10 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image: url('/template/images/bg7.png') ;">
   <div class="login-box">
     <div class="login-logo">
-      <a href="#" class="fas fa-user"><b>&nbsp ĐĂNG KÍ</b></a>
+      <a class="fas fa-user" style="color:ivory;"><b>&nbsp ĐĂNG KÍ</b></a>
     </div>
 
     <div class="card">
@@ -65,15 +65,6 @@
             </div>
           </div>
 
-          <!-- <div class="input-group mb-3">
-            <input type="text" name="avata" class="form-control" placeholder="Avata">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
-          </div> -->
-
           <div class="input-group mb-3">
             <input type="number" name="sodienthoai" class="form-control" placeholder="Số điện thoại">
             <div class="input-group-append">
@@ -99,78 +90,7 @@
                 <span class="fas fa-user"></span>
               </div>
             </div>
-          </div>
-
-          <!-- <div class="input-group mb-3">
-            <input type="text" name="vip" class="form-control" placeholder="Vip">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="text" name="tongtienmua" class="form-control" placeholder="Tổng tiền mua">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="text" name="hoatdong" class="form-control" placeholder="Hoạt động">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
-          </div> -->
-
-
-          <div class="input-group ">
-
-            <form>
-              <div class="card-body">
-
-                <div class="form-group">
-                  <label for="menu">Chọn thành phố</label>
-                  <select name="tinh_thanhpho" id="tinh_thanhpho" class="form-control m-bot15 choose tinh_thanhpho">
-                    <option value="0">---Chọn tỉnh thành phố---</option>
-                    @foreach ($tinh_thanhpho as $key => $tp)
-                    <option value="{{$tp->id}}"> {{$tp->tp_ten}} </option>
-                    @endforeach
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="menu">Chọn quận huyện</label>
-                  <select name="quan_huyen" id="quan_huyen" class="form-control m-bot15 choose quan_huyen">
-                    <option value="">---Chọn quận huyện----</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="menu">Chọn xã phường</label>
-                  <select name="xa_phuong_thitran" id="xa_phuong_thitran" class="form-control m-bot15 xa_phuong_thitran">
-                    <option value="">---Chọn xã phường----</option>
-                  </select>
-                </div>
-
-
-                <!-- <div>
-                  <input type="botton" value="Tính phí vận chuyển" name="calculate_delivery" class="btn btn-primary btn-sm calculate_delivery">
-                </div> -->
-
-                <!-- <button type="button" name="add_delivery" class="btn btn-primary add_delivery">Thêm</button> -->
-
-                @csrf
-                <!-- </form> -->
-              </div>
-            </form>
-
-          </div>
+          </div>          
 
           <div class="input-group mb-3">
             <textarea id="load_diachi" name="diachi" class="form-control" placeholder="Địa chỉ"></textarea>

@@ -84,35 +84,40 @@
         </nav> -->
         <div style="padding: 10px;">
             <!-- <table id="myTable"> -->
-            <table>
-                <tr style="background-color: lightskyblue;">
-                    <th style="text-align:center">ID</th>
-                    <th style="text-align:center">Nhân viên lập phiếu</th>
-                    <th style="text-align:center">Ngày nhập</th>
-                    <th style="text-align:center">Ngày xác nhận</th>
-                    <th style="text-align:center">Trạng thái</th>
-                    <th style="text-align:center">Hành động</th>
-                </tr>
-                <tr>
-                    <td style="text-align:center">Peter</td>
-                    <td style="text-align:center">Griffin</td>
-                    <td style="text-align:center">$100</td>
-                    <td style="text-align:center">$100</td>
-                    <td style="text-align:center">$100</td>
-                    <td style="text-align: center;vertical-align: middle;">
-                        <a class="btn btn-primary btn-sm" href="/admin/customers/view/}">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                        <a class="btn btn-primary btn-sm" href="/admin/sliders/edit/">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="#" class="btn btn-danger btn-sm" onclick="removeRow(,'/admin/sliders/destroy')">
-                            <i class="fas fa-trash"></i>
-                        </a>
-
-                    </td>
-                </tr>
-
+            <table id="myTable" >
+                <thead style="background-color:blanchedalmond;">
+                    <tr style="background-color: lightskyblue;">
+                        <th style="text-align:center">ID</th>
+                        <th style="text-align:center">Nhân viên lập phiếu</th>
+                        <th style="text-align:center">Ngày nhập</th>
+                        <th style="text-align:center">Ngày xác nhận</th>
+                        <th style="text-align:center">Trạng thái</th>
+                        <th style="text-align:center">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($phieunhap as $key => $pn)
+                    <tr>
+                        <td style="text-align:center">{{$pn->id}}</td>
+                        <td style="text-align:center">{{$pn->nhanviens->hoten}}</td>
+                        <td style="text-align:center">{{$pn->pn_ngaylapphieu}}</td>
+                        <td style="text-align:center">{{$pn->pn_ngayxacnhan}}</td>
+                        <td style="text-align:center">{{$pn->pn_trangthai}}</td>
+                        <td style="text-align: center;vertical-align: middle;">
+                            <a class="btn btn-primary btn-sm" href="/admin/warehouses/view/}">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="/admin/warehouses/active/{{$pn->id}}" class="btn btn-success btn-sm" 
+                                onclick='return confirm("Bạn chắc chắn muốn duyệt phiếu nhâp không?")'>
+                                <span class="fa fa-check" style="font-size: 15px;color: white; font-weight: bold"></span>
+                            </a>
+                            <a href="#"  onclick="removeRow( {{ $pn->id }} ,'/admin/warehouses/destroy')"class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
         </div>
     </div>

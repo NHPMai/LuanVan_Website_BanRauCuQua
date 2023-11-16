@@ -43,7 +43,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/searchProductMicrophone', [ProductController::class, 'searchProductMicrophone']);
 
         Route::get('/search', [ProductController::class, 'search']);   //Tim kiem spadmin
-        // Route::get('/search_ajax',[ProductController::class,'search_ajax'])->name('search_ajax');
      
 
         #TÌM KIẾM GIỌNG NÓI_ĐƠN HÀNG
@@ -146,14 +145,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('add', [WarehouseController::class, 'create']);
             Route::post('add', [WarehouseController::class, 'store']);
             Route::get('list', [WarehouseController::class, 'index']);
-            Route::get('edit/{brand}', [WarehouseController::class, 'show']);
-            Route::post('edit/{brand}', [WarehouseController::class, 'update']);
+            Route::get('active/{id}',[WarehouseController::class, 'active']);
             Route::DELETE('destroy', [WarehouseController::class, 'destroy']);
-            Route::post('/autocomplete_ajax', [WarehouseController::class, 'autocomplete_ajax']);
 
+
+            Route::post('/autocomplete_ajax', [WarehouseController::class, 'autocomplete_ajax']);
             Route::get('/getProductName', [WarehouseController::class, 'getProductName']);
             Route::get('/getProductId', [WarehouseController::class, 'getProductId']);
             Route::get('/getProductImage', [WarehouseController::class, 'getProductImage']);
+
 
             Route::get('/search', [App\Http\Controllers\WarehouseController::class, 'search']);
         });
@@ -250,7 +250,9 @@ Route::prefix('user')->name('user.')->group(function () {
 
         //Tài khoản
         Route::get('account', [\App\Http\Controllers\Users\TaikhoanController::class, 'account'])->name('account');
-        Route::get('diachikhachhang', [\App\Http\Controllers\Users\TaikhoanController::class, 'diachikhachhang'])->name('diachikhachhang');
+        Route::get('diachikhachhang', [\App\Http\Controllers\Users\TaikhoanController::class, 'diachikhachhang'])->name('diachikhachhang'); //Chọn địa chỉ
+        Route::post('insert_address', [\App\Http\Controllers\Users\TaikhoanController::class, 'insert_address'])->name('insert_address'); //Thêm địa chỉ
+        Route::post('load_address', [\App\Http\Controllers\Users\TaikhoanController::class, 'load_address'])->name('load_address'); // lấy dữ liệu ra
     });
 });
 
@@ -277,7 +279,6 @@ Route::get('san-pham/{id}-{slug}.html', [App\Http\Controllers\ProductController:
 Route::get('/search', [App\Http\Controllers\ProductController::class, 'search']);
 Route::get('/searchProductMicrophone', [App\Http\Controllers\ProductController::class, 'searchProductMicrophone']);
 Route::post('/autocomplete_ajax', [App\Http\Controllers\MainController::class, 'autocomplete_ajax']);
-// Route::get('/search_ajax_api',[App\Http\Controllers\MainController::class,'search_ajax_api'])->name('search_ajax_api');
 
 // //Email
 // Route::get('test-email', [App\Http\Controllers\MainController::class, 'testEmail']);

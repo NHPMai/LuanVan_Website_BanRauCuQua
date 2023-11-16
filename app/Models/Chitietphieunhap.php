@@ -14,7 +14,7 @@ class Chitietphieunhap extends Model
         // 'nhacungccap_id',
         'product_id',
         'ctpn_soluong',
-        'ctpn_gianhap'
+        'ctpn_gianhap',
     ];
     public function phieunhaps()
     {
@@ -23,10 +23,15 @@ class Chitietphieunhap extends Model
     }
     public function products()
     {
-        return $this->hasOne(Product::class, 'id', 'product_id');
+        return $this->belongsTo(Product::class, 'product_id');
             // ->withDefault(['ten'=>'']);
     }
 
+    // public function sanpham()
+    // {
+    //     return $this->belongsTo(SanPham::class, 'san_pham_id');
+    // }
+    
     // public function nhacungcap()
     // {
     //     return $this->hasOne(Nhacungcap::class, 'id', 'nhacungcap_id')

@@ -18,14 +18,5 @@ class ApiController extends Controller
         return $data;
     }
 
-    public function warehouse_ajax()
-    {
-        $data = Product::search()->get();
-        // $result = [
-        //     'hoatdong' =>true,
-        //     'message' => 'Tìm được '.$data->count().'kết quả',
-        //     'data' => $data
-        // ];
-        return $data;
-    }
+   
 }

@@ -82,11 +82,11 @@
                 <div class="card-body">
                     <div class="account-settings">
                         <div class="about" style="margin-top: 10px;">
-                            <h4 style="text-decoration:underline" >Cài đặt</h4>
+                            <h4 style="text-decoration:underline">Cài đặt</h4>
                             <div class="list-group">
                                 <a href="#" class="list-group-item list-group-item-action list-group-item-primary" style="font-size: 16px; font-weight:500">Tài khoản</a>
                                 <a href="#" class="list-group-item list-group-item-action list-group-item-secondary" style="font-size: 16px; font-weight:500">Mật khẩu</a>
-                               
+
                             </div>
 
                         </div>
@@ -95,18 +95,55 @@
             </div>
         </div>
 
-        
+
         <div class="col-xl-10 col-lg-9 col-md-12 col-sm-12 col-12">
             <div class="card h-100">
                 <div class="card-body">
                     <h4 style="text-align:center; color:#007ae1; magin-top:20px; text-decoration:underline">ĐỊA CHỈ CỦA BẠN</h4>
-                    
-                    
+
+                    <form>
+                        <div class="card-body">
+
+                            <div class="form-group">
+                                <label for="menu">Chọn thành phố</label>
+                                <select name="tinh_thanhpho" id="tinh_thanhpho" class="form-control m-bot15 choose tinh_thanhpho" style="height: 34px;">
+                                    <option value="0">---Chọn tỉnh thành phố---</option>
+                                    @foreach ($tinh_thanhpho as $key => $tp)
+                                    <option value="{{$tp->id}}"> {{$tp->tp_ten}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="menu">Chọn quận huyện</label>
+                                <select name="quan_huyen" id="quan_huyen" class="form-control m-bot15 choose quan_huyen" style="height: 34px;">
+                                    <option value="">---Chọn quận huyện----</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="menu">Chọn xã phường</label>
+                                <select name="xa_phuong_thitran" id="xa_phuong_thitran" class="form-control m-bot15 xa_phuong_thitran" style="height: 34px;">
+                                    <option value="">---Chọn xã phường----</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <textarea name="dc_diachi" id="dc_diachi" class="dc_diachi"></textarea>
+                                <!-- <textarea id="load_address"></textarea> -->
+                            </div>
+                            <div id="load_address"></div>
+                            <!-- <button type="button" name="add_delivery" class="btn btn-primary add_delivery">Thêm</button> -->
+
+                            @csrf
+                            <!-- </form> -->
+                        </div>
+                    </form>
                     <div class="row gutters">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="text-right">
                                 <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
-                                <button type="button" id="submit" name="submit" class="btn btn-primary" style="margin:0">Update</button>
+                                <button name="add_address" type="button" id="submit" name="submit" class="add_address btn btn-primary" style="margin:0">Thêm</button>
                             </div>
                         </div>
                     </div>
@@ -116,4 +153,50 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        // THÊM PHÍ VẬN CHUYỂN
+        $('.add_address').click(function() {
+            var tinh_thanhpho = $('.tinh_thanhpho').val();
+            var quan_huyen = $('.quan_huyen').val();
+            var xa_phuong_thitran = $('.xa_phuong_thitran').val();
+            var dc_diachi = $('.dc_diachi').val();
+            var _token = $('input[name="_token"]').val();
+            // alert (tinh_thanhpho);
+            // alert (quan_huyen);
+            // alert (xa_phuong_thitran);
+            // alert (phivanchuyen);
+
+            $.ajax({
+                url: "{{url('/user/insert_address')}}",
+                method: "POST",
+                data: {
+                    tinh_thanhpho: tinh_thanhpho,
+                    quan_huyen: quan_huyen,
+                    xa_phuong_thitran: xa_phuong_thitran,
+                    dc_diachi:dc_diachi,
+                    _token: _token
+                },
+                success: function(data) {
+                    alert('Thêm phí địa chỉ thành công!')
+                    fecth_delivery();
+                }
+            });
+        });
+
+        //Lấy dữ liệu địa chỉ
+        fecth_delivery();
+        function fecth_delivery(){
+            var _token = $('input[name="_token"]').val(); 
+            $.ajax({
+                url:"{{url('/user/load_address')}}",
+                method: "POST",
+                data:{_token:_token},
+                success:function(data){
+                    $('#load_address').html(data);
+                }
+            });
+        }
+    });
+</script>
 @endsection
