@@ -124,19 +124,19 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="fullName">Họ tên</label>
-                                <input type="text" class="form-control" id="fullName" placeholder="Nhập họ tên">
+                                <input type="text" class="form-control" id="fullName" placeholder="Nhập họ tên" value="{{ Auth('web')->user()->hoten }}">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="eMail">Email</label>
-                                <input type="email" class="form-control" id="eMail" placeholder="Nhập email">
+                                <input type="email" class="form-control" id="eMail" placeholder="Nhập email" value="{{ Auth('web')->user()->email }}">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="phone">Số điện thoại</label>
-                                <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại">
+                                <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại" value="{{ Auth('web')->user()->sodienthoai }}">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -167,7 +167,7 @@
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <button type="submit" class="flex-c-m stext-103 cl0 size-103 bg1 bor1 hov-btn1 p-lr-15 trans-04 ">
-                                Thêm địa chỉ
+                                <a href="{{URL::to('/user/diachikhachhang')}}">Thêm địa chỉ</a>
                             </button>
                         </div>
                     </div>

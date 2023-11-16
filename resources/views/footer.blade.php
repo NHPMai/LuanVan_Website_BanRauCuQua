@@ -450,6 +450,7 @@
 	})
 </script>
 
+
 <!--********************TÍNH PHÍ VẬN CHUYỂN**********************-->
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -513,7 +514,7 @@
 
 
 
-<!--********************CHAT BOX**********************-->
+<!--********************------------CHAT BOX-----------**********************-->
 
 <!-- Messenger Plugin chat Code -->
 <div id="fb-root"></div>
@@ -546,3 +547,5 @@
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
 </script>
+
+

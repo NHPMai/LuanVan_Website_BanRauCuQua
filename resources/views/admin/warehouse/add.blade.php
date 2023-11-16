@@ -53,7 +53,8 @@
         padding: 15px;
     }
 
-    /* Timf kiếm */
+    /* TIM KIEM */
+
     .form-search .form-group {
         width: 100%;
         position: relative;
@@ -63,7 +64,7 @@
         width: 100%;
     }
 
-    .form-search .search_ajax_result {
+    .form-search .warehouse_ajax {
         position: absolute;
         background-color: #fff;
         padding: 10px;
@@ -71,15 +72,16 @@
         width: 200px;
     }
 
-    .form-search .search_ajax_result h4 {
+    .form-search .warehouse_ajaxh4 {
         font-size: 14px;
     }
 
-    .form-search .search_ajax_result p {
+    .form-search .warehouse_ajax p {
         margin: 0;
         font-size: 11px;
         font-style: italic;
     }
+
 </style>
 
 @section('content')
@@ -146,42 +148,31 @@
                             </div>
                         </div>
                         <div class="col-11">
-                            <!-- <form action="{{ url('admin/search')}}" method="GET" class="form-inline" style="margin-bottom:0">
+
+                            <form autocomplete="off" method="GET" class="form-inline navbar-form navbar-left form-search" style="margin-bottom:0">
                                 <div class="form-group">
-                                    <input style="width: 1086px;" class="form-control form-control-sidebar" name="query" type="search" placeholder="Search" aria-label="Search">
-                                    
-                                </div>
-
-                                <button type="submit" class="btn btn-light" style=" height: 34px; width: 61px;">
-                                    <i class="fas fa-search fa-fw"></i>
-                                </button>
-                            </form> -->
-
-
-
-                            <form class="form-inline" action="{{ url('admin/search') }}" autocomplete="off" method="get" style="width: 250px;">
-                                <div class="search_box">
-                                    <input type="text" id="keywords" class="mtext-110 cl2 size-114 plh2 p-r-15" name="query" placeholder="Tìm Kiếm Sản Phâm">
+                                    <input  type="text" id="keywords" style="width: 1000px;" class="warehouse  form-control input-search-ajax" name="query" type="search" placeholder="Search" aria-label="Tìm Kiếm Sản Phẩm">
                                     <div id="search_ajax"></div>
                                 </div>
 
-                                <button type="submit" class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-                                    <i class="zmdi zmdi-search"></i>
+                                <button onclick="getProduct()"  type="button" class="btn btn-light" style=" height: 34px; width: 61px;">
+                                    <i class="fas fa-search fa-fw"></i>
                                 </button>
-
                             </form>
 
 
 
-                            <!-- <form class="navbar-form navbar-left form-search">
-                                <div class="form-group">
-                                    <input type="text" class="form-control input-search-ajax" placeholder="Search">
-
-                                    <div class="search_ajax_result">
-
-                                    </div>
+                            <!-- <form class="form-inline" autocomplete="off" method="get" style="width: 250px;">
+                                <div class="search_box">
+                                    <input type="text" id="keywords" class="warehouse mtext-110 cl2 size-114 plh2 p-r-15" name="query" placeholder="Tìm Kiếm Sản Phâm">
+                                    <div id="search_ajax"></div>
                                 </div>
+
+                                <button onclick="getProduct()" id="get" type="button" class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+                                    <i class="fa fa-search"></i>
+                                </button>
                             </form> -->
+
 
                         </div>
                     </div>
@@ -197,14 +188,17 @@
                             <th style="text-align:center">Xóa</th>
                         </tr>
                         <tr>
-                            <td style="text-align:center">Peter</td>
-                            <td style="text-align:center">Griffin</td>
-                            <td style="text-align:center">jjh</td>
+                         
+                            <td class="idsp" name='idsp' id="idsp" style="text-align:center"> </td>
+                            <td class="hasp" name='hasp' id="hasp" style="text-align:center"> </td>
+                            <td class="tensp" name='tensp' id="tensp" style="text-align:center"> </td>
+
                             <td style="text-align:center">
-                                <input type="number" id="fname" name="fname" style="width: 150px;">
+                                <input type="text" id="fname" name="fname" style="width: 150px;">
                             </td>
+
                             <td style="text-align:center">
-                                <input type="number" id="fname" name="fname" style="width: 80px;">
+                                <input type="text" id="fname" name="fname" style="width: 80px;">
                             </td>
                             <td style="text-align:center">$100</td>
                         </tr>
@@ -258,14 +252,109 @@
         } else {
             $('#search_ajax').fadeOut();
         }
+
     });
     $(document).on('click', 'li', function() {
         $('#keywords').val($(this).text());
         $('#search_ajax').fadeOut();
-    })
+    });
 </script>
 
-<!-- Timf kiếm  -->
+
+
+<script type="text/javascript">
+    document.getElementById("get").onclick = function() {
+        getProduct()
+    };
+
+    function getProduct() {
+        var query = $(".warehouse").val();
+        var _token = $('input[name="_token"]').val();
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{url('admin/warehouses/getProductName')}}",
+            method: "GET",
+            data: {
+                query: query,
+                token: _token
+            },
+            success: function(data) {
+                $('#tensp').html(data);
+            }
+        });
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{url('admin/warehouses/getProductId')}}",
+            method: "GET",
+            data: {
+                query: query,
+                token: _token
+            },
+            success: function(data) {
+                $('#idsp').html(data);
+            }
+        });
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{url('admin/warehouses/getProductImage')}}",
+            method: "GET",
+            data: {
+                query: query,
+                token: _token
+            },
+            success: function(data) {
+                $('#hasp').html(data);
+            }
+        });
+
+    }
+</script>
+
+
+
+
+<!-- <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script>
+    aData={}
+    $("#country_name").autocomplete({
+        source:function(request, response){
+            $.ajax({
+                url:"{{url('admin/warehouses/autocomplete_ajax')}}",
+                type:'GET',
+                dataType:'json',
+                success:function(data){
+                    aData = $.map(data,function(value, key){
+                        return {
+                            id: value.id,
+                            label: value.ten,
+                            capital: value.hinhanh
+                        };
+                    });
+                    var results = $.ui.autocomplete.filter(aData, request.term);
+                    response(results);
+                }
+            })
+        },
+        select:function(event,ui){
+            console.log(ui.item.capital);
+            $('#cappital').text(ui.item.capital);
+        }
+    });
+</script> -->
+
+
+
+<!-- Timf kiếm AJAX -->
 <!-- <script>
     $('.search_ajax_result').hide()
 

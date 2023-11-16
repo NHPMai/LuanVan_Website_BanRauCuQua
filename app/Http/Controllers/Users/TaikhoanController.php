@@ -12,4 +12,10 @@ class TaikhoanController extends Controller
             'title' => 'Tài khoản của bạn'
         ]);
     }
+
+    public function diachikhachhang(){
+        return view('user.diachi',[
+            'title' => 'Địa Chỉ Của Bạn'
+        ]);
+    }
 }

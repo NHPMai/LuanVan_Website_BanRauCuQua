@@ -103,7 +103,6 @@ $.ajaxSetup({
                     fecth_delivery();
                 }
             });
-
         });
 
         $('.choose').on('change',function(){

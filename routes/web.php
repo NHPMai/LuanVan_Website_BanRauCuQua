@@ -150,6 +150,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('edit/{brand}', [WarehouseController::class, 'update']);
             Route::DELETE('destroy', [WarehouseController::class, 'destroy']);
             Route::post('/autocomplete_ajax', [WarehouseController::class, 'autocomplete_ajax']);
+
+            Route::get('/getProductName', [WarehouseController::class, 'getProductName']);
+            Route::get('/getProductId', [WarehouseController::class, 'getProductId']);
+            Route::get('/getProductImage', [WarehouseController::class, 'getProductImage']);
+
             Route::get('/search', [App\Http\Controllers\WarehouseController::class, 'search']);
         });
 
@@ -206,6 +211,8 @@ Route::prefix('user')->name('user.')->group(function () {
         // Route::view('/login','user.logincustomer')->name('login');
         Route::get('/register', [LogincustomerController::class, 'register']);
         Route::post('/create', [LogincustomerController::class, 'sign_up'])->name('create');
+        // Route::post('/diachi', [LogincustomerController::class, 'diachi'])->name('diachi'); //Chọn nơi vận chuyển
+        // Route::post('/laydiachi', [LogincustomerController::class, 'laydiachi'])->name('laydiachi'); //Chọn nơi vận chuyển
 
         //Đăng nhập
         Route::get('/login', [LogincustomerController::class, 'index'])->name('login');
@@ -243,6 +250,7 @@ Route::prefix('user')->name('user.')->group(function () {
 
         //Tài khoản
         Route::get('account', [\App\Http\Controllers\Users\TaikhoanController::class, 'account'])->name('account');
+        Route::get('diachikhachhang', [\App\Http\Controllers\Users\TaikhoanController::class, 'diachikhachhang'])->name('diachikhachhang');
     });
 });
 

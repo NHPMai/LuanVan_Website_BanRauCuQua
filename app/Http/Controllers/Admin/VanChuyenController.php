@@ -13,41 +13,40 @@ class VanChuyenController extends Controller
 {
     public function index()
     {
-       
+
         return view('admin.delivery.list', [
             'title' => 'Danh sách Phí Vận Chuyển',
-            
+
         ]);
     }
 
     public function add()
     {
-        $tinh_thanhpho = Tinh_thanhpho::orderby('id','ASC')->get();
-        $quan_huyen = Quan_huyen::orderby('id','ASC')->get();
-        $xa_phuong_thitran = Xa_phuong_thitran::orderby('id','ASC')->get();
+        $tinh_thanhpho = Tinh_thanhpho::orderby('id', 'ASC')->get();
+        $quan_huyen = Quan_huyen::orderby('id', 'ASC')->get();
+        $xa_phuong_thitran = Xa_phuong_thitran::orderby('id', 'ASC')->get();
         return view('admin.delivery.add', [
             'title' => 'Thêm Phí Vận Chuyển',
-            
+
         ])->with(compact('tinh_thanhpho'))->with(compact('quan_huyen'))->with(compact('xa_phuong_thitran'));
     }
 
     public function select_delivery(Request $request)
     {
         $data = $request->all();
-        if($data['action']){
+        if ($data['action']) {
             $output = '';
-            if($data['action'] == "tinh_thanhpho"){
-                $select_quanhuyen = Quan_huyen::where('tinh_thanhpho_id',$data['ma_id'])->orderby('id','ASC')->get();
-                    $output.= '<option>----Chọn quận huyện----</option>';
-                foreach($select_quanhuyen as $key => $quan_huyen){
-                $output.='<option value="'.$quan_huyen->id.'">'.$quan_huyen->qh_ten.'</option>';
+            if ($data['action'] == "tinh_thanhpho") {
+                $select_quanhuyen = Quan_huyen::where('tinh_thanhpho_id', $data['ma_id'])->orderby('id', 'ASC')->get();
+                $output .= '<option>----Chọn quận huyện----</option>';
+                foreach ($select_quanhuyen as $key => $quan_huyen) {
+                    $output .= '<option value="' . $quan_huyen->id . '">' . $quan_huyen->qh_ten . '</option>';
                 }
-
-            } else{
-                $select_xa = Xa_phuong_thitran::where('quan_huyen_id',$data['ma_id'])->orderby('id','ASC')->get();
-                    $output.= '<option>----Chọn xã phường----</option>';
-                foreach($select_xa as $key => $xa){
-                $output.='<option value="'.$xa->id.'">'.$xa->xa_ten.'</option>';
+            } else {
+                $select_xa = Xa_phuong_thitran::where('quan_huyen_id', $data['ma_id'])->orderby('id', 'ASC')->get();
+                $output .= '<option>----Chọn xã phường----</option>';
+                foreach ($select_xa as $key => $xa) {
+                    $output .= '<option value="' . $xa->id . '">' . $xa->xa_ten . '</option>';
                 }
             }
         }
@@ -67,9 +66,9 @@ class VanChuyenController extends Controller
 
     public function select_feeship()
     {
-        $feeship = Phivanchuyen::orderby('id','DESC')->get();
-        $output ='';
-        $output.= '<div class="table-responsive">
+        $feeship = Phivanchuyen::orderby('id', 'DESC')->get();
+        $output = '';
+        $output .= '<div class="table-responsive">
             <table class="table table-bordered" style="width:80%;margin-left: 120px;" >
                 <thread">
                     <tr style="background-color:#80bfff; font-weight:500; font-size:20px">
@@ -82,31 +81,29 @@ class VanChuyenController extends Controller
                 <tbody>
                 ';
 
-                foreach ($feeship as $key => $fee){
-                $output.='
+        foreach ($feeship as $key => $fee) {
+            $output .= '
                     <tr>
-                        <td>'.$fee->tinh_thanhpho->tp_ten.'</td>
-                        <td>'.$fee->quan_huyen->qh_ten.'</td>
-                        <td>'.$fee->xa_phuong_thitran->xa_ten.'</td>
-                        <td contenteditable data-feeship_id="'.$fee->id.'" class="fee_feeship_edit">'.number_format($fee->pvc_phivanchuyen,0,',','.').'</td>
+                        <td>' . $fee->tinh_thanhpho->tp_ten . '</td>
+                        <td>' . $fee->quan_huyen->qh_ten . '</td>
+                        <td>' . $fee->xa_phuong_thitran->xa_ten . '</td>
+                        <td contenteditable data-feeship_id="' . $fee->id . '" class="fee_feeship_edit">' . number_format($fee->pvc_phivanchuyen, 0, ',', '.') . '</td>
                     </tr>
                 ';
-
-                }
-                $output .= '
+        }
+        $output .= '
                 </tbody>
                 </table> </div>
                 ';
 
-                echo $output;
-        
+        echo $output;
     }
     //Update
     public function update_delivery(Request $request)
     {
         $data = $request->all();
         $phivanchuyen = Phivanchuyen::find($data['feeship_id']);
-        $fee_value = rtrim($data['fee_value'],'.'); //Cắt dấu chấm phần nghìn
+        $fee_value = rtrim($data['fee_value'], '.'); //Cắt dấu chấm phần nghìn
         $phivanchuyen->pvc_phivanchuyen = $fee_value;
         $phivanchuyen->save();
     }

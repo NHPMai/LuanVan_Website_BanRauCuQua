@@ -9,7 +9,7 @@
         width: 100%;
     }
 
-    .form-search .search_ajax_r {
+    .form-search .search_ajax_result {
         position: absolute;
         background-color: #fff;
         padding: 10px;
@@ -17,11 +17,11 @@
         width: 200px;
     }
 
-    .form-search .search_ajax_r h4 {
+    .form-search .search_ajax_result h4 {
         font-size: 14px;
     }
 
-    .form-search .search_ajax_r p {
+    .form-search .search_ajax_result p {
         margin: 0;
         font-size: 11px;
         font-style: italic;
@@ -213,7 +213,7 @@
                         <div class="form-group">
                             <input type="text" class="form-control input-search-ajax" placeholder="Search">
 
-                            <div class="search_ajax_r">
+                            <div class="search_ajax_result">
 
                             </div>
                         </div>
@@ -276,7 +276,7 @@
 <!--********************TÌM KIẾM AJAX**********************-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
-    $('.search_ajax_r').hide()
+    $('.search_ajax_result').hide()
 
     $('.input-search-ajax').keyup(function() {
         var _text = $(this).val();
@@ -306,14 +306,14 @@
 
                     }
 
-                    $('.search_ajax_r').show();
-                    $('.search_ajax_r').html(_html)
+                    $('.search_ajax_result').show();
+                    $('.search_ajax_result').html(_html)
 
                 }
             });
         } else {
-            $('.search_ajax_r').html('');
-            $('.search_ajax_r').hide()
+            $('.search_ajax_result').html('');
+            $('.search_ajax_result').hide()
         }
 
     });

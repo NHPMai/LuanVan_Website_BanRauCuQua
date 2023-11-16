@@ -54,7 +54,5 @@
     </div>
 </div>
 
-<div id="load_delivery">
-
-</div>
+<div id="load_delivery"></div>
 @endsection

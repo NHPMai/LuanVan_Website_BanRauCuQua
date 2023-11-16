@@ -146,9 +146,7 @@
                                 </span>
                             </div>
 
-                            <!-- <div class="phivanchuyen" id="phivanchuyen">
-
-                            </div> -->
+                           
                             <div class="size-208 " style="text-align: right;">
                                 <span class="mtext-110 cl2 phivanchuyen" id="phivanchuyen">
                               
@@ -193,7 +191,7 @@
                                     </div>
 
                                     <div class="col-6" style="text-align: right;">
-                                        {{number_format($total - $total_coupon, 0,',','.') }} đ
+                                        {{number_format($total - $total_coupon , 0,',','.') }} đ
                                     </div>
                                 </div>
 

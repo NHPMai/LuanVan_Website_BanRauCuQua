@@ -89,21 +89,44 @@ class WarehouseController extends Controller
         //
     }
 
-    public function autocomplete_ajax(Request $request){
+    public function autocomplete_ajax(Request $request)
+    {
         $data = $request->all();
 
-        if($data['query']){
-            $product = Product::where('hoatdong',1)->where('ten','LIKE','%'.$data['query'].'%')->get();
+        if ($data['query']) {
+            $product = Product::where('hoatdong', 1)->where('ten', 'LIKE', '%' . $data['query'] . '%')->get();
 
             $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
 
-            foreach($product as $key => $val){
-                $output.='
-                <li class="li_search_ajax"><a href="#">'.$val->ten.'</a></li>';
+            foreach ($product as $key => $val) {
+                $output .= '
+                <li class="li_search_ajax"><a href="#">' . $val->ten . '</a></li>';
             }
             $output .= '</ul>';
             echo $output;
         }
     }
-    
+
+    public function getProductName(Request $request)
+    {
+        $data = $request->all();
+        $products = Product::where('hoatdong', 1)->where('ten', '=', $data['query'])->first();
+        //    $output = '  <input  type="text" name="tensp" value="'.$products->ten.'" style="width: 150px;">';
+        $output = $products->ten;
+        echo $output;
+    }
+    public function getProductId(Request $request)
+    {
+        $data = $request->all();
+        $products = Product::where('hoatdong', 1)->where('ten', '=', $data['query'])->first();
+        $output = $products->id;
+        echo $output;
+    }
+    public function getProductImage(Request $request)
+    {
+        $data = $request->all();
+        $products = Product::where('hoatdong', 1)->where('ten', '=', $data['query'])->first();
+        $output =  '<img class="media-object" width="50" style="margin-right: 15px" src="' . $products->hinhanh . '">';
+        echo $output;
+    }
 }

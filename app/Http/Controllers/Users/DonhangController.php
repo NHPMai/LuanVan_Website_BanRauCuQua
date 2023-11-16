@@ -232,6 +232,7 @@ class DonhangController extends Controller
         $khachhang = khachhang::find($idkh);
         $products = $this->getProduct();
         $tinh_thanhpho = Tinh_thanhpho::orderby('id','ASC')->get();
+        $phivanchuyens = Phivanchuyen::orderby('id','ASC')->get();
         return view('chitietdonhangs.donhang', [
             'products' => $products,
             'chitietdonhangs' => session()->get('chitietdonhangs'),
