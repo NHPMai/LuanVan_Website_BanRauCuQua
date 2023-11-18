@@ -145,6 +145,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('add', [WarehouseController::class, 'create']);
             Route::post('add', [WarehouseController::class, 'store']);
             Route::get('list', [WarehouseController::class, 'index']);
+            Route::get('view/{phieunhap}', [WarehouseController::class, 'show']);
             Route::get('active/{id}',[WarehouseController::class, 'active']);
             Route::DELETE('destroy', [WarehouseController::class, 'destroy']);
 

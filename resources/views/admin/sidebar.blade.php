@@ -142,7 +142,7 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-bars"></i>
-                                <p> Danh Mục
+                                <p> Danh Mục Sản Phẩm
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -150,13 +150,13 @@
                                 <li class="nav-item">
                                     <a href="/admin/menus/add" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm Danh Mục</p>
+                                        <p>Thêm Danh Mục Sản Phẩm</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/admin/menus/list" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Danh Sách Danh Mục</p>
+                                        <p>Danh Sách Danh Mục Sản Phẩm</p>
                                     </a>
                                 </li>
 

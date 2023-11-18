@@ -33,9 +33,20 @@ class WarehouseController extends Controller
         }
     }
 
+    public function show(Phieunhap $phieunhap)
+    {
+        $chitietphieunhap = Chitietphieunhap::where('phieunhap_id',$phieunhap->id)->get();
+ 
+        return view('admin.warehouse.detail', [
+            'title' => 'Chi Tiết Phiếu Nhập ' ,
+            'phieunhap' => $phieunhap,
+            'chitietphieunhap' => $chitietphieunhap,
+        ]);
+    }
+
     public function index()
     {
-        $phieunhap = Phieunhap::orderbyDesc('id')->get();
+        $phieunhap = Phieunhap::orderby('id', 'DESC')->get();
         // dd($phieunhap);
         return view('admin.warehouse.list', [
             'title' => 'Danh Sách Phiếu Nhập',

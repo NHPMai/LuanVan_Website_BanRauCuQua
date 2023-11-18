@@ -84,7 +84,7 @@
         </nav> -->
         <div style="padding: 10px;">
             <!-- <table id="myTable"> -->
-            <table id="myTable" >
+            <table>
                 <thead style="background-color:blanchedalmond;">
                     <tr style="background-color: lightskyblue;">
                         <th style="text-align:center">ID</th>
@@ -102,16 +102,28 @@
                         <td style="text-align:center">{{$pn->nhanviens->hoten}}</td>
                         <td style="text-align:center">{{$pn->pn_ngaylapphieu}}</td>
                         <td style="text-align:center">{{$pn->pn_ngayxacnhan}}</td>
-                        <td style="text-align:center">{{$pn->pn_trangthai}}</td>
+                      
+                        @if( $pn->pn_trangthai == 0)
+                        <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
+                            <button style="background-color: #b0b5ae; font-weight:600 ;border-radius: 8px; ">Chờ duyệt &nbsp <i class="fas fa-clock"></i></button>
+                        </td>
+                        @elseif( $pn->pn_trangthai == 1)
+                        <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
+                            <button style="background-color:lime; font-weight:600 ; border-radius: 8px;">Đã Duyệt &nbsp <i class="fas fa-check"></i></button>
+                        </td>
+                       
+                        @endif
+                      
                         <td style="text-align: center;vertical-align: middle;">
-                            <a class="btn btn-primary btn-sm" href="/admin/warehouses/view/}">
+                            @if ( $pn->pn_trangthai == 1 )
+                            <a class="btn btn-primary btn-sm" href="/admin/warehouses/view/{{$pn->id}}">
                                 <i class="fas fa-eye"></i>
                             </a>
-                            <a href="/admin/warehouses/active/{{$pn->id}}" class="btn btn-success btn-sm" 
-                                onclick='return confirm("Bạn chắc chắn muốn duyệt phiếu nhâp không?")'>
+                            @endif
+                            <a href="/admin/warehouses/active/{{$pn->id}}" class="btn btn-success btn-sm" onclick='return confirm("Bạn chắc chắn muốn duyệt phiếu nhâp không?")'>
                                 <span class="fa fa-check" style="font-size: 15px;color: white; font-weight: bold"></span>
                             </a>
-                            <a href="#"  onclick="removeRow( {{ $pn->id }} ,'/admin/warehouses/destroy')"class="btn btn-danger btn-sm">
+                            <a href="#" onclick="removeRow( {{ $pn->id }} ,'/admin/warehouses/destroy')" class="btn btn-danger btn-sm">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </td>
