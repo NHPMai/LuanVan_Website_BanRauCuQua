@@ -350,7 +350,7 @@
 <script src="/template/js/public.js"></script>
 
 
-<!--***************** SIDEBAR **************-->
+<!--------------------------------- SIDEBAR ------------------------------------>
 <script src="/template/js/sidebar/jquery.js"></script>
 <script src="/template/js/sidebar/bootstrap.min.js"></script>
 <script src="/template/js/sidebar/jquery.scrollUp.min.js"></script>
@@ -358,8 +358,9 @@
 <script src="/template/js/sidebar/jquery.prettyPhoto.js"></script>
 <script src="/template/js/sidebar/main.js"></script>
 
-<!--********************LỌC SẢN PHẨM**********************-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+<!----------------------------------LỌC SẢN PHẨM---------------------------------->
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#slider-range").slider({
@@ -374,10 +375,11 @@
 		$("#amount").val("đ" + $("#slider-range").slider("values", 0) +
 			" - $" + $("#slider-range").slider("values", 1));
 	});
-</script>
+</script> -->
 
 
-<!--********************TÌM KIẾM AUTOCOMPLETE**********************-->
+<!----------------------------TÌM KIẾM AUTOCOMPLETE-------------------------------->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 <script type="text/javascript">
@@ -408,7 +410,8 @@
 	});
 </script>
 
-<!--********************TÌM KIẾM GIỌNG NÓI**********************-->
+<!--------------------TÌM KIẾM GIỌNG NÓI----------------------------->
+
 <script type="text/javascript">
 	var message = document.querySelector('#message');
 
@@ -451,7 +454,8 @@
 </script>
 
 
-<!--********************TÍNH PHÍ VẬN CHUYỂN**********************-->
+<!-------------------------TÍNH PHÍ VẬN CHUYỂN----------------------->
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.choose').on('change', function() {
@@ -548,4 +552,61 @@
 	}(document, 'script', 'facebook-jssdk'));
 </script>
 
+
+<!--------------------------PAYPAL---------------------------------->
+
+<!-- <script src="https://www.paypalobjects.com/api/checkout.js"></script> -->
+
+<!-- <script>
+    var usd = (document.getElementById("vnd_to_usd")).value;
+    // var usd = ((document.getElementById("vnd_to_usd")||{}).value)||"";
+    paypal.Button.render({
+
+        env: 'sandbox', // sandbox | production
+
+        // PayPal Client IDs - replace with your own
+        // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+        client: {
+            sandbox: 'AawMrh7RWsG-3DT5fsji-6o9xyX2h4-WJOLSfHTVI5Ss0a9itxmNzOgiX8qGVMn4eTO0BzppUuA8q8mF',
+            production: '<insert production client id>'
+        },
+
+        locale: 'en_US',
+        style: {
+            size: 'medium',
+            color: 'gold',
+            shape: 'pill',
+        },
+        // Show the buyer a 'Pay Now' button in the checkout flow
+        commit: true,
+
+        // payment() is called when the button is clicked
+        payment: function(data, actions) {
+
+            // Make a call to the REST api to create the payment
+            return actions.payment.create({
+                payment: {
+                    transactions: [{
+                        amount: {
+                            total: `${usd}`,
+                            // total: '100',
+                            currency: 'USD'
+                        }
+                    }]
+                }
+            });
+        },
+
+        // onAuthorize() is called when the buyer approves the payment
+        onAuthorize: function(data, actions) {
+
+            // Make a call to the REST api to execute the payment
+            return actions.payment.execute().then(function() {
+                //Hiển thị thông tin xác nhận
+                window.alert('Cảm ơn bạn đã mua hàng của chúng tôi!');
+            });
+        }
+
+    }, '#paypal-button-container');
+</script> -->
 

@@ -13,6 +13,7 @@ use App\Models\Tinh_thanhpho;
 use App\Models\Quan_huyen;
 use App\Models\Xa_phuong_thitran;
 use App\Models\Phivanchuyen;
+use App\Models\Phuongthucthanhtoan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -42,8 +43,11 @@ class DonhangController extends Controller
 
     public function create($request)
     {
-        $qty = (int)$request->input('num_product');
+        $soluongsp = Product::all();
+        dd($soluongsp);
+        $qty = (int)$request->input('num_product'); //số lượng sản phẩm add
         $product_id = (int)$request->input('product_id');
+        // $soluongsp = (int)
 
         if ($qty <= 0 || $product_id <= 0) {
             Session::flash('error', 'Số lượng hoặc Sản phẩm không chính xác');
@@ -235,10 +239,10 @@ class DonhangController extends Controller
         $khachhang = khachhang::find($idkh);
         $a = $khachhang->id;
         $diachi = Diachi::where('khachhang_id', $a)->get();
-        // dd($diachi);
+        $phuongthucthanhtoan = Phuongthucthanhtoan::orderby('id', 'ASC')->get();
         $products = $this->getProduct();
         $tinh_thanhpho = Tinh_thanhpho::orderby('id', 'ASC')->get();
-        $phivanchuyens = Phivanchuyen::orderby('id', 'ASC')->get();
+        // $phivanchuyens = Phivanchuyen::orderby('id', 'ASC')->get();
         return view('chitietdonhangs.donhang', [
             'products' => $products,
             'chitietdonhangs' => session()->get('chitietdonhangs'),
@@ -246,11 +250,210 @@ class DonhangController extends Controller
             'coupons' => session()->get('coupon'),
             'tinh_thanhpho' => $tinh_thanhpho,
             'diachi' => $diachi,
+            'phuongthucthanhtoan' => $phuongthucthanhtoan,
         ]);
     }
 
 
-    //thanh toán đơn hàng
+
+    // public function add_order(Request $request)
+    // {
+    //     $this->validate(
+    //         $request,
+    //         [
+    //             'sodienthoai' => 'required',
+
+    //         ],
+    //         [
+    //             'sodienthoai.required' => 'Vui lòng nhập số điện thoại',
+    //         ]
+    //     );
+
+    //     //$this->cartService->getCart($request);
+    //     // $phuong_thuc_thanh_toan_id = $request->input('payment_select');
+    //     // if($phuong_thuc_thanh_toan_id == 1){
+    //     //     dd(123);
+    //     // }
+    //     // else{dd(456);}
+    //     // dd($phuong_thuc_thanh_toan_id);
+    //     try {
+    //         DB::beginTransaction();
+    //         $total = 0;
+    //         $chitietdonhangs = Session::get('chitietdonhangs');
+    //         // dd($chitietdonhangs);
+    //         $coupons = Session::get('coupon');
+    //         // dd($coupons);
+    //         $productId = array_keys($chitietdonhangs);
+    //         // dd($productId);
+    //         $data = $request->input();
+    //         //dd($data);
+    //         $data_input = session()->put('data', $data);
+
+    //         // Lấy giá trị từ session với key là 'data'
+    //         $data_get = session('data');
+
+    //         // Lấy thông tin sản phẩm từ giỏ hàng
+    //         foreach ($chitietdonhangs as $product_id => $quantity_purchased) {
+    //             // Bước 1: Truy xuất thông tin sản phẩm từ cơ sở dữ liệu
+    //             $product = Product::find($product_id);
+    //             if ($product) {
+    //                 // Bước 2: Cập nhật số lượng sản phẩm
+    //                 $new_quantity_in_stock = max(0, $product->soluongsp - $quantity_purchased);
+    //                 $new_quantity_sold = $product->sp_soluongban + $quantity_purchased;
+    //                 // Bước 3: Lưu thông tin sản phẩm đã cập nhật trở lại cơ sở dữ liệu
+    //                 $product->soluongsp = $new_quantity_in_stock;
+    //                 $product->soluongban = $new_quantity_sold;
+    //                 $product->save();
+    //                 // Cập nhật giỏ hàng với số lượng đã mua (có thể giữ nguyên hoặc xóa sản phẩm khỏi giỏ hàng tùy theo yêu cầu của bạn)
+    //                 $chitietdonhangs[$product_id] = $quantity_purchased;
+    //             }
+    //         }
+
+    //         // Lưu giỏ hàng đã cập nhật vào session
+    //         session()->put('chitietdonhangs', $chitietdonhangs);
+
+    //         $products = Product::select('id', 'ten', 'gia', 'hinhanh', 'soluongsp', 'soluongban')
+    //             ->where('hoatdong', 1)
+    //             ->whereIn('id', $productId)
+    //             ->get();
+    //         foreach ($products as $product) {
+    //             $price = $product->gia;
+    //             $priceEnd = $price * $chitietdonhangs[$product->id];
+    //             $total += $priceEnd;
+    //         }
+
+    //         // Đặt múi giờ
+    //         date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+    //         $idkh = Auth('web')->user()->id;
+
+    //         //$id_dc = $request->dc_DiaChi;
+    //         //$dc = DiaChi::find($id_dc);
+    //         //$pdh_DiaChiGiao = $dc->dc_DiaChi;
+
+    //         //$id_tp = $dc->tinh_thanh_pho_id;
+    //         //$pvc = PhiVanChuyen::where('thanh_pho_id', $id_tp)->get();
+    //         //$phi = $pvc[0]['pvc_PhiVanChuyen'];
+
+    //         $today = Carbon::now()->toDateString();
+
+    //         // $phuong_thuc_thanh_toan_id = $request->input('phuongthucthanhtoan_id');
+    //         //$submitButtonName = '';
+
+    //         // switch ($phuong_thuc_thanh_toan_id) {
+    //         //     case 1:
+    //         //         $submitButtonName = 'cod';
+    //         //         break;
+    //         //     case 2:
+    //         //         $submitButtonName = 'paypal';
+    //         //         break;
+    //         //     case 3:
+    //         //         $submitButtonName = 'redirect';
+    //         //        break;
+    //         //     case 4:
+    //         //         $submitButtonName = 'onepay';
+    //         //         break;
+    //         //     default:
+    //         //         // Xử lý mặc định nếu không khớp với bất kỳ giá trị nào
+    //         //      break;
+    //         // }
+    //         // Kiểm tra xem nút `submit` có tên là 'cod' đã được bấm hay không
+    //         // if ($submitButtonName === 'cod') {
+    //         //dd('cod');
+            
+    //         if ($coupons) {
+    //             foreach ($coupons as $key => $cou)
+    //                 if ($cou['mgg_loaigiamgia'] == 1) {
+    //                     $total_coupon = ($total * $cou['mgg_giatrigiamgia']) / 100;
+    //                     $tien_end = $total - $total_coupon;
+    //                     // dd($tien_end);
+    //                 } elseif ($cou['mgg_loaigiamgia'] == 2) {
+    //                     $tien_end = $total - $cou['mgg_giatrigiamgia'];
+    //                     //dd($tien_end);
+    //                 }
+
+    //             $chitietdonhang = new Donhang();
+    //             $chitietdonhang->khachhang_id = $idkh;
+    //             $chitietdonhang->magiamgia_id = $coupons[0]['id'];
+    //             $chitietdonhang->dh_ghichu = $request->dh_ghichu;
+    //             $chitietdonhang->dh_giamgia = $coupons[0]['mgg_magiamgia'];
+    //             $chitietdonhang->dh_diachigiaohang = 1;
+    //             $chitietdonhang->dh_thoigiandathang = $today;
+    //             $chitietdonhang->dh_thanhtien = $tien_end;
+    //             $chitietdonhang->dh_trangthai = 1;
+    //             // $cart->phuong_thuc_thanh_toan_id = $request->phuong_thuc_thanh_toan_id;
+    //             $chitietdonhang->save();
+
+
+
+    //             // Cập nhật trường mgg_SoLuongMa
+    //             $newSoLuongMa = $cou['mgg_soluongma'] - 1;
+
+    //             MaGiamGia::where('id', $cou['id'])
+    //                 ->update(['mgg_soluongma' => $newSoLuongMa]);
+    //         } else {
+    //             // $tien_end = $total + $phi ;
+    //             $tien_end = $total;
+
+    //             $chitietdonhang = new Donhang;
+    //             $chitietdonhang->khachhang_id = $idkh;
+    //             $chitietdonhang->dh_ghichu = $request->dh_ghichu;
+    //             $chitietdonhang->dh_diachigiaohang = 1;
+    //             $chitietdonhang->dh_thoigiandathang = $today;
+    //             $chitietdonhang->dh_thanhtien = $tien_end;
+    //             $chitietdonhang->dh_trangthai = 1;
+    //             // $chitietdonhang->phuong_thuc_thanh_toan_id = $request->phuong_thuc_thanh_toan_id;
+
+    //             $chitietdonhang->save();
+    //             // dd($chitietdonhang);
+    //         }
+
+    //         //CẬP NHẬT THÔNG TIN KHÁCH HÀNG
+    //         $kh = KhachHang::find($idkh);
+    //         $kh->sodienthoai = $request->sodienthoai;
+    //         $tien = $kh->tongtienmua;
+    //         $kh->tongtienmua = $tien + $tien_end;
+    //         $kh->save();
+
+    //         foreach ($products as $product) {
+    //             DB::table('chitietdonhangs')->insert([
+    //                 'donhang_id' => $chitietdonhang->id,
+    //                 'product_id' => $product->id,
+    //                 'ctdh_soluong' => $chitietdonhangs[$product->id],
+    //                 'ctdh_gia' => $product->gia
+    //             ]);
+    //         }
+
+    //         $name = Auth::user();
+    //         Mail::send('emails.test', compact('chitietdonhang', 'name'), function ($email) use ($name) {
+    //             $email->subject('Cửa Hàng Vegetable Family - Xác Nhận Đơn Hàng');
+    //             $email->to($name->email, $name->hoten);
+    //         });
+
+
+    //         if ($coupons == true) {
+    //             Session::forget('coupon');
+    //         }
+
+    //         DB::commit();
+    //         session()->forget('chitietdonhangs');
+    //         session()->forget('data_get');
+    //         session()->forget('total_paypal');
+    //     } catch (\Exception $err) {
+    //         DB::rollBack();
+    //         Session::flash('error', 'Đặt Hàng Lỗi, Vui lòng thử lại sau');
+    //         return false;
+    //     }
+    //     Session::flash('success', 'Đặt hàng thành công!');
+
+    //     return redirect("/")->with('success', 'Thao tác thành công');
+    // }
+
+
+
+
+
+    // thanh toán đơn hàng
     public function add_order(Request $request)
     {
         $this->validate(
@@ -265,176 +468,194 @@ class DonhangController extends Controller
         );
 
         //$this->cartService->getCart($request);
+        $phuong_thuc_thanh_toan_id = $request->input('payment_select');
+        
 
-        try {
-            DB::beginTransaction();
-            $total = 0;
-            $chitietdonhangs = Session::get('chitietdonhangs');
-            $coupons = Session::get('coupon');
-            // dd($coupons);
-            $productId = array_keys($chitietdonhangs);
-            //dd($productId);
-            $data = $request->input();
-            //dd($data);
-            $data_input = session()->put('data', $data);
+        if ($phuong_thuc_thanh_toan_id == 1) {
+            try {
+                DB::beginTransaction();
+                $total = 0;
+              
+                $chitietdonhangs = Session::get('chitietdonhangs');
+                // dd($chitietdonhangs);
+                $coupons = Session::get('coupon');
+                // dd($coupons);
+                $productId = array_keys($chitietdonhangs);
+                // dd($productId);
+                $data = $request->input();
+                //dd($data);
+                $data_input = session()->put('data', $data);
+                // dd($data_input);
+                // Lấy giá trị từ session với key là 'data'
+                $data_get = session('data');
 
-            // Lấy giá trị từ session với key là 'data'
-            $data_get = session('data');
-
-            // Lấy thông tin sản phẩm từ giỏ hàng
-            foreach ($chitietdonhangs as $product_id => $quantity_purchased) {
-                // Bước 1: Truy xuất thông tin sản phẩm từ cơ sở dữ liệu
-                $product = Product::find($product_id);
-                if ($product) {
-                    // Bước 2: Cập nhật số lượng sản phẩm
-                    $new_quantity_in_stock = max(0, $product->soluongsp - $quantity_purchased);
-                    $new_quantity_sold = $product->sp_soluongban + $quantity_purchased;
-                    // Bước 3: Lưu thông tin sản phẩm đã cập nhật trở lại cơ sở dữ liệu
-                    $product->soluongsp = $new_quantity_in_stock;
-                    $product->soluongban = $new_quantity_sold;
-                    $product->save();
-                    // Cập nhật giỏ hàng với số lượng đã mua (có thể giữ nguyên hoặc xóa sản phẩm khỏi giỏ hàng tùy theo yêu cầu của bạn)
-                    $chitietdonhangs[$product_id] = $quantity_purchased;
-                }
-            }
-
-            // Lưu giỏ hàng đã cập nhật vào session
-            session()->put('chitietdonhangs', $chitietdonhangs);
-
-            $products = Product::select('id', 'ten', 'gia', 'hinhanh', 'soluongsp', 'soluongban')
-                ->where('hoatdong', 1)
-                ->whereIn('id', $productId)
-                ->get();
-            foreach ($products as $product) {
-                $price = $product->gia;
-                $priceEnd = $price * $chitietdonhangs[$product->id];
-                $total += $priceEnd;
-            }
-
-            // Đặt múi giờ
-            date_default_timezone_set('Asia/Ho_Chi_Minh');
-
-            $idkh = Auth('web')->user()->id;
-
-            //$id_dc = $request->dc_DiaChi;
-            //$dc = DiaChi::find($id_dc);
-            //$pdh_DiaChiGiao = $dc->dc_DiaChi;
-
-            //$id_tp = $dc->tinh_thanh_pho_id;
-            //$pvc = PhiVanChuyen::where('thanh_pho_id', $id_tp)->get();
-            //$phi = $pvc[0]['pvc_PhiVanChuyen'];
-
-            $today = Carbon::now()->toDateString();
-
-            // $phuong_thuc_thanh_toan_id = $request->input('phuong_thuc_thanh_toan_id');
-            //$submitButtonName = '';
-
-            // switch ($phuong_thuc_thanh_toan_id) {
-            //     case 1:
-            //         $submitButtonName = 'cod';
-            //         break;
-            //     case 2:
-            //         $submitButtonName = 'paypal';
-            //         break;
-            //     case 3:
-            //         $submitButtonName = 'redirect';
-            //        break;
-            //     case 4:
-            //         $submitButtonName = 'onepay';
-            //         break;
-            //     default:
-            //         // Xử lý mặc định nếu không khớp với bất kỳ giá trị nào
-            //      break;
-            // }
-            // Kiểm tra xem nút `submit` có tên là 'cod' đã được bấm hay không
-            // if ($submitButtonName === 'cod') {
-            //dd('cod');
-            if ($coupons) {
-                foreach ($coupons as $key => $cou)
-                    if ($cou['mgg_loaigiamgia'] == 1) {
-                        $total_coupon = ($total * $cou['mgg_giatrigiamgia']) / 100;
-                        $tien_end = $total - $total_coupon;
-                        // dd($tien_end);
-                    } elseif ($cou['mgg_loaigiamgia'] == 2) {
-                        $tien_end = $total - $cou['mgg_giatrigiamgia'];
-                        //dd($tien_end);
+                // Lấy thông tin sản phẩm từ giỏ hàng
+                foreach ($chitietdonhangs as $product_id => $quantity_purchased) {
+                    // Bước 1: Truy xuất thông tin sản phẩm từ cơ sở dữ liệu
+                    $product = Product::find($product_id);
+                    
+                    if ($product) {
+                        // Bước 2: Cập nhật số lượng sản phẩm
+                        $new_quantity_in_stock = max(0, $product->soluongsp - $quantity_purchased); //Số lượng sp còn trg kho
+                       
+                        $new_quantity_sold = $product->soluongban + $quantity_purchased;//Số lượng bán
+                      
+                        // Bước 3: Lưu thông tin sản phẩm đã cập nhật trở lại cơ sở dữ liệu
+                        $product->soluongsp = $new_quantity_in_stock;
+                        $product->soluongban = $new_quantity_sold;
+                        $product->save();
+                        // Cập nhật giỏ hàng với số lượng đã mua (có thể giữ nguyên hoặc xóa sản phẩm khỏi giỏ hàng tùy theo yêu cầu của bạn)
+                        $chitietdonhangs[$product_id] = $quantity_purchased;
                     }
+                }
 
-                $chitietdonhang = new Donhang();
-                $chitietdonhang->khachhang_id = $idkh;
-                $chitietdonhang->magiamgia_id = $coupons[0]['id'];
-                $chitietdonhang->dh_ghichu = $request->dh_ghichu;
-                $chitietdonhang->dh_giamgia = $coupons[0]['mgg_magiamgia'];
-                $chitietdonhang->dh_diachigiaohang = 1;
-                $chitietdonhang->dh_thoigiandathang = $today;
-                $chitietdonhang->dh_thanhtien = $tien_end;
-                $chitietdonhang->dh_trangthai = 1;
-                // $cart->phuong_thuc_thanh_toan_id = $request->phuong_thuc_thanh_toan_id;
-                $chitietdonhang->save();
+                // Lưu giỏ hàng đã cập nhật vào session
+                session()->put('chitietdonhangs', $chitietdonhangs);
+
+                $products = Product::select('id', 'ten', 'gia', 'hinhanh', 'soluongsp', 'soluongban')
+                    ->where('hoatdong', 1)
+                    ->whereIn('id', $productId)
+                    ->get();
+               
+                foreach ($products as $product) {
+                    $price = $product->gia;
+                    $priceEnd = $price * $chitietdonhangs[$product->id];
+                    $total += $priceEnd;
+                }
+
+                // Đặt múi giờ
+                date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+                $idkh = Auth('web')->user()->id;
+
+                //$id_dc = $request->dc_DiaChi;
+                //$dc = DiaChi::find($id_dc);
+                //$pdh_DiaChiGiao = $dc->dc_DiaChi;
+
+                //$id_tp = $dc->tinh_thanh_pho_id;
+                //$pvc = PhiVanChuyen::where('thanh_pho_id', $id_tp)->get();
+                //$phi = $pvc[0]['pvc_PhiVanChuyen'];
+
+                $today = Carbon::now()->toDateString();
+
+                // $phuong_thuc_thanh_toan_id = $request->input('phuongthucthanhtoan_id');
+                //$submitButtonName = '';
+
+                // switch ($phuong_thuc_thanh_toan_id) {
+                //     case 1:
+                //         $submitButtonName = 'cod';
+                //         break;
+                //     case 2:
+                //         $submitButtonName = 'paypal';
+                //         break;
+                //     case 3:
+                //         $submitButtonName = 'redirect';
+                //        break;
+                //     case 4:
+                //         $submitButtonName = 'onepay';
+                //         break;
+                //     default:
+                //         // Xử lý mặc định nếu không khớp với bất kỳ giá trị nào
+                //      break;
+                // }
+                // Kiểm tra xem nút `submit` có tên là 'cod' đã được bấm hay không
+                // if ($submitButtonName === 'cod') {
+                //dd('cod');
+
+                if ($coupons) {
+                    foreach ($coupons as $key => $cou)
+                        if ($cou['mgg_loaigiamgia'] == 1) {
+                            $total_coupon = ($total * $cou['mgg_giatrigiamgia']) / 100;
+                            $tien_end = $total - $total_coupon;
+                            // dd($tien_end);
+                        } elseif ($cou['mgg_loaigiamgia'] == 2) {
+                            $tien_end = $total - $cou['mgg_giatrigiamgia'];
+                            //dd($tien_end);
+                        }
+
+                    $chitietdonhang = new Donhang();
+                    $chitietdonhang->khachhang_id = $idkh;
+                    $chitietdonhang->magiamgia_id = $coupons[0]['id'];
+                    $chitietdonhang->dh_ghichu = $request->dh_ghichu;
+                    $chitietdonhang->dh_giamgia = $coupons[0]['mgg_magiamgia'];
+                    $chitietdonhang->dh_diachigiaohang = 1;
+                    $chitietdonhang->dh_thoigiandathang = $today;
+                    $chitietdonhang->dh_thanhtien = $tien_end;
+                    $chitietdonhang->dh_trangthai = 1;
+                    $chitietdonhang->phuongthucthanh_toan_id = 1;
+                    $chitietdonhang->save();
 
 
 
-                // Cập nhật trường mgg_SoLuongMa
-                $newSoLuongMa = $cou['mgg_soluongma'] - 1;
+                    // Cập nhật trường mgg_SoLuongMa
+                    $newSoLuongMa = $cou['mgg_soluongma'] - 1;
 
-                MaGiamGia::where('id', $cou['id'])
-                    ->update(['mgg_soluongma' => $newSoLuongMa]);
-            } else {
-                // $tien_end = $total + $phi ;
-                $tien_end = $total;
+                    MaGiamGia::where('id', $cou['id'])
+                        ->update(['mgg_soluongma' => $newSoLuongMa]);
+                } else {
+                    // $tien_end = $total + $phi ;
+                    $tien_end = $total;
 
-                $chitietdonhang = new Donhang;
-                $chitietdonhang->khachhang_id = $idkh;
-                $chitietdonhang->dh_ghichu = $request->dh_ghichu;
-                $chitietdonhang->dh_diachigiaohang = 1;
-                $chitietdonhang->dh_thoigiandathang = $today;
-                $chitietdonhang->dh_thanhtien = $tien_end;
-                $chitietdonhang->dh_trangthai = 1;
-                // $chitietdonhang->phuong_thuc_thanh_toan_id = $request->phuong_thuc_thanh_toan_id;
+                    $chitietdonhang = new Donhang;
+                    $chitietdonhang->khachhang_id = $idkh;
+                    $chitietdonhang->dh_ghichu = $request->dh_ghichu;
+                    $chitietdonhang->dh_diachigiaohang = 1;
+                    $chitietdonhang->dh_thoigiandathang = $today;
+                    $chitietdonhang->dh_thanhtien = $tien_end;
+                    $chitietdonhang->dh_trangthai = 1;
+                    $chitietdonhang->phuongthucthanhtoan_id = 1;
+                   
+                    $chitietdonhang->save();
+                    // dd($chitietdonhang);
+                   
+                }
 
-                $chitietdonhang->save();
-                // dd($chitietdonhang);
+                //CẬP NHẬT THÔNG TIN KHÁCH HÀNG
+                $kh = KhachHang::find($idkh);
+                $kh->sodienthoai = $request->sodienthoai;
+                $tien = $kh->tongtienmua;
+                $kh->tongtienmua = $tien + $tien_end;
+                $kh->save();
+
+                foreach ($products as $product) {
+                    DB::table('chitietdonhangs')->insert([
+                        'donhang_id' => $chitietdonhang->id,
+                        'product_id' => $product->id,
+                        'ctdh_soluong' => $chitietdonhangs[$product->id],
+                        'ctdh_gia' => $product->gia
+                    ]);
+                }
+
+                $name = Auth::user();
+                Mail::send('emails.test', compact('chitietdonhang', 'name'), function ($email) use ($name) {
+                    $email->subject('Cửa Hàng Vegetable Family - Xác Nhận Đơn Hàng');
+                    $email->to($name->email, $name->hoten);
+                });
+
+
+                if ($coupons == true) {
+                    Session::forget('coupon');
+                }
+
+                DB::commit();
+                session()->forget('chitietdonhangs');
+                session()->forget('data_get');
+                session()->forget('total_paypal');
+            } catch (\Exception $err) {
+                DB::rollBack();
+                Session::flash('error', 'Đặt Hàng Lỗi, Vui lòng thử lại sau');
+                return false;
             }
+            Session::flash('success', 'Đặt hàng thành công!');
 
-            //CẬP NHẬT THÔNG TIN KHÁCH HÀNG
-            $kh = KhachHang::find($idkh);
-            $kh->sodienthoai = $request->sodienthoai;
-            $tien = $kh->tongtienmua;
-            $kh->tongtienmua = $tien + $tien_end;
-            $kh->save();
-
-            foreach ($products as $product) {
-                DB::table('chitietdonhangs')->insert([
-                    'donhang_id' => $chitietdonhang->id,
-                    'product_id' => $product->id,
-                    'ctdh_soluong' => $chitietdonhangs[$product->id],
-                    'ctdh_gia' => $product->gia
-                ]);
-            }
-
-            $name = Auth::user();
-            Mail::send('emails.test', compact('chitietdonhang', 'name'), function ($email) use ($name) {
-                $email->subject('Cửa Hàng Vegetable Family - Xác Nhận Đơn Hàng');
-                $email->to($name->email, $name->hoten);
-            });
-
-
-            if ($coupons == true) {
-                Session::forget('coupon');
-            }
-
-            DB::commit();
-            session()->forget('chitietdonhangs');
-            session()->forget('data_get');
-            // session()->forget('total_paypal');
-        } catch (\Exception $err) {
-            DB::rollBack();
-            Session::flash('error', 'Đặt Hàng Lỗi, Vui lòng thử lại sau');
-            return false;
+            return redirect("/")->with('success', 'Thao tác thành công');
+        } 
+        else{
+            return redirect()
+                ->route('user.processTransaction');
         }
-        Session::flash('success', 'Đặt hàng thành công!');
+        // dd($phuong_thuc_thanh_toan_id);
 
-        return redirect("/")->with('success', 'Thao tác thành công');
     }
 
     //PHI VAN CHUYEN

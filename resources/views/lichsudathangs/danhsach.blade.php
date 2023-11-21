@@ -71,9 +71,19 @@
       <div class="cell" data-title="Username">
         {{ $b->dh_thanhtien}}
       </div>
-      <div class="cell" data-title="Username">
 
+      <div class="cell">
+        <td> 
+          @if($b->dh_ptthanhtoan==0)
+            Thanh toán qua chuyển khoản
+          @elseif ($b->dh_ptthanhtoan==1)
+            Thanh toán khi nhận hàng
+          @else
+            Thanh toans Paypal
+          @endif
+        </td>
       </div>
+
       <div class="cell" data-title="Email">
         {{ $b->dh_thoigiandathang}}
       </div>

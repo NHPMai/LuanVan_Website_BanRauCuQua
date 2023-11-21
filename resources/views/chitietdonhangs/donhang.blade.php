@@ -55,9 +55,11 @@
                 </div>
 
                 <div>
+                   
                     <button type="button" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 ">
                         <a href="{{URL::to('/user/account')}}" style="color: white;">Thêm địa chỉ</a>
                     </button></br>
+                    
                 </div>
 
 
@@ -267,12 +269,65 @@
                     </h4>
 
 
-                    <input type="radio" id="html" name="fav_language" value="HTML">
+                    <!-- @php
+                        $phuongthucthanhtoans = DB::table('donhangs')
+                            ->join('phuongthucthanhtoans','donhangs.phuongthucthanhtoan_id', '=' , 'phuongthucthanhtoans.id')
+                            ->where('donhangs.dh_trangthai',0)
+                            ->select('phuongthucthanhtoans.pttt_ten')
+                            ->get();
+                       
+                    @endphp -->
+
+
+                    <div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Chọn hình thức thanh toán</label>
+
+                          
+                            <select name="payment_select" class="form-control input-sm m-bot15 payment_select">
+                              
+                            @foreach($phuongthucthanhtoan as $key => $pttt)
+                                    <option value="{{$pttt->id}}">{{$pttt->pttt_mota}}</option>
+                            @endforeach      
+                              
+                            </select>
+                           
+
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- <a class="btn btn-primary m-3" href="{{route('user.processTransaction')}}">Thanh toán bằng paypal</a> -->
+
+                    <!-- @if (Session()->has('error'))
+                    <div class="alert alert-danger"> {{ Session::get('error')}}</div>
+                    {{ Session()->forget('error')}}
+                    @endif
+                    @if(Session()->has('success'))
+                    <div class="alert alert-success">{{ Session::get('success')}}</div>
+                    {{ Session()->forget('success')}}
+                    @endif -->
+
+                    <div>
+                        @php
+                        $vnd_to_usd = $total/24265;
+                        $total_paypal = round($vnd_to_usd,2);
+                        {{Session::put('total_paypal',$total_paypal);}}
+                        @endphp
+                        <div id="paypal-button-container"></div>
+                        <!-- <input id="vnd_to_usd" name="vnd_to_usd" type="hidden" value="{{round($vnd_to_usd,2)}}"> -->
+                    </div>
+
+
+
+                    <!-- <input type="radio" id="html" name="fav_language" value="HTML">
                     <label for="html">Thanh toán khi giao hàng</label><br>
                     <input type="radio" id="html" name="fav_language" value="HTML">
                     <label for="html">PayPal</label><br>
                     <input type="radio" id="html" name="fav_language" value="HTML">
-                    <label for="html">VNPay</label><br>
+                    <label for="html">VNPay</label><br> -->
 
 
 

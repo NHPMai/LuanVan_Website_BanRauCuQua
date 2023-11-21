@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Nhanviens\LogoutController;
 use App\Http\Controllers\Admin\Nhanviens\NhanvienController;
 use App\Http\Controllers\Users\LogincustomerController;
 use App\Http\Controllers\Users\LogoutcustomerController;
+use App\Http\Controllers\Users\PaypalController;
 
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\MenuController;
@@ -43,7 +44,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/searchProductMicrophone', [ProductController::class, 'searchProductMicrophone']);
 
         Route::get('/search', [ProductController::class, 'search']);   //Tim kiem spadmin
-     
+
 
         #TÌM KIẾM GIỌNG NÓI_ĐƠN HÀNG
         Route::get('/searchProductMicrophonedonhang', [CartController::class, 'searchProductMicrophonedonhang']);
@@ -146,7 +147,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('add', [WarehouseController::class, 'store']);
             Route::get('list', [WarehouseController::class, 'index']);
             Route::get('view/{phieunhap}', [WarehouseController::class, 'show']);
-            Route::get('active/{id}',[WarehouseController::class, 'active']);
+            Route::get('active/{id}', [WarehouseController::class, 'active']);
             Route::DELETE('destroy', [WarehouseController::class, 'destroy']);
 
 
@@ -233,7 +234,8 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::get('order-detail/delete/{id}', [App\Http\Controllers\Users\DonhangController::class, 'remove'])->name('remove');
         Route::get('delete_all', [App\Http\Controllers\Users\DonhangController::class, 'delete_all'])->name('delete_all');
 
-        //Mã giảm giá
+        //-------------------------MÃ GIẢM GIÁ------------------------------------\\
+
         Route::post('check_coupon', [App\Http\Controllers\Users\DonhangController::class, 'check_coupon'])->name('check_coupon');   //Lấy mã giảm giá
         Route::get('delete_coupon', [App\Http\Controllers\Users\DonhangController::class, 'delete_coupon'])->name('delete_coupon'); //Xóa mã giảm giá
 
@@ -241,11 +243,20 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::post('select_delivery_home', [App\Http\Controllers\Users\DonhangController::class, 'select_delivery_home'])->name('select_delivery_home'); //Chọn nơi vận chuyển
         Route::post('calculate_fee', [App\Http\Controllers\Users\DonhangController::class, 'calculate_fee'])->name('calculate_fee');  //Tính phí vận chuyển
 
-        //thanh toan
+        //---------------------THANH TOÁN KHI NHẬN HÀNG-----------------------------\\
+
         Route::get('checkout', [App\Http\Controllers\Users\DonhangController::class, 'showcheckout'])->name(name: 'showcheckout');
         Route::post('add_order', [App\Http\Controllers\Users\DonhangController::class, 'add_order'])->name('add_order');
 
-        //lịch sử đơn hàng
+        //------------------------THANH TOAN PAYPAL---------------------------------\\
+
+        Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
+        Route::get('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
+        Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
+        Route::get('cancel-transaction', [PaypalController::class, 'cancelTransaction'])->name('cancelTransaction');
+
+        //-----------------------LỊCH SỬ MUA HÀNG------------------------------------\\
+
         Route::get('order_history', [\App\Http\Controllers\Users\DonhangController::class, 'order_history'])->name('order_history');
         Route::get('order_history_detail/{donhang}', [\App\Http\Controllers\Users\DonhangController::class, 'order_history_detail'])->name('order_history_detail');
 

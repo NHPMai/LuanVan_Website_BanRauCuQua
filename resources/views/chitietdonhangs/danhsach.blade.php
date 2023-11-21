@@ -11,7 +11,7 @@
                 <div class="m-l-25 m-r--38 m-lr-0-xl">
                     <div class="wrap-table-shopping-cart">
                         @php $total = 0; @endphp
-                        
+
                         <table class="table-shopping-cart">
                             <tbody>
                                 <tr class="table_head">
@@ -63,14 +63,14 @@
                     <div class="flex-w flex-sb-m bor15 p-lr-40 p-lr-15-sm">
 
                         <td class="p-r-15">
-                           
+
                             <a href="/user/delete_all"></a>
                         </td>
 
                         <input type="submit" value="Cập Nhật Giỏ Hàng" formaction="/user/update-order-detail" class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
                         @csrf
                     </div>
-                   
+
                 </div>
             </div>
 
@@ -111,96 +111,98 @@
 
                         <div style="width: 100%">
                             @if(Session::get('coupon'))
-                                @foreach(Session::get('coupon') as $key => $cou)
-                                    @if ($cou['mgg_loaigiamgia']==1)
-                                        <div class="row p-1">
-                                            <div class="col-6">
-                                                Mã giảm giá
-                                            </div>
-
-                                            <div class="col-6" style="text-align: right;">
-                                                {{$cou['mgg_giatrigiamgia']}}%
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="row p-1">
-                                            <div class="col-8 " style=" padding-top: 10px;">
-                                                Tổng tiền được giảm
-                                            </div>
-
-                                            <div class="col-4" style="text-align: right;">
-                                                <p>
-                                                    @php 
-                                                        $total_coupon = ($total*$cou['mgg_giatrigiamgia'])/100;
-                                                        echo '<p> '.number_format($total_coupon,0,',','.').'đ</p>';
-                                                      
-                                                    @endphp
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div class="row p-1">
-                                            <div class="col-6">
-                                                Tiền thanh toán
-                                            </div>
-
-                                            <div class="col-6" style="text-align: right;">
-                                                {{number_format($total - $total_coupon, 0,',','.') }} đ
-                                            </div>
-                                        </div>
-                                        
-
-                                    @elseif($cou['mgg_loaigiamgia']==2)
-                                        <div class="row p-1">
-                                            <div class="col-6">
-                                                Mã giảm giá
-                                            </div>
-
-                                            <div class="col-6" style="text-align: right;">
-                                                {{number_format($cou['mgg_giatrigiamgia'], 0,',','.') }} đ
-                                            </div>
-                                        </div>
-
-                                        <div class="row p-1">
-                                            <div class="col-8 " style=" padding-top: 10px;">
-                                                Tổng tiền được giảm
-                                            </div>
-
-                                            <div class="col-4" style="text-align: right;">
-                                                <p>
-                                                    @php 
-                                                        $total_coupon = $cou['mgg_giatrigiamgia'];
-                                                        echo '<p> '.number_format($total_coupon,0,',','.').'đ</p>';
-                                                        
-                                                    @endphp
-                                                </p>            
-                                            </div>
-                                        </div>
-
-                                        <div class="row p-1">
-                                            <div class="col-6">
-                                                Tiền thanh toán
-                                            </div>
-
-                                            <div class="col-6" style="text-align: right;">
-                                                {{number_format($total - $total_coupon, 0,',','.') }} đ
-                                            </div>
-                                        </div>
-                                    @endif
-                                    
-                                @endforeach
-                            @else
-                                <div class="row p-1">
-                                    <div class="col-6">
-                                        Tiền thanh toán
-                                    </div>
-
-                                    <div class="col-6" style="text-align: right;">
-                                        {{number_format($total, 0,',','.') }} đ
-                                    </div>
+                            @foreach(Session::get('coupon') as $key => $cou)
+                            @if ($cou['mgg_loaigiamgia']==1)
+                            <div class="row p-1">
+                                <div class="col-6">
+                                    Mã giảm giá
                                 </div>
+
+                                <div class="col-6" style="text-align: right;">
+                                    {{$cou['mgg_giatrigiamgia']}}%
+                                </div>
+                            </div>
+
+                            <div class="row p-1">
+                                <div class="col-8 " style=" padding-top: 10px;">
+                                    Tổng tiền được giảm
+                                </div>
+
+                                <div class="col-4" style="text-align: right;">
+                                    <p>
+                                        @php
+                                        $total_coupon = ($total*$cou['mgg_giatrigiamgia'])/100;
+                                        echo '
+                                    <p> '.number_format($total_coupon,0,',','.').'đ</p>';
+
+                                    @endphp
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row p-1">
+                                <div class="col-6">
+                                    Tiền thanh toán
+                                </div>
+
+                                <div class="col-6" style="text-align: right;">
+                                    {{number_format($total - $total_coupon, 0,',','.') }} đ
+                                </div>
+                            </div>
+
+
+                            @elseif($cou['mgg_loaigiamgia']==2)
+                            <div class="row p-1">
+                                <div class="col-6">
+                                    Mã giảm giá
+                                </div>
+
+                                <div class="col-6" style="text-align: right;">
+                                    {{number_format($cou['mgg_giatrigiamgia'], 0,',','.') }} đ
+                                </div>
+                            </div>
+
+                            <div class="row p-1">
+                                <div class="col-8 " style=" padding-top: 10px;">
+                                    Tổng tiền được giảm
+                                </div>
+
+                                <div class="col-4" style="text-align: right;">
+                                    <p>
+                                        @php
+                                        $total_coupon = $cou['mgg_giatrigiamgia'];
+                                        echo '
+                                    <p> '.number_format($total_coupon,0,',','.').'đ</p>';
+
+                                    @endphp
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row p-1">
+                                <div class="col-6">
+                                    Tiền thanh toán
+                                </div>
+
+                                <div class="col-6" style="text-align: right;">
+                                    {{number_format($total - $total_coupon, 0,',','.') }} đ
+                                </div>
+                            </div>
                             @endif
-                            
+
+                            @endforeach
+                            @else
+                            <div class="row p-1">
+                                <div class="col-6">
+                                    Tiền thanh toán
+                                </div>
+
+                                <div class="col-6" style="text-align: right;">
+                                    {{number_format($total, 0,',','.') }} đ
+                                </div>
+                            </div>
+                            @endif
+
                         </div>
 
                     </div>
@@ -232,7 +234,7 @@
 </form>
 
 
-    <!-- <form action="/user/check_coupon" method="post">
+<!-- <form action="/user/check_coupon" method="post">
     
         <div class="flex-w flex-m m-r-20 m-tb-5">
             <input class=" cl2 plh4 size-115 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Mã giảm giá">
@@ -247,36 +249,37 @@
         <a href="/user/delete_coupon">Xóa mã giảm giá</a>
     @endif -->
 
-    <div >
-        <div class="container">
-            <div class="cart__discount container">
-                @php
-                    $cou = $cou ?? ['mgg_magiamgia' => ''];
-                @endphp
-                <form action="check_coupon" method="POST">
-                    @csrf
-                    <!-- <input type="text" name="coupon" style="color: black" placeholder="Nhập mã giảm giá" value="{{ old($cou['mgg_magiamgia'], $cou['mgg_magiamgia']) }}">
-                    <button type="submit">Áp dụng</button> -->
-                    <div class="flex-w flex-m m-r-20 m-tb-5">
-                        <input class="stext-106 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon"  placeholder="Nhập mã giảm giá" value="{{ old($cou['mgg_magiamgia'], $cou['mgg_magiamgia']) }}">
-                            
-                        <button type="submit" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
-                            Áp dụng
-                        </button>
 
-                        @if(Session::get('coupon'))
-                        <button type="submit" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5" style="margin-left: 20px";>
-                            <a href="/user/delete_coupon">Xóa mã giảm giá</a>
-                        </button>
-                        @endif
-                    </div>
-                </form>
-                
-                    
-                
-            </div>
+<div>
+    <div class="container">
+        <div class="cart__discount container">
+            @php
+            $cou = $cou ?? ['mgg_magiamgia' => ''];
+            @endphp
+
+            <form action="check_coupon" method="POST">
+                @csrf
+                <!-- <input type="text" name="coupon" style="color: black" placeholder="Nhập mã giảm giá" value="{{ old($cou['mgg_magiamgia'], $cou['mgg_magiamgia']) }}">
+                    <button type="submit">Áp dụng</button> -->
+                <div class="flex-w flex-m m-r-20 m-tb-5">
+                    <input class="stext-106 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text" name="coupon" placeholder="Nhập mã giảm giá" value="{{ old($cou['mgg_magiamgia'], $cou['mgg_magiamgia']) }}">
+
+                    <button type="submit" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5">
+                        Áp dụng
+                    </button>
+
+                    @if(Session::get('coupon'))
+                    <button type="submit" class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5" style="margin-left: 20px" ;>
+                        <a href="/user/delete_coupon">Xóa mã giảm giá</a>
+                    </button>
+                    @endif
+                </div>
+            </form>
+
         </div>
     </div>
+</div>
+
 
 <!-- <div class="text-center">
     <h2>Giỏ hàng trống</h2>

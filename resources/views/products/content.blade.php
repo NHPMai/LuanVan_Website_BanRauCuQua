@@ -85,8 +85,12 @@
 							{!! \App\Helpers\Helper::gia($product->gia) !!}đ
 						</span>
 
-                        <p class="stext-102 cl3 p-t-23">
+                        <p class="stext-102 cl3 p-t-23" style="text-align: justify;">
                             {{ $product->mota }}
+                        </p>
+                        
+                        <p class="p-t-5" style="font-size:20px; font-weight:500">
+                            Số lượng sản phẩm:  {{ $product->soluongsp }}
                         </p>
 
                         <!--  -->
@@ -108,7 +112,7 @@
                                                 </div>
                                             </div>
 
-
+                                        
                                             <button type="submit"
                                                     class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 ">
                                                 Thêm vào giỏ hàng
