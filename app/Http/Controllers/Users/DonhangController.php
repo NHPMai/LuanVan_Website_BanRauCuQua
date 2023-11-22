@@ -43,8 +43,8 @@ class DonhangController extends Controller
 
     public function create($request)
     {
-        $soluongsp = Product::all();
-        dd($soluongsp);
+        // $soluongsp = Product::all();
+        // dd($soluongsp);
         $qty = (int)$request->input('num_product'); //số lượng sản phẩm add
         $product_id = (int)$request->input('product_id');
         // $soluongsp = (int)
@@ -87,7 +87,7 @@ class DonhangController extends Controller
         ]);
     }
 
-    protected function getProduct()
+    public function getProduct()
     {
         $chitietdonhangs = Session::get('chitietdonhangs');
         if (is_null($chitietdonhangs)) return [];
@@ -99,7 +99,7 @@ class DonhangController extends Controller
             ->get();
     }
 
-    protected function get()
+    public function get()
     {
         $donhangs = Session::get('donhangs');
         if (is_null($donhangs)) return [];

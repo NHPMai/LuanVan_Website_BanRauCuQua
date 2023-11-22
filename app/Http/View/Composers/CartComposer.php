@@ -17,16 +17,34 @@ class CartComposer
 
    
 
+    // public function compose(View $view)
+    // {
+    //     $carts = Session::get('carts');
+    //    if(is_null($carts)) {
+    //         $products =[];
+    //     }
+    //     else{
+    //     $productId = array_keys($carts);
+    //    $products = Product::select('id', 'name', 'price', 'price_sale', 'thumnb')
+    //         ->where('active', 1)
+    //         ->whereIn('id', $productId)
+    //         ->get();
+
+    // }
+    //     $view->with('products',$products);
+
+    // }
+
     public function compose(View $view)
     {
-        $carts = Session::get('carts');
-       if(is_null($carts)) {
+        $chitietdonhangs = Session::get('chitietdonhangs');
+       if(is_null($chitietdonhangs)) {
             $products =[];
         }
         else{
-        $productId = array_keys($carts);
-       $products = Product::select('id', 'name', 'price', 'price_sale', 'thumnb')
-            ->where('active', 1)
+        $productId = array_keys($chitietdonhangs);
+       $products = Product::select('id', 'ten', 'gia', 'hinhanh')
+            ->where('hoatdong', 1)
             ->whereIn('id', $productId)
             ->get();
 
@@ -34,4 +52,5 @@ class CartComposer
         $view->with('products',$products);
 
     }
+
 }
