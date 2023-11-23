@@ -1,11 +1,13 @@
 @extends('home')
 
 @section('content')
-<form class="bg0 p-t-60" method="post">
+<form class="bg0 p-t-40" method="post">
+
     @include('admin.alert')
 
     @if (count($products) != 0)
     <div class="container">
+        <h1 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;font-weight:600; font-style:italic; margin-top:0px"><i class="zmdi zmdi-shopping-cart"></i> Giỏ hàng của bạn </h1>
         <div class="row">
             <div class="col-lg-10 col-xl-8 ">
                 <div class="m-l-25 m-r--38 m-lr-0-xl">
@@ -15,11 +17,11 @@
                         <table class="table-shopping-cart">
                             <tbody>
                                 <tr class="table_head">
-                                    <th class="column-1">Sản Phẩm</th>
+                                    <th class="column-1" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:15px; font-weight:700">Sản Phẩm</th>
                                     <th class="column-2"></th>
-                                    <th class="column-3">Giá</th>
-                                    <th class="column-4">Số Lượng</th>
-                                    <th class="column-5">Tổng</th>
+                                    <th class="column-3" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:15px; font-weight:700">Giá</th>
+                                    <th class="column-4" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:15px; font-weight:700">Số Lượng</th>
+                                    <th class="column-5" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:15px; font-weight:700">Tổng</th>
                                     <th class="column-6">&nbsp;</th>
                                 </tr>
 
@@ -35,7 +37,7 @@
                                             <img src="{{ $product->hinhanh }}" alt="IMG">
                                         </div>
                                     </td>
-                                    <td class="column-2">{{ $product->ten }}</td>
+                                    <td class="column-2" style="font-weight: 600; font-size:medium">{{ $product->ten }}</td>
                                     <td class="column-3">{{ number_format($price, 0, '', '.') }}</td>
                                     <td class="column-4">
                                         <div class="wrap-num-product flex-w m-l-auto m-r-0">
@@ -76,11 +78,7 @@
 
 
             <div class="col-sm-10 col-lg-7 col-xl-4">
-                <div class="bor10 p-lr-10 p-t-30 p-b-40 m-l-40 m-r-40 m-lr-0-xl ">
-
-                    <h4 class="mtext-109 cl2 p-b-15">
-                        GIỎ HÀNG
-                    </h4>
+                <div class="bor10 p-lr-10 p-t-15 p-b-40 m-l-40 m-r-40 m-lr-0-xl ">
 
                     <div class="flex-w flex-t bor12 p-b-13">
                         <div class="size-209">
@@ -140,14 +138,17 @@
                                 </div>
                             </div>
 
-                            <div class="row p-1">
-                                <div class="col-6">
-                                    Tiền thanh toán
-                                </div>
+                            <div class="row p-1 ">
+                                <span style="font-size: 20px;">
+                                    Tiền thanh toán:
+                                </span>
 
-                                <div class="col-6" style="text-align: right;">
+                                <div class="size-208" style="text-align: right;">
+                                <span class="mtext-110 cl2">
                                     {{number_format($total - $total_coupon, 0,',','.') }} đ
+                                </span>
                                 </div>
+                                
                             </div>
 
 

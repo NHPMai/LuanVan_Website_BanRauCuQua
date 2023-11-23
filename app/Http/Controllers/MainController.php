@@ -76,6 +76,20 @@ class MainController extends Controller
         ])->with('brands',$brand_product);
     }
 
+
+    public function shop()
+    {
+        $brand_product = DB::table('brands')->where('hoatdong','1')->orderBy('id','desc')->get();
+        
+        return view('shop', [
+            'title' => 'Rau quả Vegetable Family',
+            'sliders' => $this->slider->show(),
+            'menus' => $this->menu->show(),
+            'products' => $this->product->get(),
+           
+        ])->with('brands',$brand_product);
+    }
+
         
 
     // public function contact()
@@ -87,6 +101,7 @@ class MainController extends Controller
 
     public function loadProduct(Request $request)
     {
+        // dd($request);
         $page = $request->input('page', 0);
         $result = $this->product->get($page);
         
@@ -99,14 +114,6 @@ class MainController extends Controller
         return response()->json(['html' => '' ]);
     }
 
-    // public function testEmail()
-    // {
-    //     $name = 'BẠN';
-    //     Mail::send('emails.test',compact('name'), function($email) use($name){
-    //         $email->subject('Demo test mail');
-    //         $email->to('nguyenmai16062001@gmail.com',$name);
-    //     });
-    // }
 
     public function autocomplete_ajax(Request $request){
         $data = $request->all();

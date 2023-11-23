@@ -61,7 +61,7 @@ return [
         'shipper' => [
             'driver' => 'session',
             'provider' => 'shippers'
-        ],
+        ]
     ],
 
     /*
@@ -92,7 +92,7 @@ return [
             'model' => App\Models\Nhanvien::class,
         ],
 
-        'shipper' => [
+        'shippers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Giaohang::class,
         ]

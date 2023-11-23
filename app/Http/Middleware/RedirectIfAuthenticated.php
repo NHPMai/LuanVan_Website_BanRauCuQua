@@ -27,6 +27,8 @@ class RedirectIfAuthenticated
                     return redirect()->route('admin.home');
                 } elseif ($guard==="web") {
                     return redirect()->route('user.home');
+                } elseif ($guard==="shipper") {
+                    return redirect()->route('shipper.home');
                 }
             }
         }

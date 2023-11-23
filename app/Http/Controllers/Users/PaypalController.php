@@ -38,6 +38,7 @@ class PaypalController extends Controller
     // THANH TOÁN
     public function processTransaction(Request $request)
     {
+        // dd($request);
         $total = Session::get('total_paypal');
 
         $provider = new PayPalClient;
@@ -107,6 +108,7 @@ class PaypalController extends Controller
     // THANH TOÁN THÀNH CÔNG
     public function successTransaction(Request $request)
     {
+        // dd($request);
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $provider->getAccessToken();

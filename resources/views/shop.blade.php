@@ -15,45 +15,9 @@
 	<!-- Cart -->
 	@include('cart')
 
-	<!-- Slider -->
-	<section class="section-slide" id="slider">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="wrap-slick1">
-						<div class="slick1">
-
-							@foreach($sliders as $slider)
-
-							<div class="item-slick1" style="background-image: url({{$slider->thumnb}}); height: 50% ; ">
-								<div class="container h-full">
-									<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-										<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
-											<span class="ltext-101 cl2 respon2 pl-5">
-												Vegetable Family
-											</span>
-										</div>
-
-										<div class="layer-slick1 animated visible-false " data-appear="fadeInUp" data-delay="800">
-											<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1 pl-5 mt-0 pt-0">
-												{{ $slider->name }}
-											</h2>
-										</div>
-									</div>
-								</div>
-							</div>
-							@endforeach
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</section>
-
-
+	
 	<!-- Banner -->
-	<!-- <div class="sec-banner bg0 p-t-80 p-b-50">
+	<!-- <div class="sec-banner bg0 p-t-50">
 		<div class="container">
 			<div class="row">
 				@foreach($menus as $menu)
@@ -78,10 +42,10 @@
 		</div>
 	</div> -->
 
-	<section>
+	<section class="p-t-80">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-3 p-t-20">
+				<div class="col-sm-3 p-t-20" >
 					@include('sidebar')
 				</div>
 
@@ -101,7 +65,7 @@
 										<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 										Filter
 									</div> -->
-								<!-- <div>
+								<div>
 									<form id="search-form" action="{{ url('/searchProductMicrophone')}}" class="d-flex" method="get">
 										<div class="btn btn-white input-group-text border-0" type="submit" id="">
 											<div style="display:none">
@@ -114,8 +78,7 @@
 											</span>
 										</div>
 									</form>
-									
-								</div> -->
+								</div>
 
 								<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
 									<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
@@ -174,149 +137,149 @@
 								</div> -->
 
 							<div class="dis-none panel-filter w-full p-t-10">
-								<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-									<div class="filter-col1 p-r-15 p-b-27">
-										<div class="mtext-102 cl2 p-b-15" value="{{Request::url()}}?sort_by=none">
-											Sắp xếp theo
+									<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+										<div class="filter-col1 p-r-15 p-b-27">
+											<div class="mtext-102 cl2 p-b-15" value="{{Request::url()}}?sort_by=none">
+												Sắp xếp theo
+											</div>
+
+											<ul>
+												<li class="p-b-6">
+													<option  value="{{Request::url()}}?sort_by=ten_a_z" class="filter-link stext-106 trans-04">
+														Tên: A->Z
+													</option>
+												</li>
+
+												<li class="p-b-6">
+													<a href="#" value="{{Request::url()}}?sort_by=ten_z_a" class="filter-link stext-106 trans-04">
+														Tên: Z->A
+													</a>
+												</li>
+
+												<li class="p-b-6">
+													<a href="#" class="filter-link stext-106 trans-04">
+														Giá: Tăng dần
+													</a>
+												</li>
+
+												<li class="p-b-6">
+													<a href="#" class="filter-link stext-106 trans-04">
+														Giá: Giảm dần
+													</a>
+												</li>
+
+											</ul>
 										</div>
 
-										<ul>
-											<li class="p-b-6">
-												<option value="{{Request::url()}}?sort_by=ten_a_z" class="filter-link stext-106 trans-04">
-													Tên: A->Z
-												</option>
-											</li>
+										<div class="filter-col2 p-r-15 p-b-27">
+											<div class="mtext-102 cl2 p-b-15">
+												Giá
+											</div>
 
-											<li class="p-b-6">
-												<a href="#" value="{{Request::url()}}?sort_by=ten_z_a" class="filter-link stext-106 trans-04">
-													Tên: Z->A
-												</a>
-											</li>
+											<ul>
+												<li class="p-b-6">
+													<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+														Tất cả
+													</a>
+												</li>
 
-											<li class="p-b-6">
-												<a href="#" class="filter-link stext-106 trans-04">
-													Giá: Tăng dần
-												</a>
-											</li>
+												<li class="p-b-6">
+													<a href="#" class="filter-link stext-106 trans-04">
+														0đ - 50.000đ
+													</a>
+												</li>
 
-											<li class="p-b-6">
-												<a href="#" class="filter-link stext-106 trans-04">
-													Giá: Giảm dần
-												</a>
-											</li>
+												<li class="p-b-6">
+													<a href="#" class="filter-link stext-106 trans-04">
+														50.000đ - 200.000đ
+													</a>
+												</li>
 
-										</ul>
-									</div>
+												<li class="p-b-6">
+													<a href="#" class="filter-link stext-106 trans-04">
+														200.00đ - $500.000đ
+													</a>
+												</li>
 
-									<div class="filter-col2 p-r-15 p-b-27">
-										<div class="mtext-102 cl2 p-b-15">
-											Giá
+												<li class="p-b-6">
+													<a href="#" class="filter-link stext-106 trans-04">
+														500.000đ - 1.000.000đ
+													</a>
+												</li>
+
+											</ul>
 										</div>
 
-										<ul>
-											<li class="p-b-6">
-												<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-													Tất cả
-												</a>
-											</li>
+										<div class="filter-col3 p-r-15 p-b-27">
+											<div class="mtext-102 cl2 p-b-15">
+												Màu Sắc
+											</div>
 
-											<li class="p-b-6">
-												<a href="#" class="filter-link stext-106 trans-04">
-													0đ - 50.000đ
-												</a>
-											</li>
+											<ul>
+												<li class="p-b-6">
+													<span class="fs-15 lh-12 m-r-6" style="color: #222;">
+														<i class="zmdi zmdi-circle"></i>
+													</span>
 
-											<li class="p-b-6">
-												<a href="#" class="filter-link stext-106 trans-04">
-													50.000đ - 200.000đ
-												</a>
-											</li>
+													<a href="#" class="filter-link stext-106 trans-04">
+														Black
+													</a>
+												</li>
 
-											<li class="p-b-6">
-												<a href="#" class="filter-link stext-106 trans-04">
-													200.00đ - $500.000đ
-												</a>
-											</li>
+												<li class="p-b-6">
+													<span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
+														<i class="zmdi zmdi-circle"></i>
+													</span>
 
-											<li class="p-b-6">
-												<a href="#" class="filter-link stext-106 trans-04">
-													500.000đ - 1.000.000đ
-												</a>
-											</li>
+													<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+														Blue
+													</a>
+												</li>
 
-										</ul>
-									</div>
+												<li class="p-b-6">
+													<span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
+														<i class="zmdi zmdi-circle"></i>
+													</span>
 
-									<div class="filter-col3 p-r-15 p-b-27">
-										<div class="mtext-102 cl2 p-b-15">
-											Màu Sắc
+													<a href="#" class="filter-link stext-106 trans-04">
+														Grey
+													</a>
+												</li>
+
+												<li class="p-b-6">
+													<span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
+														<i class="zmdi zmdi-circle"></i>
+													</span>
+
+													<a href="#" class="filter-link stext-106 trans-04">
+														Green
+													</a>
+												</li>
+
+												<li class="p-b-6">
+													<span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
+														<i class="zmdi zmdi-circle"></i>
+													</span>
+
+													<a href="#" class="filter-link stext-106 trans-04">
+														Red
+													</a>
+												</li>
+
+												<li class="p-b-6">
+													<span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
+														<i class="zmdi zmdi-circle-o"></i>
+													</span>
+
+													<a href="#" class="filter-link stext-106 trans-04">
+														White
+													</a>
+												</li>
+											</ul>
 										</div>
 
-										<ul>
-											<li class="p-b-6">
-												<span class="fs-15 lh-12 m-r-6" style="color: #222;">
-													<i class="zmdi zmdi-circle"></i>
-												</span>
-
-												<a href="#" class="filter-link stext-106 trans-04">
-													Black
-												</a>
-											</li>
-
-											<li class="p-b-6">
-												<span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
-													<i class="zmdi zmdi-circle"></i>
-												</span>
-
-												<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-													Blue
-												</a>
-											</li>
-
-											<li class="p-b-6">
-												<span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
-													<i class="zmdi zmdi-circle"></i>
-												</span>
-
-												<a href="#" class="filter-link stext-106 trans-04">
-													Grey
-												</a>
-											</li>
-
-											<li class="p-b-6">
-												<span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
-													<i class="zmdi zmdi-circle"></i>
-												</span>
-
-												<a href="#" class="filter-link stext-106 trans-04">
-													Green
-												</a>
-											</li>
-
-											<li class="p-b-6">
-												<span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
-													<i class="zmdi zmdi-circle"></i>
-												</span>
-
-												<a href="#" class="filter-link stext-106 trans-04">
-													Red
-												</a>
-											</li>
-
-											<li class="p-b-6">
-												<span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
-													<i class="zmdi zmdi-circle-o"></i>
-												</span>
-
-												<a href="#" class="filter-link stext-106 trans-04">
-													White
-												</a>
-											</li>
-										</ul>
 									</div>
-
 								</div>
-							</div>
 						</div>
 
 

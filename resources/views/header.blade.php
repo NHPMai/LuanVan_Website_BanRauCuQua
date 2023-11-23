@@ -50,42 +50,11 @@
                 </div>
 
                 <div class="right-top-bar flex-w h-full p-l-280">
-                    <!-- <a href="#" class="flex-c-m trans-04 p-lr-25">
+                    <a href="{{URL::to('/user/order-detail')}}" class="flex-c-m trans-04 p-lr-25">
                        Giỏ hàng
-                    </a> -->
+                    </a>
 
-                    <?php
-                    $khachhang_id = Session('khachhang_id');
-                    // echo $khachhang_id;
-                    $chitietdonhang_id = Session('chitietdonhang_id');
-                    if ($khachhang_id != NULL && $donhang_id == NULL) {
-                    ?>
-                        <li>
-                            <a href="{{URL::to('/checkout')}}" class="flex-c-m trans-04 p-lr-25">
-                                Giỏ hàng
-                            </a>
-                        </li>
-
-                    <?php
-                    } elseif ($khachhang_id != NULL && $donhang_id != NULL) {
-                    ?>
-                        <li>
-                            <a href="{{URL::to('/adddonhang')}}" class="flex-c-m trans-04 p-lr-25">
-                                Giỏ hàng
-                            </a>
-                        </li>
-                    <?php
-                    } else {
-                    ?>
-                        <li>
-                            <a href="{{URL::to('user/logincustomer')}}" class="flex-c-m trans-04 p-lr-25">
-                                Giỏ hàng
-                            </a>
-                        </li>
-                    <?php
-                    }
-                    ?>
-
+                    
                     <a href="{{URL::to('/user/order_history')}}" class="flex-c-m trans-04 p-lr-25">
                         Lịch sử đặt hàng
                     </a>
@@ -130,7 +99,7 @@
                         </li>
 
                         <li>
-                            <a href="product.html">Shop</a>
+                            <a href="shop">Shop</a>
                         </li>
 
                         <li class="label1" data-label1="hot">
@@ -228,7 +197,7 @@
                                 <i class="fas fa-user"></i>
                             </button>
 
-                            <div class="dropdown-menu" role="menu">
+                            <div  style="weight:200px" class="dropdown-menu" role="menu">
 
                                 @if (Auth::check())
                                 <a>{{ Auth('web')->user()->hoten }}</a>

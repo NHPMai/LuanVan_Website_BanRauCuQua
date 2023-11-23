@@ -7,6 +7,7 @@ use App\Http\Controllers\Users\LogincustomerController;
 use App\Http\Controllers\Users\LogoutcustomerController;
 use App\Http\Controllers\Users\PaypalController;
 
+
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\BrandController;
@@ -17,6 +18,9 @@ use App\Http\Controllers\Admin\MagiamgiaController;
 use App\Http\Controllers\Admin\VanChuyenController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\WarehouseController;
+
+
+use App\Http\Controllers\Shipper\ShipperController;
 use App\Models\Nhanvien;
 use App\Models\Product;
 use App\Models\Role;
@@ -203,6 +207,36 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
 
+//--------------------SHIPPER---------------------//
+
+Route::prefix('shipper')->name('shipper.')->group(function () {
+
+    Route::middleware(['guest:shipper'])->group(function () {
+        Route::get('/login', [ShipperController::class, 'index'])->name('login');
+        Route::post('/store', [ShipperController::class, 'store'])->name('store');
+    });
+
+    //SHIPPER - ĐÃ ĐĂNG NHẬP
+    Route::middleware(['auth:shipper'])->group(function () {
+
+        Route::get('/', [ShipperController::class, 'home'])->name('home');
+        Route::get('/main', [ShipperController::class, 'index'])->name('main');
+
+        #TÌM KIẾM GIỌNG NÓI_SẢN PHẨM
+        // Route::get('/searchProductMicrophone', [ProductController::class, 'searchProductMicrophone']);
+        // Route::get('/search', [ProductController::class, 'search']);   //Tim kiem spadmin
+
+
+        //ĐĂNG XUẤT ADMIN
+        Route::get('/logout', [ShipperController::class, 'logout'])->name('logout'); //Dang Xuat
+
+
+       
+    });
+});
+
+
+
 //---------------------USER--------------------------//
 
 Route::prefix('user')->name('user.')->group(function () {
@@ -272,9 +306,9 @@ Route::prefix('user')->name('user.')->group(function () {
 
 //----------------KHÁCH HÀNG VÃNG LAI KHÔNG CÓA TÀI KHOẢN--------------//
 
-
 //home
 Route::get('/', [App\Http\Controllers\MainController::class, 'index']);
+Route::get('shop', [App\Http\Controllers\MainController::class, 'shop']);
 
 //trang lien hệ
 // Route::get('danh-muc/contact', [App\Http\Controllers\MainController::class, 'contact'])->name('contact'); 
