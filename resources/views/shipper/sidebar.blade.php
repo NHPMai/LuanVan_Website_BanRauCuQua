@@ -24,22 +24,29 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-cart-plus"></i>
-                        <p>Đơn hàng
+                        <p>Danh Sách Đơn Hàng
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <!-- <ul class="nav nav-treeview"> -->
                         <li class="nav-item">
-                            <a href="/admin/customers" class="nav-link">
+                            <a href="/shipper/donhang_shipper" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Danh Sách Đơn Hàng</p>
+                                <p>Đơn Hàng Chờ</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="/admin/coupons/list" class="nav-link">
+                            <a href="/shipper/donhang_danggiao" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Mã giảm giá</p>
+                                <p>Đơn Hàng Đang Giao</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/shipper/donhang_dagiao" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Giao Hàng Thành Công</p>
                             </a>
                         </li>
 

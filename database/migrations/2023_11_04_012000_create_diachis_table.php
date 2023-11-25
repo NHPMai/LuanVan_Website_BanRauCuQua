@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('diachis', function (Blueprint $table) {
             $table->id();
             $table->string('dc_diachi');
-            $table->integer('trangthai');
+            $table->integer('dc_trangthai');
+            $table->integer('macdinh');
             $table->foreign('khachhang_id')
                 ->references('id')
                 ->on('khachhangs')

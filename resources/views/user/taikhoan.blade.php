@@ -147,17 +147,14 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="website">Tổng tiền đã mua<span class="text-danger">(*)</span></label>
-                                <input type="url" class="form-control" id="website" placeholder="" disabled>
+                                <input type="number" class="form-control" id="tongtienmua" placeholder="Tổng tiền mua" value="{{ Auth('web')->user()->tongtienmua }}" disabled>
                             </div>
                         </div>
 
-                   
                         <div id="load_address"></div>
 
 
                     </div>
-
-
 
 
                     <div class="row gutters">
@@ -194,7 +191,7 @@
                         <div class="card-body">
 
                             <div class="form-group">
-                                <label for="menu">Chọn thành phố</label>
+                                <label for="menu">Chọn thành phố <span class="text-danger">(*)</span></label>
                                 <select name="tinh_thanhpho" id="tinh_thanhpho" class="form-control m-bot15 choose tinh_thanhpho" style="height: 34px;">
                                     <option value="0">---Chọn tỉnh thành phố---</option>
                                     @foreach ($tinh_thanhpho as $key => $tp)
@@ -204,14 +201,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="menu">Chọn quận huyện</label>
+                                <label for="menu">Chọn quận huyện <span class="text-danger">(*)</span></label>
                                 <select name="quan_huyen" id="quan_huyen" class="form-control m-bot15 choose quan_huyen" style="height: 34px;">
                                     <option value="">---Chọn quận huyện----</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="menu">Chọn xã phường</label>
+                                <label for="menu">Chọn xã phường <span class="text-danger">(*)</span></label>
                                 <select name="xa_phuong_thitran" id="xa_phuong_thitran" class="form-control m-bot15 xa_phuong_thitran" style="height: 34px;">
                                     <option value="">---Chọn xã phường----</option>
                                 </select>
@@ -222,6 +219,32 @@
                             </div>
                             <div id="load_address"></div>
                             <!-- <button type="button" name="add_delivery" class="btn btn-primary add_delivery">Thêm</button> -->
+
+                            <!-- <div class="form-group">
+                <label>Kích Hoạt <span class="text-danger">(*)</span></label>
+                <div class="custom-control custom-radio">
+                    <input class="form-check-input" value="1" type="radio" id="active" name="macdinh" checked="">
+                    <label for="active" class="custom-control-label">Có</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input class="form-check-input" value="0" type="radio" id="no_active" name="macdinh" >
+                    <label for="no_active" class="custom-control-label">Không</label>
+                </div>
+            </div> -->
+                            
+                            <!-- <label for="menu">Mặc định <span class="text-danger">(*)</span></label>
+                            <div class="form-check">
+                                <input class="form-check-input" value="1" type="radio" name="macdinh" id="active">
+                                <label class="form-check-label" for="active">
+                                   Có 
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" value="0" type="radio" name="macdinh" id="no_active" checked>
+                                <label class="form-check-label" for="no_active">
+                                    Không
+                                </label>
+                            </div> -->
 
                             @csrf
                             <!-- </form> -->

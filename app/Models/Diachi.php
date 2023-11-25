@@ -12,6 +12,7 @@ class Diachi extends Model
     protected $fillable = [
         'dc_diachi',
         'dc_trangthai',
+        // 'macdinh',
         'khachhang_id',
         'xa_phuong_thitran_id',
         'quan_huyen_id',

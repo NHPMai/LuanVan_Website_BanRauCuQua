@@ -57,10 +57,6 @@ class Donhang extends Model
     public function nhanviens()
     {
         return $this->hasOne(Nhanvien::class, 'id', 'nhanvien_id');
-            // ->withDefault(['hoten'=>''])
-            // ->withDefault(['sodienthoai'=>'']);
-            // ->withDefault(['email'=>''])
-            // ->withDefault(['diachi'=>'']);
     }
     
 }

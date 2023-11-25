@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Models\Donhang;
+use App\Models\NhanVien;
+use App\Models\Chitietdonhang;
 
 class ShipperController extends Controller
 {
@@ -65,6 +68,7 @@ class ShipperController extends Controller
         return redirect('/shipper/login');
     }
 
+
     public function home ()
     {
         return view('shipper.main',[
@@ -74,4 +78,70 @@ class ShipperController extends Controller
         ]);
     }
 
+    public function donhang_shipper()
+    {
+
+        $donhang2 = Donhang::where('dh_trangthai', 2)->get();
+        // dd($donhang2);
+        return view('shipper.donhang_shipper', [
+            'title' => 'Danh Sách Đơn Hàng Chờ',
+            'donhang2' => $donhang2,
+        ]);
+    }
+    public function donhang_danggiao()
+    {
+        $donhang3 = Donhang::where('dh_trangthai', 3)->get();
+        // dd($donhang3);
+        return view('shipper.donhang_dagiao', [
+            'title' => 'Danh Sách Đơn Hàng Đang Giao',
+            'donhang4' => $donhang3,
+        ]);
+    }
+
+    public function donhang_dagiao()
+    {
+        $donhang4 = Donhang::where('dh_trangthai', 4)->get();
+        return view('shipper.donhang_dagiao', [
+            'title' => 'Danh Sách Giao Hàng Thành Công',
+            'donhang4' => $donhang4,
+        ]);
+    }
+
+    public function show(Donhang $donhang)
+    {
+        
+        $chitietdonhang = Chitietdonhang::where('donhang_id',$donhang->id)->get();
+ 
+        return view('shipper.chitietdonhang_shipper', [
+            'title' => 'Chi Tiết Đơn Hàng: ' . $donhang->khachhangs->hoten,
+            'donhang' => $donhang,
+            'chitietdonhangs' => $chitietdonhang,
+        ]);
+    }
+
+    // public function update(Request $req, $id)
+    // {
+    //     $order = Donhang::find($id)
+    //         ->update(
+    //             ['dh_trangthai' => $req->input('dh_trangthai')],
+    //     );
+    //     return redirect()->back();
+    // }
+
+    public function update(Request $req, $id)
+    {
+        $order = Donhang::find($id);
+        $newStatus = $req->input('dh_trangthai');
+        if($newStatus == 3){
+            $order->dh_trangthai = $newStatus;
+            $order->save();
+        }
+        elseif($newStatus == 4){
+            $order->dh_trangthai = $newStatus;
+            $order->save();
+
+
+        }
+        return redirect()->back();
+    }
 }

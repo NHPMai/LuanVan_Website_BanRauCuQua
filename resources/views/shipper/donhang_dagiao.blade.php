@@ -1,7 +1,7 @@
-@extends('admin.main')
+@extends('shipper.main')
 
 @section('content')
-<p style="font-weight:bold; font-size: 20px; ">Tổng Số Đơn Hàng: {{$donhangs->count()}}</p>
+<p style="font-weight:bold; font-size: 20px; ">Tổng Số Đơn Hàng Đã Giao: {{$donhang4->count()}}</p>
 
 <table class="table pt-2">
     <thead style="background-color:blanchedalmond;">
@@ -17,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($donhangs as $key => $donhang)
+        @foreach($donhang4 as $key => $donhang)
         <tr>
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->id }}</td>
             <td style="vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->khachhangs->hoten}}</td>
@@ -50,38 +50,38 @@
             </td> -->
             @if( $donhang->dh_trangthai == 1)
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
-                <button style="background-color: #b0b5ae; border-radius: 8px; font-weight:600 ">Chờ duyệt &nbsp <i class="fa fa-clock-o"></i></button>
+                <button style="background-color: #b0b5ae; border-radius: 8px; font-weight:600">Chờ duyệt &nbsp <i class="fa fa-clock-o"></i></button>
             </td>
             @elseif( $donhang->dh_trangthai == 2)
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
-                <button style="background-color: #10dee6; border-radius: 8px;  font-weight:600">Đã Duyệt &nbsp<i class="fa fa-calendar-check-o"></i></button>
+                <button style="background-color: #10dee6; border-radius: 8px; font-weight:600">Đã Duyệt &nbsp <i class="fa fa-calendar-check-o"></i></button>
             </td>
             @elseif( $donhang->dh_trangthai == 3)
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
-                <button style="background-color: #ede609; border-radius: 8px;  font-weight:600">Đang giao &nbsp <i class="fa fa-bus"></i></button>
+                <button style="background-color: #ede609; border-radius: 8px; font-weight:600">Đang giao &nbsp <i class="fa fa-bus"></i></button>
             </td>
             @elseif( $donhang->dh_trangthai == 4)
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
-                <button style="background-color: #68db2a; border-radius: 8px;  font-weight:600">Giao hàng thành công &nbsp <i class="fas fa-check"></i></button>
+                <button style="background-color: #68db2a; border-radius: 8px; font-weight:600">Giao hàng thành công &nbsp <i class="fas fa-check"></i></button>
             </td>
             @endif
 
 
             @if( $donhang->phuongthucthanhtoan_id ==1 )
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
-                <button style="background-color:#ede609; border-radius: 8px;  font-weight:600"> Thanh toán khi nhận hàng &nbsp <i class="far fa-money-bill-alt"></i></button>
+                <button style="background-color:#ede609; border-radius: 8px; font-weight:600"> Thanh toán khi nhận hàng &nbsp <i class="far fa-money-bill-alt"></i></button>
             </td>
             @elseif( $donhang->phuongthucthanhtoan_id ==2 )
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
-                <button style="background-color:lightblue; border-radius: 8px;  font-weight:600"> Thanh toán qua PayPal &nbsp <i class="fab fa-paypal"></i></button>
+                <button style="background-color:lightblue; border-radius: 8px; font-weight:600"> Thanh toán qua PayPal &nbsp <i class="fab fa-paypal"></i></button>
             </td>
             @endif
 
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->nhanviens->hoten}}</td>
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->dh_thoigiandathang }}</td>
-            
+
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
-                <a class="btn btn-primary btn-sm" href="/admin/customers/view/{{ $donhang->id }}">
+                <a class="btn btn-primary btn-sm" href="/shipper/customers/view/{{ $donhang->id }}">
                     <i class="fas fa-eye"></i>
                 </a>
             </td>

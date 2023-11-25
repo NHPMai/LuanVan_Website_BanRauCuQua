@@ -31,8 +31,6 @@ class DonhangController extends Controller
 
     public function index(Request $request)
     {
-        // dd($request);
-
         $result = $this->create($request);
 
         if ($result === false) {
@@ -43,14 +41,18 @@ class DonhangController extends Controller
 
     public function create($request)
     {
-        // $soluongsp = Product::all();
-        // dd($soluongsp);
         $qty = (int)$request->input('num_product'); //số lượng sản phẩm add
         $product_id = (int)$request->input('product_id');
-        // $soluongsp = (int)
+        $sp_id = Product::find($product_id);
+        $sp_number = $sp_id->soluongsp;
+   
+        if ( $qty < 1 || $product_id <= 0) {
+            Session::flash('error', 'Số lượng sản phẩm phải lớn hơn 0');
+            return false;
+        }
 
-        if ($qty <= 0 || $product_id <= 0) {
-            Session::flash('error', 'Số lượng hoặc Sản phẩm không chính xác');
+        if ( $sp_number < $qty || $product_id <= 0) {
+            Session::flash('error', 'Số lượng vượt quá số lượng sản phẩm trong kho');
             return false;
         }
 
@@ -65,6 +67,11 @@ class DonhangController extends Controller
         $exists = Arr::exists($chitietdonhangs, $product_id);
         if ($exists) {
             $chitietdonhangs[$product_id] = $chitietdonhangs[$product_id] + $qty;
+            // dd( $chitietdonhangs[$product_id]);
+            if( $chitietdonhangs[$product_id] > $sp_number){
+                Session::flash('error', 'Số lượng vượt quá số lượng sản phẩm trong kho');
+                return false;
+            }
             Session::put('chitietdonhangs', $chitietdonhangs);
             return true;
         }
@@ -74,6 +81,34 @@ class DonhangController extends Controller
 
         return true;
     }
+
+    // public function update(Request $request)
+    // {
+        
+    //    $qty = (int)$request->input('num_product');
+
+    //     $ctdh = Session::get('chitietdonhangs');
+    //     $ctdh_id = array_keys($ctdh);
+        
+    //     $sp_number = Product::select('soluongsp')
+    //     ->where('hoatdong', 1)
+    //     ->whereIn('id', $ctdh_id)
+    //     ->get();
+
+    //     if ( $qty < 1 ) {
+    //         Session::flash('error', 'Số lượng hoặc Sản phẩm không chính xác');
+    //         return false;
+    //     }
+
+    //     if ( $sp_number < $qty) {
+    //         Session::flash('error', 'Số lượng vượt quá số lượng sản phẩm trong kho');
+    //         return false;
+    //     }
+       
+    //     Session::put('chitietdonhangs', $qty);
+    //     return redirect('user/order-detail');
+    // }
+
 
 
     public function show()
@@ -122,7 +157,8 @@ class DonhangController extends Controller
 
     public function update(Request $request)
     {
-        // dd($request);
+        // $product_id = (int)$request->input('product_id');
+        // dd($product_id);
         Session::put('chitietdonhangs', $request->input('num_product'));
         return redirect('user/order-detail');
     }
@@ -453,7 +489,7 @@ class DonhangController extends Controller
 
 
 
-    // thanh toán đơn hàng
+    // THANH TOÁN ĐƠN HÀNG
     public function add_order(Request $request)
     {
         $this->validate(
@@ -641,6 +677,7 @@ class DonhangController extends Controller
                 session()->forget('chitietdonhangs');
                 session()->forget('data_get');
                 session()->forget('total_paypal');
+                
             } catch (\Exception $err) {
                 DB::rollBack();
                 Session::flash('error', 'Đặt Hàng Lỗi, Vui lòng thử lại sau');
@@ -648,7 +685,7 @@ class DonhangController extends Controller
             }
             Session::flash('success', 'Đặt hàng thành công!');
 
-            return redirect("/")->with('success', 'Thao tác thành công');
+            return redirect("/user/checkout");
         } 
         else{
             return redirect()

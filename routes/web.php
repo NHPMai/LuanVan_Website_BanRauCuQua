@@ -220,7 +220,12 @@ Route::prefix('shipper')->name('shipper.')->group(function () {
     Route::middleware(['auth:shipper'])->group(function () {
 
         Route::get('/', [ShipperController::class, 'home'])->name('home');
-        Route::get('/main', [ShipperController::class, 'index'])->name('main');
+        // Route::get('/main', [ShipperController::class, 'index'])->name('main');
+        Route::get('donhang_shipper', [ShipperController::class, 'donhang_shipper']);
+        Route::get('donhang_dagiao', [ShipperController::class, 'donhang_dagiao']);
+        Route::get('donhang_danggiao', [ShipperController::class, 'donhang_danggiao']);
+        Route::get('customers/view/{donhang}', [ShipperController::class, 'show']);
+        Route::post('customers/view/{donhang}', [ShipperController::class, 'update'])->name('donhang.update');
 
         #TÌM KIẾM GIỌNG NÓI_SẢN PHẨM
         // Route::get('/searchProductMicrophone', [ProductController::class, 'searchProductMicrophone']);

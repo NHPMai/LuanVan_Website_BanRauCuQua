@@ -7,6 +7,7 @@
 <body> <!-- class="animsition"-->
 	<!-- Header -->
 	@include('header')
+	<!-- @include('admin.alert') -->
 	<!-- Cart -->	
 	@include('cart')
 

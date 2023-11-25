@@ -39,6 +39,8 @@ class TaikhoanController extends Controller
         $diachi->quan_huyen_id = $data['quan_huyen'];
         $diachi->xa_phuong_thitran_id = $data['xa_phuong_thitran'];
         $diachi->dc_diachi = $data['dc_diachi'];
+        // $diachi->macdinh = $request->macdinh;
+       
         $diachi->save();
     }
 

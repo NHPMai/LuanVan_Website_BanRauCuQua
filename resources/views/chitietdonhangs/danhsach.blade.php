@@ -1,13 +1,13 @@
 @extends('home')
 
 @section('content')
-<form class="bg0 p-t-40" method="post">
+<form class="bg0 p-t-50" method="post">
 
     @include('admin.alert')
 
     @if (count($products) != 0)
     <div class="container">
-        <h1 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;font-weight:600; font-style:italic; margin-top:0px"><i class="zmdi zmdi-shopping-cart"></i> Giỏ hàng của bạn </h1>
+        <h1 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;color:brown ;font-weight:600; font-style:italic; margin-top:0px"><i class="zmdi zmdi-shopping-cart"></i> Giỏ hàng của bạn </h1>
         <div class="row">
             <div class="col-lg-10 col-xl-8 ">
                 <div class="m-l-25 m-r--38 m-lr-0-xl">
@@ -34,10 +34,10 @@
                                 <tr class="table_row">
                                     <td class="column-1">
                                         <div class="how-itemcart1">
-                                            <img src="{{ $product->hinhanh }}" alt="IMG">
+                                            <img src="{{ $product->hinhanh }}" style="width:100px" alt="IMG">
                                         </div>
                                     </td>
-                                    <td class="column-2" style="font-weight: 600; font-size:medium">{{ $product->ten }}</td>
+                                    <td class="column-2" style="font-weight: 600; font-size:medium; padding-left: 20px;">{{ $product->ten }}</td>
                                     <td class="column-3">{{ number_format($price, 0, '', '.') }}</td>
                                     <td class="column-4">
                                         <div class="wrap-num-product flex-w m-l-auto m-r-0">
@@ -82,7 +82,7 @@
 
                     <div class="flex-w flex-t bor12 p-b-13">
                         <div class="size-209">
-                            <span class="stext-110 cl2">
+                            <span style="font-size: 20px;">
                                 Tổng Cộng:
                             </span>
                         </div>
@@ -94,7 +94,7 @@
                         </div>
                     </div>
 
-                    <div class="flex-w flex-t bor12 p-t-15 p-b-30">
+                    <div class="flex-w flex-t p-t-15 p-b-30">
                         <!-- <div class="size-209 w-full-ssm">
                             <span class="stext-110 cl2">
                                 Vận chuyển:
@@ -112,7 +112,7 @@
                             @foreach(Session::get('coupon') as $key => $cou)
                             @if ($cou['mgg_loaigiamgia']==1)
                             <div class="row p-1">
-                                <div class="col-6">
+                                <div class="col-6 mtext-110">
                                     Mã giảm giá
                                 </div>
 
@@ -144,17 +144,17 @@
                                 </span>
 
                                 <div class="size-208" style="text-align: right;">
-                                <span class="mtext-110 cl2">
-                                    {{number_format($total - $total_coupon, 0,',','.') }} đ
-                                </span>
+                                    <span class="mtext-110 cl2">
+                                        {{number_format($total - $total_coupon, 0,',','.') }} đ
+                                    </span>
                                 </div>
-                                
+
                             </div>
 
 
                             @elseif($cou['mgg_loaigiamgia']==2)
                             <div class="row p-1">
-                                <div class="col-6">
+                                <div class="col-6 ">
                                     Mã giảm giá
                                 </div>
 
@@ -181,7 +181,7 @@
                             </div>
 
                             <div class="row p-1">
-                                <div class="col-6">
+                                <div class="col-6 ">
                                     Tiền thanh toán
                                 </div>
 
@@ -193,13 +193,18 @@
 
                             @endforeach
                             @else
-                            <div class="row p-1">
-                                <div class="col-6">
+                            <div class="row p-1" style="margin:0px">
+                                <span class="mtext-110 cl2 ">
                                     Tiền thanh toán
-                                </div>
+                                </span>
 
-                                <div class="col-6" style="text-align: right;">
+                                <!-- <div class="col-5 mtext-110" style="text-align: right;">
                                     {{number_format($total, 0,',','.') }} đ
+                                </div> -->
+                                <div class="size-208 " style="text-align: right; margin-left: 20px;">
+                                    <span class="mtext-110 cl2">
+                                        {{number_format($total, 0,',','.') }}
+                                    </span>
                                 </div>
                             </div>
                             @endif

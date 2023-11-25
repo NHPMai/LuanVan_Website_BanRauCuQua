@@ -9,6 +9,8 @@ use App\Http\Services\Product\ProductAdminService;
 use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use \Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -42,11 +44,71 @@ class ProductController extends Controller
     }
 
     
-    public function store(ProductRequest $request)
+    // public function store(ProductRequest $request)
+    // {
+    //     $this->productService->insert($request);
+    //     return redirect()->back();
+    // }
+
+    public function store(Request $request)
     {
-        $this->productService->insert($request);
+        $isValidPrice = $this->isValidPrice($request);
+        if ($isValidPrice === false) return false;
+
+        try {
+            $request->except('_token');
+            // Product::create($request->all());
+            $this -> validate($request, [
+                'ten' => 'required',
+                'gia' => 'required',
+                'menu_id' => 'required',
+                'brand_id' => 'required',
+                'noidung' => 'required',
+                'hinhanh' => 'required',
+                'hoatdong' => 'required',
+            ],
+            [
+                'ten.required' => 'Vui lòng nhập tên sản phẩm',
+                'gia.required' => 'Vui lòng nhập giá sản phẩm',
+                'menu_id.required' => 'Vui lòng chọn danh mục sản phẩm',
+                'brand_id.required' => 'Vui lòng chọn thương hiệu sản phẩm',
+                'hinhanh.required' => 'Vui lòng nhập hình ảnh sản phẩm',
+                'hoatdong.required' => 'Vui lòng chọn trạng thái',
+            ]);
+    
+            $sp = new Product();
+            
+            $sp->ten = $request->ten;
+            $sp->gia = $request->gia;
+            $sp->mota = $request->mota;
+            $sp->menu_id = $request->menu_id;
+            $sp->brand_id = $request->brand_id;
+            $sp->noidung = $request->noidung;
+            $sp->soluongsp = 0;
+            $sp->hinhanh = $request->hinhanh;
+            $sp->hoatdong = $request->hoatdong;
+            $sp->save();
+           
+            Session::flash('success', 'Thêm Sản phẩm thành công');
+        } catch (\Exception $err) {
+            Session::flash('error', 'Thêm Sản phẩm lỗi');
+            Log::info($err->getMessage());
+            return  false;
+        }
+      
 
         return redirect()->back();
+    }
+
+    protected function isValidPrice($request)
+    {
+       
+        if ($request->input('gia') == 0) {
+            Session::flash('error', 'Vui lòng nhập giá sản phẩm');
+            return false;
+        }
+
+        return  true;
     }
 
     

@@ -48,12 +48,12 @@
                     <input type="number" name="gia" value="{{ old('gia') }}" class="form-control">
                 </div>
             </div>
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
                 <div class="form-group">
                     <label for="menu">Số Lượng Sản Phẩm <span class="text-danger">(*)</span></label>
                     <input type="number" name="soluongsp" value="{{ old('soluongsp') }}" class="form-control">
                 </div>
-            </div>
+            </div> -->
 
 
             <!-- <div class="col-md-6">
