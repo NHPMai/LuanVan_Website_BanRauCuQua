@@ -292,7 +292,12 @@ display: flex;
               </div>
               @if ($donhang->dh_trangthai == 1 )
               <div class="text-end">
-                <a href="#" class="btn btn-warning" data-abc="true"> <i class="fa fa-remove"></i></i> Hủy đơn hàng</a>
+                <a href="#" class="btn btn-warning" data-abc="true" style="font-weight: 600;"> <i class="fa fa-remove"></i> Hủy đơn hàng</a>
+              </div>
+              @elseif ($donhang->dh_trangthai == 3 )
+              <div class="text-end">
+                <!-- <a href="shipper/order_history/{{$donhang->id}}" class="btn btn-success" data-abc="true" style="font-weight: 600;"> <i class="fa fa-check"></i> Đã nhận</a> -->
+                <a href="/user/order_update/{{$donhang->id}}" class="btn btn-success" data-abc="true" style="font-weight: 600;"> <i class="fa fa-check"></i> Đã nhận</a>
               </div>
               @endif
             </div>
@@ -400,7 +405,7 @@ display: flex;
             <hr>
             <div class="row">
               <div class="col-6">
-                <a href="/user/order_history" class="btn btn-warning text-start" data-abc="true"> <i class="fa fa-chevron-left"></i> Back to orders</a>
+                <a href="/user/order_history" class="btn btn-secondary text-start" data-abc="true"> <i class="fa fa-chevron-left"></i> Quay lại</a>
               </div>
 
               <div class="col-6">

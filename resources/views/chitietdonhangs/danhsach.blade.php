@@ -3,10 +3,14 @@
 @section('content')
 <form class="bg0 p-t-50" method="post">
 
-    @include('admin.alert')
+    
+
 
     @if (count($products) != 0)
     <div class="container">
+    <div style="width: 100%; text-align:center; ">
+        @include('admin.alert')
+    </div>
         <h1 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;color:brown ;font-weight:600; font-style:italic; margin-top:0px"><i class="zmdi zmdi-shopping-cart"></i> Giỏ hàng của bạn </h1>
         <div class="row">
             <div class="col-lg-10 col-xl-8 ">
@@ -17,11 +21,11 @@
                         <table class="table-shopping-cart">
                             <tbody>
                                 <tr class="table_head">
-                                    <th class="column-1" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:15px; font-weight:700">Sản Phẩm</th>
+                                    <th class="column-1" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:15px; font-weight:700;">Sản Phẩm</th>
                                     <th class="column-2"></th>
-                                    <th class="column-3" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:15px; font-weight:700">Giá</th>
-                                    <th class="column-4" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:15px; font-weight:700">Số Lượng</th>
-                                    <th class="column-5" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:15px; font-weight:700">Tổng</th>
+                                    <th class="column-3" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:15px; font-weight:700; ">Giá</th>
+                                    <th class="column-4" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:15px; font-weight:700; text-align:center">Số Lượng</th>
+                                    <th class="column-5" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size:15px; font-weight:700;">Tổng</th>
                                     <th class="column-6">&nbsp;</th>
                                 </tr>
 

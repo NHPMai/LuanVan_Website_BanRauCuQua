@@ -77,7 +77,12 @@
             </td>
             @endif
 
-            <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->nhanviens->hoten}}</td>
+
+            @if ($donhang->dh_trangthai == 1)
+                <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;"></td>
+            @else
+                 <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->nhanviens->hoten}}</td>
+            @endif
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->dh_thoigiandathang }}</td>
             
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">

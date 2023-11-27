@@ -83,7 +83,7 @@
 
 
         <div class="content-wrapper">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col">
                     <div class="row">
                         <div class="col-6">
@@ -114,46 +114,10 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <div class="col">
-                <div class="row">
-                    <div class="col-6">
-                        <form action="{{ url('admin/searchdonhang')}}" method="GET" class="form-inline pl-3 pt-3"  >
-                            <div class="form-group" >
-                                <input class="form-control form-control-sidebar" name="query" type="search" placeholder="Search Đơn Hàng" aria-label="Search">
-                            </div>
-
-                            <button type="submit" class="btn btn-light" >
-                                <i class="fas fa-search fa-fw"></i>
-                            </button>
-                        </form>
-                    </div>
-
-                    <div class="col-6 pt-3">
-                        <form id="search-form" action="{{ url('admin/searchProductMicrophonedonhang')}}" class="d-flex" method="get">
-                            <div class="btn btn-white input-group-text border-0" type="submit" id="">
-                                <div style="display:none">
-                                    <input id="search-input" name="keywork"  type="text">
-
-                                </div>
-                                <span class="microphone">
-                                    <i class="fas fa-microphone"></i>
-                                    <span class="recording-icon"></span>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div> -->
-            </div>
 
 
-
-
-
-
-
-
+            
             <!-- Main content -->
             <section class="content">
 

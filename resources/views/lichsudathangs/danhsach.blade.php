@@ -3,8 +3,13 @@
 @section('content')
 <link href="/template/css/table/bang.css" rel="stylesheet">
 
-<div class="wrapper" style="text-align: center;">
 
+
+<div class="wrapper" style="text-align: center;">
+  <div style="width: 100%; text-align:center; ">
+    @include('admin.alert')
+  </div>
+  <h1 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;color:brown ;font-weight:600; font-style:italic; margin-top:20px; text-align:left;"><i class="zmdi zmdi-shopping-cart"></i> Lịch sử đặt hàng của bạn </h1>
   <div class="table">
 
     <div class="hang header" style="font-size: 16px;">
@@ -73,7 +78,7 @@
       </div>
 
 
-      <div class="cell">
+      <div class="cell" style="padding-right:0">
         @if( $b->phuongthucthanhtoan_id ==1 )
         <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
           <button style="background-color:#ede609; border-radius: 8px; font-weight:600"> Thanh toán khi nhận hàng &nbsp <i class="far fa-money-bill-alt"></i></button>

@@ -53,7 +53,7 @@ class ProductAdminService
     public function get()
     {
         return Product::with('menu','brand')
-            ->orderByDesc('id')->get();
+        ->orderBy('id', 'desc')->get();
     }
 
     public function update($request, $product)

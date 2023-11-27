@@ -263,7 +263,7 @@ class PaypalController extends Controller
             Session::put('success_paypal', true);
 
             return redirect()
-                ->route('user.showcheckout')
+                ->route('user.order_history')
                 ->with('success', 'Thanh toán thành công');
         } else {
             return redirect()

@@ -14,6 +14,7 @@ use App\Models\Quan_huyen;
 use App\Models\Xa_phuong_thitran;
 use App\Models\Phivanchuyen;
 use App\Models\Phuongthucthanhtoan;
+use App\Models\Thongke;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -110,6 +111,46 @@ class DonhangController extends Controller
     // }
 
 
+    //Hàm cập nhập số lượng giỏ hàng
+    public function update(Request $request)
+    {
+        $numProductArray = $request->input('num_product');
+
+        // Lấy giỏ hàng hiện tại từ session
+        $chitietdonhangs = session()->get('chitietdonhangs');
+
+        foreach ($numProductArray as $product_id => $newQuantity) {
+            // Lấy thông tin sản phẩm từ cơ sở dữ liệu sử dụng $product_id
+            $product = Product::find($product_id);
+
+            $soluong_sp = $product->soluongsp;
+            if ($product) {
+                if (isset($chitietdonhangs[$product_id])) {
+                    //dd($chitietdonhangs[$product_id]);
+                    if($newQuantity > $soluong_sp){
+                        session()->flash('error', 'Số lượng của sản phẩm ' . $product->ten .' lớn hơn trong kho!');
+                        return redirect('user/order-detail');
+                        // return false;
+                    } 
+                    elseif($newQuantity <= 0){
+                        session()->flash('error', 'Số lượng của sản phẩm ' . $product->ten .' không được nhỏ hơn 0!');
+                        return redirect('user/order-detail');
+                        // return false;
+                    }
+                    else{
+                        // Cập nhật số lượng sản phẩm trong giỏ hàng
+                        $chitietdonhangs[$product_id] = $newQuantity;
+                    }
+
+                } 
+            } 
+        }
+        session()->put('chitietdonhangs', $chitietdonhangs);
+
+        return redirect('user/order-detail');
+    }
+
+
 
     public function show()
     {
@@ -155,13 +196,13 @@ class DonhangController extends Controller
         //
     }
 
-    public function update(Request $request)
-    {
-        // $product_id = (int)$request->input('product_id');
-        // dd($product_id);
-        Session::put('chitietdonhangs', $request->input('num_product'));
-        return redirect('user/order-detail');
-    }
+    // public function update(Request $request)
+    // {
+    //     // $product_id = (int)$request->input('product_id');
+    //     // dd($product_id);
+    //     Session::put('chitietdonhangs', $request->input('num_product'));
+    //     return redirect('user/order-detail');
+    // }
 
     public function remove($id = 0)
     {
@@ -685,7 +726,7 @@ class DonhangController extends Controller
             }
             Session::flash('success', 'Đặt hàng thành công!');
 
-            return redirect("/user/checkout");
+            return redirect("/user/order_history");
         } 
         else{
             return redirect()
@@ -778,5 +819,150 @@ class DonhangController extends Controller
             'donhang' => $donhang,
             'chitietdonhangs' => $chitietdonhang,
         ]);
+    }
+
+    // public function update_donhang(Request $req, $id)
+    // {
+    //     $order = Donhang::find($id);
+       
+    //     $id_kh = $order->khachhang_id;
+    //     $kh = khachhang::where('id', $id_kh)->get();
+    //     // dd($kh);
+    //     $newStatus = $req->input('dh_trangthai');
+    //     if ($newStatus == 3) {
+    //         $order->dh_trangthai = $newStatus;
+    //         $order->save();
+    //     } elseif ($newStatus == 4) {
+    //         $order->dh_trangthai = $newStatus;
+    //         $order->save();
+
+    //         // $kh = khachhang::where('id', $id_kh)->get();
+    //         // Mail::send('emails.giaohangthanhcong', compact('kh'), function ($email) use ($kh) {
+    //         //     $email->subject('Cửa Hàng Vegetable Family - Giao Hàng Thành Công');
+    //         //     $email->to($kh->email, $kh->hoten);
+    //         // });
+
+    //         // $name = Auth::user();
+    //         // Mail::send('emails.test', compact('chitietdonhang', 'name'), function ($email) use ($name) {
+    //         //     $email->subject('Cửa Hàng Vegetable Family - Xác Nhận Đơn Hàng');
+    //         //     $email->to($name->email, $name->hoten);
+    //         // });
+
+        
+
+
+    //         $order_date = $order->dh_thoigiandathang;
+           
+    //         $thongke = ThongKe::where('tk_Ngay',$order_date)->get();
+
+    //         if($thongke){
+    //             $thongke_dem = $thongke->count();
+    //         }else{
+    //             $thongke_dem = 0;
+    //         }
+    
+    //         $total_order = 0; //tong so luong don
+    //         $sales = 0; //doanh thu
+    //         $profit = 0; //loi nhuan
+    //         $quantity = 0; //so luong
+    
+    //         $a =$order->id;
+    //         $ctdh = Chitietdonhang::where('donhang_id',$a)->get();
+          
+           
+    //         foreach ($ctdh as $detail){
+    //             $product = $detail->product;
+    //             $quantity += $detail->ctdh_soluong;
+    //             $sales += $detail->ctdh_gia * $detail->ctdh_soluong;
+    //             // dd($sales);
+    //             $profit = $sales - 100000;
+    //             // dd($profit);
+    //         }
+    //         $total_order += 1;
+    
+    //         if($thongke_dem > 0){
+    //             $thongke_capnhat = ThongKe::where('tk_Ngay',$order_date)->first();
+    //             $thongke_capnhat->tk_TongTien = $thongke_capnhat->tk_TogTien + $sales;
+    //             $thongke_capnhat->tk_LoiNhuan = $thongke_capnhat->tk_LoiNhuan + $profit;
+    //             $thongke_capnhat->tk_SoLuong = $thongke_capnhat->tk_SoLuong + $quantity;
+    //             $thongke_capnhat->tk_TongDonHang = $thongke_capnhat->tk_TongDonHang + $total_order;
+    //             // dd($thongke_capnhat);
+    //             $thongke_capnhat->save();
+    //         }else{
+    //             $thongke_moi = new ThongKe();
+    //             // dd($thongke);
+    //             $thongke_moi->tk_Ngay = $order_date;
+    //             $thongke_moi->tk_SoLuong = $quantity;
+    //             $thongke_moi->tk_TongTien = $sales;
+    //             $thongke_moi->tk_LoiNhuan = $profit;
+    //             $thongke_moi->tk_TongDonHang = $total_order;
+    //             $thongke_moi->save();
+    //         }
+
+
+    //     }
+    //     return redirect()->back();
+    // }
+
+    public function update_donhang($id)
+    {
+        $trangthaidonhang = Donhang::find($id)
+            ->update(
+                ['dh_trangthai' => 4],
+        );
+        // if( $trangthaidonhang = true){
+        //     $order = Donhang::find($id);
+        //     $order_date = $order->dh_thoigiandathang;
+           
+        //     $thongke = ThongKe::where('tk_Ngay',$order_date)->get();
+
+        //     if($thongke){
+        //         $thongke_dem = $thongke->count();
+        //     }else{
+        //         $thongke_dem = 0;
+        //     }
+    
+        //     $total_order = 0; //tong so luong don
+        //     $sales = 0; //doanh thu
+        //     $profit = 0; //loi nhuan
+        //     $quantity = 0; //so luong
+    
+        //     $a =$order->id;
+        //     $ctdh = Chitietdonhang::where('donhang_id',$a)->get();
+          
+           
+        //     foreach ($ctdh as $detail){
+        //         $product = $detail->product;
+        //         $quantity += $detail->ctdh_soluong;
+        //         $sales += $detail->ctdh_gia * $detail->ctdh_soluong;
+        //         // dd($sales);
+        //         $profit = $sales - 100000;
+        //         // dd($profit);
+        //     }
+        //     $total_order += 1;
+    
+        //     if($thongke_dem > 0){
+        //         $thongke_capnhat = ThongKe::where('tk_Ngay',$order_date)->first();
+        //         $thongke_capnhat->tk_TongTien = $thongke_capnhat->tk_TogTien + $sales;
+        //         $thongke_capnhat->tk_LoiNhuan = $thongke_capnhat->tk_LoiNhuan + $profit;
+        //         $thongke_capnhat->tk_SoLuong = $thongke_capnhat->tk_SoLuong + $quantity;
+        //         $thongke_capnhat->tk_TongDonHang = $thongke_capnhat->tk_TongDonHang + $total_order;
+        //         // dd($thongke_capnhat);
+        //         $thongke_capnhat->save();
+        //     }else{
+        //         $thongke_moi = new ThongKe();
+        //         // dd($thongke);
+        //         $thongke_moi->tk_Ngay = $order_date;
+        //         $thongke_moi->tk_SoLuong = $quantity;
+        //         $thongke_moi->tk_TongTien = $sales;
+        //         $thongke_moi->tk_LoiNhuan = $profit;
+        //         $thongke_moi->tk_TongDonHang = $total_order;
+        //         $thongke_moi->save();
+        //     }
+        // }
+        
+
+        Session::flash('success', 'Bạn đã nhận đơn hàng thành công!');
+        return redirect('user/order_history');
     }
 }

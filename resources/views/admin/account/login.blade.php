@@ -19,7 +19,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
-<body class="hold-transition login-page" style="background-image: url('/template/images/admin.png')">
+<body class="hold-transition login-page" style="background-image: url('/template/images/bg7.png')">
   <div class="login-box">
     <div class="login-logo">
 

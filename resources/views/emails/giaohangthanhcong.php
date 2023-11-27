@@ -1,7 +1,10 @@
 
 <div style="width: 500px; margin: 0 auto; padding: 15px; text-align: center;">
     <h2>XiN CHÀO {{$name->hoten}}</h2>
-    <p>Bạn đã đặt hàng thành công tại cửa hàng chúng tôi<br>Vui lòng kiểm tra đơn hàng tại lịch sử đơn hàng của bạn!<p>
+    <p>Đơn hàng của bạn đã được giao thành công.<br> Cảm ơn bạn đã ủng hộ cửa hàng Vegetables Family của chúng tôi. <br>Rất hân hạnh được phục vụ và hẹn gặp lại quý khách!<p>
+    <a href="">
+        XÁC NHẬN ĐƠN HÀNG
+    </a>
 </div>
 
 

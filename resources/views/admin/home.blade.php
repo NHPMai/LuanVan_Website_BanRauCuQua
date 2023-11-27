@@ -1,30 +1,160 @@
 @extends('admin.main')
 
 @section('content')
-</br>
-
-<p>Mai</p>
 
 
-<div class="row">
+
+
+<!-- <div class="row">
   <form autocomplete="off" style="display: flex;">
-  @csrf
-      <div class="col-3">
-          <p>Từ ngày: <input type="text" id="datepicker" style="width: 150px"> </p>
+    @csrf
+    <div class="col-3">
+      <p>Từ ngày: <input type="text" id="datepicker" style="width: 150px"> </p>
 
+    </div>
+
+    <div class="col-3">
+      <p>Đến ngày: <input type="text" id="datepicker2" style="width: 140px"> </p>
+    </div>
+
+    <div class="col-3">
+      <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm" value="Lọc kết quả">
+    </div>
+
+    <div class="col-3">
+      <p>Lọc theo:
+        <select class="dashboard-filter">
+          <option>--Chọn--</option>
+          <option value="7ngay">7 ngày qua</option>
+          <option value="thangtruoc">Tháng trước</option>
+          <option value="thangnay">Tháng này
+          <option value="quy1">Quý 1</option>
+          <option value="quy2">Quý 2</option>
+          <option value="quy3">Quý 3</option>
+          <option value="quy4">Quý 4</option>
+          {{--<option value="365ngayqua">365 ngày qua</option>--}}
+        </select>
+      </p>
+    </div>
+  </form>
+  {{-- </div>--}}
+</div>
+
+<div class="col-12">
+  <div id="chart" style="height: 250px;"></div>
+</div> -->
+
+<div class="row" style="margin-bottom: 20px;">
+
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-info">
+      <div class="inner">
+        <h3>Sản Phẩm</h3>
+
+        <p style="font-weight:bold; font-size: 20px; ">Tổng: {{$products->count()}}</p> 
       </div>
-
-      <div class="col-3">
-          <p>Đến ngày: <input type="text" id="datepicker2" style="width: 140px"> </p>
+      <div class="icon">
+        <i class="ion ion-stats-bars"></i>
       </div>
+      <a href="/admin/products/list" class="small-box-footer">Chi Tiết <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
 
-      <div class="col-3">
-          <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm" value="Lọc kết quả">
+
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-success">
+      <div class="inner">
+        <h3>Nhà Cung Cấp<sup style="font-size: 20px">%</sup></h3>
+        <p style="font-weight:bold; font-size: 20px; ">Tổng: {{$suppliers->count()}}</p>
       </div>
+      <div class="icon">
+        <i class="ion ion-bag"></i>
+      </div>
+      <a href="/admin/suppliers/list" class="small-box-footer">Chi Tiết <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
 
-      <div class="col-3">
-          <p>Lọc theo:
-              <select class="dashboard-filter">
+
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-warning">
+      <div class="inner">
+        <h3>Đơn Hàng</h3>
+        <p style="font-weight:bold; font-size: 20px; ">Tổng: {{$donhangs->count()}}</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-person-add"></i>
+      </div>
+      <a href="/admin/customers" class="small-box-footer">Chi Tiết <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+
+
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-danger">
+      <div class="inner">
+        <h3>Kho Hàng</h3>
+        <p style="font-weight:bold; font-size: 20px; ">Tổng:  {{$warehouses->count()}}</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-pie-graph"></i>
+      </div>
+      <a href="/admin/warehouses/list" class="small-box-footer">Chi Tiết<i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+</div>
+
+
+<div>
+  <section class=" connectedSortable">
+    <div class="card ">
+      <div class="card-header border-0">
+
+        <h3 class="card-title btn btn-dark btn-sm">
+          <i class="fas fa-chart-pie"></i>
+          Biểu Đồ
+        </h3>
+
+        <div class="card-tools">
+          <!-- <div class="btn-group">
+            <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
+              <i class="fas fa-bars"></i>
+            </button>
+            <div class="dropdown-menu" role="menu">
+              <a href="#" class="dropdown-item">Add new event</a>
+              <a href="#" class="dropdown-item">Clear events</a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">View calendar</a>
+            </div>
+          </div> -->
+          <button type="button" class="btn btn-dark btn-sm" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-dark btn-sm" data-card-widget="remove">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <hr style="margin-top:0">
+      <div class="card-body pt-0">
+        <div class="row">
+          <form autocomplete="off" style="display: flex;">
+            @csrf
+            <div class="col-3">
+              <p style="font-weight: 600; font-size:18px">Từ ngày: <input type="text" id="datepicker" style="width: 150px"> </p>
+
+            </div>
+
+            <div class="col-3">
+              <p style="font-weight: 600; font-size:18px">Đến ngày: <input type="text" id="datepicker2" style="width: 140px"> </p>
+            </div>
+
+            <div class="col-3">
+              <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm" value="Lọc kết quả" style="margin-top: 25px; text-align:center">
+            </div>
+
+            <div class="col-3">
+              <p style="font-weight: 600; font-size:18px">Lọc theo:
+                <select class="dashboard-filter">
                   <option>--Chọn--</option>
                   <option value="7ngay">7 ngày qua</option>
                   <option value="thangtruoc">Tháng trước</option>
@@ -33,20 +163,21 @@
                   <option value="quy2">Quý 2</option>
                   <option value="quy3">Quý 3</option>
                   <option value="quy4">Quý 4</option>
-                  {{--<option value="365ngayqua">365 ngày qua</option>--}}
-              </select>
-          </p>
+                </select>
+              </p>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-12">
+          <div id="chart" style="height: 250px;"></div>
+        </div>
+
       </div>
-    </form>
-  {{--        </div>--}}
-  </div>
+    </div>
 
-  <div class="col-12">
-      <div id="chart" style="height: 250px;"></div>
-  </div>
-
-
-
+  </section>
+</div>
 
 
 <!-- <div class="container-fluid">
@@ -110,7 +241,6 @@
     </div>
 
   </div>
-
 
   <div class="row">
    

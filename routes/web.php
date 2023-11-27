@@ -225,18 +225,14 @@ Route::prefix('shipper')->name('shipper.')->group(function () {
         Route::get('donhang_dagiao', [ShipperController::class, 'donhang_dagiao']);
         Route::get('donhang_danggiao', [ShipperController::class, 'donhang_danggiao']);
         Route::get('customers/view/{donhang}', [ShipperController::class, 'show']);
-        Route::post('customers/view/{donhang}', [ShipperController::class, 'update'])->name('donhang.update');
+        Route::post('customers/view/{donhang}', [ShipperController::class, 'update'])->name('update');
 
         #TÌM KIẾM GIỌNG NÓI_SẢN PHẨM
         // Route::get('/searchProductMicrophone', [ProductController::class, 'searchProductMicrophone']);
         // Route::get('/search', [ProductController::class, 'search']);   //Tim kiem spadmin
 
-
         //ĐĂNG XUẤT ADMIN
         Route::get('/logout', [ShipperController::class, 'logout'])->name('logout'); //Dang Xuat
-
-
-       
     });
 });
 
@@ -298,6 +294,7 @@ Route::prefix('user')->name('user.')->group(function () {
 
         Route::get('order_history', [\App\Http\Controllers\Users\DonhangController::class, 'order_history'])->name('order_history');
         Route::get('order_history_detail/{donhang}', [\App\Http\Controllers\Users\DonhangController::class, 'order_history_detail'])->name('order_history_detail');
+        Route::get('order_update/{donhang}', [\App\Http\Controllers\Users\DonhangController::class, 'update_donhang']);
 
         //Tài khoản
         Route::get('account', [\App\Http\Controllers\Users\TaikhoanController::class, 'account'])->name('account');

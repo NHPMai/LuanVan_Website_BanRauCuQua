@@ -131,17 +131,25 @@ $.ajaxSetup({
 </script>
 
 <!-- THONGKE -->
-<!-- <script src="//code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> -->
 
 
 <script type="text/javascript">
     $(document).ready(function (){
+
+
+
         chart30daysorder();
-        var chart = new Morris.Bar({
+        var chart = new Morris.Area({
             element: 'chart',
             lineColor: ['#819C79', '#FC8710','#FF6541','#A4ADD3','#766B56'],
             parseTime: false,
@@ -191,7 +199,7 @@ $.ajaxSetup({
             // Chuyển đổi ngày tháng từ MM/DD/YYYY sang YYYY-MM-DD
             var from_date = moment($('#datepicker').val(), 'MM/DD/YYYY').format('YYYY-MM-DD');
             var to_date = moment($('#datepicker2').val(), 'MM/DD/YYYY').format('YYYY-MM-DD');
-            //alert(from_date);
+            // alert(from_date);
 
             $.ajax({
                 url: "{{url('/admin/filter-by-date')}}",
@@ -278,7 +286,7 @@ $.ajaxSetup({
 
 
 <!-- SELECT2 -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $('#productSelect').select2({
         templateResult: function(data){
             if(!data.id){
@@ -354,5 +362,5 @@ $.ajaxSetup({
                 '<td style="text-align: center;">#' +selectProduct.id
         }
     })
-</script>
+</script> -->
 @yield('footer')
