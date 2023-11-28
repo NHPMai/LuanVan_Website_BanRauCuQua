@@ -23,7 +23,7 @@ class MainController extends Controller
     public function index()
     {
         return view('admin.home',[
-            'title' => 'Trang Quản Trị Amin',
+            'title' => 'Vegetables Family',
             'donhangs' => Donhang::orderByDesc('id')->get(),
             'products' => Product::orderByDesc('id')->get(),
             'suppliers' => Nhacungcap::orderByDesc('id')->get(),

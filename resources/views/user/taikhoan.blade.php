@@ -178,6 +178,9 @@
   Launch demo modal
 </button> -->
 
+
+
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -231,7 +234,7 @@
                     <label for="no_active" class="custom-control-label">Không</label>
                 </div>
             </div> -->
-                            
+
                             <!-- <label for="menu">Mặc định <span class="text-danger">(*)</span></label>
                             <div class="form-check">
                                 <input class="form-check-input" value="1" type="radio" name="macdinh" id="active">
@@ -250,13 +253,9 @@
                             <!-- </form> -->
                         </div>
                     </form>
-                    <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="text-right">
-                                <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
-                                <button name="add_address" type="button" id="submit" name="submit" class="add_address btn btn-primary" style="margin:0">Thêm</button>
-                            </div>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button name="add_address" type="button" id="submit" name="submit" class="add_address btn btn-primary" style="margin:0">Thêm</button>
                     </div>
                 </div>
 
@@ -267,7 +266,7 @@
 
 <script>
     $(document).ready(function() {
-        // THÊM PHÍ VẬN CHUYỂN
+        // THÊM ĐỊA CHỈ
         $('.add_address').click(function() {
             var tinh_thanhpho = $('.tinh_thanhpho').val();
             var quan_huyen = $('.quan_huyen').val();
@@ -290,7 +289,7 @@
                     _token: _token
                 },
                 success: function(data) {
-                    alert('Thêm phí địa chỉ thành công!')
+                    alert('Thêm địa chỉ thành công!')
                     fecth_delivery();
                 }
             });

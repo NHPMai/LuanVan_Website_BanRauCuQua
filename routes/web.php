@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\MagiamgiaController;
 use App\Http\Controllers\Admin\VanChuyenController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\Users\KhachhangController;
 use App\Http\Controllers\Admin\WarehouseController;
 
 
@@ -58,15 +59,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/logout', [LogoutController::class, 'logout'])->name('logout'); //Dang Xuat
 
 
-        // #Tài Khoản
-        // Route::prefix('accounts')->group(function () {
-        //     Route::get('add', [MenuController::class, 'create']);
-        //     Route::post('add', [MenuController::class, 'store']);
-        //     Route::get('list', [MenuController::class, 'index']);
-        //     Route::get('edit/{menu}', [MenuController::class, 'show']);
-        //     Route::post('edit/{menu}', [MenuController::class, 'update']);
-        //     Route::DELETE('destroy', [MenuController::class, 'destroy']);
-        // });
+        // # Khách Hàng
+        Route::prefix('clients')->group(function () {
+            Route::get('add', [KhachhangController::class, 'create']);
+            Route::post('add', [KhachhangController::class, 'store']);
+            Route::get('list', [KhachhangController::class, 'index']);
+            Route::get('edit/{client}', [KhachhangController::class, 'show']);
+            Route::post('edit/{client}', [KhachhangController::class, 'update']);
+            Route::DELETE('destroy', [KhachhangController::class, 'destroy']);
+        });
 
         #Nhân viên
         Route::prefix('staffs')->group(function () {
@@ -94,14 +95,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         // #Bài viết
-        Route::prefix('menus')->group(function () {
-            Route::get('add', [MenuController::class, 'create']);
-            Route::post('add', [MenuController::class, 'store']);
-            Route::get('list', [MenuController::class, 'index']);
-            Route::get('edit/{menu}', [MenuController::class, 'show']);
-            Route::post('edit/{menu}', [MenuController::class, 'update']);
-            Route::DELETE('destroy', [MenuController::class, 'destroy']);
-        });
+        // Route::prefix('menus')->group(function () {
+        //     Route::get('add', [MenuController::class, 'create']);
+        //     Route::post('add', [MenuController::class, 'store']);
+        //     Route::get('list', [MenuController::class, 'index']);
+        //     Route::get('edit/{menu}', [MenuController::class, 'show']);
+        //     Route::post('edit/{menu}', [MenuController::class, 'update']);
+        //     Route::DELETE('destroy', [MenuController::class, 'destroy']);
+        // });
 
         #Brand
         Route::prefix('brands')->group(function () {
@@ -153,7 +154,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('view/{phieunhap}', [WarehouseController::class, 'show']);
             Route::get('active/{id}', [WarehouseController::class, 'active']);
             Route::DELETE('destroy', [WarehouseController::class, 'destroy']);
-
 
             Route::post('/autocomplete_ajax', [WarehouseController::class, 'autocomplete_ajax']);
             Route::get('/getProductName', [WarehouseController::class, 'getProductName']);

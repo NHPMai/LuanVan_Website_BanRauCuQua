@@ -279,25 +279,4 @@ class NhanvienController extends Controller
         return redirect()->back();
     }
 
-    // public function active($id)
-    // {
-    //     $nhanvien = Nhanvien::find($id)
-    //         ->update(
-    //             ['hoatdong' => 0],
-    //     );
-
-    //     Session::flash('success', 'Thay đổi trạng thái thành công!');
-    //     return redirect('list');
-    // }
-
-    // public function unactive($id)
-    // {
-    //     $nhanvien = Nhanvien::find($id)
-    //         ->update(
-    //             ['hoatdong' => 1],
-    //     );
-
-    //     Session::flash('success', 'Thay đổi trạng thái thành công!');
-    //     return redirect('list');
-    // }
 }

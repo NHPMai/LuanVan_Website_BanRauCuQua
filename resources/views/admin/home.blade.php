@@ -3,8 +3,6 @@
 @section('content')
 
 
-
-
 <!-- <div class="row">
   <form autocomplete="off" style="display: flex;">
     @csrf
@@ -43,6 +41,9 @@
 <div class="col-12">
   <div id="chart" style="height: 250px;"></div>
 </div> -->
+
+@if (Auth('admin')->user()->email == 'admin@gmail.com')
+
 
 <div class="row" style="margin-bottom: 20px;">
 
@@ -102,7 +103,6 @@
     </div>
   </div>
 </div>
-
 
 <div>
   <section class=" connectedSortable">
@@ -179,6 +179,7 @@
   </section>
 </div>
 
+@endif
 
 <!-- <div class="container-fluid">
 

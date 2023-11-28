@@ -3,15 +3,20 @@
 @section('content')
 
 <form class="bg0 p-t-50 p-b-85" action="/user/add_order" method="post">
-    @include('admin.alert')
+
 
 
 
 
     <div class="container  p-t-30 p-l-50" style="border-radius: 5px;  background-color:aliceblue">
+        <div style="width: 100%; text-align:center; ">
+            @include('admin.alert')
+        </div>
+
         <h1 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;color:brown; font-weight:600; font-style:italic; margin-top:0px; margin-bottom: 20px">
             Thanh toán đơn hàng của bạn ở đây
         </h1>
+
         <div class="row">
             <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
                 <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" hidden name="khachhang_id" value="{{Auth::user()->id}}">
@@ -48,8 +53,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="menu" style="font-size: medium;">Địa chỉ</label>
-                    <select class="form-control" name="diachi_id" style="height: 30px;">
+                    <label for="menu" style="font-size: medium; ">Địa chỉ</label>
+                    <select class="form-control" name="diachi_id" style="height: 35px; font-size: medium">
                         @foreach($diachi as $dc)
                         <option value="{{ $dc->id }}" style="font-size: medium;">{{ $dc->dc_diachi . ',' . $dc->xa_phuong_thitran->xa_ten . ', ' . $dc->quan_huyen->qh_ten . ', ' . $dc->tinh_thanhpho->tp_ten  }}</option>
                         @endforeach
@@ -125,7 +130,7 @@
                         TỔNG TIỀN
                     </p>
 
-                    <div class="flex-w flex-t p-t-15 p-b-30">
+                    <div class="flex-w flex-t p-t-15">
                         @foreach($products as $key => $product)
                         @php
                         $price = $product->gia;
@@ -133,29 +138,40 @@
                         $total += $priceEnd;
                         @endphp
                         @endforeach
-                        <div class="size-209 w-full-ssm">
+
+
+                        <!-- @php
+                                $id_dc = $dc->id;
+                                $dc = App\Models\DiaChi::find($id_dc);
+
+                                $id_xa = $dc->xa_phuong_thitran_id;
+                                $pvc = App\Models\PhiVanChuyen::where('xa_phuong_thitran_id', $id_xa)->get();
+                                $phi = $pvc[0]['pvc_phivanchuyen'];
+                            @endphp -->
+
+                        <div class="size-209 w-full-ssm ">
                             <span style="font-size: 20px;">
                                 Tiền hàng:
                             </span>
                         </div>
 
-                        <div class="size-208" style="text-align: right;">
+                        <div class="size-208 " style="text-align: right;">
                             <span class="mtext-110 cl2">
                                 {{ number_format($total, 0, '', '.') }}đ
                             </span>
                         </div>
 
-                        <div class="flex-w flex-t p-t-15 p-b-30">
-                            <div class="size-209 w-full-ssm">
+                        <div class="flex-w flex-t p-t-15 ">
+                            <div class="size-209 w-full-ssm m-b-10">
                                 <span style="font-size: 20px;">
                                     Phí vận chuyển:
                                 </span>
                             </div>
 
 
-                            <div class="size-208 p-t-15" style="text-align: right;">
+                            <div class="size-208 m-b-10" style="text-align: right;">
                                 <span class="mtext-110 cl2 phivanchuyen" id="phivanchuyen">
-
+                                    1111111111
                                 </span>
                             </div>
 
@@ -213,7 +229,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row p-1 bor12">
+                                <div class="row p-1 ">
                                     <div class="col-8 " style="font-size: 20px; padding-top: 10px;">
                                         Tổng tiền được giảm
                                     </div>
@@ -229,7 +245,7 @@
                                         </p>
                                     </div>
                                 </div>
-
+                                <hr class="m-tb-10">
                                 <div class="row p-1">
                                     <div class="col-6" style="font-size: 20px;">
                                         Tiền thanh toán

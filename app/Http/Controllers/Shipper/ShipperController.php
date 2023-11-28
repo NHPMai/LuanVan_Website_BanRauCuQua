@@ -158,7 +158,7 @@ class ShipperController extends Controller
 
         
 
-
+            $order = Donhang::find($id);
             $order_date = $order->dh_thoigiandathang;
            
             $thongke = ThongKe::where('tk_Ngay',$order_date)->get();

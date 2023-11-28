@@ -77,10 +77,6 @@ class PaypalController extends Controller
         }
     }
 
-
-
-
-
     // public function successTransaction(Request $request)
     // {
     //     $provider = new PayPalClient;
@@ -101,8 +97,6 @@ class PaypalController extends Controller
     //             ->with('error', $response['message'] ?? 'Lỗi thanh toán');
     //     }
     // }
-
-
 
 
     // THANH TOÁN THÀNH CÔNG
@@ -165,13 +159,14 @@ class PaypalController extends Controller
 
                 $idkh = Auth('web')->user()->id;
 
-                //$id_dc = $request->dc_DiaChi;
-                //$dc = DiaChi::find($id_dc);
-                //$pdh_DiaChiGiao = $dc->dc_DiaChi;
+                // $id_dc = $request->diachi_id;
+              
+                // $dc = DiaChi::find($id_dc);
+                // $dh_diachigiaohang = $dc->dc_diachi;
 
-                //$id_tp = $dc->tinh_thanh_pho_id;
-                //$pvc = PhiVanChuyen::where('thanh_pho_id', $id_tp)->get();
-                //$phi = $pvc[0]['pvc_PhiVanChuyen'];
+                // $id_xa = $dc->xa_phuong_thitran_id;
+                // $pvc = PhiVanChuyen::where('xa_phuong_thitran_id', $id_xa)->get();
+                // $phi = $pvc[0]['pvc_phivanchuyen'];
 
                 $today = Carbon::now()->toDateString();
 
@@ -181,10 +176,14 @@ class PaypalController extends Controller
                     foreach ($coupons as $key => $cou)
                         if ($cou['mgg_loaigiamgia'] == 1) {
                             $total_coupon = ($total * $cou['mgg_giatrigiamgia']) / 100;
-                            $tien_end = $total - $total_coupon;
+                            $tien_end = $total - $total_coupon ;
+                            // $tien_end = $total - $total_coupon + $phi;
+
                             // dd($tien_end);
                         } elseif ($cou['mgg_loaigiamgia'] == 2) {
-                            $tien_end = $total - $cou['mgg_giatrigiamgia'];
+                            $tien_end = $total - $cou['mgg_giatrigiamgia'] ;
+                            // $tien_end = $total - $cou['mgg_giatrigiamgia'] + $phi;
+
                             //dd($tien_end);
                         }
 
@@ -194,6 +193,7 @@ class PaypalController extends Controller
                     $chitietdonhang->dh_ghichu = $request->dh_ghichu;
                     $chitietdonhang->dh_giamgia = $coupons[0]['mgg_magiamgia'];
                     $chitietdonhang->dh_diachigiaohang = 1;
+                    // $chitietdonhang->dh_diachigiaohang = $dh_diachigiaohang;
                     $chitietdonhang->dh_thoigiandathang = $today;
                     $chitietdonhang->dh_thanhtien = $tien_end;
                     $chitietdonhang->dh_trangthai = 1;
@@ -208,13 +208,14 @@ class PaypalController extends Controller
                     MaGiamGia::where('id', $cou['id'])
                         ->update(['mgg_soluongma' => $newSoLuongMa]);
                 } else {
+                    $tien_end = $total  ;
                     // $tien_end = $total + $phi ;
-                    $tien_end = $total;
 
                     $chitietdonhang = new Donhang;
                     $chitietdonhang->khachhang_id = $idkh;
                     $chitietdonhang->dh_ghichu = $request->dh_ghichu;
                     $chitietdonhang->dh_diachigiaohang = 1;
+                    // $chitietdonhang->dh_diachigiaohang = $dh_diachigiaohang;
                     $chitietdonhang->dh_thoigiandathang = $today;
                     $chitietdonhang->dh_thanhtien = $tien_end;
                     $chitietdonhang->dh_trangthai = 1;

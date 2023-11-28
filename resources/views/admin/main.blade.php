@@ -21,12 +21,13 @@
         text-transform: uppercase;
         text-align: center;
     }
+
     .panel-default>.panel-heading {
-    color: #000000 ! important;
-    background-color: #ddede0 ! important;
-    border-color: #ddede0 ! important;
-    font-size: 20px;
-}
+        color: #000000 ! important;
+        background-color: #ddede0 ! important;
+        border-color: #ddede0 ! important;
+        font-size: 20px;
+    }
 </style>
 
 <body class="hold-transition sidebar-mini">
@@ -46,7 +47,7 @@
             <ul class="navbar-nav ml-auto nav-pills ">
                 <li class="nav-item menu-open">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
+                        <!-- <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
                             <i class="fas fa-user"></i>
                         </button>
 
@@ -65,7 +66,17 @@
 
                             @endif
 
-                        </div>
+                        </div> -->
+                        @if (Auth::check())
+                        <!-- <a href="{{ route('admin.logout') }}" class="dropdown-item" style="font-size: 18px; font-weight:700">
+                            Log Out
+                        </a> -->
+                         <button type="button" class="btn btn-light btn-sm " >
+                         <a href="{{ route('admin.logout') }}" class="dropdown-item" style="font-size: 18px; font-weight:700">
+                            Log Out
+                        </a>
+                        </button>
+                        @endif
                     </div>
                 </li>
 
@@ -117,7 +128,7 @@
             </div> -->
 
 
-            
+
             <!-- Main content -->
             <section class="content">
 
@@ -132,7 +143,7 @@
                             <!-- jquery validation -->
                             <div class="card  mt-3">
                                 <div class="panel-heading" style="margin-bottom: 10px;">
-                                    <h3 class="panel-heading">{{ $title }}</h3>
+                                    <h3 class="panel-heading" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;color:brown; font-weight:900; font-size:35px; ; margin-top:0px; margin-bottom: 20px">{{ $title }}</h3>
                                 </div>
 
                                 @yield('content')

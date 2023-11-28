@@ -46,13 +46,13 @@ class DonhangController extends Controller
         $product_id = (int)$request->input('product_id');
         $sp_id = Product::find($product_id);
         $sp_number = $sp_id->soluongsp;
-   
-        if ( $qty < 1 || $product_id <= 0) {
+
+        if ($qty < 1 || $product_id <= 0) {
             Session::flash('error', 'Số lượng sản phẩm phải lớn hơn 0');
             return false;
         }
 
-        if ( $sp_number < $qty || $product_id <= 0) {
+        if ($sp_number < $qty || $product_id <= 0) {
             Session::flash('error', 'Số lượng vượt quá số lượng sản phẩm trong kho');
             return false;
         }
@@ -69,7 +69,7 @@ class DonhangController extends Controller
         if ($exists) {
             $chitietdonhangs[$product_id] = $chitietdonhangs[$product_id] + $qty;
             // dd( $chitietdonhangs[$product_id]);
-            if( $chitietdonhangs[$product_id] > $sp_number){
+            if ($chitietdonhangs[$product_id] > $sp_number) {
                 Session::flash('error', 'Số lượng vượt quá số lượng sản phẩm trong kho');
                 return false;
             }
@@ -85,12 +85,12 @@ class DonhangController extends Controller
 
     // public function update(Request $request)
     // {
-        
+
     //    $qty = (int)$request->input('num_product');
 
     //     $ctdh = Session::get('chitietdonhangs');
     //     $ctdh_id = array_keys($ctdh);
-        
+
     //     $sp_number = Product::select('soluongsp')
     //     ->where('hoatdong', 1)
     //     ->whereIn('id', $ctdh_id)
@@ -105,7 +105,7 @@ class DonhangController extends Controller
     //         Session::flash('error', 'Số lượng vượt quá số lượng sản phẩm trong kho');
     //         return false;
     //     }
-       
+
     //     Session::put('chitietdonhangs', $qty);
     //     return redirect('user/order-detail');
     // }
@@ -127,23 +127,20 @@ class DonhangController extends Controller
             if ($product) {
                 if (isset($chitietdonhangs[$product_id])) {
                     //dd($chitietdonhangs[$product_id]);
-                    if($newQuantity > $soluong_sp){
-                        session()->flash('error', 'Số lượng của sản phẩm ' . $product->ten .' lớn hơn trong kho!');
+                    if ($newQuantity > $soluong_sp) {
+                        session()->flash('error', 'Số lượng của sản phẩm ' . $product->ten . ' lớn hơn trong kho!');
                         return redirect('user/order-detail');
                         // return false;
-                    } 
-                    elseif($newQuantity <= 0){
-                        session()->flash('error', 'Số lượng của sản phẩm ' . $product->ten .' không được nhỏ hơn 0!');
+                    } elseif ($newQuantity <= 0) {
+                        session()->flash('error', 'Số lượng của sản phẩm ' . $product->ten . ' không được nhỏ hơn 0!');
                         return redirect('user/order-detail');
                         // return false;
-                    }
-                    else{
+                    } else {
                         // Cập nhật số lượng sản phẩm trong giỏ hàng
                         $chitietdonhangs[$product_id] = $newQuantity;
                     }
-
-                } 
-            } 
+                }
+            }
         }
         session()->put('chitietdonhangs', $chitietdonhangs);
 
@@ -437,7 +434,7 @@ class DonhangController extends Controller
     //         // Kiểm tra xem nút `submit` có tên là 'cod' đã được bấm hay không
     //         // if ($submitButtonName === 'cod') {
     //         //dd('cod');
-            
+
     //         if ($coupons) {
     //             foreach ($coupons as $key => $cou)
     //                 if ($cou['mgg_loaigiamgia'] == 1) {
@@ -546,13 +543,13 @@ class DonhangController extends Controller
 
         //$this->cartService->getCart($request);
         $phuong_thuc_thanh_toan_id = $request->input('payment_select');
-        
+
 
         if ($phuong_thuc_thanh_toan_id == 1) {
             try {
                 DB::beginTransaction();
                 $total = 0;
-              
+
                 $chitietdonhangs = Session::get('chitietdonhangs');
                 // dd($chitietdonhangs);
                 $coupons = Session::get('coupon');
@@ -570,13 +567,13 @@ class DonhangController extends Controller
                 foreach ($chitietdonhangs as $product_id => $quantity_purchased) {
                     // Bước 1: Truy xuất thông tin sản phẩm từ cơ sở dữ liệu
                     $product = Product::find($product_id);
-                    
+
                     if ($product) {
                         // Bước 2: Cập nhật số lượng sản phẩm
                         $new_quantity_in_stock = max(0, $product->soluongsp - $quantity_purchased); //Số lượng sp còn trg kho
-                       
-                        $new_quantity_sold = $product->soluongban + $quantity_purchased;//Số lượng bán
-                      
+
+                        $new_quantity_sold = $product->soluongban + $quantity_purchased; //Số lượng bán
+
                         // Bước 3: Lưu thông tin sản phẩm đã cập nhật trở lại cơ sở dữ liệu
                         $product->soluongsp = $new_quantity_in_stock;
                         $product->soluongban = $new_quantity_sold;
@@ -593,7 +590,7 @@ class DonhangController extends Controller
                     ->where('hoatdong', 1)
                     ->whereIn('id', $productId)
                     ->get();
-               
+
                 foreach ($products as $product) {
                     $price = $product->gia;
                     $priceEnd = $price * $chitietdonhangs[$product->id];
@@ -605,13 +602,15 @@ class DonhangController extends Controller
 
                 $idkh = Auth('web')->user()->id;
 
-                //$id_dc = $request->dc_DiaChi;
-                //$dc = DiaChi::find($id_dc);
-                //$pdh_DiaChiGiao = $dc->dc_DiaChi;
 
-                //$id_tp = $dc->tinh_thanh_pho_id;
-                //$pvc = PhiVanChuyen::where('thanh_pho_id', $id_tp)->get();
-                //$phi = $pvc[0]['pvc_PhiVanChuyen'];
+                $id_dc = $request->diachi_id;
+                $dc = DiaChi::find($id_dc);
+                $dh_diachigiaohang = $dc->dc_diachi;
+
+                $id_xa = $dc->xa_phuong_thitran_id;
+                $pvc = PhiVanChuyen::where('xa_phuong_thitran_id', $id_xa)->get();
+                $phi = $pvc[0]['pvc_phivanchuyen'];
+
 
                 $today = Carbon::now()->toDateString();
 
@@ -642,24 +641,25 @@ class DonhangController extends Controller
                 if ($coupons) {
                     foreach ($coupons as $key => $cou)
                         if ($cou['mgg_loaigiamgia'] == 1) {
-                            $total_coupon = ($total * $cou['mgg_giatrigiamgia']) / 100;
-                            $tien_end = $total - $total_coupon;
+                            $total_coupon = ($total * $cou['mgg_giatrigiamgia']) / 100 ;
+                            $tien_end = $total - $total_coupon + $phi;
                             // dd($tien_end);
                         } elseif ($cou['mgg_loaigiamgia'] == 2) {
-                            $tien_end = $total - $cou['mgg_giatrigiamgia'];
-                            //dd($tien_end);
+                            $tien_end = $total - $cou['mgg_giatrigiamgia'] + $phi;
+                            // dd($tien_end);
                         }
+
 
                     $chitietdonhang = new Donhang();
                     $chitietdonhang->khachhang_id = $idkh;
                     $chitietdonhang->magiamgia_id = $coupons[0]['id'];
                     $chitietdonhang->dh_ghichu = $request->dh_ghichu;
                     $chitietdonhang->dh_giamgia = $coupons[0]['mgg_magiamgia'];
-                    $chitietdonhang->dh_diachigiaohang = 1;
+                    $chitietdonhang->dh_diachigiaohang = $dh_diachigiaohang;
                     $chitietdonhang->dh_thoigiandathang = $today;
-                    $chitietdonhang->dh_thanhtien = $tien_end;
+                    $chitietdonhang->dh_thanhtien = $tien_end ;
                     $chitietdonhang->dh_trangthai = 1;
-                    $chitietdonhang->phuongthucthanh_toan_id = 1;
+                    $chitietdonhang->phuongthucthanhtoan_id = 1;
                     $chitietdonhang->save();
 
 
@@ -670,21 +670,21 @@ class DonhangController extends Controller
                     MaGiamGia::where('id', $cou['id'])
                         ->update(['mgg_soluongma' => $newSoLuongMa]);
                 } else {
-                    // $tien_end = $total + $phi ;
-                    $tien_end = $total;
+                    $tien_end = $total + $phi ;
+                    
 
                     $chitietdonhang = new Donhang;
                     $chitietdonhang->khachhang_id = $idkh;
                     $chitietdonhang->dh_ghichu = $request->dh_ghichu;
-                    $chitietdonhang->dh_diachigiaohang = 1;
+                    $chitietdonhang->dh_diachigiaohang = $dh_diachigiaohang;
                     $chitietdonhang->dh_thoigiandathang = $today;
                     $chitietdonhang->dh_thanhtien = $tien_end;
                     $chitietdonhang->dh_trangthai = 1;
                     $chitietdonhang->phuongthucthanhtoan_id = 1;
-                   
+
                     $chitietdonhang->save();
                     // dd($chitietdonhang);
-                   
+
                 }
 
                 //CẬP NHẬT THÔNG TIN KHÁCH HÀNG
@@ -718,7 +718,6 @@ class DonhangController extends Controller
                 session()->forget('chitietdonhangs');
                 session()->forget('data_get');
                 session()->forget('total_paypal');
-                
             } catch (\Exception $err) {
                 DB::rollBack();
                 Session::flash('error', 'Đặt Hàng Lỗi, Vui lòng thử lại sau');
@@ -727,8 +726,7 @@ class DonhangController extends Controller
             Session::flash('success', 'Đặt hàng thành công!');
 
             return redirect("/user/order_history");
-        } 
-        else{
+        } else {
             return redirect()
                 ->route('user.processTransaction');
         }
@@ -824,7 +822,7 @@ class DonhangController extends Controller
     // public function update_donhang(Request $req, $id)
     // {
     //     $order = Donhang::find($id);
-       
+
     //     $id_kh = $order->khachhang_id;
     //     $kh = khachhang::where('id', $id_kh)->get();
     //     // dd($kh);
@@ -848,11 +846,11 @@ class DonhangController extends Controller
     //         //     $email->to($name->email, $name->hoten);
     //         // });
 
-        
+
 
 
     //         $order_date = $order->dh_thoigiandathang;
-           
+
     //         $thongke = ThongKe::where('tk_Ngay',$order_date)->get();
 
     //         if($thongke){
@@ -860,16 +858,16 @@ class DonhangController extends Controller
     //         }else{
     //             $thongke_dem = 0;
     //         }
-    
+
     //         $total_order = 0; //tong so luong don
     //         $sales = 0; //doanh thu
     //         $profit = 0; //loi nhuan
     //         $quantity = 0; //so luong
-    
+
     //         $a =$order->id;
     //         $ctdh = Chitietdonhang::where('donhang_id',$a)->get();
-          
-           
+
+
     //         foreach ($ctdh as $detail){
     //             $product = $detail->product;
     //             $quantity += $detail->ctdh_soluong;
@@ -879,7 +877,7 @@ class DonhangController extends Controller
     //             // dd($profit);
     //         }
     //         $total_order += 1;
-    
+
     //         if($thongke_dem > 0){
     //             $thongke_capnhat = ThongKe::where('tk_Ngay',$order_date)->first();
     //             $thongke_capnhat->tk_TongTien = $thongke_capnhat->tk_TogTien + $sales;
@@ -909,11 +907,11 @@ class DonhangController extends Controller
         $trangthaidonhang = Donhang::find($id)
             ->update(
                 ['dh_trangthai' => 4],
-        );
+            );
         // if( $trangthaidonhang = true){
         //     $order = Donhang::find($id);
         //     $order_date = $order->dh_thoigiandathang;
-           
+
         //     $thongke = ThongKe::where('tk_Ngay',$order_date)->get();
 
         //     if($thongke){
@@ -921,16 +919,16 @@ class DonhangController extends Controller
         //     }else{
         //         $thongke_dem = 0;
         //     }
-    
+
         //     $total_order = 0; //tong so luong don
         //     $sales = 0; //doanh thu
         //     $profit = 0; //loi nhuan
         //     $quantity = 0; //so luong
-    
+
         //     $a =$order->id;
         //     $ctdh = Chitietdonhang::where('donhang_id',$a)->get();
-          
-           
+
+
         //     foreach ($ctdh as $detail){
         //         $product = $detail->product;
         //         $quantity += $detail->ctdh_soluong;
@@ -940,7 +938,7 @@ class DonhangController extends Controller
         //         // dd($profit);
         //     }
         //     $total_order += 1;
-    
+
         //     if($thongke_dem > 0){
         //         $thongke_capnhat = ThongKe::where('tk_Ngay',$order_date)->first();
         //         $thongke_capnhat->tk_TongTien = $thongke_capnhat->tk_TogTien + $sales;
@@ -960,7 +958,7 @@ class DonhangController extends Controller
         //         $thongke_moi->save();
         //     }
         // }
-        
+
 
         Session::flash('success', 'Bạn đã nhận đơn hàng thành công!');
         return redirect('user/order_history');

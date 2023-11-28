@@ -3,14 +3,14 @@
 @section('content')
 <form class="bg0 p-t-50" method="post">
 
-    
+
 
 
     @if (count($products) != 0)
     <div class="container">
-    <div style="width: 100%; text-align:center; ">
-        @include('admin.alert')
-    </div>
+        <div style="width: 100%; text-align:center; ">
+            @include('admin.alert')
+        </div>
         <h1 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;color:brown ;font-weight:600; font-style:italic; margin-top:0px"><i class="zmdi zmdi-shopping-cart"></i> Giỏ hàng của bạn </h1>
         <div class="row">
             <div class="col-lg-10 col-xl-8 ">
@@ -82,7 +82,7 @@
 
 
             <div class="col-sm-10 col-lg-7 col-xl-4">
-                <div class="bor10 p-lr-10 p-t-15 p-b-40 m-l-40 m-r-40 m-lr-0-xl ">
+                <div class="bor10 p-lr-5 p-t-15 p-b-40 m-l-35  m-lr-0-xl ">
 
                     <div class="flex-w flex-t bor12 p-b-13">
                         <div class="size-209">
@@ -93,7 +93,7 @@
 
                         <div class="size-208" style="text-align: right;">
                             <span class="mtext-110 cl2">
-                                {{ number_format($total, 0, '', '.') }}
+                                {{ number_format($total, 0, '', '.') }}đ
                             </span>
                         </div>
                     </div>
@@ -116,22 +116,22 @@
                             @foreach(Session::get('coupon') as $key => $cou)
                             @if ($cou['mgg_loaigiamgia']==1)
                             <div class="row p-1">
-                                <div class="col-6 mtext-110">
+                                <div class="col-6 " style="font-size: 20px;">
                                     Mã giảm giá
                                 </div>
 
-                                <div class="col-6" style="text-align: right;">
+                                <div class="col-6 mtext-110" style="text-align: right;">
                                     {{$cou['mgg_giatrigiamgia']}}%
                                 </div>
                             </div>
 
                             <div class="row p-1">
-                                <div class="col-8 " style=" padding-top: 10px;">
+                                <div class="col-8 " style="font-size:20px; padding-top: 10px;">
                                     Tổng tiền được giảm
                                 </div>
 
                                 <div class="col-4" style="text-align: right;">
-                                    <p>
+                                    <p class="mtext-110">
                                         @php
                                         $total_coupon = ($total*$cou['mgg_giatrigiamgia'])/100;
                                         echo '
@@ -147,7 +147,7 @@
                                     Tiền thanh toán:
                                 </span>
 
-                                <div class="size-208" style="text-align: right;">
+                                <div class="size-208" style="text-align: right; font-size: 20px;">
                                     <span class="mtext-110 cl2">
                                         {{number_format($total - $total_coupon, 0,',','.') }} đ
                                     </span>
@@ -158,22 +158,22 @@
 
                             @elseif($cou['mgg_loaigiamgia']==2)
                             <div class="row p-1">
-                                <div class="col-6 ">
+                                <div class="col-6 " style="font-size: 20px;">
                                     Mã giảm giá
                                 </div>
 
-                                <div class="col-6" style="text-align: right;">
+                                <div class="col-6 mtext-110" style="text-align: right;">
                                     {{number_format($cou['mgg_giatrigiamgia'], 0,',','.') }} đ
                                 </div>
                             </div>
 
-                            <div class="row p-1">
-                                <div class="col-8 " style=" padding-top: 10px;">
+                            <div class="row p-1 ">
+                                <div class="col-8 " style="font-size: 20px; padding-top: 10px;">
                                     Tổng tiền được giảm
                                 </div>
 
-                                <div class="col-4" style="text-align: right;">
-                                    <p>
+                                <div class="col-4" style="text-align: right; font-size: 20px;">
+                                    <p class="mtext-110">
                                         @php
                                         $total_coupon = $cou['mgg_giatrigiamgia'];
                                         echo '
@@ -183,13 +183,13 @@
                                     </p>
                                 </div>
                             </div>
-
+                            <hr class="m-tb-10">
                             <div class="row p-1">
-                                <div class="col-6 ">
+                                <div class="col-6 " style="font-size: 20px;">
                                     Tiền thanh toán
                                 </div>
 
-                                <div class="col-6" style="text-align: right;">
+                                <div class="col-6 mtext-110" style="text-align: right;">
                                     {{number_format($total - $total_coupon, 0,',','.') }} đ
                                 </div>
                             </div>
@@ -198,17 +198,15 @@
                             @endforeach
                             @else
                             <div class="row p-1" style="margin:0px">
-                                <span class="mtext-110 cl2 ">
+                                <span class="col-6" style="font-size: 20px;">
                                     Tiền thanh toán
                                 </span>
 
                                 <!-- <div class="col-5 mtext-110" style="text-align: right;">
                                     {{number_format($total, 0,',','.') }} đ
                                 </div> -->
-                                <div class="size-208 " style="text-align: right; margin-left: 20px;">
-                                    <span class="mtext-110 cl2">
-                                        {{number_format($total, 0,',','.') }}
-                                    </span>
+                                <div class="col-6 mtext-110" style="text-align: right;">
+                                    {{number_format($total, 0,',','.') }}
                                 </div>
                             </div>
                             @endif
@@ -218,19 +216,6 @@
                     </div>
 
 
-                    <!-- <div class="flex-w flex-t p-t-27 p-b-33">
-                        <div class="size-209">
-                            <span class="mtext-101 cl2">
-                                Tiền thanh toán:
-                            </span>
-                        </div>
-
-                        <div class="size-208 p-t-1" style="text-align: right;">
-                            <span class="mtext-110 cl2">
-                            
-                            </span>
-                        </div>
-                    </div> -->
 
                     <a href="/user/checkout" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" type="submit">
                         THANH TOÁN
