@@ -534,10 +534,12 @@ class DonhangController extends Controller
             $request,
             [
                 'sodienthoai' => 'required',
+                // 'diachi_id' => 'required',
 
             ],
             [
                 'sodienthoai.required' => 'Vui lòng nhập số điện thoại',
+                // 'diachi_id.required' => 'Vui lòng chọn địa chỉ giao hàng',
             ]
         );
 
@@ -761,11 +763,13 @@ class DonhangController extends Controller
     public function calculate_fee(Request $request)
     {
         $data = $request->all();
+
+        $diachi = Diachi::where('id', $data['calculate_delivery'])->first();
         // dd($request);
         // if($data['tinh_thanhpho_id']){
-        $feeship = Phivanchuyen::where('tinh_thanhpho_id', $data['tinh_thanhpho_id'])
-            ->where('quan_huyen_id', $data['quan_huyen_id'])
-            ->where('xa_phuong_thitran_id', $data['xa_phuong_thitran_id'])->first();
+        $feeship = Phivanchuyen::where('tinh_thanhpho_id', $diachi['tinh_thanhpho_id'])
+            ->where('quan_huyen_id', $diachi['quan_huyen_id'])
+            ->where('xa_phuong_thitran_id', $diachi['xa_phuong_thitran_id'])->first();
         // foreach($feeship as $key => $fee){
         //     Session::put('fee',$fee->pvc_phivanchuyen);
         //     Session::save();

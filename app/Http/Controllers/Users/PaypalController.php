@@ -159,17 +159,15 @@ class PaypalController extends Controller
 
                 $idkh = Auth('web')->user()->id;
 
+
                 // $id_dc = $request->diachi_id;
-              
                 // $dc = DiaChi::find($id_dc);
                 // $dh_diachigiaohang = $dc->dc_diachi;
-
                 // $id_xa = $dc->xa_phuong_thitran_id;
                 // $pvc = PhiVanChuyen::where('xa_phuong_thitran_id', $id_xa)->get();
                 // $phi = $pvc[0]['pvc_phivanchuyen'];
 
                 $today = Carbon::now()->toDateString();
-
 
 
                 if ($coupons) {
@@ -192,7 +190,7 @@ class PaypalController extends Controller
                     $chitietdonhang->magiamgia_id = $coupons[0]['id'];
                     $chitietdonhang->dh_ghichu = $request->dh_ghichu;
                     $chitietdonhang->dh_giamgia = $coupons[0]['mgg_magiamgia'];
-                    $chitietdonhang->dh_diachigiaohang = 1;
+                    $chitietdonhang->dh_diachigiaohang = 'An Thành Tây, Vũng Liêm, Vĩnh Long';
                     // $chitietdonhang->dh_diachigiaohang = $dh_diachigiaohang;
                     $chitietdonhang->dh_thoigiandathang = $today;
                     $chitietdonhang->dh_thanhtien = $tien_end;
@@ -214,7 +212,7 @@ class PaypalController extends Controller
                     $chitietdonhang = new Donhang;
                     $chitietdonhang->khachhang_id = $idkh;
                     $chitietdonhang->dh_ghichu = $request->dh_ghichu;
-                    $chitietdonhang->dh_diachigiaohang = 1;
+                    $chitietdonhang->dh_diachigiaohang = 'An Thành Tây, Vũng Liêm, Vĩnh Long';
                     // $chitietdonhang->dh_diachigiaohang = $dh_diachigiaohang;
                     $chitietdonhang->dh_thoigiandathang = $today;
                     $chitietdonhang->dh_thanhtien = $tien_end;

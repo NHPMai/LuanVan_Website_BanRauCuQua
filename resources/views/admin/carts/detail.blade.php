@@ -71,10 +71,10 @@
 
         </tbody>
     </table>
-    <div class="col-md-12" style="margin-bottom: 50px;">
+    <div class="col-md-12" style="margin-bottom: 10px;">
         <form action="" method="post">
             {{ csrf_field() }}
-            <div class="col-md-8"></div>
+            <!-- <div class="col-md-8"></div> -->
             <div class="col-md-4">
 
                 <div class="form-inline">
@@ -96,6 +96,10 @@
         <!-- <button type="button" class="btn btn-default btn-sm">
           <span class="glyphicon glyphicon-chevron-left"></span> 
         </button> -->
+    </div>
+
+    <div class="m-1">
+        <a href="/admin/customers" class="btn btn-secondary text-start" data-abc="true"> <i class="fa fa-chevron-left"></i> Quay lại</a>
     </div>
 
     <div>

@@ -23,7 +23,7 @@
   <div class="login-box">
     <div class="login-logo">
 
-      <a href="#" style="font-family: arial"><b>ĐĂNG NHẬP</b></a>
+      <a href="#" style="font-size:45px; font-weight:700"><b>ĐĂNG NHẬP</b></a>
       <i class="fa-sharp fa-solid fa-right-to-bracket"></i>
     </div>
     <!-- /.login-logo -->

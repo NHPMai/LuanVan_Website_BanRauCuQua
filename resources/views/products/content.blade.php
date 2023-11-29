@@ -83,6 +83,14 @@
                     </p>
 
                     <p class="p-t-5" style="font-size:20px; font-weight:500">
+                        Danh mục: {{ $product->menu->name }}
+                    </p>
+
+                    <p class="p-t-5" style="font-size:20px; font-weight:500">
+                        Thương hiệu: {{ $product->brand->ten }}
+                    </p>
+
+                    <p class="p-t-5" style="font-size:20px; font-weight:500">
                         Số lượng sản phẩm: {{ $product->soluongsp }} kg
                     </p>
 

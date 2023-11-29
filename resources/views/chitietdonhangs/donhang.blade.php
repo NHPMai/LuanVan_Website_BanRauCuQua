@@ -54,11 +54,20 @@
 
                 <div class="form-group">
                     <label for="menu" style="font-size: medium; ">Địa chỉ</label>
-                    <select class="form-control" name="diachi_id" style="height: 35px; font-size: medium">
+                    <select class="form-control calculate_delivery" name="diachi_id" style="height: 35px; font-size: medium">
+                        <option value="" style="font-size: medium;" >-----Chọn-----</option>
                         @foreach($diachi as $dc)
-                        <option value="{{ $dc->id }}" style="font-size: medium;">{{ $dc->dc_diachi . ',' . $dc->xa_phuong_thitran->xa_ten . ', ' . $dc->quan_huyen->qh_ten . ', ' . $dc->tinh_thanhpho->tp_ten  }}</option>
+                        <option  value="{{ $dc->id }}" style="font-size: medium;" >{{ $dc->dc_diachi . ',' . $dc->xa_phuong_thitran->xa_ten . ', ' . $dc->quan_huyen->qh_ten . ', ' . $dc->tinh_thanhpho->tp_ten  }}</option>
                         @endforeach
                     </select>
+
+
+                    <!-- <select class="form-control " name="diachi_id" style="height: 35px; font-size: medium">
+                        <option value="" style="font-size: medium;" >-----Chọn-----</option>
+                        @foreach($diachi as $dc)
+                        <option  value="{{ $dc->id }}" style="font-size: medium;" >{{ $dc->dc_diachi . ',' . $dc->xa_phuong_thitran->xa_ten . ', ' . $dc->quan_huyen->qh_ten . ', ' . $dc->tinh_thanhpho->tp_ten  }}</option>
+                        @endforeach
+                    </select> -->
                 </div>
 
                 <div>
@@ -171,7 +180,7 @@
 
                             <div class="size-208 m-b-10" style="text-align: right;">
                                 <span class="mtext-110 cl2 phivanchuyen" id="phivanchuyen">
-                                    1111111111
+                                    
                                 </span>
                             </div>
 

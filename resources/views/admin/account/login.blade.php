@@ -23,7 +23,7 @@
   <div class="login-box">
     <div class="login-logo">
 
-      <a href="#" style="font-family: arial; font-weight:bold ; color:white"><b>ĐĂNG NHẬP QUẢN TRỊ VIÊN</b></a>
+      <a href="#" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size:45px ;font-weight:700 ; color:white"><b>ĐĂNG NHẬP QUẢN TRỊ VIÊN</b></a>
       <i class="fa-sharp fa-solid fa-right-to-bracket"></i>
     </div>
     <!-- /.login-logo -->

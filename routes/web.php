@@ -274,7 +274,7 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::post('check_coupon', [App\Http\Controllers\Users\DonhangController::class, 'check_coupon'])->name('check_coupon');   //Lấy mã giảm giá
         Route::get('delete_coupon', [App\Http\Controllers\Users\DonhangController::class, 'delete_coupon'])->name('delete_coupon'); //Xóa mã giảm giá
 
-        //Phi van chuyen
+        //-----------------------PHÍ VẬN CHUYỂN------------------------------------\\
         Route::post('select_delivery_home', [App\Http\Controllers\Users\DonhangController::class, 'select_delivery_home'])->name('select_delivery_home'); //Chọn nơi vận chuyển
         Route::post('calculate_fee', [App\Http\Controllers\Users\DonhangController::class, 'calculate_fee'])->name('calculate_fee');  //Tính phí vận chuyển
 

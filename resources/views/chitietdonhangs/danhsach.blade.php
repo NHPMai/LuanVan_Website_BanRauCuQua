@@ -197,7 +197,7 @@
 
                             @endforeach
                             @else
-                            <div class="row p-1" style="margin:0px">
+                            <div class="row p-1" style="margin:0px; padding-left:0px">
                                 <span class="col-6" style="font-size: 20px;">
                                     Tiền thanh toán
                                 </span>

@@ -25,13 +25,11 @@ class Product extends Model
 
     public function menu()
     {
-        return $this->hasOne(Menu::class, 'id', 'menu_id')
-            ->withDefault(['ten'=>'']);
+        return $this->hasOne(Menu::class, 'id', 'menu_id');
     }
     public function brand()
     {
-        return $this->hasOne(Brand::class, 'id', 'brand_id')
-            ->withDefault(['ten'=>'']);
+        return $this->hasOne(Brand::class, 'id', 'brand_id');
     }
 
     public function scopeSearch($query){

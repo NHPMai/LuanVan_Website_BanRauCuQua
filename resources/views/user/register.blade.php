@@ -22,7 +22,9 @@
 <body class="hold-transition login-page" style="background-image: url('/template/images/bg7.png') ;">
   <div class="login-box">
     <div class="login-logo">
-      <a class="fas fa-user" style="color:ivory;"><b>&nbsp ĐĂNG KÍ</b></a>
+      <i class="fas fa-user" style="color:ivory;"></i>
+      <a href="#"  style="font-size:45px; font-weight:700; color:ivory; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"><b>ĐĂNG KÍ</b></a>
+      <!-- <a  style="color:ivory;"><b>&nbsp ĐĂNG KÍ</b></a> -->
     </div>
 
     <div class="card">
