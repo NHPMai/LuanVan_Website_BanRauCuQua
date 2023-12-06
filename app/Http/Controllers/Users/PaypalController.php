@@ -228,6 +228,7 @@ class PaypalController extends Controller
                 // $tien = $kh->tongtienmua;
                 // $kh->tongtienmua = $tien + $tien_end;
                 // $kh->save();
+                // dd($kh);
 
                 foreach ($products as $product) {
                     DB::table('chitietdonhangs')->insert([

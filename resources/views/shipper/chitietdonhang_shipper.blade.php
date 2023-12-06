@@ -98,13 +98,20 @@
                     <input type="submit" value="Xác nhận" class="btn btn-primary">
 
                     @elseif( $donhang->dh_trangthai == 3 )
-                    <label>Trạng thái đơn hàng: </label>
-                    <select name="dh_trangthai" class="form-control input-inline" style="width: 150px; margin-right: 10px;">
-                        <option value="3">Đang giao</option>
-                        <option value="4">Giao hàng thành công</option>
-                    </select>
-                    <input type="submit" value="Xác nhận" class="btn btn-primary">
+                    <div class="row">
+                        <label>Trạng thái đơn hàng: </label>
+                        <div class="col-12">
 
+                            <select name="dh_trangthai" class="form-control input-inline" style="width: 150px; margin-right: 10px;">
+                                <option value="3">Đang giao</option>
+                                <option value="4">Giao hàng thành công</option>
+                            </select>
+                            <input type="submit" value="Xác nhận" class="btn btn-primary">
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#huydon" style="font-weight: 700;">
+                                Hủy đơn hàng
+                            </button>
+                        </div>
+                    </div>
 
                     @endif
                 </div>
@@ -112,8 +119,35 @@
         </form>
     </div>
 
-    <div>
+    <!-- Modal--HỦY ĐƠN HÀNG -->
+    <div style="margin-top:200px" class="modal fade" id="huydon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
 
+            <form action="/shipper/huydonhang/{{$donhang->id}}" method="post">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Lý do hủy đơn hàng </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <p><textarea rows="5" name="dh_huy" required placeholder="Lý do hủy đơn hàng... (bắt buộc)" style="width: 456px"></textarea></p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <!-- <button type="submit" id="{{$donhang->id}}" onclick="huydonhang(this.id)" class="btn btn-success" style="margin-top: 0px">Gửi lí do hủy</button> -->
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-success" style="margin-top: 0px">Gửi lí do hủy</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
     </div>
 
 </div>

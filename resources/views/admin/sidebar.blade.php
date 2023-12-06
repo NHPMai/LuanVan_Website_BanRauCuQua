@@ -150,13 +150,13 @@
                         <li class="nav-item">
                             <a href="/admin/menus/add" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm danh mục sản phẩm</p>
+                                <p>Thêm danh mục</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/admin/menus/list" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách danh mục sản phẩm</p>
+                                <p>Danh sách danh mục</p>
                             </a>
                         </li>
 
@@ -253,13 +253,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/admin/staffs/add" class="nav-link">
+                            <a href="/admin/clients/add" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thêm khách hàng</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/staffs/list" class="nav-link">
+                            <a href="/admin/clients/list" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách khách hàng</p>
                             </a>
@@ -277,13 +277,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/admin/staffs/add" class="nav-link">
+                            <a href="/admin/shippers/add" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Thêm giao hàng</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/admin/staffs/list" class="nav-link">
+                            <a href="/admin/shippers/list" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh Sách giao hàng</p>
                             </a>

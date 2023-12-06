@@ -14,8 +14,8 @@ class KhachhangController extends Controller
     public function index()
     {
         $khachhangs = khachhang::orderbyDesc('id')->get();
-        return view('admin.staff.list', [
-            'title' => 'Danh Sách Nhân Viên',
+        return view('admin.client.list', [
+            'title' => 'Danh Sách Khách Hàng',
             'khachhangs' => $khachhangs,
         ]);
     }
@@ -27,7 +27,7 @@ class KhachhangController extends Controller
         $quan_huyen = Quan_huyen::orderby('id', 'ASC')->get();
         $xa_phuong_thitran = Xa_phuong_thitran::orderby('id', 'ASC')->get();
         return view('admin.staff.add', [
-            'title' => 'Thêm Mới Nhân Viên',
+            'title' => 'Thêm Mới Khách Hàng',
             // 'phieunhaps' => $get(),
         ])->with(compact('tinh_thanhpho'))->with(compact('quan_huyen'))->with(compact('xa_phuong_thitran'));;
     }

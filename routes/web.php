@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\MagiamgiaController;
+use App\Http\Controllers\Admin\Shippers\ShipperController as ShippersShipperController;
 use App\Http\Controllers\Admin\VanChuyenController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\Users\KhachhangController;
@@ -69,6 +70,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::DELETE('destroy', [KhachhangController::class, 'destroy']);
         });
 
+
+        // #Giao Hàng
+        Route::prefix('shippers')->group(function () {
+            Route::get('add', [ShippersShipperController::class, 'create']);
+            Route::post('add', [ShippersShipperController::class, 'store']);
+            Route::get('list', [ShippersShipperController::class, 'index']);
+            Route::get('edit/{client}', [ShippersShipperController::class, 'show']);
+            Route::post('edit/{client}', [ShippersShipperController::class, 'update']);
+            Route::DELETE('destroy', [ShippersShipperController::class, 'destroy']);
+        });
+
+
         #Nhân viên
         Route::prefix('staffs')->group(function () {
             Route::get('add', [NhanvienController::class, 'create']);
@@ -122,6 +135,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('edit/{product}', [ProductController::class, 'show']);
             Route::post('edit/{product}', [ProductController::class, 'update']);
             Route::DELETE('destroy', [ProductController::class, 'destroy']);
+
+            Route::get('active/{id}', [ProductController::class, 'active']);
+            Route::get('unactive/{id}', [ProductController::class, 'unactive']);
         });
 
         // #Nha Cung Cap
@@ -174,6 +190,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('customers/view/{donhang}', [\App\Http\Controllers\Admin\CartController::class, 'update'])->name('donhang.update');
         Route::post('customers/{donhang}', [\App\Http\Controllers\Admin\CartController::class, 'update']);
         Route::DELETE('destroy', [\App\Http\Controllers\Admin\CartController::class, 'destroy']);
+        Route::post('huydonhang/{donhang}', [\App\Http\Controllers\Admin\CartController::class, 'huydonhang'])->name('huydonhang');
+
 
         # MÃ GIẢM GIÁ
         Route::prefix('coupons')->group(function () {
@@ -226,6 +244,8 @@ Route::prefix('shipper')->name('shipper.')->group(function () {
         Route::get('donhang_danggiao', [ShipperController::class, 'donhang_danggiao']);
         Route::get('customers/view/{donhang}', [ShipperController::class, 'show']);
         Route::post('customers/view/{donhang}', [ShipperController::class, 'update'])->name('update');
+        Route::post('huydonhang/{donhang}', [ShipperController::class, 'huydonhang'])->name('huydonhang');
+
 
         #TÌM KIẾM GIỌNG NÓI_SẢN PHẨM
         // Route::get('/searchProductMicrophone', [ProductController::class, 'searchProductMicrophone']);
@@ -294,7 +314,11 @@ Route::prefix('user')->name('user.')->group(function () {
 
         Route::get('order_history', [\App\Http\Controllers\Users\DonhangController::class, 'order_history'])->name('order_history');
         Route::get('order_history_detail/{donhang}', [\App\Http\Controllers\Users\DonhangController::class, 'order_history_detail'])->name('order_history_detail');
-        Route::get('order_update/{donhang}', [\App\Http\Controllers\Users\DonhangController::class, 'update_donhang']);
+        // Route::get('order_update/{donhang}', [\App\Http\Controllers\Users\DonhangController::class, 'update_donhang']);
+        // Route::get('order_cancle/{donhang}', [\App\Http\Controllers\Users\DonhangController::class, 'huydonhang']);
+        Route::post('huydonhang/{donhang}', [\App\Http\Controllers\Users\DonhangController::class, 'huydonhang'])->name('huydonhang');
+        Route::post('binhluandonhang', [\App\Http\Controllers\Users\DonhangController::class, 'binhluandonhang'])->name('binhluandonhang');
+
 
         //Tài khoản
         Route::get('account', [\App\Http\Controllers\Users\TaikhoanController::class, 'account'])->name('account');

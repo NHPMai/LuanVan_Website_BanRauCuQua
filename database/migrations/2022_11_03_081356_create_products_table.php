@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('soluongsp');
             $table->integer('soluongban');
             $table->integer('hoatdong');
-            $table->integer('luotxem');
+            $table->integer('an');
             $table->unsignedBigInteger('menu_id');
             $table->unsignedBigInteger('brand_id');
             $table->foreign('menu_id')

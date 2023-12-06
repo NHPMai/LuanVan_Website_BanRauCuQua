@@ -561,6 +561,29 @@
 	});
 </script>
 
+
+
+<!--********************------------HỦY ĐƠN HÀNG-----------**********************-->
+<script type="text/javascript">
+	function binhluandonhang(id){
+		var id = id;
+		var binhluandonhang = $('.binhluandonhang').val();
+		var _token = $('input[name="_token"]').val();
+		$.ajax({
+			url: "{{url('/user/binhluandonhang')}}",
+			method: "POST",
+
+			data:{id:id, binhluandonhang:binhluandonhang, _token:_token},
+			success:function(data){
+				alert('Bình luận đơn hàng thành công');
+				location.reload();
+			}
+		})
+	}
+</script>
+
+
+
 <!--********************------------CHAT BOX-----------**********************-->
 
 <!-- Messenger Plugin chat Code -->

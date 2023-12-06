@@ -24,17 +24,6 @@ class Chitietphieunhap extends Model
     public function products()
     {
         return $this->belongsTo(Product::class, 'product_id');
-            // ->withDefault(['ten'=>'']);
     }
 
-    // public function sanpham()
-    // {
-    //     return $this->belongsTo(SanPham::class, 'san_pham_id');
-    // }
-    
-    // public function nhacungcap()
-    // {
-    //     return $this->hasOne(Nhacungcap::class, 'id', 'nhacungcap_id')
-    //         ->withDefault(['name'=>'']);
-    // }
 }

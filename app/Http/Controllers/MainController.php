@@ -34,6 +34,7 @@ class MainController extends Controller
     public function index()
     {
         $brand_product = DB::table('brands')->where('hoatdong','1')->orderBy('id','desc')->get();
+        
         if(isset($_GET['sort_by'])){
             $sort_by = $_GET['sort_by'];
             if ($sort_by == 'gia_giam_dan'){

@@ -109,173 +109,173 @@
 
   /* cuc */
   body {
-            background-color:
-                #eeeeee;
-            font-family: 'Open Sans', serif
-        }
+    background-color:
+      #eeeeee;
+    font-family: 'Open Sans', serif
+  }
 
-        .container_order {
-            margin-top: 50px;
-            margin-bottom: 50px
-        }
+  .container_order {
+    margin-top: 50px;
+    margin-bottom: 50px
+  }
 
-        .card {
-            position:
-                relative;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction:
-                normal;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            min-width: 0;
-            word-wrap: break-word;
-            background-color:
-                #fff;
-            background-clip: border-box;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius:
-                0.10rem
-        }
+  .card {
+    position:
+      relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction:
+      normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color:
+      #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius:
+      0.10rem
+  }
 
-        .card-header:first-child {
-            border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0
-        }
+  .card-header:first-child {
+    border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0
+  }
 
-        .card-header {
-            padding:
-                0.75rem 1.25rem;
-            margin-bottom: 0;
-            background-color: #fff;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-        }
+  .card-header {
+    padding:
+      0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+  }
 
-        .track {
-            position:
-                relative;
-            background-color: #ddd;
-            height: 7px;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            margin-bottom:
-                60px;
-            margin-top: 50px
-        }
+  .track {
+    position:
+      relative;
+    background-color: #ddd;
+    height: 7px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom:
+      60px;
+    margin-top: 50px
+  }
 
-        .track .step {
-            -webkit-box-flex: 1;
-            -ms-flex-positive: 1;
-            flex-grow: 1;
-            width: 25%;
-            margin-top:
-                -18px;
-            text-align: center;
-            position: relative
-        }
+  .track .step {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    width: 25%;
+    margin-top:
+      -18px;
+    text-align: center;
+    position: relative
+  }
 
-        .track .step.active:before {
-            background: #FF5722
-        }
+  .track .step.active:before {
+    background: #FF5722
+  }
 
-        .track .step::before {
-            height: 7px;
-            position: absolute;
-            content: "";
-            width: 100%;
-            left: 0;
-            top: 18px
-        }
+  .track .step::before {
+    height: 7px;
+    position: absolute;
+    content: "";
+    width: 100%;
+    left: 0;
+    top: 18px
+  }
 
-        .track .step.active .icon {
-            background: #ee5435;
-            color: #fff
-        }
+  .track .step.active .icon {
+    background: #ee5435;
+    color: #fff
+  }
 
-        .track .icon {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height:
-                40px;
-            position: relative;
-            border-radius: 100%;
-            background: #ddd
-        }
+  .track .icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height:
+      40px;
+    position: relative;
+    border-radius: 100%;
+    background: #ddd
+  }
 
-        .track .step.active .text {
-            font-weight: 400;
-            color:
-                #000
-        }
+  .track .step.active .text {
+    font-weight: 400;
+    color:
+      #000
+  }
 
-        .track .text {
-            display: block;
-            margin-top: 7px
-        }
+  .track .text {
+    display: block;
+    margin-top: 7px
+  }
 
-        .itemside {
-            position: relative;
-            display: -webkit-box;
-            display:
-                -ms-flexbox;
-display: flex;
-            width: 100%
-        }
+  .itemside {
+    position: relative;
+    display: -webkit-box;
+    display:
+      -ms-flexbox;
+    display: flex;
+    width: 100%
+  }
 
-        .itemside .aside {
-            position: relative;
-            -ms-flex-negative: 0;
-            flex-shrink:
-                0
-        }
+  .itemside .aside {
+    position: relative;
+    -ms-flex-negative: 0;
+    flex-shrink:
+      0
+  }
 
-        .img-sm {
-            width: 80px;
-            height: 80px;
-            padding: 7px
-        }
+  .img-sm {
+    width: 80px;
+    height: 80px;
+    padding: 7px
+  }
 
-        ul.row,
-        ul.row-sm {
-            list-style: none;
-            padding: 0
-        }
+  ul.row,
+  ul.row-sm {
+    list-style: none;
+    padding: 0
+  }
 
-        .itemside .info {
-            padding-left: 15px;
-            padding-right: 7px
-        }
+  .itemside .info {
+    padding-left: 15px;
+    padding-right: 7px
+  }
 
-        .itemside .title {
-            display: block;
-            margin-bottom: 5px;
-            color:
-                #212529
-        }
+  .itemside .title {
+    display: block;
+    margin-bottom: 5px;
+    color:
+      #212529
+  }
 
-        p {
-            margin-top: 0;
-            margin-bottom: 1rem
-        }
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem
+  }
 
-        .btn-warning {
-            color: #ffffff;
-            background-color: #ee5435;
-            border-color:
-                #ee5435;
-            border-radius: 1px
-        }
+  .btn-warning {
+    color: #ffffff;
+    background-color: #ee5435;
+    border-color:
+      #ee5435;
+    border-radius: 1px
+  }
 
-        .btn-warning:hover {
-            color: #ffffff;
-            background-color: #ff2b00;
-            border-color:
-                #ff2b00;
-            border-radius: 1px
-        }
+  .btn-warning:hover {
+    color: #ffffff;
+    background-color: #ff2b00;
+    border-color:
+      #ff2b00;
+    border-radius: 1px
+  }
 </style>
 
 <section class="vh-100" style="background-color: #8c9eff; font-size:medium">
@@ -283,22 +283,49 @@ display: flex;
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 p-t-20">
         <div class="card card-stepper text-black" style="border-radius: 16px;">
-        
+
           <div class="card-body p-5">
-         
+
             <div class="d-flex justify-content-between align-items-center mb-5">
               <div>
                 <h3 class="mb-0"> Thông tin chi tiết của đơn hàng ID: <span class="text-primary font-weight-bold">{{$donhang->id}}</span></h>
               </div>
               @if ($donhang->dh_trangthai == 1 )
-              <div class="text-end">
-                <a href="#" class="btn btn-warning" data-abc="true" style="font-weight: 600;"> <i class="fa fa-remove"></i> Hủy đơn hàng</a>
-              </div>
+              <!-- <div class="text-end">
+                <a href="/user/order_cancle/{{$donhang->id}}" class="btn btn-warning" data-abc="true" style="font-weight: 600;"> <i class="fa fa-remove"></i> Hủy đơn hàng</a>
+              </div> -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#huydon">
+                <i class="fa fa-remove"></i> Hủy đơn hàng
+              </button>
+
+
               @elseif ($donhang->dh_trangthai == 3 )
               <div class="text-end">
-                <!-- <a href="shipper/order_history/{{$donhang->id}}" class="btn btn-success" data-abc="true" style="font-weight: 600;"> <i class="fa fa-check"></i> Đã nhận</a> -->
                 <a href="/user/order_update/{{$donhang->id}}" class="btn btn-success" data-abc="true" style="font-weight: 600;"> <i class="fa fa-check"></i> Đã nhận</a>
               </div>
+
+              @elseif ($donhang->dh_trangthai == 4 && $donhang->dh_binhluan == '')
+              <!-- <div class="text-end">
+                <a href="/user/order_cancle/{{$donhang->id}}" class="btn btn-warning" data-abc="true" style="font-weight: 600;"> <i class="fa fa-remove"></i> Hủy đơn hàng</a>
+              </div> -->
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#binhluandonhang" style="font-weight: 700;">
+                Bình luận đơn hàng
+              </button>
+
+              @elseif ($donhang->dh_trangthai == 4)
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#xembinhluandonhang" style="font-weight: 700;">
+                Xem bình luận đơn hàng
+              </button>
+
+              @elseif ($donhang->dh_trangthai == 5 && $donhang->dh_huy == '')
+              <div class="text-end">
+                <a href="" class="btn btn-warning" data-abc="true" style="font-weight: 600;"> Đơn hàng đã hủy</a>
+              </div>
+              @elseif ($donhang->dh_trangthai == 5)
+              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#xemlido" style="font-weight: 700;">
+                Xem lí do hủy đơn
+              </button>
+
               @endif
             </div>
 
@@ -308,13 +335,15 @@ display: flex;
                 <div class="col"> <strong>Giao bởi:</strong> <br> Chưa xác định, | <i class="fa fa-phone"></i> {{$donhang->khachhangs->sodienthoai}} </div>
                 <div class="col"> <strong>Trạng thái:</strong> <br>
                   @if ($donhang->dh_trangthai == 1)
-                      Chờ duyệt
+                  Chờ duyệt
                   @elseif ($donhang->dh_trangthai == 2)
-                      Đã duyệt
+                  Đã duyệt
                   @elseif ($donhang->dh_trangthai == 3)
-                      Đang vận chuyển
+                  Đang vận chuyển
                   @elseif ($donhang->dh_trangthai == 4)
-                      Giao hàng thành công
+                  Giao hàng thành công
+                  @elseif ($donhang->dh_trangthai == 5)
+                  Đơn hàng đã hủy
                   @endif
                 </div>
                 <div class="col"> <strong>Theo dõi #:</strong> <br>{{$donhang->id}}</div>
@@ -322,27 +351,27 @@ display: flex;
             </article>
 
             @php
-              $status_confirmed = '';
-              $status_picked = '';
-              $status_way = '';
-              $status_ready = '';
+            $status_confirmed = '';
+            $status_picked = '';
+            $status_way = '';
+            $status_ready = '';
 
-              if ($donhang->dh_trangthai == 4) {
-                  $status_confirmed = 'active';
-                  $status_picked = 'active';
-                  $status_way = 'active';
-                  $status_ready = 'active';
-              } elseif ($donhang->dh_trangthai == 3) {
-                  $status_confirmed = 'active';
-                  $status_picked = 'active';
-                  $status_way = 'active';
-              } elseif ($donhang->dh_trangthai == 2) {
-                  $status_confirmed = 'active';
-                  $status_picked = 'active';
-              } else {
-                  $status_confirmed = 'active';
-              }
-          @endphp
+            if ($donhang->dh_trangthai == 4) {
+            $status_confirmed = 'active';
+            $status_picked = 'active';
+            $status_way = 'active';
+            $status_ready = 'active';
+            } elseif ($donhang->dh_trangthai == 3) {
+            $status_confirmed = 'active';
+            $status_picked = 'active';
+            $status_way = 'active';
+            } elseif ($donhang->dh_trangthai == 2) {
+            $status_confirmed = 'active';
+            $status_picked = 'active';
+            } else {
+            $status_confirmed = 'active';
+            }
+            @endphp
 
             <ul id="progressbar-2" class="d-flex justify-content-between mx-0 mt-0 mb-5 px-0 pt-5 pb-2">
               <li class="step0 {{ $status_confirmed }} text-center" id="step1"></li>
@@ -383,9 +412,9 @@ display: flex;
             </div>
 
           </div>
-         
+
           <div class="p-5">
-          @php $total = 0; @endphp
+            @php $total = 0; @endphp
             @foreach($chitietdonhangs as $key => $chitietdonhang)
             @php
             $price = $chitietdonhang->ctdh_gia * $chitietdonhang->ctdh_soluong;
@@ -396,9 +425,11 @@ display: flex;
                 <img src="{{ $chitietdonhang->product->hinhanh}}" alt="IMG" style="width: 100px">
               </div>
               <div class="col-10 info align-self-center">
-             
-                <p class="title" style="font-size: larger; font-weight:700"> <br> {{ $chitietdonhang->product->ten}}</p> <span class="text-muted">{{ $chitietdonhang->product->gia}} </span>
-             
+
+                <p class="title" style="font-size: larger; font-weight:700"> <br> {{ $chitietdonhang->product->ten}}</p> 
+                <span class="text-muted">{{ number_format($chitietdonhang->product->gia, 0, '', '.') }} đ &nbsp</span>
+                <span class="text-muted"> x &nbsp {{ $chitietdonhang->ctdh_soluong }}</span>
+
               </div>
             </div>
             @endforeach
@@ -409,20 +440,120 @@ display: flex;
               </div>
 
               <div class="col-6">
-                <h4 class="mb-0" style="text-align: right;">Tổng tiền: <span>{{$donhang->dh_thanhtien}}</span> VNĐ</h4>
+                <h4 class="mb-0" style="text-align: right;">Tổng tiền: <span>{{ number_format($donhang->dh_thanhtien, 0, '', '.') }}</span> VNĐ</h4>
               </div>
 
             </div>
-
-
           </div>
-
-        
         </div>
-
       </div>
     </div>
   </div>
+
+  <!-- Modal--HỦY ĐƠN HÀNG -->
+  <div style="margin-top:200px" class="modal fade" id="huydon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+      <form action="/user/huydonhang/{{$donhang->id}}" method="post">
+        @csrf
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Lý do hủy đơn hàng </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <p><textarea rows="5" name="dh_huy" required placeholder="Lý do hủy đơn hàng... (bắt buộc)"></textarea></p>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <!-- <button type="submit" id="{{$donhang->id}}" onclick="huydonhang(this.id)" class="btn btn-success" style="margin-top: 0px">Gửi lí do hủy</button> -->
+            <div class="text-end">
+              <button type="submit" class="btn btn-success" style="margin-top: 0px">Gửi lí do hủy</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+   <!-- Modal--XEM LÍ DO HỦY ĐƠN HÀNG-->
+   <div style="margin-top:200px" class="modal fade" id="xemlido" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        @csrf
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Xem lí do hủy đơn hàng </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <p><textarea rows="5"  placeholder="Bình luận đơn hàng... (bắt buộc)" disabled>{{$donhang->dh_huy}}</textarea></p>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+    </div>
+  </div>
+
+
+  <!-- Modal--BÌNH LUẬN ĐƠN HÀNG-->
+  <div style="margin-top:200px" class="modal fade" id="binhluandonhang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form>
+        @csrf
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Bình luận đơn hàng </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <p><textarea rows="5" class="binhluandonhang" required placeholder="Bình luận đơn hàng... (bắt buộc)"></textarea></p>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button type="button" id="{{$donhang->id}}" onclick="binhluandonhang(this.id)" class="btn btn-success" style="margin-top: 0px">Gửi bình luận</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal--XEM BÌNH LUẬN ĐƠN HÀNG-->
+  <div style="margin-top:200px" class="modal fade" id="xembinhluandonhang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        @csrf
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Xem bình luận đơn hàng </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <p><textarea rows="5" placeholder="Bình luận đơn hàng... (bắt buộc)" disabled>{{$donhang->dh_binhluan}}</textarea></p>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+    </div>
+  </div>
+
 </section>
 
 @endsection

@@ -51,21 +51,23 @@
 
                 <div class="right-top-bar flex-w h-full p-l-280">
                     <a href="{{URL::to('/user/order-detail')}}" class="flex-c-m trans-04 p-lr-25">
-                       Giỏ hàng
+                        Giỏ hàng
                     </a>
 
-                    
+
                     <a href="{{URL::to('/user/order_history')}}" class="flex-c-m trans-04 p-lr-25">
                         Lịch sử đặt hàng
                     </a>
 
+                    @if (Auth::check())
                     <a href="{{URL::to('/user/account')}}" class="flex-c-m trans-04 p-lr-25">
                         Tài khoản
                     </a>
-
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
+                    @else
+                    <a href="{{asset('user/login')}}" class="flex-c-m trans-04 p-lr-25">
                         Đăng nhập
                     </a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -95,27 +97,23 @@
                 <div class="menu-desktop">
                     <ul class="main-menu">
                         <li class="active-menu">
-                            <a href="/">Home</a>
-                        </li>
-
-                        <li>
-                            <a href="shop">Shop</a>
+                            <a href="/">Trang chủ</a>
                         </li>
 
                         <li class="label1" data-label1="hot">
-                            <a href="shoping-cart.html">Features</a>
+                            <a href="shop">Sản phẩm</a>
                         </li>
 
                         <li>
-                            <a href="blog.html">Blog</a>
+                            <a href="blog.html">Giới thiệu</a>
                         </li>
 
                         <li>
-                            <a href="about.html">About</a>
+                            <a href="about.html">Tin tức</a>
                         </li>
 
                         <li>
-                            <a href="contact.html">Contact</a>
+                            <a href="contact.html">Liên hệ</a>
                         </li>
                     </ul>
                 </div>
@@ -197,7 +195,7 @@
                                 <i class="fas fa-user"></i>
                             </button>
 
-                            <div  style="weight:200px" class="dropdown-menu" role="menu">
+                            <div style="weight:215px" class="dropdown-menu" role="menu">
 
                                 @if (Auth::check())
                                 <a>{{ Auth('web')->user()->hoten }}</a>
@@ -324,5 +322,3 @@
         $('#search_ajax').fadeOut();
     })
 </script> -->
-
-

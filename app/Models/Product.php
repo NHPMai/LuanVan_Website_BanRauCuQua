@@ -18,7 +18,7 @@ class Product extends Model
         'soluongsp',
         'soluongban',
         'hoatdong',
-        'luotxem',
+        'an',
         'menu_id',
         'brand_id',
     ];

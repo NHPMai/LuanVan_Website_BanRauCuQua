@@ -15,16 +15,17 @@ class Chitietdonhang extends Model
         'ctdh_soluong',
         'ctdh_gia'
     ];
-    public function product()
-    {
-        return $this->hasOne(Product::class, 'id', 'product_id');
-            // ->withDefault(['ten'=>''])
-            // ->withDefault(['hinhanh'=>'']);
-    }
+    // public function product()
+    // {
+    //     return $this->hasOne(Product::class, 'id', 'product_id');
+          
+    // }
     public function donhang()
     {
         return $this->hasOne(Donhang::class, 'id', 'donhang_id');
-            // ->withDefault(['ten'=>''])
-            // ->withDefault(['hinhanh'=>'']);
+    }
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }

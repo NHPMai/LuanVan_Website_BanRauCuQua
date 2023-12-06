@@ -6,7 +6,9 @@ $.ajaxSetup({
 
 function loadMore()
 {
+    
     const page = $('#page').val();
+    
     $.ajax({
         type : 'POST',
         dataType : 'JSON',

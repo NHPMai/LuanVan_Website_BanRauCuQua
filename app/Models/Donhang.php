@@ -41,22 +41,17 @@ class Donhang extends Model
         return $this->hasOne(khachhang::class, 'id', 'khachhang_id')
             ->withDefault(['hoten'=>''])
             ->withDefault(['sodienthoai'=>'']);
-            // ->withDefault(['email'=>''])
-            // ->withDefault(['diachi'=>'']);
     }
 
     public function phuongthucthanhtoans()
     {
         return $this->hasOne(Phuongthucthanhtoan::class, 'id', 'phuongthucthanhtoan_id');
-            // ->withDefault(['hoten'=>''])
-            // ->withDefault(['sodienthoai'=>'']);
-            // ->withDefault(['email'=>''])
-            // ->withDefault(['diachi'=>'']);
     }
 
     public function nhanviens()
     {
-        return $this->hasOne(Nhanvien::class, 'id', 'nhanvien_id');
+        return $this->hasOne(Nhanvien::class, 'id', 'nhanvien_id')
+        ->withDefault(['hoten'=>'']);
     }
     
 }

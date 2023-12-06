@@ -1,11 +1,9 @@
-
-
 @extends('admin.main')
 
 
 @section('content')
 <!-- <p style="font-weight:bold; font-size: 20px; ">Tổng Số Sản Phẩm: </p> -->
-<table class="table pt-2" id="myTable">
+<table class="table pt-2" >
     <thead style="background-color:blanchedalmond;">
         <tr>
             <th style="width: 30px; text-align: center;vertical-align: middle; border: 1px solid LightGray;">ID</th>
@@ -38,9 +36,19 @@
                 <a class="btn btn-primary btn-sm" href="/admin/products/edit/{{ $product->id }}">
                     <i class="fas fa-edit"></i>
                 </a>
-                <a href="#" class="btn btn-danger btn-sm" onclick="removeRow( {{ $product->id }} ,'/admin/products/destroy')">
+                <!-- <a href="#" class="btn btn-danger btn-sm" onclick="removeRow( {{ $product->id }} ,'/admin/products/destroy')">
                     <i class="fas fa-trash"></i>
+                </a> -->
+
+                @if ( $product->an == 1 )
+                <a class="btn btn-success btn-sm" href="/admin/products/unactive/{{$product->id}}" onclick='return confirm("Bạn chắc chắn khóa không?")'>
+                    <i class="fas fa-lock-open"></i>
                 </a>
+                @elseif ( $product->an == 0 )
+                <a   href="/admin/products/active/{{$product->id}}" class="btn btn-danger btn-sm" onclick='return confirm("Bạn chắc chắn mở khóa không?")'>
+                    <span class="fas fa-lock" style="font-size: 15px;color: white; font-weight: bold"></span>
+                </a>
+                @endif
 
             </td>
         </tr>
@@ -48,6 +56,6 @@
     </tbody>
 </table>
 
-
+{!! $products->links() !!}
 
 @endsection

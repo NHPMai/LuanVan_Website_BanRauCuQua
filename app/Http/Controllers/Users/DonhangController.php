@@ -545,9 +545,11 @@ class DonhangController extends Controller
 
         //$this->cartService->getCart($request);
         $phuong_thuc_thanh_toan_id = $request->input('payment_select');
+        // dd($phuong_thuc_thanh_toan_id);
 
 
         if ($phuong_thuc_thanh_toan_id == 1) {
+
             try {
                 DB::beginTransaction();
                 $total = 0;
@@ -643,7 +645,7 @@ class DonhangController extends Controller
                 if ($coupons) {
                     foreach ($coupons as $key => $cou)
                         if ($cou['mgg_loaigiamgia'] == 1) {
-                            $total_coupon = ($total * $cou['mgg_giatrigiamgia']) / 100 ;
+                            $total_coupon = ($total * $cou['mgg_giatrigiamgia']) / 100;
                             $tien_end = $total - $total_coupon + $phi;
                             // dd($tien_end);
                         } elseif ($cou['mgg_loaigiamgia'] == 2) {
@@ -659,7 +661,7 @@ class DonhangController extends Controller
                     $chitietdonhang->dh_giamgia = $coupons[0]['mgg_magiamgia'];
                     $chitietdonhang->dh_diachigiaohang = $dh_diachigiaohang;
                     $chitietdonhang->dh_thoigiandathang = $today;
-                    $chitietdonhang->dh_thanhtien = $tien_end ;
+                    $chitietdonhang->dh_thanhtien = $tien_end;
                     $chitietdonhang->dh_trangthai = 1;
                     $chitietdonhang->phuongthucthanhtoan_id = 1;
                     $chitietdonhang->save();
@@ -672,8 +674,8 @@ class DonhangController extends Controller
                     MaGiamGia::where('id', $cou['id'])
                         ->update(['mgg_soluongma' => $newSoLuongMa]);
                 } else {
-                    $tien_end = $total + $phi ;
-                    
+                    $tien_end = $total + $phi;
+
 
                     $chitietdonhang = new Donhang;
                     $chitietdonhang->khachhang_id = $idkh;
@@ -729,6 +731,9 @@ class DonhangController extends Controller
 
             return redirect("/user/order_history");
         } else {
+            // $chitietdonhangs = Session::get('chitietdonhangs');
+            // dd($chitietdonhangs);
+
             return redirect()
                 ->route('user.processTransaction');
         }
@@ -807,14 +812,6 @@ class DonhangController extends Controller
 
         $chitietlichsu = Donhang::where('khachhang_id', $idkh)->get();
         $chitietdonhang = Chitietdonhang::where('donhang_id', $donhang->id)->get();
-        // $chitietlichsu = DB::table('donhangs')
-        //     ->join('chitietdonhangs', 'donhangs.id', '=', 'chitietdonhangs.donhang_id')
-        //     ->join('khachhangs', 'donhangs.khachhang_id', '=', 'khachhangs.id')
-        //     ->where('donhangs.khachhang_id','=' ,$idkh)
-        //     ->select('donhangs.*', 'chitietdonhangs.*', 'khachhangs.*')
-        //     ->get();
-
-        // dd($chitietdonhang);
         return view('lichsudathangs.chitiet', [
             'title' => 'Lịch Sử Đặt Hàng Của Bạn',
             'chitietlichsu' => $chitietlichsu,
@@ -966,5 +963,41 @@ class DonhangController extends Controller
 
         Session::flash('success', 'Bạn đã nhận đơn hàng thành công!');
         return redirect('user/order_history');
+    }
+
+
+    public function huydonhang(Request $req, $id)
+    {
+        // $data = $req->all();
+
+        $detail_order = Chitietdonhang::with('product')
+            ->where('donhang_id', $id)
+            ->get();
+            // dd($detail_order);
+        // Cập nhật số lượng hàng trong bảng san_phams
+        foreach ($detail_order as $detail) {
+            $sp = $detail->product;
+            $sp->soluongsp += $detail->ctdh_soluong;
+            $sp->save();
+        }
+
+        $order = Donhang::where('id', $id)->first();
+        $order->dh_huy = $req->dh_huy;
+        $order->dh_trangthai = 5;
+        $order->save();
+
+
+        // Session::flash('success', 'Hủy đơn hàng thành công!');
+        return redirect('user/order_history');
+    }
+    
+
+    public function binhluandonhang(Request $req)
+    {
+        $data = $req->all();
+
+        $order = Donhang::where('id', $data['id'])->first();
+        $order->dh_binhluan = $data['binhluandonhang'];
+        $order->save();
     }
 }

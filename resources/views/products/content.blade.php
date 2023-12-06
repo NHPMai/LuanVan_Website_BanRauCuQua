@@ -2,8 +2,8 @@
 @section('content')
 <div class="container p-t-80">
     <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-        <a href="/" class="stext-109 cl8 hov-cl1 trans-04">
-            Home
+        <a href="/shop" class="stext-109 cl8 hov-cl1 trans-04">
+            Sản phẩm
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
 
@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<section class="sec-product-detail bg0 p-t-65 p-b-60">
+<section class="sec-product-detail bg0 p-t-65 p-b-30">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-lg-7 p-b-30">
@@ -326,14 +326,14 @@
     <div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
 
         <span class="stext-107 cl6 p-lr-25">
-            Categories: {{ $product->menu->ten }}
+            Danh Mục: {{ $product->menu->name }}
         </span>
     </div>
 </section>
 
-<section class="sec-relate-product bg0 p-t-20 p-b-105">
+<section class="sec-relate-product bg0 p-b-105">
     <div class="container">
-        <div class="p-b-45">
+        <div class="p-b-20">
             <h3 class="cl5 txt-center" style="font-family: arial; font-size: 40px ; font-weight:bolder">
                 CÁC SẢN PHẨM LIÊN QUAN
             </h3>

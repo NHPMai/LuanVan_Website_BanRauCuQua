@@ -211,4 +211,27 @@ class ShipperController extends Controller
         }
         return redirect()->back();
     }
+
+    public function huydonhang(Request $req, $id)
+    {
+
+        $detail_order = Chitietdonhang::with('product')
+            ->where('donhang_id', $id)
+            ->get();
+        // Cập nhật số lượng hàng trong bảng san_phams
+        foreach ($detail_order as $detail) {
+            $sp = $detail->product;
+            $sp->soluongsp += $detail->ctdh_soluong;
+            $sp->save();
+        }
+
+        $order = Donhang::where('id', $id)->first();
+        $order->dh_huy = $req->dh_huy;
+        $order->dh_trangthai = 5;
+        $order->save();
+
+
+        // Session::flash('success', 'Hủy đơn hàng thành công!');
+        return redirect('shipper/donhang_danggiao');
+    }
 }

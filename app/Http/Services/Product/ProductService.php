@@ -12,22 +12,14 @@ class ProductService
 
     public function get($page = null)
     {
-        //  $a= Product::select('id', 'ten', 'gia', 'hinhanh')
-        //     ->orderByDesc('id')
-        //     ->when($page != null, function ($query) use ($page) {
-        //         $query->offset($page * self::LIMIT);
-        //     })
-        //     ->where('hoatdong',1)
-        //     ->limit(self::LIMIT)
-        //     ->get();
-
-        //     dd($a);
         return Product::select('id', 'ten', 'gia', 'hinhanh')
             ->orderByDesc('id')
             ->when($page != null, function ($query) use ($page) {
                 $query->offset($page * self::LIMIT);
             })
             ->where('hoatdong',1)
+            ->where('an',1)
+            ->where('soluongsp','!=',0)
             ->limit(self::LIMIT)
             ->get();
     }
@@ -44,6 +36,7 @@ class ProductService
     {
         return Product::select('id', 'ten', 'gia', 'hinhanh')
             ->where('hoatdong', 1)
+            ->where('an', 1)
             ->where('id', '!=', $id)
             ->orderByDesc('id')
             ->limit(8)

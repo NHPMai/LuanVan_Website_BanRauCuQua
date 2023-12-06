@@ -10,6 +10,11 @@
         <li>Email: <strong>{{ $donhang->khachhangs->email }}</strong></li>
         <li>Ghi chú: <strong>{{ $donhang->dh_ghichu }}</strong></li>
 
+        @if( $donhang->dh_trangthai == 4)
+        <li style="font-weight: 700; color:blue">Đánh giá đơn hàng: <strong style="font-weight: 700; color:black">{{ $donhang->dh_binhluan}}</strong></li>
+        @elseif( $donhang->dh_trangthai == 5)
+        <li style="font-weight: 700; color:crimson">Lý do hủy đơn hàng: <strong style="font-weight: 700; color:black">{{ $donhang->dh_huy }}</strong></li>
+        @endif
     </ul>
 </div>
 
@@ -61,6 +66,10 @@
                 <td class="column-6" style="text-align: center;vertical-align: middle">
                     <a style="background-color: #68db2a; border-radius: 8px; font-weight:700; font-size:18px; ">Giao hàng thành công &nbsp <i class="fas fa-check"></i></a>
                 </td>
+                @elseif( $donhang->dh_trangthai == 5)
+                <td class="column-6" style="text-align: center;vertical-align: middle; ">
+                    <span style="background-color:beige;color:crimson ;border-radius: 8px;  font-weight:600">Đã hủy đơn hàng &nbsp <i class="fa fa-times"></i> </span>
+                </td>
                 @endif
             </tr>
             @endforeach
@@ -75,36 +84,70 @@
         <form action="" method="post">
             {{ csrf_field() }}
             <!-- <div class="col-md-8"></div> -->
-            <div class="col-md-4">
-
-                <div class="form-inline">
-                    @if( $donhang->dh_trangthai== 1)
-                    <label style="margin-bottom: 10px;">Trạng thái đơn hàng: </label>
-                    <select name="dh_trangthai" class="form-control input-inline" style="width: 150px; margin-right: 10px;">ư
-                        <option value="1">Chờ duyệt</option>
-                        <option value="2">Đã Duyệt</option>
-                        <!-- <option value="3">Đang giao</option>
-                        <option value="4">Giao hàng thành công</option> -->
-                    </select>
-                    <input type="submit" value="Xác nhận" class="btn btn-primary">
+            <div class="">
 
 
-                    @endif
+                @if( $donhang->dh_trangthai== 1)
+                <div class="row">
+                    <div class="col-10">
+                        <div class="form-inline">
+                            <label style="margin-bottom: 10px;">Trạng thái đơn hàng: </label>
+                            <select name="dh_trangthai" class="form-control input-inline" style="width: 150px; margin-right: 10px;">ư
+                                <option value="1">Chờ duyệt</option>
+                                <option value="2">Đã duyệt</option>
+                                <!-- <option value="4">Giao hàng thành công</option> -->
+                            </select>
+                            <input type="submit" value="Xác nhận" class="btn btn-primary">
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#huydon" style="font-weight: 700;">
+                                Hủy đơn hàng
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                @endif
+            </div>
+        </form>
+    </div>
+
+    <!-- <button type="button" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-chevron-left"></span> 
+        </button> -->
+</div>
+
+<div class="m-1">
+    <a href="/admin/customers" class="btn btn-secondary text-start" data-abc="true"> <i class="fa fa-chevron-left"></i> Quay lại</a>
+</div>
+
+</div>
+
+<!-- Modal--HỦY ĐƠN HÀNG -->
+<div style="margin-top:200px" class="modal fade" id="huydon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+        <form action="/user/huydonhang/{{$donhang->id}}" method="post">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Lý do hủy đơn hàng </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <p><textarea rows="5" name="dh_huy" required placeholder="Lý do hủy đơn hàng... (bắt buộc)" style="width: 456px"></textarea></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <!-- <button type="submit" id="{{$donhang->id}}" onclick="huydonhang(this.id)" class="btn btn-success" style="margin-top: 0px">Gửi lí do hủy</button> -->
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-success" style="margin-top: 0px">Gửi lí do hủy</button>
+                    </div>
                 </div>
             </div>
         </form>
-        <!-- <button type="button" class="btn btn-default btn-sm">
-          <span class="glyphicon glyphicon-chevron-left"></span> 
-        </button> -->
-    </div>
-
-    <div class="m-1">
-        <a href="/admin/customers" class="btn btn-secondary text-start" data-abc="true"> <i class="fa fa-chevron-left"></i> Quay lại</a>
-    </div>
-
-    <div>
 
     </div>
-
 </div>
 @endsection

@@ -3,7 +3,10 @@
 namespace App\Helpers;
 
 use App\Models\Menu;
+use App\Models\Chitietdonhang;
+use App\Models\Donhang;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class Helper
 {
@@ -116,19 +119,13 @@ class Helper
 
   
 
-    // public static function price($price = 0, $priceSale = 0)
-    // {
-    //     if ($priceSale != 0) return number_format($priceSale);
-    //     if ($price != 0)  return number_format($price);
-    //     return '<a href="/lien-he.html">Liên Hệ</a>';
-    // }
 
     public static function gia($gia = 0)
     {
-        // if ($priceSale != 0) return number_format($priceSale);
+        // $chitietdonhang = Chitietdonhang::where('donhang_id', $donhang->id)->get();
         if ($gia != 0)  return number_format($gia);
         return '<a href="/lien-he.html">Liên Hệ</a>';
     }
 
-    
+   
 }

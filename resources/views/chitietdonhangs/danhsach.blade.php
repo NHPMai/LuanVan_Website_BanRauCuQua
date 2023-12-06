@@ -143,7 +143,7 @@
                             </div>
 
                             <div class="row p-1 ">
-                                <span style="font-size: 20px;">
+                                <span style="font-size: 20px; margin-left: 15px;">
                                     Tiền thanh toán:
                                 </span>
 
@@ -198,7 +198,7 @@
                             @endforeach
                             @else
                             <div class="row p-1" style="margin:0px; padding-left:0px">
-                                <span class="col-6" style="font-size: 20px;">
+                                <span class="col-6" style="font-size: 20px; padding-left:0px">
                                     Tiền thanh toán
                                 </span>
 
