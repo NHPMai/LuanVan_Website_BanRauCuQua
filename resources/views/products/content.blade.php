@@ -241,78 +241,63 @@
                         <div class="row">
                             <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
                                 <div class="p-b-30 m-lr-15-sm">
-                                    <!-- Review -->
-                                    <div class="flex-w flex-t p-b-68">
-                                        <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-                                            <img src="/template/images/icons/logocp.png">
-                                        </div>
 
-                                        <div class="size-207">
-                                            <div class="flex-w flex-sb-m p-b-17">
-                                                <span class="mtext-107 cl2 p-r-20">
-                                                    NVA
-                                                </span>
+                                    <p class="stext-102 cl6 m-t-20">
+                                        Hãy đánh giá thoải mái, tên và email của bạn sẽ không được hiện lên bạn nhé! <br>Cảm ơn các bạn!
+                                    </p>
 
-                                                <span class="fs-18 cl11">
-                                                    <i class="zmdi zmdi-star"></i>
-                                                    <i class="zmdi zmdi-star"></i>
-                                                    <i class="zmdi zmdi-star"></i>
-                                                    <i class="zmdi zmdi-star"></i>
-                                                    <i class="zmdi zmdi-star-half"></i>
-                                                </span>
-                                            </div>
+                                    <div class="flex-w flex-m p-t-20 p-b-23">
+                                        <span class="stext-102 cl3 m-r-16">
+                                            Đánh giá
+                                        </span>
 
-                                            <p class="stext-102 cl6">
-                                                Sản Phẩm Chất Lượng, Tươi Ngon, Giá tốt.
-                                            </p>
-                                        </div>
+                                        <span class="wrap-rating fs-18 cl11 pointer">
+
+                                            <ul class="list-inline" title="Average Rating" style="margin-bottom:0px">
+                                                @for($count=1; $count<=5; $count++) @php if($count <=$rating){ $color='color:#ffcc00;' ; } else { $color='color:#ccc;' ; } @endphp <li title="start_rating" id="{{$product->id}}-{{$count}}" data-index="{{$count}}" data-product_id="{{$product->id}}" data-rating="{{$rating}}" class="rating" style="cursor: pointer; {{$color}} ; font-size:30px;">
+                                                    &#9733;
+
+                                                    </li>
+
+                                                    @endfor
+                                            </ul>
+
+
+
+
+                                        </span>
                                     </div>
 
+                                    <!-- Review -->
+                                    <form>
+                                        @csrf
+                                        <input type="hidden" name="product_id" class="product_id" value="{{$product->id}}">
+                                        <div id="comment_show"></div>
+                                        
+
+                                    </form>
+
                                     <!-- Add review -->
-                                    <form class="w-full">
-                                        <h5 class="mtext-108 cl2 p-b-7">
-                                            Thêm Đánh Giá
-                                        </h5>
-
-                                        <p class="stext-102 cl6">
-                                            Hãy đánh giá thoải mái, tên và email của bạn sẽ không được hiện lên bạn nhé! <br>Cảm ơn các bạn!
-                                        </p>
-
-                                        <div class="flex-w flex-m p-t-50 p-b-23">
-                                            <span class="stext-102 cl3 m-r-16">
-                                                Your Rating
-                                            </span>
-
-                                            <span class="wrap-rating fs-18 cl11 pointer">
-                                                <i class="item-rating pointer zmdi zmdi-star-outline"></i>
-                                                <i class="item-rating pointer zmdi zmdi-star-outline"></i>
-                                                <i class="item-rating pointer zmdi zmdi-star-outline"></i>
-                                                <i class="item-rating pointer zmdi zmdi-star-outline"></i>
-                                                <i class="item-rating pointer zmdi zmdi-star-outline"></i>
-                                                <input class="dis-none" type="number" name="rating">
-                                            </span>
-                                        </div>
+                                    <form action="#" class="w-full">
 
                                         <div class="row p-b-25">
-                                            <div class="col-12 p-b-5">
-                                                <label class="stext-102 cl3" for="review">Your review</label>
-                                                <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
+                                            <div class="col-12 ">
+                                                <label class="stext-102 cl3" for="review">Nội dung bình luận</label>
+                                                <textarea class="comment_content size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="binhluan" ></textarea>
                                             </div>
-
                                             <div class="col-sm-6 p-b-5">
-                                                <label class="stext-102 cl3" for="name">Name</label>
-                                                <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="name">
-                                            </div>
-
-                                            <div class="col-sm-6 p-b-5">
-                                                <label class="stext-102 cl3" for="email">Email</label>
-                                                <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email">
+                                                <label class="stext-102 cl3" for="name">Tên bình luận</label>
+                                                <input class="comment_name size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="bl_ten">
                                             </div>
                                         </div>
+                                        
+                                        <div id="notify_comment"></div>
 
-                                        <button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
-                                            Submit
+                                        <button class="send_comment flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10" type="button">
+                                            Gửi bình luận
                                         </button>
+                                       
+
                                     </form>
                                 </div>
                             </div>

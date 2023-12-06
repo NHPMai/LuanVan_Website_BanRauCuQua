@@ -320,6 +320,12 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::post('binhluandonhang', [\App\Http\Controllers\Users\DonhangController::class, 'binhluandonhang'])->name('binhluandonhang');
 
 
+        //-----------------------ĐÁNH GIÁ SẢN PHẨM------------------------------------\\
+        Route::post('insert_rating', [App\Http\Controllers\ProductController::class, 'insert_rating'])->name('insert_rating');
+        Route::post('load_comment', [App\Http\Controllers\ProductController::class, 'load_comment'])->name('load_comment');
+        Route::post('send_comment', [App\Http\Controllers\ProductController::class, 'send_comment'])->name('send_comment');
+
+
         //Tài khoản
         Route::get('account', [\App\Http\Controllers\Users\TaikhoanController::class, 'account'])->name('account');
         Route::get('diachikhachhang', [\App\Http\Controllers\Users\TaikhoanController::class, 'diachikhachhang'])->name('diachikhachhang'); //Chọn địa chỉ
