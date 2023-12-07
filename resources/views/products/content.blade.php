@@ -282,7 +282,7 @@
 
                                         <div class="row p-b-25">
                                             <div class="col-12 ">
-                                                <label class="stext-102 cl3" for="review">Nội dung bình luận</label>
+                                                <label class="stext-102 cl3 m-t-20" for="review">Nội dung bình luận</label>
                                                 <textarea class="comment_content size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="binhluan" ></textarea>
                                             </div>
                                             <div class="col-sm-6 p-b-5">

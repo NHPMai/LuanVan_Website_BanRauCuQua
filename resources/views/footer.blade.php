@@ -683,7 +683,7 @@
 					_token: _token
 				},
 				success: function(data) {					
-					$('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công, bl đang chờ duyệt</span>');
+					$('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công, bình luận đang chờ duyệt</span>');
 					load_comment();
 					$('#notify_comment').fadeOut(5000);
 					$('.comment_name').val('');

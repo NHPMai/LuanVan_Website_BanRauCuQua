@@ -13,12 +13,15 @@ class Binhluan extends Model
         'binhluan',
         'bl_ten',
         'bl_ngay',
-        'product_id'
+        'bl_parent',
+        'bl_trangthai',
+        'product_id',
     ];
     protected $primaryKey = 'id';
     
-    // public function products()
-    // {
-    //     return $this->hasMany(Product::class, 'brand_id','id');
-    // }
+    public function products()
+    {
+        return $this->hasOne(Product::class, 'id', 'product_id')
+            ->withDefault(['ten'=>'']);
+    }
 }

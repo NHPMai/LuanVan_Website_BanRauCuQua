@@ -46,39 +46,72 @@ class ProductController extends Controller
     public function load_comment(Request $request)
     {
         $product_id = $request->product_id;
-        $comment = Binhluan::where('product_id', $product_id)->where('bl_trangthai', 0)->get();
+        $comment = Binhluan::where('product_id', $product_id)->where('bl_parent','=',0)->where('bl_trangthai', 0)->get();
+
+        $comment_rep = Binhluan::where('bl_parent','>',0)->orderBy('id','DESC')->get();
+
         $output = '';
         foreach ($comment as $key => $comm) {
-            $output.= '
-            <div class="flex-w flex-t p-b-30">
+            $output .= '
+            <div class="flex-w flex-t m-t-20">
             <input type="hidden" name="product_id" class="product_id" value="{{$product->id}}">
             <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
-                <img src="'.url('/template/images/icons/logocp.png').'">
+                <img src="' . url('/template/images/nhanvien/nhansu.png') . '">
             </div>
 
             <div style="font-size:16px">
                 <div class="flex-w flex-sb-m p-b-5 p-t-5">
                     <span class=" cl2 p-r-20" style="font-weight:700">
-                        @'.$comm->bl_ten.'
+                        @' . $comm->bl_ten . '
                     </span>
                 </div>
 
-                <p class=" cl6">
-                    '.$comm->bl_ngay.'
+                <p class="cl6">
+                    ' . $comm->bl_ngay . '
                 </p>
 
                 <p class=" cl6">
-                    '.$comm->binhluan.'
+                    ' . $comm->binhluan . '
                 </p>
             </div>
         </div>
         <p></p>
         ';
+
+            foreach ($comment_rep as $key => $rep_comment) {
+                if ($rep_comment->bl_parent == $comm->id) {
+
+                    $output .= ' <div class="flex-w flex-t p-b-20" style="margin:5px 50px;  background-color: #F8F8F8;">
+            <input type="hidden" name="product_id" class="product_id" value="{{$product->id}}">
+            <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
+                <img width="60%" src="' . url('/template/images/icons/logocp.png') . '">
+            </div>
+
+            <div style="font-size:16px">
+                <div class="flex-w flex-sb-m p-b-5 p-t-5">
+                    <span class=" cl2 p-r-20" style="font-weight:700">
+                        @Admin
+                    </span>
+                </div>
+
+                <p class=" cl6">
+                    '.$rep_comment->binhluan.'
+                </p>
+
+                <p class=" cl6">
+                  
+                </p>
+            </div>
+        </div>
+        <p></p>';
+                }
+            }
         }
         echo $output;
     }
 
-    public function send_comment (Request $request){
+    public function send_comment(Request $request)
+    {
         $product_id = $request->product_id;
         $comment_name = $request->comment_name;
         $comment_content = $request->comment_content;
@@ -88,8 +121,8 @@ class ProductController extends Controller
         $comment->binhluan = $comment_content;
         $comment->bl_ten = $comment_name;
         $comment->bl_trangthai = 1;
+        $comment->bl_parent = 0;
         $comment->save();
-
     }
 
 

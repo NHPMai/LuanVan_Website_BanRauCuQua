@@ -188,7 +188,7 @@
                 </li>
 
                 <!-- Sản Phẩm -->
-                <li class="nav-item user-panel" style="border-bottom-width: 2px; border-bottom: 2px solid  #9a9ea3; margin-bottom:5px">
+                <li class="nav-item " >
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-carrot" style="color:orange;"></i>
                         <p>Quản Lý Sản Phẩm
@@ -206,6 +206,24 @@
                             <a href="/admin/products/list" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách sản phẩm</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Quản lí bình luận -->
+                <li class="nav-item user-panel" style="border-bottom-width: 2px; border-bottom: 2px solid  #9a9ea3; margin-bottom:5px">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-carrot" style="color:orange;"></i>
+                        <p>Quản Lý Bình Luận
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/admin/products/list_comment" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Liệt kê bình luận</p>
                             </a>
                         </li>
                     </ul>

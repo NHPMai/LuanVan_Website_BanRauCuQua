@@ -138,6 +138,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::get('active/{id}', [ProductController::class, 'active']);
             Route::get('unactive/{id}', [ProductController::class, 'unactive']);
+
+            Route::get('list_comment', [ProductController::class, 'list_comment']);
+            Route::post('allow_comment', [ProductController::class, 'allow_comment']);
+            Route::post('reply_comment', [ProductController::class, 'reply_comment']);
+
+            
         });
 
         // #Nha Cung Cap

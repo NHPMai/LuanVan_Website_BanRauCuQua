@@ -4,7 +4,7 @@
 <script src="/template/admin/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
-  $.widget.bridge('uibutton', $.ui.button)
+    $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
 <script src="/template/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -35,11 +35,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 <script type="text/javascript">
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 </script>
 
 
@@ -47,43 +47,50 @@ $.ajaxSetup({
 
 <!-- DIACHI -->
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function() {
 
         //LẤY DỮ LIỆU
         fecth_delivery();
-        function fecth_delivery(){
-            var _token = $('input[name="_token"]').val(); 
+
+        function fecth_delivery() {
+            var _token = $('input[name="_token"]').val();
             $.ajax({
-                url:"{{url('/admin/deliverys/select_feeship')}}",
+                url: "{{url('/admin/deliverys/select_feeship')}}",
                 method: "POST",
-                data:{_token:_token},
-                success:function(data){
+                data: {
+                    _token: _token
+                },
+                success: function(data) {
                     $('#load_delivery').html(data);
                 }
             });
         }
 
         //UPDATE
-        $(document).on('blur','.fee_feeship_edit',function(){
+        $(document).on('blur', '.fee_feeship_edit', function() {
 
             var feeship_id = $(this).data('feeship_id');
             var fee_value = $(this).text();
-            var _token = $('input[name="_token"]').val(); 
+            var _token = $('input[name="_token"]').val();
             // alert(feeship_id);
             // alert(fee_value);
             $.ajax({
-                url:"{{url('/admin/deliverys/update_delivery')}}",
+                url: "{{url('/admin/deliverys/update_delivery')}}",
                 method: "POST",
-                data:{feeship_id:feeship_id,fee_value:fee_value,_token:_token},
-                success:function(data){
-                    alert ('Đã chỉnh sửa phí vân chuyển thành công!')
+                data: {
+                    feeship_id: feeship_id,
+                    fee_value: fee_value,
+                    _token: _token
+                },
+                success: function(data) {
+                    alert('Đã chỉnh sửa phí vân chuyển thành công!')
                     fecth_delivery();
                 }
             });
         });
 
         // THÊM PHÍ VẬN CHUYỂN
-        $('.add_delivery').click(function(){
+        $('.add_delivery').click(function() {
             var tinh_thanhpho = $('.tinh_thanhpho').val();
             var quan_huyen = $('.quan_huyen').val();
             var xa_phuong_thitran = $('.xa_phuong_thitran').val();
@@ -95,17 +102,23 @@ $.ajaxSetup({
             // alert (phivanchuyen);
 
             $.ajax({
-                url:"{{url('/admin/deliverys/insert_delivery')}}",
+                url: "{{url('/admin/deliverys/insert_delivery')}}",
                 method: "POST",
-                data:{tinh_thanhpho:tinh_thanhpho, quan_huyen:quan_huyen, xa_phuong_thitran:xa_phuong_thitran, phivanchuyen:phivanchuyen,_token:_token},
-                success:function(data){
-                    alert ('Thêm phí vân chuyển thành công!')
+                data: {
+                    tinh_thanhpho: tinh_thanhpho,
+                    quan_huyen: quan_huyen,
+                    xa_phuong_thitran: xa_phuong_thitran,
+                    phivanchuyen: phivanchuyen,
+                    _token: _token
+                },
+                success: function(data) {
+                    alert('Thêm phí vân chuyển thành công!')
                     fecth_delivery();
                 }
             });
         });
 
-        $('.choose').on('change',function(){
+        $('.choose').on('change', function() {
             var action = $(this).attr('id');
             var ma_id = $(this).val();
             var _token = $('input[name="_token"]').val();
@@ -113,17 +126,21 @@ $.ajaxSetup({
             // alert(action);
             //     alert(ma_id);
             //         alert(_token);
-            if (action == 'tinh_thanhpho'){
+            if (action == 'tinh_thanhpho') {
                 result = 'quan_huyen';
             } else {
                 result = 'xa_phuong_thitran';
             }
             $.ajax({
-                url:"{{url('/admin/deliverys/select_delivery')}}",
+                url: "{{url('/admin/deliverys/select_delivery')}}",
                 method: "POST",
-                data:{action:action, ma_id:ma_id,_token:_token},
-                success:function(data){
-                    $('#'+ result).html(data);
+                data: {
+                    action: action,
+                    ma_id: ma_id,
+                    _token: _token
+                },
+                success: function(data) {
+                    $('#' + result).html(data);
                 }
             });
         });
@@ -144,39 +161,41 @@ $.ajaxSetup({
 
 
 <script type="text/javascript">
-    $(document).ready(function (){
+    $(document).ready(function() {
 
 
 
         chart30daysorder();
         var chart = new Morris.Area({
             element: 'chart',
-            lineColor: ['#819C79', '#FC8710','#FF6541','#A4ADD3','#766B56'],
+            lineColor: ['#819C79', '#FC8710', '#FF6541', '#A4ADD3', '#766B56'],
             parseTime: false,
-            hideHover:"auto",
+            hideHover: "auto",
             xkey: 'period',
-            ykeys: ['order','sales','profit','quantity'],
-            labels: ['đơn hàng','doanh số','lợi nhuận','số lượng']
+            ykeys: ['order', 'sales', 'profit', 'quantity'],
+            labels: ['đơn hàng', 'doanh số', 'lợi nhuận', 'số lượng']
         });
 
-        function chart30daysorder(){
+        function chart30daysorder() {
             var _token = $('input[name="_token"]').val();
             //alert('hi');
             //alert(_token);
             $.ajax({
-                url:"{{url('/admin/days-order')}}",
+                url: "{{url('/admin/days-order')}}",
                 method: "POST",
-                dataType:"JSON",
-                data:{_token:_token},
+                dataType: "JSON",
+                data: {
+                    _token: _token
+                },
 
-                success:function (data) {
+                success: function(data) {
                     //console.log(data);
                     chart.setData(data);
                 }
             });
         };
 
-        $('.dashboard-filter').change(function () {
+        $('.dashboard-filter').change(function() {
             var dashboard_value = $(this).val();
             var _token = $('input[name="_token"]').val();
 
@@ -184,15 +203,18 @@ $.ajaxSetup({
                 url: "{{url('/admin/dashboard-filter')}}",
                 method: "POST",
                 dataType: "JSON",
-                data: { dashboard_value: dashboard_value, _token: _token },
+                data: {
+                    dashboard_value: dashboard_value,
+                    _token: _token
+                },
 
-                success: function (data) {
+                success: function(data) {
                     chart.setData(data);
                 }
             });
         });
 
-        $('#btn-dashboard-filter').click(function () {
+        $('#btn-dashboard-filter').click(function() {
             var _token = $('input[name="_token"]').val();
             // var from_date = $('#datepicker').val();
             // var to_date = $('#datepicker2').val();
@@ -205,9 +227,13 @@ $.ajaxSetup({
                 url: "{{url('/admin/filter-by-date')}}",
                 method: "POST",
                 dataType: "JSON",
-                data: { from_date: from_date, to_date: to_date, _token: _token },
+                data: {
+                    from_date: from_date,
+                    to_date: to_date,
+                    _token: _token
+                },
 
-                success: function (data) {
+                success: function(data) {
                     chart.setData(data);
                 }
             });
@@ -235,47 +261,103 @@ $.ajaxSetup({
     });
 </script>
 
+<!------------ DUYỆT BÌNH LUẬN -------------->
+<script type="text/javascript">
+    $('.comment_duyet_btn').click(function() {
+        var comment_status = $(this).data('comment_status');
+        var comment_id = $(this).data('comment_id');
+        var comment_product_id = $(this).attr('id');
+        if (comment_status == 0) {
+            var alert = 'Thay đổi thành duyệt thành công';
+        } else {
+            var alert = 'Thay đổi thành không duyệt thành công';
+        }
+        $.ajax({
+            url: "{{url('/admin/products/allow_comment')}}",
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                comment_status: comment_status,
+                comment_id: comment_id,
+                comment_product_id: comment_product_id
+            },
+            success: function(data) {
+                location.reload();
+                $('#notify_comment').html('<span class="text text-alert">' + alert + '</span>');
+
+            }
+        });
+    });
+
+    $('.btn-reply-comment').click(function() {
+        var comment_id = $(this).data('comment_id');
+        var comment = $('.reply_comment_' + comment_id).val();
+        var comment_product_id = $(this).data('product_id');
+      
+        $.ajax({
+            url: "{{url('/admin/products/reply_comment')}}",
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                comment : comment,
+                comment_id: comment_id,
+                comment_product_id: comment_product_id
+            },
+            success: function(data) {
+                $('.reply_comment' + comment_id).val('');
+                $('#notify_comment').html('<span class="text text-alert">Trả lời bình luận thành công</span>');
+                location.reload();
+            }
+        });
+    });
+</script>
+
+
 <!-- TIM KIEM GIONG NOIS -->
-    <script type="text/javascript">
-        var message = document.querySelector('#message');
+<script type="text/javascript">
+    var message = document.querySelector('#message');
 
-        var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-        var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+    var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 
-        var grammar = '#JSGF V1.0;'
+    var grammar = '#JSGF V1.0;'
 
-        var recognition = new SpeechRecognition();
-        var speechRecognitionList = new SpeechGrammarList();
-        speechRecognitionList.addFromString(grammar, 1);
-        recognition.grammars = speechRecognitionList;
-        recognition.lang = 'vi-VN';
-        recognition.interimResult = false;
+    var recognition = new SpeechRecognition();
+    var speechRecognitionList = new SpeechGrammarList();
+    speechRecognitionList.addFromString(grammar, 1);
+    recognition.grammars = speechRecognitionList;
+    recognition.lang = 'vi-VN';
+    recognition.interimResult = false;
 
-        recognition.continuous = true;
-        recognition.onresult = function(event) {
-            var lastResult = event.results.length - 1;
-            var content = event.results[lastResult][0].transcript
-            // console.log(content);
-            document.getElementById('search-input').value = content;
-            document.getElementById('search-form').submit();
-        }
+    recognition.continuous = true;
+    recognition.onresult = function(event) {
+        var lastResult = event.results.length - 1;
+        var content = event.results[lastResult][0].transcript
+        // console.log(content);
+        document.getElementById('search-input').value = content;
+        document.getElementById('search-form').submit();
+    }
 
-        recognition.onspeeched = function() {
-            recognition.stop();
-        }
+    recognition.onspeeched = function() {
+        recognition.stop();
+    }
 
-        recognition.onerror = function() {
-            console.log(event.error);
-            const microphone = document.querySelector('.microphone');
-            microphone.classList.remove('recording')
-        }
+    recognition.onerror = function() {
+        console.log(event.error);
+        const microphone = document.querySelector('.microphone');
+        microphone.classList.remove('recording')
+    }
 
-        document.querySelector('.microphone').addEventListener('click', function() {
-            recognition.start();
-            const microphone = document.querySelector('.microphone');
-            microphone.classList.add('recording');
-        })
-    </script>
+    document.querySelector('.microphone').addEventListener('click', function() {
+        recognition.start();
+        const microphone = document.querySelector('.microphone');
+        microphone.classList.add('recording');
+    })
+</script>
 
 
 <!-- Tìm kiếm theo Data -->

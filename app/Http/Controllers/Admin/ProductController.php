@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Product\ProductRequest;
 use App\Http\Services\Product\ProductAdminService;
+use App\Models\Binhluan;
 use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -195,6 +196,35 @@ class ProductController extends Controller
     }
 
 
+    public function list_comment(){
+        $comment = Binhluan::where('bl_parent','=',0)->orderBy('id','DESC')->get();
+        $comment_rep = Binhluan::where('bl_parent','>',0)->orderBy('id','DESC')->get();
+        // dd($comment);
+        return view('admin.comment.list_comment',[
+            'title' => 'Danh sách bình luận',
+            'comment' => $comment,
+            'comment_rep' => $comment_rep,
+        ]);
+    }
+
+    public function allow_comment(Request $request){
+        $data = $request->all();
+        $comment = Binhluan::find( $data['comment_id']);
+        $comment->bl_trangthai = $data['comment_status'];
+        $comment->save();
+    }
+
+    public function reply_comment(Request $request){
+        $data = $request->all();
+        $comment = new Binhluan();
+        $comment->binhluan = $data['comment'];
+        $comment->product_id = $data['comment_product_id'];
+        $comment->bl_parent = $data['comment_id'];
+        $comment->bl_trangthai = 0;
+        $comment->bl_ten = 'Vegetables Family';
+        $comment->save();
+    }
+
 
     public function search()
     {
@@ -217,13 +247,4 @@ class ProductController extends Controller
         ], compact('products'));
     }
 
-    // Tìm kiếm ajax
-    // public function search_ajax()
-    // {
-    //     $data = Product::search()->get();
-    //     dd($data);
-    //     return view('admin.product.Ajax_search',[
-    //         'title' => "Tim Kiếm Sản Phẩm"
-    //     ], compact('data'));
-    // }
 }
