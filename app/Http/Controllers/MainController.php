@@ -91,6 +91,12 @@ class MainController extends Controller
         ])->with('brands',$brand_product);
     }
 
+    public function about()
+    {
+        return view('about',[
+            'title' => 'Giới thiệu',
+        ]);
+    }
         
 
     // public function contact()

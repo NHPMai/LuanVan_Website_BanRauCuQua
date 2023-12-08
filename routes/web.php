@@ -8,6 +8,7 @@ use App\Http\Controllers\Users\LogoutcustomerController;
 use App\Http\Controllers\Users\PaypalController;
 
 
+
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\BrandController;
@@ -67,7 +68,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('list', [KhachhangController::class, 'index']);
             Route::get('edit/{client}', [KhachhangController::class, 'show']);
             Route::post('edit/{client}', [KhachhangController::class, 'update']);
+            Route::get('view/{id}', [KhachhangController::class, 'chitiet']);
             Route::DELETE('destroy', [KhachhangController::class, 'destroy']);
+            Route::get('active/{id}', [KhachhangController::class, 'active']);
+            Route::get('unactive/{id}', [KhachhangController::class, 'unactive']);
         });
 
 
@@ -78,7 +82,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('list', [ShippersShipperController::class, 'index']);
             Route::get('edit/{client}', [ShippersShipperController::class, 'show']);
             Route::post('edit/{client}', [ShippersShipperController::class, 'update']);
+            Route::get('view/{id}', [ShippersShipperController::class, 'chitiet']);
             Route::DELETE('destroy', [ShippersShipperController::class, 'destroy']);
+            Route::get('active/{id}', [ShippersShipperController::class, 'active']);
+            Route::get('unactive/{id}', [ShippersShipperController::class, 'unactive']);
         });
 
 
@@ -90,6 +97,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('edit/{staff}', [NhanvienController::class, 'show']);
             Route::post('edit/{staff}', [NhanvienController::class, 'update']);
             Route::DELETE('destroy', [NhanvienController::class, 'destroy']);
+            Route::get('active/{id}', [NhanvienController::class, 'active']);
+            Route::get('unactive/{id}', [NhanvienController::class, 'unactive']);
+
 
             Route::get('permission', [NhanvienController::class, 'permission']);
             Route::get('edit_permission/{id}', [NhanvienController::class, 'edit_permission'])->name('admin.staffs.edit_permission');
@@ -183,7 +193,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/getProductImage', [WarehouseController::class, 'getProductImage']);
 
 
-            Route::get('/search', [App\Http\Controllers\WarehouseController::class, 'search']);
+            Route::get('/search', [WarehouseController::class, 'search']);
         });
 
 
@@ -272,7 +282,7 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::middleware(['guest:web'])->group(function () {
         //Đăng kí
         // Route::view('/login','user.logincustomer')->name('login');
-        Route::get('/register', [LogincustomerController::class, 'register']);
+        Route::get('/register', [LogincustomerController::class, 'register'])->name('register');
         Route::post('/create', [LogincustomerController::class, 'sign_up'])->name('create');
         // Route::post('/diachi', [LogincustomerController::class, 'diachi'])->name('diachi'); //Chọn nơi vận chuyển
         // Route::post('/laydiachi', [LogincustomerController::class, 'laydiachi'])->name('laydiachi'); //Chọn nơi vận chuyển
@@ -286,6 +296,7 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::middleware(['auth:web'])->group(function () {
 
         Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('home'); //Trang Home
+        Route::get('shop', [App\Http\Controllers\MainController::class, 'shop']);
         Route::get('/logoutcustomer', [LogoutcustomerController::class, 'logoutcustomer'])->name('logoutcustomer'); //Dang Xuat
 
         //đơn hàng
@@ -332,8 +343,12 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::post('send_comment', [App\Http\Controllers\ProductController::class, 'send_comment'])->name('send_comment');
 
 
-        //Tài khoản
+        //-----------------------TÀI KHOẢN------------------------------------\\
         Route::get('account', [\App\Http\Controllers\Users\TaikhoanController::class, 'account'])->name('account');
+        Route::get('update_taikhoan/{id}', [\App\Http\Controllers\Users\TaikhoanController::class, 'show'])->name('update_taikhoan');
+        Route::post('update_taikhoan/{id}', [\App\Http\Controllers\Users\TaikhoanController::class, 'update'])->name('update_taikhoan');
+        Route::post('upload/services', [\App\Http\Controllers\Users\UploadController::class, 'store']);
+
         Route::get('diachikhachhang', [\App\Http\Controllers\Users\TaikhoanController::class, 'diachikhachhang'])->name('diachikhachhang'); //Chọn địa chỉ
         Route::post('insert_address', [\App\Http\Controllers\Users\TaikhoanController::class, 'insert_address'])->name('insert_address'); //Thêm địa chỉ
         Route::post('load_address', [\App\Http\Controllers\Users\TaikhoanController::class, 'load_address'])->name('load_address'); // lấy dữ liệu ra
@@ -346,7 +361,16 @@ Route::prefix('user')->name('user.')->group(function () {
 
 //home
 Route::get('/', [App\Http\Controllers\MainController::class, 'index']);
+
 Route::get('shop', [App\Http\Controllers\MainController::class, 'shop']);
+Route::get('san-pham/shop', [App\Http\Controllers\MainController::class, 'shop']);
+Route::get('danh-muc/shop', [App\Http\Controllers\MainController::class, 'shop']);
+Route::get('thuong-hieu/shop', [App\Http\Controllers\MainController::class, 'shop']);
+
+Route::get('about', [App\Http\Controllers\MainController::class, 'about']);
+Route::get('san-pham/about', [App\Http\Controllers\MainController::class, 'about']);
+Route::get('danh-muc/about', [App\Http\Controllers\MainController::class, 'about']);
+Route::get('thuong-hieu/about', [App\Http\Controllers\MainController::class, 'about']);
 
 //trang lien hệ
 // Route::get('danh-muc/contact', [App\Http\Controllers\MainController::class, 'contact'])->name('contact'); 

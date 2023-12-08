@@ -47,7 +47,7 @@ class NhanvienController extends Controller
                 'hoten' => 'required',
                 'avata' => 'required',
                 'sodienthoai' => 'required',
-                'email' => 'required',
+                'email' => 'required|email|unique:nhanviens,email|max:255',
                 'gioitinh' => 'required',
                 'ngaysinh' => 'required',
                 'diachi' => 'required',
@@ -59,6 +59,7 @@ class NhanvienController extends Controller
                 'avata.required' => 'Vui lòng chọn ảnh đại diện',
                 'sodienthoai.required' => 'Vui lòng sodienthoai',
                 'email.required' => 'Vui lòng nhập email',
+                'email.unique' => 'Vui lòng nhập email khác, do email này đã tồn tại',
                 'gioitinh.required' => 'Vui lòng chọn giới tính',
                 'ngaysinh.required' => 'Vui lòng nhập ngày tháng năm sinh',
                 'diachi.required' => 'Vui lòng nhập địa chỉ',
@@ -279,4 +280,27 @@ class NhanvienController extends Controller
         return redirect()->back();
     }
 
+
+    
+    public function active($id)
+    {
+        $sp = Nhanvien::find($id)
+            ->update(
+                ['hoatdong' => 1],
+            );
+
+        Session::flash('success', 'Mở khóa tài khoản khách hàng thành công!');
+        return redirect()->back();
+    }
+
+    public function unactive($id)
+    {
+        $sp = Nhanvien::find($id)
+            ->update(
+                ['hoatdong' => 0],
+            );
+
+        Session::flash('success', 'Khóa tài khoản khách hàng thành công!');
+        return redirect()->back();
+    }
 }

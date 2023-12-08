@@ -64,24 +64,7 @@
         </div>
     </div>
     <div>
-        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Excel</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">PDF <span class="sr-only">(current)</span></a>
-                    </li>
-                </ul>
-                <form action="{{ url('admin/search')}}" method="GET" class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
-        </nav> -->
         <div style="padding: 10px;">
             <table id="myTable">
                 <thead>
@@ -104,19 +87,32 @@
                         <td style="text-align:center">{{$nhanvien->id}}</td>
                         <td style="text-align:center">{{$nhanvien->hoten}}</td>
                         <td style="text-align:center"><img src="{{ $nhanvien->avata }}" style="border-radius: 50%; border: 2px solid #a1a1a1;" height="100" width="100"></td>
-                            @if( $nhanvien->gioitinh == 1)
-                            <td style="text-align:center">Nam</td>
-                            @elseif ($nhanvien->gioitinh ==2)
-                            <td style="text-align:center">Nữ</td>
-                            @endif
+                        
+                        @if( $nhanvien->gioitinh == 1)
+                        <td style="text-align:center">Nam</td>
+                        @elseif ($nhanvien->gioitinh ==2)
+                        <td style="text-align:center">Nữ</td>
+                        @endif
+                        
                         <td style="text-align:center">{{$nhanvien->sodienthoai}}</td>
                         <td style="text-align:center">{{$nhanvien->diachi}}</td>
                         <td style="text-align:center">{{$nhanvien->email}}</td>
-                            @if( $nhanvien->hoatdong == 0)
-                            <td style="text-align:center"><button type="button" class="btn btn-danger">Khóa</button></td>
-                            @elseif ($nhanvien->hoatdong == 1)
-                            <td style="text-align:center"><button type="button" class="btn btn-success">Hoạt động</button></td>
-                            @endif
+
+                        @if ( $nhanvien->hoatdong == 1 )
+                        <td style="text-align:center">
+                            <a class="btn btn-success btn-sm" href="/admin/staffs/unactive/{{$nhanvien->id}}" onclick='return confirm("Bạn chắc chắn khóa không?")'>
+                                <i class="fas fa-lock-open"></i>
+                            </a>
+                        </td>
+                        @elseif ( $nhanvien->hoatdong == 0 )
+                        <td style="text-align:center">
+                            <a href="/admin/staffs/active/{{$nhanvien->id}}" class="btn btn-danger btn-sm" onclick='return confirm("Bạn chắc chắn mở khóa không?")'>
+                                <span class="fas fa-lock" style="font-size: 15px;color: white; font-weight: bold"></span>
+                            </a>
+                        </td>
+                        @endif
+
+
                         <td style="text-align: center;vertical-align: middle;">
                             <a class="btn btn-primary btn-sm" href="/admin/staffs/edit/{{ $nhanvien->id }}">
                                 <i class="fas fa-edit"></i>

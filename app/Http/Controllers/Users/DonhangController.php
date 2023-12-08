@@ -118,6 +118,7 @@ class DonhangController extends Controller
 
         // Lấy giỏ hàng hiện tại từ session
         $chitietdonhangs = session()->get('chitietdonhangs');
+      
 
         foreach ($numProductArray as $product_id => $newQuantity) {
             // Lấy thông tin sản phẩm từ cơ sở dữ liệu sử dụng $product_id
@@ -152,6 +153,7 @@ class DonhangController extends Controller
     public function show()
     {
         $products = $this->getProduct();
+        // dd($products);
         return view('chitietdonhangs.danhsach', [
             'title' => 'Giỏ Hàng',
             'products' => $products,
@@ -163,6 +165,7 @@ class DonhangController extends Controller
     public function getProduct()
     {
         $chitietdonhangs = Session::get('chitietdonhangs');
+        // dd($chitietdonhangs);
         if (is_null($chitietdonhangs)) return [];
 
         $productId = array_keys($chitietdonhangs);
@@ -308,14 +311,19 @@ class DonhangController extends Controller
 
     //HIỆN THANH TOÁN
     public function showcheckout()
-    {
+    {       
+        // $b = session()->get('chitietdonhangs');
+        // dd($b);
+
         $idkh = Auth::user()->id;
         $khachhang = khachhang::find($idkh);
         $a = $khachhang->id;
         $diachi = Diachi::where('khachhang_id', $a)->get();
         $phuongthucthanhtoan = Phuongthucthanhtoan::orderby('id', 'ASC')->get();
         $products = $this->getProduct();
+        // dd($products);
         $tinh_thanhpho = Tinh_thanhpho::orderby('id', 'ASC')->get();
+        // dd($tinh_thanhpho);
         // $phivanchuyens = Phivanchuyen::orderby('id', 'ASC')->get();
         return view('chitietdonhangs.donhang', [
             'products' => $products,
@@ -326,6 +334,7 @@ class DonhangController extends Controller
             'diachi' => $diachi,
             'phuongthucthanhtoan' => $phuongthucthanhtoan,
         ]);
+        // return 123;
     }
 
 
@@ -522,8 +531,6 @@ class DonhangController extends Controller
 
     //     return redirect("/")->with('success', 'Thao tác thành công');
     // }
-
-
 
 
 
@@ -807,7 +814,18 @@ class DonhangController extends Controller
 
     public function order_history_detail(Donhang $donhang)
     {
-        // dd($donhang);
+
+        // $idkh = Auth::user()->id;
+        // $id_sp = Product::get('id');
+
+        // $donhang1 = DB::table('donhangs')
+        //     ->where('khachhang_id', $idkh)
+        //     ->join('chitietdonhangs', 'donhangs.id', '=', 'chitietdonhangs.donhang_id')
+        //     ->select( 'chitietdonhangs.product_id')
+        //     ->get();
+    //    dd($donhang1);
+        
+
         $idkh = Auth::user()->id;
 
         $chitietlichsu = Donhang::where('khachhang_id', $idkh)->get();
@@ -973,7 +991,7 @@ class DonhangController extends Controller
         $detail_order = Chitietdonhang::with('product')
             ->where('donhang_id', $id)
             ->get();
-            // dd($detail_order);
+        // dd($detail_order);
         // Cập nhật số lượng hàng trong bảng san_phams
         foreach ($detail_order as $detail) {
             $sp = $detail->product;
@@ -990,7 +1008,7 @@ class DonhangController extends Controller
         // Session::flash('success', 'Hủy đơn hàng thành công!');
         return redirect('user/order_history');
     }
-    
+
 
     public function binhluandonhang(Request $req)
     {

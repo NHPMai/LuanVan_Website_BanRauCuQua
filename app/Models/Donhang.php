@@ -53,5 +53,11 @@ class Donhang extends Model
         return $this->hasOne(Nhanvien::class, 'id', 'nhanvien_id')
         ->withDefault(['hoten'=>'']);
     }
+
+    public function giaohangs()
+    {
+        return $this->hasOne(Giaohang::class, 'id', 'giaohang_id')
+        ->withDefault(['gh_hoten'=>'']);
+    }
     
 }

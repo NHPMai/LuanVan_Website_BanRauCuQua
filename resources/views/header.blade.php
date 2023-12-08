@@ -101,11 +101,19 @@
                         </li>
 
                         <li class="label1" data-label1="hot">
+                            @if(Auth::check())
                             <a href="shop">Sản phẩm</a>
+                            @else
+                            <a href="user/shop">Sản phẩm</a>
+                            @endif
                         </li>
 
                         <li>
-                            <a href="blog.html">Giới thiệu</a>
+                            @if(Auth::check())
+                            <a href="about">Giới thiệu</a>
+                            @else
+                            <a href="user/about">Giới thiệu</a>
+                            @endif
                         </li>
 
                         <li>

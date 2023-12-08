@@ -20,6 +20,7 @@ class Giaohang extends Authenticatable
         'password',
         'email',
         'gh_trangthai',
+        'gh_ngaysinh'
     ];
     protected $hidden = [
         'password',

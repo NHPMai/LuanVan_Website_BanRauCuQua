@@ -8,12 +8,13 @@ use Illuminate\Http\Request;
 use App\Http\Services\CartService;
 use App\Models\Cart;
 use App\Models\Chitietdonhang;
+use App\Models\Giaohang;
 use App\Models\khachhang;
 use App\Models\Thongke;
 use App\Models\NhanVien;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -29,13 +30,14 @@ class CartController extends Controller
 
     public function show(Donhang $donhang)
     {
-       
+       $giaohang = Giaohang::where('gh_trangthai',1)->get();
         $chitietdonhang = Chitietdonhang::where('donhang_id', $donhang->id)->get();
 
         return view('admin.carts.detail', [
             'title' => 'Chi Tiết Đơn Hàng: ' . $donhang->khachhangs->hoten,
             'donhang' => $donhang,
             'chitietdonhangs' => $chitietdonhang,
+            'giaohangs' => $giaohang,
         ]);
     }
 
@@ -52,19 +54,25 @@ class CartController extends Controller
 
     public function update(Request $req, $id)
     {
+        
         $id_nd = Auth::user()->id;
         $nhanvien = NhanVien::where('id', $id_nd)->first();
         $id_nv = $nhanvien->id;
         
         $order = Donhang::find($id);
         $newStatus = $req->input('dh_trangthai');
+        $giaohang = $req->input('giaohang_id');
+
         if ($newStatus == 1) {
             $order->dh_trangthai = $newStatus;
             $order->save();
+            Session::flash('error', 'Nhấn "Đã duyệt" và chọn "Giao hàng" để duyệt đơn hàng');
         } elseif ($newStatus == 2) {
             $order->dh_trangthai = $newStatus;
             $order->nhanvien_id = $id_nv;
+            $order->giaohang_id = $giaohang;
             $order->save();
+            Session::flash('success', 'Đã duyệt đơn hàng thành công');
         }
 
         return redirect()->back();

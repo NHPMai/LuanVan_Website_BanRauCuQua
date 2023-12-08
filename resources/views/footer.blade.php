@@ -247,6 +247,7 @@
 	</div>
 </div>
 
+<script src="/template/js/upload.js"></script>
 <!--===============================================================================================-->
 <script src="/template/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -348,6 +349,7 @@
 <!--===============================================================================================-->
 <script src="/template/js/main.js"></script>
 <script src="/template/js/public.js"></script>
+
 
 
 <!--------------------------------- SIDEBAR ------------------------------------>
@@ -621,25 +623,64 @@
 	});
 
 	//click đánh giá sao 
+	// $(document).on('click', '.rating', function() {
+	// 	var index = $(this).data("index");
+	// 	var product_id = $(this).data('product_id');
+	// 	var _token = $('input[name = "_token"]').val();
+	// 	$.ajax({
+	// 		url: "{{url('/user/insert_rating')}}",
+	// 		method: "POST",
+	// 		data: {
+	// 			index: index,
+	// 			product_id: product_id,
+	// 			_token: _token
+	// 		},
+	// 		success: function(data) {
+	// 			if (data == 'done') {
+	// 				alert("Bạn đã đánh giá " + index + " trên 5 sao");
+
+	// 			} else {
+	// 				alert("Lỗi đánh giá");
+	// 			}
+	// 			location.reload();
+
+	// 		}
+	// 	});
+	// });
+
 	$(document).on('click', '.rating', function() {
 		var index = $(this).data("index");
 		var product_id = $(this).data('product_id');
+		// var user_id = $(this).data('user_id');
 		var _token = $('input[name = "_token"]').val();
+		
 		$.ajax({
 			url: "{{url('/user/insert_rating')}}",
 			method: "POST",
 			data: {
 				index: index,
 				product_id: product_id,
+				// user_id: user_id,
 				_token: _token
 			},
 			success: function(data) {
 				if (data == 'done') {
 					alert("Bạn đã đánh giá " + index + " trên 5 sao");
 
-				} else {
+				} 
+				else {
 					alert("Lỗi đánh giá");
 				}
+
+				// if (data == 'loi') {
+				// 	alert("Đừng có sai");
+
+				// } 
+				// else {
+				// 	alert("Lỗi đánh giá");
+				// }
+
+
 				location.reload();
 
 			}
@@ -683,7 +724,7 @@
 					_token: _token
 				},
 				success: function(data) {					
-					$('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công, bình luận đang chờ duyệt</span>');
+					$('#notify_comment').html('<span class="text text-success" style="font-size:20px; font-weight:700">Thêm bình luận thành công, bình luận đang chờ duyệt</span>');
 					load_comment();
 					$('#notify_comment').fadeOut(5000);
 					$('.comment_name').val('');

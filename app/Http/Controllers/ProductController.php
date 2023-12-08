@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Services\Product\ProductService;
 use App\Models\Binhluan;
+use App\Models\Chitietdonhang;
+use App\Models\Donhang;
 use App\Models\Product;
 use App\Models\Menu;
 use App\Models\Rating;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -35,20 +39,39 @@ class ProductController extends Controller
 
     public function insert_rating(Request $request)
     {
+         
         $data = $request->all();
+      
+        // $idkh = $data['user_id'];
+        // $id_sp = Product::get('id');
+
+        // $donhang1 = DB::table('donhangs')
+        //     ->where('khachhang_id', $idkh)
+        //     ->join('chitietdonhangs', 'donhangs.id', '=', 'chitietdonhangs.donhang_id')
+        //     ->select( 'chitietdonhangs.product_id')
+        //     ->get();
+
         $rating = new Rating();
         $rating->product_id = $data['product_id'];
         $rating->rating = $data['index'];
         $rating->save();
         echo 'done';
+      
+
+        // $data = $request->all();
+        // $rating = new Rating();
+        // $rating->product_id = $data['product_id'];
+        // $rating->rating = $data['index'];
+        // $rating->save();
+        // echo 'done';
     }
 
     public function load_comment(Request $request)
     {
         $product_id = $request->product_id;
-        $comment = Binhluan::where('product_id', $product_id)->where('bl_parent','=',0)->where('bl_trangthai', 0)->get();
+        $comment = Binhluan::where('product_id', $product_id)->where('bl_parent', '=', 0)->where('bl_trangthai', 0)->get();
 
-        $comment_rep = Binhluan::where('bl_parent','>',0)->orderBy('id','DESC')->get();
+        $comment_rep = Binhluan::where('bl_parent', '>', 0)->orderBy('id', 'DESC')->get();
 
         $output = '';
         foreach ($comment as $key => $comm) {
@@ -95,7 +118,7 @@ class ProductController extends Controller
                 </div>
 
                 <p class=" cl6">
-                    '.$rep_comment->binhluan.'
+                    ' . $rep_comment->binhluan . '
                 </p>
 
                 <p class=" cl6">

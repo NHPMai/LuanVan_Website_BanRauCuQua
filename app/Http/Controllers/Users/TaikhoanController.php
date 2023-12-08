@@ -9,11 +9,13 @@ use Illuminate\Http\Request;
 use App\Models\Tinh_thanhpho;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class TaikhoanController extends Controller
 {
     public function account()
     {
+        // $id_account = Auth('web')->user()->id;
         $tinh_thanhpho = Tinh_thanhpho::orderby('id', 'ASC')->get();
         return view('user.taikhoan', [
             'title' => 'Tài khoản của bạn',
@@ -86,5 +88,31 @@ class TaikhoanController extends Controller
                 ';
 
         echo $output;
+    }
+
+
+    public function show()
+    {
+        // $id_account = Auth('web')->user()->id;
+        $tinh_thanhpho = Tinh_thanhpho::orderby('id', 'ASC')->get();
+        return view('user.update_taikhoan', [
+            'title' => 'Cập nhật tài khoản của bạn',
+            'tinh_thanhpho' => $tinh_thanhpho,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+       
+      
+        $kh = khachhang::find($id);
+
+        $kh->hoten = $request->hoten;
+        $kh->avata = $request->avata;
+        $kh->sodienthoai = $request->sodienthoai; 
+        $kh->save();
+
+        Session::flash('success', 'Cập nhật tài khoản khách hàng thành công!');
+        return redirect('/user/account');
     }
 }

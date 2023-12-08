@@ -141,23 +141,13 @@
 
                     <div class="flex-w flex-t p-t-15">
                         @foreach($products as $key => $product)
-                        @php
-                        $price = $product->gia;
-                        $priceEnd = $price * $chitietdonhangs[$product->id];
-                        $total += $priceEnd;
-                        @endphp
+                            @php
+                                $price = $product->gia;
+                                $priceEnd = $price * $chitietdonhangs[$product->id];
+                                $total += $priceEnd;
+                            @endphp
                         @endforeach
-
-
-                        <!-- @php
-                                $id_dc = $dc->id;
-                                $dc = App\Models\DiaChi::find($id_dc);
-
-                                $id_xa = $dc->xa_phuong_thitran_id;
-                                $pvc = App\Models\PhiVanChuyen::where('xa_phuong_thitran_id', $id_xa)->get();
-                                $phi = $pvc[0]['pvc_phivanchuyen'];
-                            @endphp -->
-
+                        
                         <div class="size-209 w-full-ssm ">
                             <span style="font-size: 20px;">
                                 Tiền hàng:
@@ -284,6 +274,7 @@
 
                         </div>
                     </div>
+                   
 
 
                     @csrf
@@ -297,14 +288,6 @@
                     </p>
 
 
-                    <!-- @php
-                        $phuongthucthanhtoans = DB::table('donhangs')
-                            ->join('phuongthucthanhtoans','donhangs.phuongthucthanhtoan_id', '=' , 'phuongthucthanhtoans.id')
-                            ->where('donhangs.dh_trangthai',0)
-                            ->select('phuongthucthanhtoans.pttt_ten')
-                            ->get();
-                       
-                    @endphp -->
 
 
                     <div>
@@ -327,17 +310,6 @@
 
 
 
-                    <!-- <a class="btn btn-primary m-3" href="{{route('user.processTransaction')}}">Thanh toán bằng paypal</a> -->
-
-                    <!-- @if (Session()->has('error'))
-                    <div class="alert alert-danger"> {{ Session::get('error')}}</div>
-                    {{ Session()->forget('error')}}
-                    @endif
-                    @if(Session()->has('success'))
-                    <div class="alert alert-success">{{ Session::get('success')}}</div>
-                    {{ Session()->forget('success')}}
-                    @endif -->
-
                     <div>
                         @php
                         $vnd_to_usd = $total/24265;
@@ -345,17 +317,8 @@
                         {{Session::put('total_paypal',$total_paypal);}}
                         @endphp
                         <div id="paypal-button-container"></div>
-                        <!-- <input id="vnd_to_usd" name="vnd_to_usd" type="hidden" value="{{round($vnd_to_usd,2)}}"> -->
                     </div>
 
-
-
-                    <!-- <input type="radio" id="html" name="fav_language" value="HTML">
-                    <label for="html">Thanh toán khi giao hàng</label><br>
-                    <input type="radio" id="html" name="fav_language" value="HTML">
-                    <label for="html">PayPal</label><br>
-                    <input type="radio" id="html" name="fav_language" value="HTML">
-                    <label for="html">VNPay</label><br> -->
 
 
 

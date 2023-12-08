@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\NhanVien;
+use App\Models\Donhang;
+use App\Models\Chitietdonhang;
 
 use Exception;
 
@@ -49,6 +51,7 @@ class BrandController extends Controller
         //     // dd($nhanvien);
         // }
         // $brands = Brand::all()->sortByDesc("id")->paginate(20);
+
         $brands = Brand::orderbyDesc('id')->get();
         return view('admin.brand.list',[
             'title' => 'Danh Sách Thương Hiệu Mới Nhất',

@@ -99,42 +99,54 @@ class LogincustomerController extends Controller
 
     //ĐĂNG KÍ
 
-    public function sign_up(Request $req)
-    {
-        $req->validate([
-            'hoten' => 'required',
-            'email' => 'required|email|unique:khachhangs',
-            'password' => 'required|min:5|max:12',
-            // 'avata'=> 'required',
-            'sodienthoai' => 'required',
-            'gioitinh' => 'required',
-            'ngaysinh' => 'required',
-            'diachi' => 'required',
-            // 'vip'=>'required',
-            // 'tongtienmua'=>'required',
-            // 'hoatdong'=>'required',
-        ]);
-        $khachhang = new khachhang();
-        $khachhang->hoten = $req->hoten;
-        $khachhang->email = $req->email;
-        $khachhang->password = bcrypt($req->password);
-        // $khachhang->avata = $req->avata;
-        $khachhang->sodienthoai = $req->sodienthoai;
-        $khachhang->gioitinh = $req->gioitinh;
-        $khachhang->ngaysinh = $req->ngaysinh;
-        $khachhang->diachi = $req->diachi;
-        // $khachhang->vip = $req->vip;
-        // $khachhang->tongtienmua = $req->tongtienmua;
-        // $khachhang->hoatdong = $req->hoatdong;
-        $khachhang->save();
-        if ($req) {
-            return back()->with('success', 'Bạn đã đăng kí thành công!!!');
-        } else {
-            return back()->with('fail', 'Lỗi vui lòng đăng kí lại!');
-        }
 
-        // Session::put('khachhang_id',$khachhang);
+
+    public function sign_up(Request $request)
+    {
+        $this->validate(
+            $request,
+            [
+                'hoten' => 'required',
+                'sodienthoai' => 'required',
+                'email' => 'required|email|unique:khachhangs,email|max:255',
+                'gioitinh' => 'required',
+                'ngaysinh' => 'required',
+                'diachi' => 'required',
+                'password' => 'required|confirmed|min:6',
+            ],
+            [
+                'hoten.required' => 'Vui lòng nhập tên khách hàng',
+                'sodienthoai.required' => 'Vui lòng số điện thoại',
+                'email.required' => 'Vui lòng nhập email',
+                'email.unique' => 'Vui lòng nhập email khác, do email này đã tồn tại',
+                'gioitinh.required' => 'Vui lòng chọn giới tính',
+                'ngaysinh.required' => 'Vui lòng nhập ngày tháng năm sinh',
+                'diachi.required' => 'Vui lòng nhập địa chỉ',
+                'password.required' => 'Vui lòng nhập mật khẩu',
+                'password.min' => 'Mật khẩu ít nhất 6 kí tự',
+                'confirmed' => 'Mật khẩu không khớp',
+            ]
+        );
+
+        $khachhang = khachhang::create([
+            'hoten' => $request->hoten,
+            'sodienthoai' => $request->sodienthoai,
+            'email' => $request->email,
+            'gioitinh' => $request->gioitinh,
+            'ngaysinh' => $request->ngaysinh,
+            'diachi' => $request->diachi,
+            'password' => bcrypt($request->password),
+            'hoatdong' => 1,
+        ]);
+
+
+        Session::flash('success', 'Đăng kí ài khoản thành công');
+        return  redirect()->back();
     }
+
+
+
+
 
     public function register()
     {

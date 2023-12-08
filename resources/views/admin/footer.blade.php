@@ -268,9 +268,9 @@
         var comment_id = $(this).data('comment_id');
         var comment_product_id = $(this).attr('id');
         if (comment_status == 0) {
-            var alert = 'Thay đổi thành duyệt thành công';
+            var alert = 'Thay đổi thành công';
         } else {
-            var alert = 'Thay đổi thành không duyệt thành công';
+            var alert = 'Thay đổi thành công';
         }
         $.ajax({
             url: "{{url('/admin/products/allow_comment')}}",
@@ -285,7 +285,7 @@
             },
             success: function(data) {
                 location.reload();
-                $('#notify_comment').html('<span class="text text-alert">' + alert + '</span>');
+                $('#notify_comment').html('<span class="text text-success" style="font-size:20px; font-weight:700">' + alert + '</span>');
 
             }
         });
@@ -309,7 +309,7 @@
             },
             success: function(data) {
                 $('.reply_comment' + comment_id).val('');
-                $('#notify_comment').html('<span class="text text-alert">Trả lời bình luận thành công</span>');
+                $('#notify_comment').html('<span class="text text-success" style="font-size:20px; font-weight:700">Trả lời bình luận thành công</span>');
                 location.reload();
             }
         });

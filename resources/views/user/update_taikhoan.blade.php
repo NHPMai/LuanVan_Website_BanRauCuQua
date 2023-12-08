@@ -1,4 +1,7 @@
 @extends('home')
+<head> 
+    <meta name = "csrf-token" content = "{{ csrf_token() }}" > 
+</head>
 
 @section('content')
 <style>
@@ -74,114 +77,123 @@
     }
 </style>
 
-
 <div class="container p-t-50 p-b-20">
-    <div class="row gutters">
-        <div class="col-xl-2 col-lg-3 col-md-12 col-sm-12 col-12">
-            <div class="card h-40">
-                <div class="card-body">
-                    <div class="account-settings">
-                        <div class="about" style="margin-top: 10px;">
-                            <h4 style="text-decoration:underline">Cài đặt</h4>
-                            <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action list-group-item-primary" style="font-size: 16px; font-weight:500">Tài khoản</a>
-                                <a href="#" class="list-group-item list-group-item-action list-group-item-secondary" style="font-size: 16px; font-weight:500">Mật khẩu</a>
+    <form action="" method="POST">
+        <div class="row gutters">
+            <div class="col-xl-2 col-lg-3 col-md-12 col-sm-12 col-12">
+                <div class="card h-40">
+                    <div class="card-body">
+                        <div class="account-settings">
+                            <div class="about" style="margin-top: 10px;">
+                                <h4 style="text-decoration:underline">Cài đặt</h4>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item list-group-item-action list-group-item-primary" style="font-size: 16px; font-weight:500">Tài khoản</a>
+                                    <a href="#" class="list-group-item list-group-item-action list-group-item-secondary" style="font-size: 16px; font-weight:500">Mật khẩu</a>
+
+                                </div>
 
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-            <div class="card h-100">
-                <div class="card-body">
-                    <div class="border-bottom-5px"></div>
-                    <div class="account-settings">
-                        <h4 style="text-align:center; color:#007ae1; magin-top:20px;  text-decoration:underline">Ảnh đại diện</h4>
-                        <div class="user-profile pt-2" style=" padding-bottom: 0px; margin-bottom: 5px;">
-                            <div class="user-avatar">
-                                <img src="{{ Auth('web')->user()->avata }}" style="border-radius: 50%; border: 2px solid #a1a1a1;" alt="Maxwell Admin">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="border-bottom-5px"></div>
+                        <div class="account-settings">
+                            <h4 style="text-align:center; color:#007ae1; magin-top:20px;  text-decoration:underline">Ảnh đại diện</h4>
+                            <div class="user-profile pt-2" style=" padding-bottom: 0px; margin-bottom: 5px;">
+                                <div class="user-avatar">
+                                    <img src="{{ Auth('web')->user()->avata }}" style="border-radius: 50%; border: 2px solid #a1a1a1;" alt="Maxwell Admin">
 
-                                <!-- <input type="file" class="form-control" id="upload">
+                                    <!-- <input type="file" class="form-control" id="upload">
                                 <div id="image_show"></div>
                                 <input type="hidden" name="avata" id="thumnb"> -->
 
+                                </div>
                             </div>
-                        </div>
-                        <div class="about">
-                            <i class='fas fa-image' style='font-size:36px'></i>
-                            <h5>Ảnh đại diện</h5>
-                            <p>Hãy tải ảnh lên với kích thước <br>150px x 150px <br>(Tỉ lệ 1x1)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-7 col-lg-9 col-md-12 col-sm-12 col-12">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h4 style="text-align:center; color:#007ae1; magin-top:20px; text-decoration:underline">THÔNG TIN CÁ NHÂN</h4>
-                    <div class="row gutters">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="fullName">Họ tên<span class="text-danger">(*)</span></label>
-                                <input type="text" class="form-control" id="fullName" placeholder="Nhập họ tên" value="{{ Auth('web')->user()->hoten }}" disabled>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="eMail">Email<span class="text-danger">(*)</span></label>
-                                <input type="email" class="form-control" id="eMail" placeholder="Nhập email" value="{{ Auth('web')->user()->email }}" disabled>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="phone">Số điện thoại<span class="text-danger">(*)</span></label>
-                                <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại" value="{{ Auth('web')->user()->sodienthoai }}" disabled>
-                            </div>
-                        </div>
+                            <div class="about">
+                                <!-- <i class='fas fa-image' style='font-size:36px'></i> -->
+                                <!-- <div class="form-group">
+                                    <input type="file" class="form-control" id="upload">
+                                    <div id="image_show"></div>
+                                    <input type="hidden" name="avata" value="{{ Auth('web')->user()->avata }}" id="thumnb">
+                                </div> -->
 
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="website">Tổng tiền đã mua<span class="text-danger">(*)</span></label>
-                                <input type="number" class="form-control" id="tongtienmua" placeholder="Tổng tiền mua" value="{{ Auth('web')->user()->tongtienmua }}" disabled>
-                            </div>
-                        </div>
+                                <div class="form-group">
+                                    <label for="menu">Ảnh Sản Phẩm <span class="text-danger">(*)</span></label>
+                                    <input type="file" class="form-control" id="upload">
+                                    <div id="image_show">
+                                        <a href="{{ Auth('web')->user()->avata }}">
+                                            <img src="{{ Auth('web')->user()->avata }}" width="100px">
+                                        </a>
+                                    </div>
+                                    <input type="hidden" name="avata" value="{{ Auth('web')->user()->avata}}" id="thumnb">
+                                </div>
 
-                        <div id="load_address"></div>
-
-
-                    </div>
-
-
-                    <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="text-right">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin:0">
-                                    Thêm địa chỉ
-                                </button>
-                                <!-- <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button> -->
-                                <button type="button" id="submit" name="submit" class="btn btn-primary" style="margin:0">
-                                    <a  href="/user/update_taikhoan/{{ Auth('web')->user()->id }}">Cập nhật </a>
-                                </button>
+                                <h5>Ảnh đại diện</h5>
+                                <p>Hãy tải ảnh lên với kích thước <br>150px x 150px <br>(Tỉ lệ 1x1)</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-xl-7 col-lg-9 col-md-12 col-sm-12 col-12">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 style="text-align:center; color:#007ae1; magin-top:20px; text-decoration:underline">THÔNG TIN CÁ NHÂN</h4>
+                        <div class="row gutters">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="fullName">Họ tên<span class="text-danger">(*)</span></label>
+                                    <input type="text" class="form-control" id="fullName" placeholder="Nhập họ tên" name="hoten" value="{{ Auth('web')->user()->hoten }}">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="eMail">Email<span class="text-danger">(*)</span></label>
+                                    <input type="email" class="form-control" id="eMail" placeholder="Nhập email" name="email" value="{{ Auth('web')->user()->email }}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="phone">Số điện thoại<span class="text-danger">(*)</span></label>
+                                    <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại" name="sodienthoai" value="{{ Auth('web')->user()->sodienthoai }}">
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="website">Tổng tiền đã mua<span class="text-danger">(*)</span></label>
+                                    <input type="number" class="form-control" id="tongtienmua" placeholder="Tổng tiền mua" name="tongtienmua" value="{{ Auth('web')->user()->tongtienmua }}" disabled>
+                                </div>
+                            </div>
+
+                            <div id="load_address"></div>
+
+
+                        </div>
+
+
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="text-right">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin:0">
+                                        Thêm địa chỉ
+                                    </button>
+                                    <!-- <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button> -->
+                                    <button type="submit" id="submit" name="submit" class="btn btn-primary" style="margin:0">Cập nhật</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button> -->
-
-
-
+        @csrf
+    </form>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -224,6 +236,7 @@
                             </div>
                             <div id="load_address"></div>
 
+
                             @csrf
                             <!-- </form> -->
                         </div>
@@ -238,6 +251,8 @@
         </div>
     </div>
 </div>
+
+
 
 <script>
     $(document).ready(function() {

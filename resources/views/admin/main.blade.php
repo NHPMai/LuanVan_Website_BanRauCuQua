@@ -47,35 +47,13 @@
             <ul class="navbar-nav ml-auto nav-pills ">
                 <li class="nav-item menu-open">
                     <div class="btn-group">
-                        <!-- <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                            <i class="fas fa-user"></i>
-                        </button>
-
-                        <div class="dropdown-menu" role="menu">
-                            @if (Auth::check())
-
-                            <div class="dropdown-divider"></div>
-                            <a href="{{ route('admin.logout') }}" class="dropdown-item">
+                        
+                        @if (Auth::check())
+                            <button type="button" class="btn btn-light btn-sm " >
+                            <a href="{{ route('admin.logout') }}" class="dropdown-item" style="font-size: 18px; font-weight:700">
                                 Log Out
                             </a>
-
-                            @else
-
-                            <a href="{{asset('danh-muc/register')}}" class="dropdown-item">Đăng ký</a>
-                            <a href="{{asset('admin/users/login')}}" class="dropdown-item">Đăng nhập</a>
-
-                            @endif
-
-                        </div> -->
-                        @if (Auth::check())
-                        <!-- <a href="{{ route('admin.logout') }}" class="dropdown-item" style="font-size: 18px; font-weight:700">
-                            Log Out
-                        </a> -->
-                         <button type="button" class="btn btn-light btn-sm " >
-                         <a href="{{ route('admin.logout') }}" class="dropdown-item" style="font-size: 18px; font-weight:700">
-                            Log Out
-                        </a>
-                        </button>
+                            </button>
                         @endif
                     </div>
                 </li>

@@ -21,12 +21,13 @@
         text-transform: uppercase;
         text-align: center;
     }
+
     .panel-default>.panel-heading {
-    color: #000000 ! important;
-    background-color: #ddede0 ! important;
-    border-color: #ddede0 ! important;
-    font-size: 20px;
-}
+        color: #000000 ! important;
+        background-color: #ddede0 ! important;
+        border-color: #ddede0 ! important;
+        font-size: 20px;
+    }
 </style>
 
 <body class="hold-transition sidebar-mini">
@@ -46,26 +47,13 @@
             <ul class="navbar-nav ml-auto nav-pills ">
                 <li class="nav-item menu-open">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                            <i class="fas fa-user"></i>
-                        </button>
-
-                        <div class="dropdown-menu" role="menu">
-                            @if (Auth::check())
-
-                            <div class="dropdown-divider"></div>
-                            <a href="{{ route('shipper.logout') }}" class="dropdown-item">
+                        @if (Auth::check())
+                        <button type="button" class="btn btn-light btn-sm ">
+                            <a href="{{ route('shipper.logout') }}" class="dropdown-item" style="font-size: 18px; font-weight:700">
                                 Log Out
                             </a>
-
-                            @else
-
-                            <a href="{{asset('danh-muc/register')}}" class="dropdown-item">Đăng ký</a>
-                            <a href="{{asset('shipper/users/login')}}" class="dropdown-item">Đăng nhập</a>
-
-                            @endif
-
-                        </div>
+                        </button>
+                        @endif
                     </div>
                 </li>
 
@@ -148,12 +136,6 @@
             </div>
 
 
-
-
-
-
-
-
             <!-- Main content -->
             <section class="content">
 
@@ -168,7 +150,7 @@
                             <!-- jquery validation -->
                             <div class="card  mt-3">
                                 <div class="panel-heading" style="margin-bottom: 10px;">
-                                    <h3 class="panel-heading">{{ $title }}</h3>
+                                    <h3 class="panel-heading" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;color:brown; font-weight:900; font-size:35px; ; margin-top:0px; margin-bottom: 20px">{{ $title }}</h3>
                                 </div>
 
                                 @yield('content')

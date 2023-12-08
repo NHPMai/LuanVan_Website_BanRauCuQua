@@ -23,25 +23,20 @@
   <div class="login-box">
     <div class="login-logo">
       <i class="fas fa-user" style="color:ivory;"></i>
-      <a href="#"  style="font-size:45px; font-weight:700; color:ivory; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"><b>ĐĂNG KÍ</b></a>
+      <a href="#" style="font-size:45px; font-weight:700; color:ivory; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif"><b>ĐĂNG KÍ</b></a>
       <!-- <a  style="color:ivory;"><b>&nbsp ĐĂNG KÍ</b></a> -->
     </div>
 
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Register to start your session</p>
+        <p class="login-box-msg">Đăng kí tài khoản để mua sản phẩm!</p>
+        @include('admin.alert')
 
         <form action="{{route('user.create')}}" method="post">
-          @if(Session::has('success'))
-          <div class="alert alert-success">{{Session::get('success')}}</div>
-          @endif
-          @if(Session::has('fail'))
-          <div class="alert alert-danger">{{Session::get('fail')}}</div>
-          @endif
-          @csrf
+
           <div class="input-group mb-3">
-            <input type="text" name="hoten" class="form-control" placeholder="Họ và tên">
-            <!-- <span class="text-danger">@error('hoten') {{$$message}}  @enderror</span> -->
+            <input type="text" name="hoten" value="{{ old('hoten') }}" class="form-control" placeholder="Họ và tên">
+
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -50,7 +45,7 @@
           </div>
 
           <div class="input-group mb-3">
-            <input type="email" name="email" class="form-control" placeholder="Email">
+            <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -59,7 +54,7 @@
           </div>
 
           <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control" placeholder="Password">
+            <input type="password" name="password" value="{{ old('password') }}" class="form-control" placeholder="Nhập mật khẩu">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -68,7 +63,16 @@
           </div>
 
           <div class="input-group mb-3">
-            <input type="number" name="sodienthoai" class="form-control" placeholder="Số điện thoại">
+            <input type="password" name="password_confirmation" class="form-control" placeholder="Nhập lại mật khẩu">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="number" name="sodienthoai" value="{{ old('sodienthoai') }}" class="form-control" placeholder="Số điện thoại">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-phone"></span>
@@ -77,7 +81,22 @@
           </div>
 
           <div class="input-group mb-3">
-            <input type="text" name="gioitinh" class="form-control" placeholder="Giới tính">
+            <select name="gioitinh" class="form-control input-inline" style=" margin-right: 10px;">
+              <option value="">-----Giới tính-----</option>
+              <option value="1">Nam</option>
+              <option value="2">Nữ</option>
+            </select>
+
+            <!-- <input type="text" name="gioitinh" class="form-control" placeholder="Giới tính">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div> -->
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="date" name="ngaysinh"  value="{{ old('ngaysinh') }}" class="form-control" placeholder="Ngày sinh">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -86,36 +105,27 @@
           </div>
 
           <div class="input-group mb-3">
-            <input type="date" name="ngaysinh" class="form-control" placeholder="Ngày sinh">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
-          </div>          
-
-          <div class="input-group mb-3">
-            <textarea id="load_diachi" name="diachi" class="form-control" placeholder="Địa chỉ"></textarea>
+            <input id="load_diachi" name="diachi"  value="{{ old('diachi') }}" class="form-control" placeholder="Địa chỉ">
           </div>
 
           <div class="row">
-            <div class="col-8">
-              <div class="icheck-primary">
+            <div class="col-8" style="padding-top: 10px;">
+              <!-- <div class="icheck-primary">
                 <input type="checkbox" name="remember" id="remember">
                 <label for="remember">
                   Remember Me
                 </label>
-              </div>
+              </div> -->
+              <a href="{{route('user.login')}}">Đăng nhập</a>
             </div>
             <!-- /.col -->
             <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block">Register</button>
+              <button type="submit" class="btn btn-primary btn-block">Đăng kí</button>
             </div>
             <!-- /.col -->
           </div>
 
-          <br>
-          <a href="{{route('user.login')}}">Login Here</a>
+         
           @csrf
         </form>
 
@@ -181,9 +191,6 @@
     //     }
     //   });
     // }
-
-
-
   </script>
 
 </body>

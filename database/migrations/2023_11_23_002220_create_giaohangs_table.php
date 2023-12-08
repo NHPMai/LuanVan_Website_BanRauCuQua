@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->string('gh_sodienthoai');
             $table->string('gh_gioitinh');
+            $table->string('gh_ngaysinh');
             $table->string('gh_diachi');
             $table->string('email')->unique();
             $table->string('password');

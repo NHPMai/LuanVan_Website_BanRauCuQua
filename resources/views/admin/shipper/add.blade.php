@@ -11,30 +11,26 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="menu">Họ và tên <span class="text-danger">(*)</span></label>
-                    <input type="text" name="hoten" value="{{ $nhanvien->hoten }}" class="form-control" placeholder="Nhập tên nhà cung cấp">
+                    <input type="text" name="gh_hoten" value="{{ old('gh_hoten') }}" class="form-control" placeholder="Nhập tên người giao hàng">
                 </div>
 
                 <div class="form-group">
                     <label for="menu">Số điện thoai <span class="text-danger">(*)</span></label>
-                    <input type="number" name="sodienthoai" value="{{ $nhanvien->sodienthoai}}" class="form-control" placeholder="Nhập số điện thoại">
+                    <input type="number" name="gh_sodienthoai" value="{{ old('gh_sodienthoai') }}" class="form-control" placeholder="Nhập số điện thoại">
                 </div>
 
                 <div class="form-group">
                     <label style="margin-bottom: 10px;">Giới tính<span class="text-danger">(*)</span></label>
-                    <select name="gioitinh" class="form-control input-inline" style=" margin-right: 10px;">
+                    <select name="gh_gioitinh" class="form-control input-inline" style=" margin-right: 10px;">
                         <option value="">-----Chọn-----</option>
-                        <option value="1" {{ $nhanvien->gioitinh == '1' ? 'selected' : '' }}>
-                            Nam
-                        </option>
-                        <option value="2" {{ $nhanvien->gioitinh == '2' ? 'selected' : '' }}>
-                            Nữ
-                        </option>
+                        <option value="1">Nam</option>
+                        <option value="2">Nữ</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="menu">Ngày sinh <span class="text-danger">(*)</span></label>
-                    <input type="date" name="ngaysinh" value="{{ $nhanvien->ngaysinh }}" class="form-control">
+                    <input type="date" name="gh_ngaysinh" value="{{ old('gh_ngaysinh') }}" class="form-control">
                 </div>
 
 
@@ -44,45 +40,43 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="menu">Địa chỉ email <span class="text-danger">(*)</span></label>
-                    <input type="email" name="email" value="{{ $nhanvien->email }}" class="form-control" placeholder="Nhập email">
+                    <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Nhập email">
                 </div>
                 <div class="form-group">
                     <label for="menu">Mật khẩu<span class="text-danger">(*)</span></label>
-                    <input type="password" name="password" value="{{ $nhanvien->password }}" class="form-control" placeholder="Nhập mật khẩu">
+                    <input type="password" name="password" value="{{ old('password') }}" class="form-control" placeholder="Nhập mật khẩu">
                 </div>
                 <div class="form-group">
                     <label for="menu">Nhập lại mật khẩu<span class="text-danger">(*)</span></label>
-                    <input type="password" name="password_confirmation" value="{{ $nhanvien->password }}" class="form-control" placeholder="Nhập lại mật khẩu">
+                    <input type="password" name="password_confirmation" class="form-control" placeholder="Nhập lại mật khẩu">
                 </div>
-
                 <div class="form-group">
                     <label for="menu">Địa chỉ cụ thể <span class="text-danger">(*)</span></label>
-                    <input type="text" name="diachi" value="{{ $nhanvien->diachi }}" class="form-control" placeholder="Nhập địa chỉ">
+                    <input type="text" name="gh_diachi" value="{{ old('gh_diachi') }}" class="form-control" placeholder="Nhập địa chỉ">
                 </div>
             </div>
 
         </div>
 
         <div class="form-group">
-            <label for="menu">Ảnh nhân viên<span class="text-danger">(*)</span></label>
+            <label for="menu">Chọn ảnh đại diện<span class="text-danger">(*)</span></label>
             <input type="file" class="form-control" id="upload">
             <div id="image_show">
-                <a href="{{ $nhanvien->avata}}" target="_blank">
-                    <img src="{{  $nhanvien->avata }}" width="100px">
-                </a>
+
             </div>
-            <input type="hidden" name="avata" value="{{  $nhanvien->avata }}" id="thumnb">
+            <input type="hidden" name="gh_avatar" id="thumnb">
         </div>
 
+
+
         <div class="form-group">
-            <lable>Kích Hoạt <span class="text-danger">(*)</span></lable>
+            <label>Kích Hoạt<span class="text-danger">(*)</span></label>
             <div class="custom-control custom-radio">
-                <input class="custom-control-input" value="1" type="radio" id="active" name="hoatdong" {{$nhanvien->hoatdong == 1 ? 'checked=""' : ''}}>
+                <input class="custom-control-input" value="1" type="radio" id="active" name="gh_trangthai" checked="">
                 <label for="active" class="custom-control-label">Có</label>
             </div>
-
             <div class="custom-control custom-radio">
-                <input class="custom-control-input" value="0" type="radio" id="no_active" name="hoatdong" {{$nhanvien->hoatdong == 0 ? 'checked=""' : ''}}>
+                <input class="custom-control-input" value="0" type="radio" id="no_active" name="gh_trangthai">
                 <label for="no_active" class="custom-control-label">Không</label>
             </div>
         </div>

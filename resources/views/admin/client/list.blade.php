@@ -59,7 +59,7 @@
             </div>
 
             <div class="text-end">
-                <a href="/admin/staffs/add" class="btn btn-warning" data-abc="true"> <i class="fas fa-plus"></i></i>&nbsp;<b>Thêm mới</b></a>
+                <a href="/admin/clients/add" class="btn btn-warning" data-abc="true"> <i class="fas fa-plus"></i></i>&nbsp;<b>Thêm mới</b></a>
             </div>
         </div>
     </div>
@@ -83,7 +83,7 @@
             </div>
         </nav> -->
         <div style="padding: 10px;">
-            <table >
+            <table id="myTable">
                 <thead>
                     <tr style="background-color: lightskyblue;">
                         <th style="text-align:center">ID</th>
@@ -103,28 +103,53 @@
 
                         <td style="text-align:center">{{$khachhang->id}}</td>
                         <td style="text-align:center">{{$khachhang->hoten}}</td>
-                        <td style="text-align:center"><img src="/template/admin/dist/img/logoadmin.png" style="border-radius: 50%; border: 2px solid #a1a1a1;" height="100" width="100"></td>
-                            @if( $khachhang->gioitinh == 'nam')
-                            <td style="text-align:center">Nam</td>
-                            @elseif ($khachhang->gioitinh == 'nữ')
-                            <td style="text-align:center">Nữ</td>
-                            @endif
+                        @if ($khachhang->avata == '')
+                        <td style="text-align:center"><img src="/template/images/khachhang/no-avatar.png" style="border-radius: 50%; border: 2px solid #a1a1a1;" height="100" width="100"></td>
+                        @else
+                        <td style="text-align:center"><img src="{{$khachhang->avata}}" style="border-radius: 50%; border: 2px solid #a1a1a1;" height="100" width="100"></td>
+                        @endif
+
+                        @if( $khachhang->gioitinh == '1')
+                        <td style="text-align:center">Nam</td>
+                        @elseif ($khachhang->gioitinh == '2')
+                        <td style="text-align:center">Nữ</td>
+                        @endif
                         <td style="text-align:center">{{$khachhang->sodienthoai}}</td>
                         <td style="text-align:center">{{$khachhang->diachi}}</td>
                         <td style="text-align:center">{{$khachhang->email}}</td>
-                            @if( $khachhang->hoatdong == 0)
-                            <td style="text-align:center"><button type="button" class="btn btn-danger">Khóa</button></td>
-                            @elseif ($khachhang->hoatdong == 1)
-                            <td style="text-align:center"><button type="button" class="btn btn-success">Hoạt động</button></td>
-                            @endif
+
+
+                        @if ( $khachhang->hoatdong == 1 )
+                        <td style="text-align:center">
+                            <a class="btn btn-success btn-sm" href="/admin/clients/unactive/{{$khachhang->id}}" onclick='return confirm("Bạn chắc chắn khóa không?")'>
+                                <i class="fas fa-lock-open"></i>
+                            </a>
+                        </td>
+                        @elseif ( $khachhang->hoatdong == 0 )
+                        <td style="text-align:center">
+                            <a href="/admin/clients/active/{{$khachhang->id}}" class="btn btn-danger btn-sm" onclick='return confirm("Bạn chắc chắn mở khóa không?")'>
+                                <span class="fas fa-lock" style="font-size: 15px;color: white; font-weight: bold"></span>
+                            </a>
+                        </td>
+                        @endif
+
+
                         <td style="text-align: center;vertical-align: middle;">
+                            <a class="btn btn-warning btn-sm" href="/admin/clients/view/{{ $khachhang->id  }}">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            
                             <a class="btn btn-primary btn-sm" href="/admin/clients/edit/{{ $khachhang->id }}">
                                 <i class="fas fa-edit"></i>
                             </a>
 
-                            <a href="#" class="btn btn-danger btn-sm" onclick="removeRow({{$khachhang->id}},'/admin/clients/destroy')">
+                            <!-- <a href="#" class="btn btn-danger btn-sm" onclick="removeRow({{$khachhang->id}},'/admin/clients/destroy')">
                                 <i class="fas fa-trash"></i>
-                            </a>
+                            </a> -->
+                            <!-- <br><br> -->
+
+
+
 
                         </td>
 

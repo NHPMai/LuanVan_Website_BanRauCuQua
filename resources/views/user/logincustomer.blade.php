@@ -29,7 +29,7 @@
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg">Hãy đăng nhập để vào cửa hàng bạn nhé!</p>
+        <p class="login-box-msg">Hãy đăng nhập để mua sắm bạn nhé!</p>
         @include('user.alert')
 
         <form action="{{route('user.store')}}" method="post">
@@ -50,17 +50,18 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-8">
-              <div class="icheck-primary">
+            <div class="col-8" style="padding-top: 10px;">
+              <!-- <div class="icheck-primary">
                 <input type="checkbox" name="remember" id="remember">
                 <label for="remember">
                   Remember Me
                 </label>
-              </div>
+              </div> -->
+              <a href="{{route('user.register')}}">Đăng kí</a>
             </div>
             <!-- /.col -->
             <div class="col-4">
-              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+              <button type="submit" class="btn btn-primary btn-block" style="padding-left: 6px; padding-right:6px">Đăng nhập</button>
             </div>
             <!-- /.col -->
           </div>

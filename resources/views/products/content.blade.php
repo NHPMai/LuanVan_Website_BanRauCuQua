@@ -254,7 +254,13 @@
                                         <span class="wrap-rating fs-18 cl11 pointer">
 
                                             <ul class="list-inline" title="Average Rating" style="margin-bottom:0px">
-                                                @for($count=1; $count<=5; $count++) @php if($count <=$rating){ $color='color:#ffcc00;' ; } else { $color='color:#ccc;' ; } @endphp <li title="start_rating" id="{{$product->id}}-{{$count}}" data-index="{{$count}}" data-product_id="{{$product->id}}" data-rating="{{$rating}}" class="rating" style="cursor: pointer; {{$color}} ; font-size:30px;">
+                                                @for($count=1; $count<=5; $count++) @php if($count <=$rating){ $color='color:#ffcc00;' ; } else { $color='color:#ccc;' ; } @endphp 
+                                                <li title="start_rating" id="{{$product->id}}-{{$count}}" 
+                                                    data-index="{{$count}}" 
+                                                    data-product_id="{{$product->id}}" 
+                                                    data-user_id="{{Auth('web')->user()->id}}" 
+                                                    data-rating="{{$rating}}" 
+                                                    class="rating" style="cursor: pointer; {{$color}} ; font-size:30px;">
                                                     &#9733;
 
                                                     </li>

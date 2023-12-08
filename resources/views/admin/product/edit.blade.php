@@ -82,7 +82,7 @@
                     <img src="{{ $product->hinhanh }}" width="100px">
                 </a>
             </div>
-            <input type="hidden" name="hinhanh" value="{{ $product->hinhanh}}" id="hinhanh">
+            <input type="hidden" name="hinhanh" value="{{ $product->hinhanh}}" id="thumnb">
         </div>
 
         <div class="form-group">

@@ -19,7 +19,7 @@ class ShipperController extends Controller
     public function index()
     {
         return view('shipper.account.login_shipper', [
-            'title' => 'Đăng nhập shipper'
+            'title' => 'Đăng Nhập Shipper'
         ]);
     }
 
@@ -81,8 +81,9 @@ class ShipperController extends Controller
 
     public function donhang_shipper()
     {
-
-        $donhang2 = Donhang::where('dh_trangthai', 2)->orderBy('id', 'desc')->get();
+        $id_gh = Auth::user()->id;
+              
+        $donhang2 = Donhang::where('dh_trangthai', 2)->where('giaohang_id',$id_gh)->orderBy('id', 'desc')->get();
         // dd($donhang2);
         return view('shipper.donhang_shipper', [
             'title' => 'Danh Sách Đơn Hàng Chờ',
@@ -91,7 +92,8 @@ class ShipperController extends Controller
     }
     public function donhang_danggiao()
     {
-        $donhang3 = Donhang::where('dh_trangthai', 3)->orderBy('id', 'desc')->get();
+        $id_gh = Auth::user()->id;
+        $donhang3 = Donhang::where('dh_trangthai', 3)->where('giaohang_id',$id_gh)->orderBy('id', 'desc')->get();
         // dd($donhang3);
         return view('shipper.donhang_dagiao', [
             'title' => 'Danh Sách Đơn Hàng Đang Giao',
@@ -101,7 +103,8 @@ class ShipperController extends Controller
 
     public function donhang_dagiao()
     {
-        $donhang4 = Donhang::where('dh_trangthai', 4)->orderBy('id', 'desc')->get();
+        $id_gh = Auth::user()->id;
+        $donhang4 = Donhang::where('dh_trangthai', 4)->where('giaohang_id',$id_gh)->orderBy('id', 'desc')->get();
         return view('shipper.donhang_dagiao', [
             'title' => 'Danh Sách Giao Hàng Thành Công',
             'donhang4' => $donhang4,
@@ -120,15 +123,6 @@ class ShipperController extends Controller
         ]);
     }
 
-    // public function update(Request $req, $id)
-    // {
-    //     $order = Donhang::find($id)
-    //         ->update(
-    //             ['dh_trangthai' => $req->input('dh_trangthai')],
-    //     );
-    //     return redirect()->back();
-    // }
-
     public function update(Request $req, $id)
     {
         $order = Donhang::find($id);
@@ -143,6 +137,15 @@ class ShipperController extends Controller
         } elseif ($newStatus == 4) {
             $order->dh_trangthai = $newStatus;
             $order->save();
+
+
+            // $name = Auth::user();
+            // Mail::send('emails.test', compact('chitietdonhang', 'name'), function ($email) use ($name) {
+            //     $email->subject('Cửa Hàng Vegetable Family - Xác Nhận Đơn Hàng Được Giao Thành Công');
+            //     $email->to($name->email, $name->hoten);
+            // });
+
+            
 
             // $kh = khachhang::where('id', $id_kh)->get();
             // Mail::send('emails.giaohangthanhcong', compact('kh'), function ($email) use ($kh) {

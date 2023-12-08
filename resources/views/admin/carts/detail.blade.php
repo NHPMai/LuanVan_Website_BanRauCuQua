@@ -85,24 +85,31 @@
             {{ csrf_field() }}
             <!-- <div class="col-md-8"></div> -->
             <div class="">
-
-
                 @if( $donhang->dh_trangthai== 1)
                 <div class="row">
-                    <div class="col-10">
-                        <div class="form-inline">
-                            <label style="margin-bottom: 10px;">Trạng thái đơn hàng: </label>
+                    <div class="col-12 ">
+                        <div class="form-inline" style="margin-bottom: 10px;">
+                            <label style="margin-bottom: 10px; margin-left: 100px;margin-right: 10px;">Trạng thái đơn hàng: </label>
                             <select name="dh_trangthai" class="form-control input-inline" style="width: 150px; margin-right: 10px;">ư
                                 <option value="1">Chờ duyệt</option>
                                 <option value="2">Đã duyệt</option>
-                                <!-- <option value="4">Giao hàng thành công</option> -->
                             </select>
-                            <input type="submit" value="Xác nhận" class="btn btn-primary">
+
+                            <label style="margin-left: 120px; margin-right: 10px;">Giao hàng <span class="text-danger">(*)</span></label>
+                            <select class="form-control" name="giaohang_id">
+                                @foreach($giaohangs as $giaohang)
+                                <option value="{{ $giaohang->id }}">{{ $giaohang->gh_hoten }}</option>
+                                @endforeach
+                            </select>
+
+                            <input style="margin-left: 150px" type="submit" value="Xác nhận" class="btn btn-primary 0"> &nbsp;
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#huydon" style="font-weight: 700;">
                                 Hủy đơn hàng
                             </button>
                         </div>
+
                     </div>
+
                 </div>
                 @endif
             </div>
@@ -115,7 +122,7 @@
 </div>
 
 <div class="m-1">
-    <a href="/admin/customers" class="btn btn-secondary text-start" data-abc="true"> <i class="fa fa-chevron-left"></i> Quay lại</a>
+    <a href="/admin/customers" class="btn btn-secondary text-end" data-abc="true"> <i class="fa fa-chevron-left"></i> Quay lại</a>
 </div>
 
 </div>
