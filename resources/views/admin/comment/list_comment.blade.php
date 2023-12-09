@@ -23,8 +23,8 @@
             <td style="vertical-align: middle;text-align: center; border: 1px solid LightGray;">{{ $comm->id }}</td>
             <td style="vertical-align: middle;text-align: center; font-weight:700; font-size:17px; border: 1px solid LightGray;">{{ $comm->bl_ten }}</td>
             <td style="vertical-align: middle;text-align: left; border: 1px solid LightGray;"> {{$comm->binhluan}}
-            <p style="margin-bottom: 0px; margin-left: 0px; font-weight:700">Trả lời: </p>
-            
+                <p style="margin-bottom: 0px; margin-left: 0px; font-weight:700">Trả lời: </p>
+
                 <ul class="list_rep">
                     <style type="text/css">
                         ul.list_rep li {
@@ -35,9 +35,9 @@
                     </style>
 
                     @foreach ($comment_rep as $key => $comm_reply)
-                        @if($comm_reply->bl_parent == $comm->id)
-                            <li>{{$comm_reply->binhluan}}</li>
-                         @endif
+                    @if($comm_reply->bl_parent == $comm->id)
+                    <li>{{$comm_reply->binhluan}}</li>
+                    @endif
                     @endforeach
                 </ul>
 
@@ -52,21 +52,21 @@
 
             @if( $comm->bl_trangthai == 1 )
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
-                <input type="button" data-comment_status="0" data-comment_id="{{$comm->id}}" id="{{$comm->product_id}}" class="btn btn-primary btn-xs comment_duyet_btn" value="Duyệt &nbsp">
+                <input type="button" data-comment_status="0" data-comment_id="{{$comm->id}}" id="{{$comm->product_id}}" style="font-size: 16px; font-weight:700" class="btn btn-success btn-xs comment_duyet_btn" value="Duyệt &nbsp">
             </td>
             @else
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
-                <input type="button" data-comment_status="1" data-comment_id="{{$comm->id}}" id="{{$comm->product_id}}" class="btn btn-danger btn-xs comment_duyet_btn" value="Bỏ Duyệt &nbsp">
+                <input type="button" data-comment_status="1" data-comment_id="{{$comm->id}}" id="{{$comm->product_id}}" style="font-size: 16px; font-weight:700" class="btn btn-warning btn-xs comment_duyet_btn" value="Bỏ Duyệt &nbsp">
             </td>
             @endif
 
             <td style="vertical-align: middle;text-align: center; border: 1px solid LightGray;">
-                <a class="btn btn-primary btn-sm" href="/admin/comments/edit/{{ $comm->id }}">
+                <!-- <a class="btn btn-primary btn-sm" href="/admin/comments/edit/{{ $comm->id }}">
                     <i class="fas fa-edit"></i>
-                </a>
+                </a> -->
 
-                <a class="btn btn-success btn-sm" href="/admin/comments/unactive/{{$comm->id}}" onclick='return confirm("Bạn chắc chắn xóa bình luận này không?")'>
-                    <i class="fas fa-lock-open"></i>
+                <a href="#" class="btn btn-danger btn-sm" onclick="removeRow( {{ $comm->id }} ,'/admin/products/xoa_comment')">
+                    <i class="fas fa-trash"></i>
                 </a>
 
 

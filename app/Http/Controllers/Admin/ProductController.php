@@ -12,6 +12,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use \Illuminate\Support\Facades\Log;
+use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
@@ -224,6 +225,34 @@ class ProductController extends Controller
         $comment->bl_ten = 'Vegetables Family';
         $comment->save();
     }
+
+    public function destroy($request)
+    {
+        $id = (int) $request->input('id');
+
+        $binhluan = Binhluan::where('id',$id)->first();
+        if ($binhluan){
+            return Binhluan::where('id',$id)->delete();
+        }
+        return false;
+    }
+
+    public function xoa_comment(Request $request): JsonResponse
+    {
+        $result = $this->destroy($request);
+        if($result){
+            return response()->json([
+                'error' =>false,
+                'message' =>'Xoá Bình Luận Thành Công!'
+            ]);
+        }
+
+        return response()->json([
+            'error' =>true
+        ]);
+    }
+
+
 
 
     public function search()

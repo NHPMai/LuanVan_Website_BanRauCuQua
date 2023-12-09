@@ -91,7 +91,7 @@
                     </p>
 
                     <p class="p-t-5" style="font-size:20px; font-weight:500">
-                        Số lượng sản phẩm: {{ $product->soluongsp }} kg
+                        Số lượng sản phẩm có sẵn: {{ $product->soluongsp }} kg
                     </p>
 
                     <!--  -->
@@ -253,6 +253,7 @@
 
                                         <span class="wrap-rating fs-18 cl11 pointer">
 
+                                        @if(Auth::check())
                                             <ul class="list-inline" title="Average Rating" style="margin-bottom:0px">
                                                 @for($count=1; $count<=5; $count++) @php if($count <=$rating){ $color='color:#ffcc00;' ; } else { $color='color:#ccc;' ; } @endphp 
                                                 <li title="start_rating" id="{{$product->id}}-{{$count}}" 
@@ -262,13 +263,22 @@
                                                     data-rating="{{$rating}}" 
                                                     class="rating" style="cursor: pointer; {{$color}} ; font-size:30px;">
                                                     &#9733;
-
-                                                    </li>
-
-                                                    @endfor
+                                                </li>
+                                                @endfor
                                             </ul>
-
-
+                                        @else 
+                                            <ul class="list-inline" title="Average Rating" style="margin-bottom:0px">
+                                                @for($count=1; $count<=5; $count++) @php if($count <=$rating){ $color='color:#ffcc00;' ; } else { $color='color:#ccc;' ; } @endphp 
+                                                <li title="start_rating" id="{{$product->id}}-{{$count}}" 
+                                                    data-index="{{$count}}" 
+                                                    data-product_id="{{$product->id}}" 
+                                                    data-rating="{{$rating}}" 
+                                                    class="rating" style="cursor: pointer; {{$color}} ; font-size:30px;">
+                                                    &#9733;
+                                                </li>
+                                                @endfor
+                                            </ul>
+                                        @endif
 
 
                                         </span>
@@ -293,7 +303,11 @@
                                             </div>
                                             <div class="col-sm-6 p-b-5">
                                                 <label class="stext-102 cl3" for="name">Tên bình luận</label>
-                                                <input class="comment_name size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="bl_ten">
+                                                @if(Auth::check())
+                                                <input class="comment_name size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" style="width: 320px" name="bl_ten" value="{{Auth('web')->user()->hoten}}" disabled>
+                                                @else
+                                                <input class="comment_name size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" style="width: 320px" name="bl_ten" value="">
+                                                @endif
                                             </div>
                                         </div>
                                         

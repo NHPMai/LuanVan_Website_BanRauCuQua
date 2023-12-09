@@ -28,7 +28,7 @@
             <td style="vertical-align: middle;text-align: center; font-weight:600; color:firebrick; border: 1px solid LightGray;">{{number_format($product->gia, 0,',','.') }} đ</td>
             <td style="vertical-align: middle;text-align: center; border: 1px solid LightGray;">{{ $product->menu->name }}</td>
             <td style="vertical-align: middle;text-align: center; border: 1px solid LightGray;">{{ $product->brand->ten }}</td>
-            <td style="vertical-align: middle;text-align: center; border: 1px solid LightGray;">{{ $product->soluongsp }}</td>
+            <td style="vertical-align: middle;text-align: center; border: 1px solid LightGray;">{{ $product->soluongsp }} kg</td>
             <td style="vertical-align: middle;width:300px; text-align:justify; border: 1px solid LightGray;">{{ $product->mota }}</td>
             <td style="vertical-align: middle;text-align: center; border: 1px solid LightGray;">{!! \App\Helpers\Helper::active($product->hoatdong) !!}</td>
 

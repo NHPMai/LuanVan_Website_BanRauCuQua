@@ -23,8 +23,8 @@
   <div class="login-box">
     <div class="login-logo">
 
-      <a href="#" style="font-family: arial; font-weight:bold ; color:white"><b>ĐĂNG NHẬP SHIPPER</b></a>
-      <i class="fa-sharp fa-solid fa-right-to-bracket"></i>
+      <a href="#" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ; color:white; font-size:45px ;font-weight:900";><b>ĐĂNG NHẬP SHIPPER</b></a>
+      <!-- <i class="fa-sharp fa-solid fa-right-to-bracket"></i> -->
     </div>
     <!-- /.login-logo -->
     <div class="card">

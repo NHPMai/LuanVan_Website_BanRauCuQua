@@ -64,8 +64,8 @@ class ShipperController extends Controller
     public function logout(Request $request)
     {
         Auth::guard('shipper')->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        // $request->session()->invalidate();
+        // $request->session()->regenerateToken();
         return redirect('/shipper/login');
     }
 

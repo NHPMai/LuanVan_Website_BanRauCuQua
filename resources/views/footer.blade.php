@@ -651,16 +651,16 @@
 	$(document).on('click', '.rating', function() {
 		var index = $(this).data("index");
 		var product_id = $(this).data('product_id');
-		// var user_id = $(this).data('user_id');
+		var user_id = $(this).data('user_id');
 		var _token = $('input[name = "_token"]').val();
-		
+		// alert (user_id);
 		$.ajax({
 			url: "{{url('/user/insert_rating')}}",
 			method: "POST",
 			data: {
 				index: index,
 				product_id: product_id,
-				// user_id: user_id,
+				user_id: user_id,
 				_token: _token
 			},
 			success: function(data) {

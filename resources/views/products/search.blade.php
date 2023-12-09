@@ -21,7 +21,7 @@
                         </a>
 
                         <span class="stext-105 cl3">
-                            {!! \App\Helpers\Helper::gia($product->gia) !!}đ
+                            {!! \App\Helpers\Helper::gia($product->gia) !!} đ/kg
 
                         </span>
                     </div>

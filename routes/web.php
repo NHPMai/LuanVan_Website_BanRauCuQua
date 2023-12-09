@@ -152,7 +152,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('list_comment', [ProductController::class, 'list_comment']);
             Route::post('allow_comment', [ProductController::class, 'allow_comment']);
             Route::post('reply_comment', [ProductController::class, 'reply_comment']);
-
+            Route::DELETE('xoa_comment', [ProductController::class, 'xoa_comment']);
             
         });
 
@@ -337,7 +337,7 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::post('binhluandonhang', [\App\Http\Controllers\Users\DonhangController::class, 'binhluandonhang'])->name('binhluandonhang');
 
 
-        //-----------------------ĐÁNH GIÁ SẢN PHẨM------------------------------------\\
+        //-----------------------ĐÁNH GIÁ + BÌNH LUẬN SẢN PHẨM------------------------------------\\
         Route::post('insert_rating', [App\Http\Controllers\ProductController::class, 'insert_rating'])->name('insert_rating');
         Route::post('load_comment', [App\Http\Controllers\ProductController::class, 'load_comment'])->name('load_comment');
         Route::post('send_comment', [App\Http\Controllers\ProductController::class, 'send_comment'])->name('send_comment');

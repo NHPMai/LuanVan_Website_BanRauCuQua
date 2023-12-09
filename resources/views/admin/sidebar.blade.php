@@ -316,7 +316,7 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-arrows-alt-v" style="color: greenyellow;"></i>
-                        <p>Quản Lý Phiếu Nhập
+                        <p>Quản Lý Kho Hàng
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -377,55 +377,7 @@
 
 
 
-                <!-- Phiếu Nhập -->
-
-
-
-
-
-
-
-                <!-- <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
-                        <p> Báo Cáo Thống Kê
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/admin/products/add" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thống Kê Doanh Thu</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/admin/products/list" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Thống Kê Số Lượng Hàng Hóa</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li> -->
-
-                <!-- <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p> Khách Hàng
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/admin/customers" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Danh Sách Người Dùng</p>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li> -->
+                
 
 
 

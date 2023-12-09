@@ -53,6 +53,7 @@ class ProductController extends Controller
 
         $rating = new Rating();
         $rating->product_id = $data['product_id'];
+        $rating->khachhang_id = $data['user_id'];
         $rating->rating = $data['index'];
         $rating->save();
         echo 'done';
