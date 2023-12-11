@@ -13,6 +13,7 @@ use App\Models\Thongke;
 use App\Models\NhanVien;
 use App\Models\Chitietdonhang;
 use App\Models\khachhang;
+use Illuminate\Support\Facades\DB;
 
 class ShipperController extends Controller
 {
@@ -82,8 +83,8 @@ class ShipperController extends Controller
     public function donhang_shipper()
     {
         $id_gh = Auth::user()->id;
-              
-        $donhang2 = Donhang::where('dh_trangthai', 2)->where('giaohang_id',$id_gh)->orderBy('id', 'desc')->get();
+
+        $donhang2 = Donhang::where('dh_trangthai', 2)->where('giaohang_id', $id_gh)->orderBy('id', 'desc')->get();
         // dd($donhang2);
         return view('shipper.donhang_shipper', [
             'title' => 'Danh Sách Đơn Hàng Chờ',
@@ -93,7 +94,7 @@ class ShipperController extends Controller
     public function donhang_danggiao()
     {
         $id_gh = Auth::user()->id;
-        $donhang3 = Donhang::where('dh_trangthai', 3)->where('giaohang_id',$id_gh)->orderBy('id', 'desc')->get();
+        $donhang3 = Donhang::where('dh_trangthai', 3)->where('giaohang_id', $id_gh)->orderBy('id', 'desc')->get();
         // dd($donhang3);
         return view('shipper.donhang_dagiao', [
             'title' => 'Danh Sách Đơn Hàng Đang Giao',
@@ -104,7 +105,7 @@ class ShipperController extends Controller
     public function donhang_dagiao()
     {
         $id_gh = Auth::user()->id;
-        $donhang4 = Donhang::where('dh_trangthai', 4)->where('giaohang_id',$id_gh)->orderBy('id', 'desc')->get();
+        $donhang4 = Donhang::where('dh_trangthai', 4)->where('giaohang_id', $id_gh)->orderBy('id', 'desc')->get();
         return view('shipper.donhang_dagiao', [
             'title' => 'Danh Sách Giao Hàng Thành Công',
             'donhang4' => $donhang4,
@@ -123,12 +124,82 @@ class ShipperController extends Controller
         ]);
     }
 
+    // public function update(Request $req, $id)
+    // {
+    //     $order = Donhang::find($id);
+
+    //     $id_kh = $order->khachhang_id;
+    //     $kh = khachhang::where('id', $id_kh)->get();
+    //     // dd($kh);
+    //     $newStatus = $req->input('dh_trangthai');
+    //     if ($newStatus == 3) {
+    //         $order->dh_trangthai = $newStatus;
+    //         $order->save();
+    //     } elseif ($newStatus == 4) {
+    //         $order->dh_trangthai = $newStatus;
+    //         $order->save();
+
+
+    //         $order = Donhang::find($id);
+    //         $order_date = $order->dh_thoigiandathang;
+
+    //         $thongke = ThongKe::where('tk_Ngay',$order_date)->get();
+
+    //         if($thongke){
+    //             $thongke_dem = $thongke->count();
+    //         }else{
+    //             $thongke_dem = 0;
+    //         }
+
+    //         $total_order = 0; //tong so luong don
+    //         $sales = 0; //doanh thu
+    //         $profit = 0; //loi nhuan
+    //         $quantity = 0; //so luong
+
+    //         $a =$order->id;
+    //         $ctdh = Chitietdonhang::where('donhang_id',$a)->get();
+
+
+    //         foreach ($ctdh as $detail){
+    //             $product = $detail->product;
+    //             $quantity += $detail->ctdh_soluong;
+    //             $sales += $detail->ctdh_gia * $detail->ctdh_soluong;
+    //             // dd($sales);
+    //             $profit = $sales - 100000;
+    //             // dd($profit);
+    //         }
+    //         $total_order += 1;
+
+    //         if($thongke_dem > 0){
+    //             $thongke_capnhat = ThongKe::where('tk_Ngay',$order_date)->first();
+    //             $thongke_capnhat->tk_TongTien = $thongke_capnhat->tk_TogTien + $sales;
+    //             $thongke_capnhat->tk_LoiNhuan = $thongke_capnhat->tk_LoiNhuan + $profit;
+    //             $thongke_capnhat->tk_SoLuong = $thongke_capnhat->tk_SoLuong + $quantity;
+    //             $thongke_capnhat->tk_TongDonHang = $thongke_capnhat->tk_TongDonHang + $total_order;
+    //             // dd($thongke_capnhat);
+    //             $thongke_capnhat->save();
+    //         }else{
+    //             $thongke_moi = new ThongKe();
+    //             // dd($thongke);
+    //             $thongke_moi->tk_Ngay = $order_date;
+    //             $thongke_moi->tk_SoLuong = $quantity;
+    //             $thongke_moi->tk_TongTien = $sales;
+    //             $thongke_moi->tk_LoiNhuan = $profit;
+    //             $thongke_moi->tk_TongDonHang = $total_order;
+    //             $thongke_moi->save();
+    //         }
+
+
+    //     }
+    //     return redirect()->back();
+    // }
+
     public function update(Request $req, $id)
     {
         $order = Donhang::find($id);
-       
+
         $id_kh = $order->khachhang_id;
-        $kh = khachhang::where('id', $id_kh)->get();
+        $kh = khachhang::where('id', $id_kh)->first();
         // dd($kh);
         $newStatus = $req->input('dh_trangthai');
         if ($newStatus == 3) {
@@ -138,68 +209,82 @@ class ShipperController extends Controller
             $order->dh_trangthai = $newStatus;
             $order->save();
 
-
-            // $name = Auth::user();
-            // Mail::send('emails.test', compact('chitietdonhang', 'name'), function ($email) use ($name) {
-            //     $email->subject('Cửa Hàng Vegetable Family - Xác Nhận Đơn Hàng Được Giao Thành Công');
-            //     $email->to($name->email, $name->hoten);
+            $email =  $kh->email;
+       
+            $title_mail = "Thông báo giao hàng thành công";
+             
+            // $mailData = [
+            //     'id_dh' => $order->id,
+            //     'kh_ten' => $kh->hoten,
+            // ];
+            // Mail::send('emails.giaohangthanhcong',[$email,'mailData' => $mailData], function($message) use ($email, $title_mail){
+            //     $message->to($email)->subject($title_mail);
+            //     $message->from($email,$title_mail);
             // });
 
-            
+            // $mailData = [
+            //     'id_dh' => $order->id,
+            //     'kh_ten' => $kh->hoten,
+            // ];
+            Mail::send('emails.giaohangthanhcong',[
+                '$email' => $email,
+                'id_dh' => $order->id,
+                'kh_ten' => $kh->hoten,
+            ], function($message) use ($email, $title_mail){
+                $message->to($email)->subject($title_mail);
+                $message->from($email,$title_mail);
+            });
+        }
 
-            // $kh = khachhang::where('id', $id_kh)->get();
-            // Mail::send('emails.giaohangthanhcong', compact('kh'), function ($email) use ($kh) {
-            //     $email->subject('Cửa Hàng Vegetable Family - Giao Hàng Thành Công');
-            //     $email->to($kh->email, $kh->hoten);
-            // });
 
-            // $name = Auth::user();
-            // Mail::send('emails.test', compact('chitietdonhang', 'name'), function ($email) use ($name) {
-            //     $email->subject('Cửa Hàng Vegetable Family - Xác Nhận Đơn Hàng');
-            //     $email->to($name->email, $name->hoten);
-            // });
+        $order_date = $order->dh_thoigiandathang;
 
-        
+        $thongke = ThongKe::where('tk_Ngay', $order_date)->get();
 
-            $order = Donhang::find($id);
-            $order_date = $order->dh_thoigiandathang;
-           
-            $thongke = ThongKe::where('tk_Ngay',$order_date)->get();
+        if ($thongke) {
+            $thongke_dem = $thongke->count();
+        } else {
+            $thongke_dem = 0;
+        }
+       
+        if ($order->dh_trangthai == 4) {
 
-            if($thongke){
-                $thongke_dem = $thongke->count();
-            }else{
-                $thongke_dem = 0;
-            }
-    
+
             $total_order = 0; //tong so luong don
             $sales = 0; //doanh thu
             $profit = 0; //loi nhuan
             $quantity = 0; //so luong
-    
-            $a =$order->id;
-            $ctdh = Chitietdonhang::where('donhang_id',$a)->get();
-          
-           
-            foreach ($ctdh as $detail){
-                $product = $detail->product;
+
+            $a = $order->id;
+            $ctdh =  DB::table('chitietdonhangs')
+                ->join('donhangs', 'donhangs.id', '=', 'chitietdonhangs.donhang_id')
+                ->join('products', 'products.id', '=', 'chitietdonhangs.product_id')
+                ->select('chitietdonhangs.*', 'donhangs.*', 'products.*')
+                ->where('donhang_id', $a)
+                ->get();
+
+            foreach ($ctdh as $detail) {
+
+                // $product = $detail->product;
+                // dd($product);
                 $quantity += $detail->ctdh_soluong;
+                // dd($quantity);
                 $sales += $detail->ctdh_gia * $detail->ctdh_soluong;
                 // dd($sales);
-                $profit = $sales - 100000;
+                $profit = $sales - 10000;
                 // dd($profit);
             }
             $total_order += 1;
-    
-            if($thongke_dem > 0){
-                $thongke_capnhat = ThongKe::where('tk_Ngay',$order_date)->first();
-                $thongke_capnhat->tk_TongTien = $thongke_capnhat->tk_TogTien + $sales;
+
+            if ($thongke_dem > 0) {
+                $thongke_capnhat = ThongKe::where('tk_Ngay', $order_date)->first();
+                $thongke_capnhat->tk_TongTien = $thongke_capnhat->tk_TongTien + $sales;
                 $thongke_capnhat->tk_LoiNhuan = $thongke_capnhat->tk_LoiNhuan + $profit;
                 $thongke_capnhat->tk_SoLuong = $thongke_capnhat->tk_SoLuong + $quantity;
                 $thongke_capnhat->tk_TongDonHang = $thongke_capnhat->tk_TongDonHang + $total_order;
                 // dd($thongke_capnhat);
                 $thongke_capnhat->save();
-            }else{
+            } else {
                 $thongke_moi = new ThongKe();
                 // dd($thongke);
                 $thongke_moi->tk_Ngay = $order_date;
@@ -209,11 +294,12 @@ class ShipperController extends Controller
                 $thongke_moi->tk_TongDonHang = $total_order;
                 $thongke_moi->save();
             }
-
-
         }
+
         return redirect()->back();
     }
+
+
 
     public function huydonhang(Request $req, $id)
     {

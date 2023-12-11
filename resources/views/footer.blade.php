@@ -362,7 +362,7 @@
 
 <!----------------------------------LỌC SẢN PHẨM---------------------------------->
 
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#slider-range").slider({
@@ -377,7 +377,7 @@
 		$("#amount").val("đ" + $("#slider-range").slider("values", 0) +
 			" - $" + $("#slider-range").slider("values", 1));
 	});
-</script> -->
+</script>
 
 
 <!----------------------------TÌM KIẾM AUTOCOMPLETE-------------------------------->
@@ -564,6 +564,52 @@
 		})
 	});
 </script>
+
+
+<!-- <script type="text/javascript">
+	$(document).ready(function() {
+		$('.calculate_delivery').click(function() {
+
+			// var tinh_thanhpho_id = $('.tinh_thanhpho').val(); //lấy giá trị thông qua class
+			// var quan_huyen_id = $('.quan_huyen').val();
+			// var xa_phuong_thitran_id = $('.xa_phuong_thitran').val();
+			var _token = $('input[name="_token"]').val();
+			var calculate_delivery = $('.calculate_delivery').val();
+			// alert (calculate_delivery);
+
+			if (calculate_delivery != '') {
+				// alert('Làm ơn chọn địa chỉ để tính phí vận chuyển');
+				$.ajax({
+					url: "{{url('/user/calculate_fee')}}",
+					method: "POST",
+					data: {
+						calculate_delivery: calculate_delivery,
+
+						_token: _token
+					},
+					success: function(data) {
+						$('#phivanchuyen').html(data);
+					}
+				});
+			}
+			// else {
+			// 	$.ajax({
+			// 		url: "{{url('/user/calculate_fee')}}",
+			// 		method: "POST",
+			// 		data: {
+			// 			calculate_delivery: calculate_delivery,
+
+			// 			_token: _token
+			// 		},
+			// 		success: function(data) {
+			// 			$('#phivanchuyen').html(data);
+			// 		}
+			// 	});
+			// }
+
+		})
+	});
+</script> -->
 
 
 

@@ -46,14 +46,24 @@
 			</div>
 		</div> -->
 
-		<div class="price-range">
+		<!-- <div class="price-range">
 			<h2>Price Range</h2>
 			<div class="well text-center">
 				<input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br />
 				<b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
 			</div>
+		</div> -->
+
+		<div class="price-range">
+			<label for="amount">Lọc giá theo</label>
+			<form>
+				<div id="slider-range"></div>
+				<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+				<input type="hidden" name="start_price" id="start_price">
+				<input type="hidden" name="end_price" id="end_price">
+				<br>
+				<input type="submit" name="filter_price" value="Lọc giá" class="btn btn-sm btn-default">
+			</form>
 		</div>
-
-
 	</div>
 </section>

@@ -308,5 +308,26 @@
 	@include('footer')
 
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#slider-range").slider({
+			orientation: "horizontal",
+			range: true,
+			min: {{$min_price_range}};
+			max: {{$max_price_range}};
+			step:5000,
+			values: [{{$min_price}}, {{$max_price}}],
+			
+			slide: function(event, ui) {
+				$("#amount").val("đ" + ui.values[0] + " - đ" + ui.values[1]);
+				$("#start_price").val(ui.values[0] );
+				$("#end_price").val(ui.values[1] );
+			}
+		});
 
+		$("#amount").val("đ" + $("#slider-range").slider("values", 0) +
+			" - đ" + $("#slider-range").slider("values", 1));
+	});
+</script>
 </html>

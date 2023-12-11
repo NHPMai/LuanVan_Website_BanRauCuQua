@@ -35,6 +35,25 @@ class MainController extends Controller
     {
         $brand_product = DB::table('brands')->where('hoatdong','1')->orderBy('id','desc')->get();
         
+        return view('main', [
+            'title' => 'Rau quả Vegetable Family',
+            'sliders' => $this->slider->show(),
+            'menus' => $this->menu->show(),
+            'products' => $this->product->get(),
+           
+        ])->with('brands',$brand_product);
+    }
+
+
+    public function shop()
+    {
+        $brand_product = DB::table('brands')->where('hoatdong','1')->orderBy('id','desc')->get();
+        $min_price = Product::min('gia');
+        $max_price = Product::max('gia');
+        $min_price_range = $min_price + 100000;
+        $max_price_range = $max_price + 100000;
+
+
         if(isset($_GET['sort_by'])){
             $sort_by = $_GET['sort_by'];
             if ($sort_by == 'gia_giam_dan'){
@@ -66,29 +85,21 @@ class MainController extends Controller
                 $products = $this->product->get();
             }
 
+        }elseif(isset($_GET['start_price']) &&  $_GET['end_price']){
+            $min_price = $_GET['start_price'];
+            $max_price = $_GET['end_price'];
+
+            $products = Product::whereBetween('gia',[$min_price,$max_price])->orderBy('id','ASC')->paginate(6)->appends(request()->query());
         }
 
-        return view('main', [
-            'title' => 'Rau quả Vegetable Family',
-            'sliders' => $this->slider->show(),
-            'menus' => $this->menu->show(),
-            'products' => $this->product->get(),
-           
-        ])->with('brands',$brand_product);
-    }
 
-
-    public function shop()
-    {
-        $brand_product = DB::table('brands')->where('hoatdong','1')->orderBy('id','desc')->get();
-        
         return view('shop', [
             'title' => 'Rau quả Vegetable Family',
             'sliders' => $this->slider->show(),
             'menus' => $this->menu->show(),
             'products' => $this->product->get(),
            
-        ])->with('brands',$brand_product);
+        ])->with('brands',$brand_product)->with('min_price',$min_price)->with('max_price',$max_price)->with('max_price_range', $max_price_range)->with('min_price_range', $min_price_range);
     }
 
     public function about()

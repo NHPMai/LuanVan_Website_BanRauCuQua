@@ -541,12 +541,12 @@ class DonhangController extends Controller
             $request,
             [
                 'sodienthoai' => 'required',
-                // 'diachi_id' => 'required',
+                'diachi_id' => 'required',
 
             ],
             [
                 'sodienthoai.required' => 'Vui lòng nhập số điện thoại',
-                // 'diachi_id.required' => 'Vui lòng chọn địa chỉ giao hàng',
+                'diachi_id.required' => 'Vui lòng chọn địa chỉ giao hàng',
             ]
         );
 
@@ -720,6 +720,26 @@ class DonhangController extends Controller
                     $email->to($name->email, $name->hoten);
                 });
 
+
+
+                // $c_name = Auth::guard('web')->user()->hoten;
+                // $c_id = Auth::guard('web')->user()->id;
+                // $c_email = Auth::guard('web')->user()->email;
+
+                
+                // $mailData = [
+                //     'c_name' => $c_name,
+                //     'donhang' => $chitietdonhang,
+                //     'chitietdonhangs' => $chitietdonhangs,
+                // ];
+              
+              
+                // Mail::send('emails.check_other',[$c_email,'mailData'=>$mailData], function($mail) use ($c_email,$c_name){
+                //     $mail->to($c_email,$c_name);
+                //     $mail->from('VegetablesFamily@gmail.com');
+                //     $mail->subject('Cửa Hàng Vegetable Family - Xác Nhận Đơn Hàng');
+                // });
+                
 
                 if ($coupons == true) {
                     Session::forget('coupon');
@@ -927,60 +947,10 @@ class DonhangController extends Controller
             ->update(
                 ['dh_trangthai' => 4],
             );
-        // if( $trangthaidonhang = true){
-        //     $order = Donhang::find($id);
-        //     $order_date = $order->dh_thoigiandathang;
-
-        //     $thongke = ThongKe::where('tk_Ngay',$order_date)->get();
-
-        //     if($thongke){
-        //         $thongke_dem = $thongke->count();
-        //     }else{
-        //         $thongke_dem = 0;
-        //     }
-
-        //     $total_order = 0; //tong so luong don
-        //     $sales = 0; //doanh thu
-        //     $profit = 0; //loi nhuan
-        //     $quantity = 0; //so luong
-
-        //     $a =$order->id;
-        //     $ctdh = Chitietdonhang::where('donhang_id',$a)->get();
 
 
-        //     foreach ($ctdh as $detail){
-        //         $product = $detail->product;
-        //         $quantity += $detail->ctdh_soluong;
-        //         $sales += $detail->ctdh_gia * $detail->ctdh_soluong;
-        //         // dd($sales);
-        //         $profit = $sales - 100000;
-        //         // dd($profit);
-        //     }
-        //     $total_order += 1;
-
-        //     if($thongke_dem > 0){
-        //         $thongke_capnhat = ThongKe::where('tk_Ngay',$order_date)->first();
-        //         $thongke_capnhat->tk_TongTien = $thongke_capnhat->tk_TogTien + $sales;
-        //         $thongke_capnhat->tk_LoiNhuan = $thongke_capnhat->tk_LoiNhuan + $profit;
-        //         $thongke_capnhat->tk_SoLuong = $thongke_capnhat->tk_SoLuong + $quantity;
-        //         $thongke_capnhat->tk_TongDonHang = $thongke_capnhat->tk_TongDonHang + $total_order;
-        //         // dd($thongke_capnhat);
-        //         $thongke_capnhat->save();
-        //     }else{
-        //         $thongke_moi = new ThongKe();
-        //         // dd($thongke);
-        //         $thongke_moi->tk_Ngay = $order_date;
-        //         $thongke_moi->tk_SoLuong = $quantity;
-        //         $thongke_moi->tk_TongTien = $sales;
-        //         $thongke_moi->tk_LoiNhuan = $profit;
-        //         $thongke_moi->tk_TongDonHang = $total_order;
-        //         $thongke_moi->save();
-        //     }
-        // }
-
-
-        Session::flash('success', 'Bạn đã nhận đơn hàng thành công!');
-        return redirect('user/order_history');
+        Session::flash('success', 'Xác nhận bạn đã nhận đơn hàng thành công!');
+        return redirect()->back();
     }
 
 

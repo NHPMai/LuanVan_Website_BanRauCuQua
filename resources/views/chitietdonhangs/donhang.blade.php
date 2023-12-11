@@ -18,7 +18,7 @@
         </h1>
 
         <div class="row">
-            <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+            <div class="col-lg-10 col-xl-7 m-lr-auto ">
                 <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" hidden name="khachhang_id" value="{{Auth::user()->id}}">
                 <div class="row">
                     <div class="col-md-6">
@@ -128,10 +128,12 @@
 
 
                 <p>Mọi thông tin sẽ được cập nhật cho tài khoản của bạn</p>
+                <img src="/template/images/anh.png" style="width: 300px;">
+
             </div>
 
 
-            <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+            <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto ">
                 <div class="bor10 p-lr-20 p-t-15 p-b-10 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
 
                     @php $total = 0; @endphp

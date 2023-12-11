@@ -297,6 +297,8 @@ Route::prefix('user')->name('user.')->group(function () {
 
         Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('home'); //Trang Home
         Route::get('shop', [App\Http\Controllers\MainController::class, 'shop']);
+        Route::get('about', [App\Http\Controllers\MainController::class, 'about']);
+
         Route::get('/logoutcustomer', [LogoutcustomerController::class, 'logoutcustomer'])->name('logoutcustomer'); //Dang Xuat
 
         //đơn hàng
@@ -331,8 +333,7 @@ Route::prefix('user')->name('user.')->group(function () {
 
         Route::get('order_history', [\App\Http\Controllers\Users\DonhangController::class, 'order_history'])->name('order_history');
         Route::get('order_history_detail/{donhang}', [\App\Http\Controllers\Users\DonhangController::class, 'order_history_detail'])->name('order_history_detail');
-        // Route::get('order_update/{donhang}', [\App\Http\Controllers\Users\DonhangController::class, 'update_donhang']);
-        // Route::get('order_cancle/{donhang}', [\App\Http\Controllers\Users\DonhangController::class, 'huydonhang']);
+        Route::get('order_update/{donhang}', [\App\Http\Controllers\Users\DonhangController::class, 'update_donhang']);
         Route::post('huydonhang/{donhang}', [\App\Http\Controllers\Users\DonhangController::class, 'huydonhang'])->name('huydonhang');
         Route::post('binhluandonhang', [\App\Http\Controllers\Users\DonhangController::class, 'binhluandonhang'])->name('binhluandonhang');
 
