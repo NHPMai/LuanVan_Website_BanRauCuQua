@@ -64,6 +64,10 @@
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
                 <span style="background-color: #68db2a; border-radius: 8px; font-weight:600">Giao hàng thành công &nbsp <i class="fas fa-check"></i></span>
             </td>
+            @elseif( $donhang->dh_trangthai == 6)
+            <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
+                <span style="background-color:bisque;color:red; border-radius: 8px; font-weight:600">Giao hàng không thành công &nbsp <i class="fas fa-check"></i></span>
+            </td>
             @endif
 
 

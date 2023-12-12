@@ -1,7 +1,7 @@
 @extends('shipper.main')
 
 @section('content')
-<p style="font-weight:bold; font-size: 20px; ">Tổng Số Đơn Hàng Đang Giao: {{$donhang3->count()}}</p>
+<p style="font-weight:bold; font-size: 20px; ">Tổng Số Đơn Hàng Giao Thất Bại: {{$donhang6->count()}}</p>
 
 <table class="table pt-2">
     <thead style="background-color:blanchedalmond;">
@@ -17,19 +17,20 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($donhang3 as $key => $donhang)
+        @foreach($donhang6 as $key => $donhang)
         <tr>
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->id }}</td>
             <td style="vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->khachhangs->hoten}}</td>
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{number_format($donhang->dh_thanhtien, 0,',','.') }} đ</td>
 
+            
             @if( $donhang->dh_trangthai == 1)
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
                 <span style="background-color: #b0b5ae; border-radius: 8px; font-weight:600">Chờ duyệt &nbsp <i class="fa fa-clock-o"></i></span>
             </td>
             @elseif( $donhang->dh_trangthai == 2)
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
-                <span style="background-color: #10dee6; border-radius: 8px; font-weight:600">Đã Duyệt &nbsp <i class="fa fa-calendar-check-o"></i></span>
+                <span style="background-color: #10dee6; border-radius: 8px; font-weight:600">Đã Duyệt &nbsp <i class="	far fa-calendar-check"></i></span>
             </td>
             @elseif( $donhang->dh_trangthai == 3)
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
@@ -58,6 +59,7 @@
 
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->nhanviens->hoten}}</td>
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->dh_thoigiandathang }}</td>
+
 
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
                 <a class="btn btn-primary btn-sm" href="/shipper/customers/view/{{ $donhang->id }}">

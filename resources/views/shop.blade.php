@@ -60,25 +60,40 @@
 							</div>
 
 							<div class="flex-w flex-c-m m-tb-10 ">
-								<!-- <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
-										<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
-										<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-										Filter
-									</div> -->
-								<div>
-									<form id="search-form" action="{{ url('/searchProductMicrophone')}}" class="d-flex" method="get">
-										<div class="btn btn-white input-group-text border-0" type="submit" id="">
-											<div style="display:none">
-												<input id="search-input" name="keywork" type="text">
 
-											</div>
-											<span class="microphone">
-												<i class="fas fa-microphone"></i>
-												<span class="recording-icon"></span>
-											</span>
-										</div>
-									</form>
-								</div>
+								<!-- <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+									<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+									<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+									Filter
+								</div> -->
+								<form >
+									@csrf
+									<select name="sort" id="sort" class="form-control" style="height: 35px;">
+										<option value="{{Request::url()}}?sort_by=none" class="filter-link stext-106 trans-04">
+											---Lọc theo---
+										</option>
+
+										<option value="{{Request::url()}}?sort_by=ten_a_z" class="filter-link stext-106 trans-04">
+											Tên: A->Z
+										</option>
+
+										<option value="{{Request::url()}}?sort_by=ten_z_a" class="filter-link stext-106 trans-04">
+											Tên: Z->A
+										</option>
+
+										<option value="{{Request::url()}}?sort_by=gia_tang_dan" class="filter-link stext-106 trans-04">
+											Giá: Tăng dần
+										</option>
+
+										<option value="{{Request::url()}}?sort_by=gia_giam_dan" class="filter-link stext-106 trans-04">
+											Giá: Giảm dần
+										</option>
+
+
+									</select>
+								</form>
+
+
 
 								<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
 									<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
@@ -98,184 +113,40 @@
 									</form>
 								</div>
 
-								<!-- <form action="{{ url('search')}}" method="GET" class="form-inline pl-3 pt-3" >
-										<div class="form-group">
-											<input class="form-control form-control-sidebar" name="query" type="search" placeholder="Search" aria-label="Search">
-										</div>
-
-										<button type="submit" class="btn btn-light">
-											<i class="fas fa-search fa-fw"></i>
-										</button>
-									</form> -->
-
 							</div>
 
-
-							<!-- Filter -->
-
-							<!-- <div class="row">
-									<div class="col-md-4">
-										<label for="amount">Sắp xếp theo</label>
-										<form>
-											@csrf
-											<section name = "sort" id="loc">
-												<option value="{{Request::url()}}?sort_by=none">Lọc theo</option>
-												<option value="{{Request::url()}}?sort_by=gia_tang_dan">Giá: Tăng dần</option>
-												<option value="{{Request::url()}}?sort_by=gia_giam_dan">Giá: Giảm dần</option>
-												<option value="{{Request::url()}}?sort_by=ten_a_z">Tên: A->Z</option>
-												<option value="{{Request::url()}}?sort_by=ten_z_a">Tên: Z->A</option>
-											</section>
-										</form>
-									</div>
-									<div class="col-md-4">
-										<label for="amount">Lọc giá theo</label>
-										<form>
-											<div id = "slider-range"></div>
-											<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-										</form>
-									</div>
-								</div> -->
 
 							<div class="dis-none panel-filter w-full p-t-10">
 								<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
 									<div class="filter-col1 p-r-15 p-b-27">
-										<div class="mtext-102 cl2 p-b-15" value="{{Request::url()}}?sort_by=none">
-											Sắp xếp theo
-										</div>
+										
+										<form>
+											@csrf
+											<select name="sort" id="sort" class="form-control">
+												<option value="{{Request::url()}}?sort_by=none" class="filter-link stext-106 trans-04">
+													-----Lọc theo-----
+												</option>
 
-										<ul>
-											<li class="p-b-6">
 												<option value="{{Request::url()}}?sort_by=ten_a_z" class="filter-link stext-106 trans-04">
 													Tên: A->Z
 												</option>
-											</li>
 
-											<li class="p-b-6">
-												<a href="#" value="{{Request::url()}}?sort_by=ten_z_a" class="filter-link stext-106 trans-04">
+												<option value="{{Request::url()}}?sort_by=ten_z_a" class="filter-link stext-106 trans-04">
 													Tên: Z->A
-												</a>
-											</li>
+												</option>
 
-											<li class="p-b-6">
-												<a href="#" class="filter-link stext-106 trans-04">
+												<option value="{{Request::url()}}?sort_by=gia_tang_dan" class="filter-link stext-106 trans-04">
 													Giá: Tăng dần
-												</a>
-											</li>
+												</option>
 
-											<li class="p-b-6">
-												<a href="#" class="filter-link stext-106 trans-04">
+												<option value="{{Request::url()}}?sort_by=gia_giam_dan" class="filter-link stext-106 trans-04">
 													Giá: Giảm dần
-												</a>
-											</li>
+												</option>
 
-										</ul>
-									</div>
 
-									<div class="filter-col2 p-r-15 p-b-27">
-										<div class="mtext-102 cl2 p-b-15">
-											Giá
-										</div>
+											</select>
+										</form>
 
-										<ul>
-											<li class="p-b-6">
-												<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-													Tất cả
-												</a>
-											</li>
-
-											<li class="p-b-6">
-												<a href="#" class="filter-link stext-106 trans-04">
-													0đ - 50.000đ
-												</a>
-											</li>
-
-											<li class="p-b-6">
-												<a href="#" class="filter-link stext-106 trans-04">
-													50.000đ - 200.000đ
-												</a>
-											</li>
-
-											<li class="p-b-6">
-												<a href="#" class="filter-link stext-106 trans-04">
-													200.00đ - $500.000đ
-												</a>
-											</li>
-
-											<li class="p-b-6">
-												<a href="#" class="filter-link stext-106 trans-04">
-													500.000đ - 1.000.000đ
-												</a>
-											</li>
-
-										</ul>
-									</div>
-
-									<div class="filter-col3 p-r-15 p-b-27">
-										<div class="mtext-102 cl2 p-b-15">
-											Màu Sắc
-										</div>
-
-										<ul>
-											<li class="p-b-6">
-												<span class="fs-15 lh-12 m-r-6" style="color: #222;">
-													<i class="zmdi zmdi-circle"></i>
-												</span>
-
-												<a href="#" class="filter-link stext-106 trans-04">
-													Black
-												</a>
-											</li>
-
-											<li class="p-b-6">
-												<span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
-													<i class="zmdi zmdi-circle"></i>
-												</span>
-
-												<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-													Blue
-												</a>
-											</li>
-
-											<li class="p-b-6">
-												<span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
-													<i class="zmdi zmdi-circle"></i>
-												</span>
-
-												<a href="#" class="filter-link stext-106 trans-04">
-													Grey
-												</a>
-											</li>
-
-											<li class="p-b-6">
-												<span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
-													<i class="zmdi zmdi-circle"></i>
-												</span>
-
-												<a href="#" class="filter-link stext-106 trans-04">
-													Green
-												</a>
-											</li>
-
-											<li class="p-b-6">
-												<span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
-													<i class="zmdi zmdi-circle"></i>
-												</span>
-
-												<a href="#" class="filter-link stext-106 trans-04">
-													Red
-												</a>
-											</li>
-
-											<li class="p-b-6">
-												<span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
-													<i class="zmdi zmdi-circle-o"></i>
-												</span>
-
-												<a href="#" class="filter-link stext-106 trans-04">
-													White
-												</a>
-											</li>
-										</ul>
 									</div>
 
 								</div>
@@ -288,13 +159,13 @@
 							@include('products.list')
 						</div>
 
-						<!-- Load more -->
-						<div class="flex-c-m flex-w w-full p-t-45" id="button-loadMore">
+				
+						<!-- <div class="flex-c-m flex-w w-full p-t-45" id="button-loadMore">
 							<input type="hidden" value="1" id="page">
 							<a onclick="loadMore()" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
 								Load More
 							</a>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -308,26 +179,6 @@
 	@include('footer')
 
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#slider-range").slider({
-			orientation: "horizontal",
-			range: true,
-			min: {{$min_price_range}};
-			max: {{$max_price_range}};
-			step:5000,
-			values: [{{$min_price}}, {{$max_price}}],
-			
-			slide: function(event, ui) {
-				$("#amount").val("đ" + ui.values[0] + " - đ" + ui.values[1]);
-				$("#start_price").val(ui.values[0] );
-				$("#end_price").val(ui.values[1] );
-			}
-		});
 
-		$("#amount").val("đ" + $("#slider-range").slider("values", 0) +
-			" - đ" + $("#slider-range").slider("values", 1));
-	});
-</script>
+
 </html>

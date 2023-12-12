@@ -51,6 +51,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="/shipper/donhang_thatbai" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Giao Hàng Thất Bại</p>
+                    </a>
+                </li>
+
                 <!-- </ul> -->
                 </li>
 

@@ -258,6 +258,7 @@ Route::prefix('shipper')->name('shipper.')->group(function () {
         Route::get('donhang_shipper', [ShipperController::class, 'donhang_shipper']);
         Route::get('donhang_dagiao', [ShipperController::class, 'donhang_dagiao']);
         Route::get('donhang_danggiao', [ShipperController::class, 'donhang_danggiao']);
+        Route::get('donhang_thatbai', [ShipperController::class, 'donhang_thatbai']);
         Route::get('customers/view/{donhang}', [ShipperController::class, 'show']);
         Route::post('customers/view/{donhang}', [ShipperController::class, 'update'])->name('update');
         Route::post('huydonhang/{donhang}', [ShipperController::class, 'huydonhang'])->name('huydonhang');
@@ -374,7 +375,7 @@ Route::get('danh-muc/about', [App\Http\Controllers\MainController::class, 'about
 Route::get('thuong-hieu/about', [App\Http\Controllers\MainController::class, 'about']);
 
 //trang lien hệ
-// Route::get('danh-muc/contact', [App\Http\Controllers\MainController::class, 'contact'])->name('contact'); 
+Route::get('danh-muc/contact', [App\Http\Controllers\MainController::class, 'contact'])->name('contact'); 
 
 //Hiện thị sản phẩm thêm
 Route::post('/services/load-product', [App\Http\Controllers\MainController::class, 'loadProduct']);

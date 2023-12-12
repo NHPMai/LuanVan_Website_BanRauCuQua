@@ -23,31 +23,7 @@
             <td style="vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->khachhangs->hoten}}</td>
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{number_format($donhang->dh_thanhtien, 0,',','.') }} đ</td>
 
-            <!-- <td>
-                <div class="col-md-12" style="margin-bottom: 50px;">
-                    <form action="" method="POST">
-                        {{ csrf_field() }}
-                            <div class="form-inline">
-                                @if( $donhang->dh_trangthai == 1)
-                                <select name="dh_trangthai" class="form-control input-inline" style="width: 150px; margin-right: 10px;">
-                                    <option value="1">Chờ lấy hàng</option>
-                                    <option value="2">Đang giao</option>
-                                    <option value="3">Đã giao</option>
-                                </select>
-
-                                <input type="submit" value="Xác nhận" class="btn btn-primary">
-                                @elseif( $donhang->dh_trangthai == 2 )
-                                <label>Trạng thái đơn hàng: </label>
-                                <select name="dh_trangthai" class="form-control input-inline" style="width: 150px; margin-right: 10px;">
-                                    <option value="2">Đang giao</option>
-                                    <option value="3">Đã giao</option>
-                                </select>
-                                <input type="submit" value="Xác nhận" class="btn btn-primary">
-                                @endif
-                            </div>
-                    </form>
-                </div>
-            </td> -->
+            
             @if( $donhang->dh_trangthai == 1)
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
                 <span style="background-color: #b0b5ae; border-radius: 8px; font-weight:600">Chờ duyệt &nbsp <i class="fa fa-clock-o"></i></span>
@@ -64,6 +40,10 @@
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
                 <span style="background-color: #68db2a; border-radius: 8px; font-weight:600">Giao hàng thành công &nbsp <i class="fas fa-check"></i></span>
             </td>
+            @elseif( $donhang->dh_trangthai == 6)
+            <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
+                <span style="background-color:bisque;color:red; border-radius: 8px; font-weight:600">Giao hàng không thành công &nbsp <i class="fas fa-check"></i></span>
+            </td>
             @endif
 
 
@@ -79,8 +59,6 @@
 
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->nhanviens->hoten}}</td>
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->dh_thoigiandathang }}</td>
-
-
 
 
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">

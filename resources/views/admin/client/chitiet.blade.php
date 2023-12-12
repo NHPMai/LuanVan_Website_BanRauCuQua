@@ -73,6 +73,10 @@
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
                 <span style="background-color:beige;color:crimson ;border-radius: 8px;  font-weight:600">Đã hủy đơn hàng &nbsp <i class="fa fa-times"></i> </span>
             </td>
+            @elseif( $donhang->dh_trangthai == 6)
+            <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
+                <span style="background-color:bisque;color:red;border-radius: 8px;  font-weight:600">Đã hủy đơn hàng &nbsp <i class="fa fa-times"></i> </span>
+            </td>
             @endif
 
 

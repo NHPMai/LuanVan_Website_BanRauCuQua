@@ -14,6 +14,8 @@
         <li style="font-weight: 700; color:blue">Đánh giá đơn hàng: <strong style="font-weight: 700; color:black">{{ $donhang->dh_binhluan}}</strong></li>
         @elseif( $donhang->dh_trangthai == 5)
         <li style="font-weight: 700; color:crimson">Lý do hủy đơn hàng: <strong style="font-weight: 700; color:black">{{ $donhang->dh_huy }}</strong></li>
+        @elseif( $donhang->dh_trangthai == 6)
+        <li style="font-weight: 700; color:crimson">Lý do giao hàng thất bại: <strong style="font-weight: 700; color:black">{{ $donhang->dh_huy }}</strong></li>
         @endif
     </ul>
 </div>
@@ -69,6 +71,10 @@
                 @elseif( $donhang->dh_trangthai == 5)
                 <td class="column-6" style="text-align: center;vertical-align: middle; ">
                     <span style="background-color:beige;color:crimson ;border-radius: 8px;  font-weight:600">Đã hủy đơn hàng &nbsp <i class="fa fa-times"></i> </span>
+                </td>
+                @elseif( $donhang->dh_trangthai == 6)
+                <td class="column-6" style="text-align: center;vertical-align: middle; ">
+                    <span style="background-color:bisque;color:red;border-radius: 8px;  font-weight:600">Giao hàng thất bại &nbsp  </span>
                 </td>
                 @endif
             </tr>
@@ -131,7 +137,7 @@
 <div style="margin-top:200px" class="modal fade" id="huydon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
 
-        <form action="/user/huydonhang/{{$donhang->id}}" method="post">
+        <form action="/admin/huydonhang/{{$donhang->id}}" method="post">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">

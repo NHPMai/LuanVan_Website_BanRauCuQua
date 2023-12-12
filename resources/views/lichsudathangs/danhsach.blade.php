@@ -52,6 +52,10 @@
         <td class="column-6" style="text-align: center;vertical-align: middle;  border: 1px solid LightGray;">
           <span style="background-color:crimson; color:white ; border-radius: 8px; font-weight:700; height: 40px; padding-left:5px; padding-right:5px">Đã hủy đơn hàng &nbsp <i class="fa fa-times"></i></span>
         </td>
+        @elseif( $b->dh_trangthai == 6)
+        <td class="column-6" style="text-align: center;vertical-align: middle;  border: 1px solid LightGray;">
+          <span style="background-color:bisque;color:red; border-radius: 8px; font-weight:700; height: 40px; padding-left:5px; padding-right:5px">Giao hàng thất bại &nbsp <i class="fa fa-times"></i></span>
+        </td>
         @endif
 
         <td style="vertical-align: middle;text-align: center; font-weight:700;"> {{ number_format($b->dh_thanhtien, 0, '', '.') }} đ</td>

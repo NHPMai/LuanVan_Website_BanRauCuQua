@@ -11,19 +11,30 @@ class ProductService
 {
     const LIMIT = 16;
 
-    public function get($page = null)
+    // public function get($page = null)
+    // {
+    //     return Product::select('id', 'ten', 'gia', 'hinhanh')
+    //         ->orderByDesc('id')
+    //         ->when($page != null, function ($query) use ($page) {
+    //             $query->offset($page * self::LIMIT);
+    //         })
+    //         ->where('hoatdong',1)
+    //         ->where('an',1)
+    //         ->where('soluongsp','!=',0)
+    //         ->limit(self::LIMIT)
+    //         ->get();
+    // }
+
+    public function get()
     {
         return Product::select('id', 'ten', 'gia', 'hinhanh')
             ->orderByDesc('id')
-            ->when($page != null, function ($query) use ($page) {
-                $query->offset($page * self::LIMIT);
-            })
             ->where('hoatdong',1)
             ->where('an',1)
             ->where('soluongsp','!=',0)
-            ->limit(self::LIMIT)
             ->get();
     }
+
 
     public function show($id)
     {

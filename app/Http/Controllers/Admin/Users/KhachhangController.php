@@ -174,7 +174,7 @@ class KhachhangController extends Controller
        
         $khachhang = khachhang::find($id);
        
-        $donhang = Donhang::where('khachhang_id', $id)->get();
+        $donhang = Donhang::where('khachhang_id', $id)->orderby('id','DESC')->get();
         // dd($donhang);
         return view('admin.client.chitiet', [
             'khachhang' => $khachhang,

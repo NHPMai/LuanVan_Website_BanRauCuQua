@@ -81,7 +81,11 @@ class CartController extends Controller
 
     public function huydonhang(Request $req, $id)
     {
-       
+        $order = Donhang::find($id);
+        $id_nd = Auth::user()->id;
+        $nhanvien = NhanVien::where('id', $id_nd)->first();
+        $id_nv = $nhanvien->id;
+
         $detail_order = Chitietdonhang::with('product')
             ->where('donhang_id', $id)
             ->get();
@@ -95,11 +99,12 @@ class CartController extends Controller
 
         $order = Donhang::where('id', $id)->first();
         $order->dh_huy = $req->dh_huy;
+        $order->nhanvien_id = $id_nv;
         $order->dh_trangthai = 5;
         $order->save();
 
 
-        // Session::flash('success', 'Hủy đơn hàng thành công!');
+        Session::flash('success', 'Hủy đơn hàng thành công!');
         return redirect('admin/customers');
     }
 

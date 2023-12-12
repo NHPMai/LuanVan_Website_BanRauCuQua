@@ -8,6 +8,7 @@ use App\Http\Services\Menu\MenuService;
 use App\Http\Services\Brand\BrandService;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Services\Product\ProductService;
+use App\Models\Menu;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -44,14 +45,15 @@ class MainController extends Controller
         ])->with('brands',$brand_product);
     }
 
-
-    public function shop()
-    {
+    const LIMIT = 16;
+    public function shop( $page = null)
+    { 
+       
         $brand_product = DB::table('brands')->where('hoatdong','1')->orderBy('id','desc')->get();
-        $min_price = Product::min('gia');
-        $max_price = Product::max('gia');
-        $min_price_range = $min_price + 100000;
-        $max_price_range = $max_price + 100000;
+        // $min_price = Product::min('gia');
+        // $max_price = Product::max('gia');
+        // $min_price_range = $min_price - 10000;
+        // $max_price_range = $max_price + 20000;
 
 
         if(isset($_GET['sort_by'])){
@@ -59,37 +61,49 @@ class MainController extends Controller
             if ($sort_by == 'gia_giam_dan'){
                 $products = Product::orderBy('gia','desc')
                     ->where('hoatdong',1)
-                    ->paginate(10)->appends(request()->query());
+                    ->where('an',1)
+                    ->where('soluongsp','!=',0)
+                    ->paginate(20);
             }
             elseif ($sort_by == 'gia_tang_dan'){
                 $products = Product::orderBy('gia','asc')
                     ->where('hoatdong',1)
-                    ->paginate(10)->appends(request()->query());
-            }
-            elseif ($sort_by == 'gia_giam_dan'){
-                $products = Product::orderBy('gia','desc')
-                    ->where('hoatdong',1)
-                    ->paginate(10)->appends(request()->query());
+                    ->where('an',1)
+                    ->where('soluongsp','!=',0)
+                    ->paginate(20);
             }
             elseif ($sort_by == 'ten_a_z'){
-                $products = Product::orderBy('ten','desc')
+                $products = Product::orderBy('ten','asc')
                     ->where('hoatdong',1)
-                    ->paginate(10)->appends(request()->query());
+                    ->where('an',1)
+                    ->where('soluongsp','!=',0)
+                    ->paginate(20);
             }
             elseif ($sort_by == 'ten_z_a'){
-                $products = Product::orderBy('gia','asc')
+                $products = Product::orderBy('ten','desc')
                     ->where('hoatdong',1)
-                    ->paginate(10)->appends(request()->query());
+                    ->where('an',1)
+                    ->where('soluongsp','!=',0)
+                    ->paginate(20);
             }
-            else{
-                $products = $this->product->get();
-            }
+           
 
-        }elseif(isset($_GET['start_price']) &&  $_GET['end_price']){
-            $min_price = $_GET['start_price'];
-            $max_price = $_GET['end_price'];
+        // }elseif(isset($_GET['start_price']) &&  $_GET['end_price']){
+        //     $min_price = $_GET['start_price'];
+        //     $max_price = $_GET['end_price'];
 
-            $products = Product::whereBetween('gia',[$min_price,$max_price])->orderBy('id','ASC')->paginate(6)->appends(request()->query());
+        //     $products = Product::whereBetween('gia',[$min_price,$max_price])->orderBy('id','ASC')->paginate(6);
+        } else{
+            $products = Product::select('id', 'ten', 'gia', 'hinhanh')
+                ->orderByDesc('id')
+                ->when($page != null, function ($query) use ($page) {
+                    $query->offset($page * self::LIMIT);
+                })
+                ->where('hoatdong',1)
+                ->where('an',1)
+                ->where('soluongsp','!=',0)
+                ->limit(self::LIMIT)
+                ->get();
         }
 
 
@@ -97,9 +111,13 @@ class MainController extends Controller
             'title' => 'Rau quả Vegetable Family',
             'sliders' => $this->slider->show(),
             'menus' => $this->menu->show(),
-            'products' => $this->product->get(),
+            // 'products' => $this->product->get(),
            
-        ])->with('brands',$brand_product)->with('min_price',$min_price)->with('max_price',$max_price)->with('max_price_range', $max_price_range)->with('min_price_range', $min_price_range);
+        ])->with('brands',$brand_product)
+        // ->with('min_price',$min_price)->with('max_price',$max_price)
+        // ->with('max_price_range', $max_price_range)
+        // ->with('min_price_range', $min_price_range)
+        ->with('products', $products);
     }
 
     public function about()
@@ -110,12 +128,12 @@ class MainController extends Controller
     }
         
 
-    // public function contact()
-    // {
-    //     return view('contact',[
-    //         'title' => 'Liên Hệ',
-    //     ]);
-    // }
+    public function contact()
+    {
+        return view('contact',[
+            'title' => 'Liên Hệ',
+        ]);
+    }
 
     public function loadProduct(Request $request)
     {

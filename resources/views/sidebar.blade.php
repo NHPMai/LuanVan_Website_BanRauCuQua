@@ -13,21 +13,7 @@
 
 
 		<!--BRAND-PRODUCT-->
-		<!-- <h2>Thương Hiệu</h2>
-		<div class="brands_products" style="text-align: center;">
-			<div class="brands-name">
-				<ul >
-					<li>
-						@foreach($brands as $key => $brand)
-						<h4 class="panel-title" style="line-height: 1.5;" >
-							<a href="{{URL::to('/thuonghieusanpham/'.$brand->id)}}">  {{$brand->ten}} </a>
-						</h4>
-						@endforeach
-					</li>
-				</ul>
-			</div>
-		</div> -->
-		<h2>Thương Hiệu</h2>
+				<h2>Thương Hiệu</h2>
 		<div class="panel-group category-products" id="accordian">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -37,33 +23,17 @@
 		</div>
 
 
-		<!-- <h2>Lọc Sản Phẩm</h2>
-		<div class="panel-group category-products" id="accordian">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title" style="text-align: center;"><a href=""></a> Sẩn Phẩm: A-Z </h4>
-				</div>
-			</div>
-		</div> -->
-
-		<!-- <div class="price-range">
-			<h2>Price Range</h2>
-			<div class="well text-center">
-				<input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br />
-				<b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
-			</div>
-		</div> -->
-
 		<div class="price-range">
-			<label for="amount">Lọc giá theo</label>
+			<!-- <h2 for="amount">Lọc theo giá</h2> -->
 			<form>
 				<div id="slider-range"></div>
 				<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
 				<input type="hidden" name="start_price" id="start_price">
 				<input type="hidden" name="end_price" id="end_price">
 				<br>
-				<input type="submit" name="filter_price" value="Lọc giá" class="btn btn-sm btn-default">
+				<!-- <input type="submit" name="filter_price" value="Lọc giá" class="btn btn-sm btn-default"> -->
 			</form>
 		</div>
-	</div>
+
+
 </section>

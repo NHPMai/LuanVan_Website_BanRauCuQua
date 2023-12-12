@@ -362,21 +362,17 @@
 
 <!----------------------------------LỌC SẢN PHẨM---------------------------------->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#slider-range").slider({
-			orientation: "horizontal",
-			range: true,
-			values: [17, 67],
-			slide: function(event, ui) {
-				$("#amount").val("$" + ui.values[0] + " - đ" + ui.values[1]);
-			}
-		});
+	$(document).ready(function(){
+		$('#sort').on('change',function(){
 
-		$("#amount").val("đ" + $("#slider-range").slider("values", 0) +
-			" - $" + $("#slider-range").slider("values", 1));
-	});
+			var url = $(this).val();
+			if(url){
+				window.location = url;
+			}
+			return false;
+		});
+	})
 </script>
 
 

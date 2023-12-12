@@ -325,6 +325,10 @@
               <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#xemlido" style="font-weight: 700;">
                 Xem lí do hủy đơn
               </button>
+              @elseif ($donhang->dh_trangthai == 6)
+              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#xemlido" style="font-weight: 700;">
+                Xem lí do giao hàng thất bại
+              </button>
 
               @endif
             </div>
@@ -335,7 +339,7 @@
                 <div class="col"> <strong>Giao bởi:</strong> <br> Chưa xác định, | <i class="fa fa-phone"></i> {{$donhang->khachhangs->sodienthoai}} </div>
                 <div class="col"> <strong>Trạng thái:</strong> <br>
                   @if ($donhang->dh_trangthai == 1)
-                  Chờ duyệt
+                  Chờ duyệt 
                   @elseif ($donhang->dh_trangthai == 2)
                   Đã duyệt
                   @elseif ($donhang->dh_trangthai == 3)
@@ -343,7 +347,9 @@
                   @elseif ($donhang->dh_trangthai == 4)
                   Giao hàng thành công
                   @elseif ($donhang->dh_trangthai == 5)
-                  Đơn hàng đã hủy
+                  <b style="color: #ff2b00;">Đơn hàng đã hủy </b>
+                  @elseif ($donhang->dh_trangthai == 6)
+                  <b style="color: #ff2b00;">Giao hàng thất bại </b>
                   @endif
                 </div>
                 <div class="col"> <strong>Theo dõi #:</strong> <br>{{$donhang->id}}</div>
@@ -487,7 +493,11 @@
         @csrf
         <div class="modal-content">
           <div class="modal-header">
+            @if($donhang->dh_trangthai == 5)
             <h5 class="modal-title" id="exampleModalLabel">Xem lí do hủy đơn hàng </h5>
+            @elseif ($donhang->dh_trangthai == 6)
+            <h5 class="modal-title" id="exampleModalLabel">Xem lí do giao hàng thất bại </h5>
+            @endif
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -553,6 +563,8 @@
         </div>
     </div>
   </div>
+
+
 
 </section>
 

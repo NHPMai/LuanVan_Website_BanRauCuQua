@@ -112,6 +112,16 @@ class ShipperController extends Controller
         ]);
     }
 
+    public function donhang_thatbai()
+    {
+        $id_gh = Auth::user()->id;
+        $donhang6 = Donhang::where('dh_trangthai', 6)->where('giaohang_id', $id_gh)->orderBy('id', 'desc')->get();
+        return view('shipper.donhang_thatbai', [
+            'title' => 'Danh Sách Giao Hàng Thất Bại',
+            'donhang6' => $donhang6,
+        ]);
+    }
+
     public function show(Donhang $donhang)
     {
 
@@ -236,7 +246,6 @@ class ShipperController extends Controller
             });
         }
 
-
         $order_date = $order->dh_thoigiandathang;
 
         $thongke = ThongKe::where('tk_Ngay', $order_date)->get();
@@ -316,7 +325,7 @@ class ShipperController extends Controller
 
         $order = Donhang::where('id', $id)->first();
         $order->dh_huy = $req->dh_huy;
-        $order->dh_trangthai = 5;
+        $order->dh_trangthai = 6;
         $order->save();
 
 

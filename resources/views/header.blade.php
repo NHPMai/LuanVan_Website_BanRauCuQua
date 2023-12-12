@@ -116,12 +116,12 @@
                             @endif
                         </li>
 
-                        <li>
+                        <!-- <li>
                             <a href="about.html">Tin tức</a>
-                        </li>
+                        </li> -->
 
                         <li>
-                            <a href="contact.html">Liên hệ</a>
+                            <a href="danh-muc/contact">Liên hệ</a>
                         </li>
                     </ul>
                 </div>
