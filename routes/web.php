@@ -142,6 +142,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('add', [ProductController::class, 'create']);
             Route::post('add', [ProductController::class, 'store']);
             Route::get('list', [ProductController::class, 'index']);
+            Route::get('list_destroy', [ProductController::class, 'list_destroy']);
             Route::get('edit/{product}', [ProductController::class, 'show']);
             Route::post('edit/{product}', [ProductController::class, 'update']);
             Route::DELETE('destroy', [ProductController::class, 'destroy']);
@@ -149,6 +150,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('active/{id}', [ProductController::class, 'active']);
             Route::get('unactive/{id}', [ProductController::class, 'unactive']);
 
+
+            
             Route::get('list_comment', [ProductController::class, 'list_comment']);
             Route::post('allow_comment', [ProductController::class, 'allow_comment']);
             Route::post('reply_comment', [ProductController::class, 'reply_comment']);

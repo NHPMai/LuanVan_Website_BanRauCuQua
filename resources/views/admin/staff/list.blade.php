@@ -118,9 +118,9 @@
                                 <i class="fas fa-edit"></i>
                             </a>
 
-                            <a href="#" class="btn btn-danger btn-sm" onclick="removeRow({{$nhanvien->id}},'/admin/staffs/destroy')">
+                            <!-- <a href="#" class="btn btn-danger btn-sm" onclick="removeRow({{$nhanvien->id}},'/admin/staffs/destroy')">
                                 <i class="fas fa-trash"></i>
-                            </a>
+                            </a> -->
 
                         </td>
 

@@ -91,7 +91,7 @@
     </div>
 
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Thêm</button>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
         <button type="submit" class="btn btn-danger">Hủy</button>
     </div>
     @csrf

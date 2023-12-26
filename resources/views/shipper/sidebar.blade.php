@@ -13,7 +13,7 @@
                 <!-- <img src="/template/admin/dist/img/logoadmin.png" class="img-circle elevation-2" alt="User Image"> -->
                 <img src="{{ Auth('shipper')->user()->gh_avatar }}" style="border-radius: 50%; border: 2px solid #a1a1a1;" height="100" width="100">
             </div>
-            <div class="info" style="vertical-align: middle;margin-top: 40px; margin-left: 20px;">
+            <div class="info" style="vertical-align: middle; margin-left: 20px;">
                 <a href="#" class="d-block" style="font-size: 25px; font-weight:700">{{ Auth('shipper')->user()->gh_hoten }}</a>
             </div>
         </div>

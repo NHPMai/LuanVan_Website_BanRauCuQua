@@ -47,7 +47,7 @@
                 </td>
                 <td class="column-2" style="text-align: center;vertical-align: middle;  font-size:18px; color:navy; font-weight:700">{{ $chitietdonhang->product->ten }}</td>
                 <td class="column-3" style="text-align: center;vertical-align: middle; font-size:18px;">{{ number_format($price, 0, '', '.') }}</td>
-                <td class="column-4" style="text-align: center;vertical-align: middle; font-size:18px;">{{ $chitietdonhang->ctdh_soluong }}</td>
+                <td class="column-4" style="text-align: center;vertical-align: middle; font-size:18px;">{{ $chitietdonhang->ctdh_soluong }} kg</td>
                 <td class="column-5" style="text-align: center;vertical-align: middle; font-size:18px;">{{ number_format($price, 0, '', '.') }}</td>
 
                 @if( $donhang->dh_trangthai == 1)
@@ -89,7 +89,7 @@
             <div class="col-md-8"></div>
             <div class="col-md-4">
 
-                <div class="form-inline">
+                <div class="form-inline" style="width:500px">
                     @if( $donhang->dh_trangthai== 1)
                     <label style="margin-bottom: 10px;">Trạng thái đơn hàng: </label>
                     <select name="dh_trangthai" class="form-control input-inline" style="width: 150px; margin-right: 10px;">ư
@@ -114,7 +114,7 @@
                     @elseif( $donhang->dh_trangthai == 3 )
                     <div class="row">
                         <label>Trạng thái đơn hàng: </label>
-                        <div class="col-12">
+                        <div class="col-12" style="width:520px">
 
                             <select name="dh_trangthai" class="form-control input-inline" style="width: 150px; margin-right: 10px;">
                                 <option value="3">Đang giao</option>

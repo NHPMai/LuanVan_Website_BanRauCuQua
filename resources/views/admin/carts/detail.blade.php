@@ -46,7 +46,7 @@
                 </td>
                 <td class="column-2" style="text-align: center;vertical-align: middle; font-size:18px; color:navy; font-weight:700">{{ $chitietdonhang->product->ten }}</td>
                 <td class="column-3" style="text-align: center;vertical-align: middle; font-size:18px; ">{{ number_format($price, 0, '', '.') }}</td>
-                <td class="column-4" style="text-align: center;vertical-align: middle ; font-size:18px; ">{{ $chitietdonhang->ctdh_soluong }}</td>
+                <td class="column-4" style="text-align: center;vertical-align: middle ; font-size:18px; ">{{ $chitietdonhang->ctdh_soluong }} kg</td>
                 <td class="column-5" style="text-align: center;vertical-align: middle ; font-size:18px; ">{{ number_format($price, 0, '', '.') }}</td>
 
                 @if( $donhang->dh_trangthai == 1)
@@ -81,7 +81,7 @@
             @endforeach
             <tr>
                 <td colspan="5" class="text-right" style="font-size: 20px; color:brown; font-weight:700">Tổng Tiền</td>
-                <td style="font-size: 20px; color:brown; font-weight:700">{{ number_format($total, 0, '', '.') }}</td>
+                <td style="font-size: 20px; color:brown; font-weight:700">{{ number_format($total, 0, '', '.') }} vnđ</td>
             </tr>
 
         </tbody>
@@ -95,20 +95,20 @@
                 <div class="row">
                     <div class="col-12 ">
                         <div class="form-inline" style="margin-bottom: 10px;">
-                            <label style="margin-bottom: 10px; margin-left: 100px;margin-right: 10px;">Trạng thái đơn hàng: </label>
+                            <label style="margin-bottom: 10px; margin-left: 10px;margin-right: 10px;">Trạng thái đơn hàng: </label>
                             <select name="dh_trangthai" class="form-control input-inline" style="width: 150px; margin-right: 10px;">ư
                                 <option value="1">Chờ duyệt</option>
                                 <option value="2">Đã duyệt</option>
                             </select>
 
-                            <label style="margin-left: 120px; margin-right: 10px;">Giao hàng <span class="text-danger">(*)</span></label>
+                            <label style="margin-left: 20px; margin-right: 10px;">Giao hàng <span class="text-danger">(*)</span></label>
                             <select class="form-control" name="giaohang_id">
                                 @foreach($giaohangs as $giaohang)
                                 <option value="{{ $giaohang->id }}">{{ $giaohang->gh_hoten }}</option>
                                 @endforeach
                             </select>
 
-                            <input style="margin-left: 150px" type="submit" value="Xác nhận" class="btn btn-primary 0"> &nbsp;
+                            <input style="margin-left: 110px" type="submit" value="Xác nhận" class="btn btn-primary 0"> &nbsp;
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#huydon" style="font-weight: 700;">
                                 Hủy đơn hàng
                             </button>

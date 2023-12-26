@@ -45,6 +45,14 @@ class ProductController extends Controller
         // return 'tao';
     }
 
+    public function list_destroy()
+    {
+        return view('admin.product.list_destroy', [
+            'title' => 'Danh Sách Sản Phẩm',
+            'products' => $this->productService->get_destroy(),
+            'brands' => $this->productService->get()
+        ]);
+    }
 
     // public function store(ProductRequest $request)
     // {
@@ -191,7 +199,7 @@ class ProductController extends Controller
                 ['an' => 0],
             );
 
-        Session::flash('success', 'Khóa sản phẩm thành công!');
+        Session::flash('success', 'Xóa sản phẩm thành công!');
         // return redirect()->route('admin.staffs.edit_permission',['id' => $nv_id]);
         return redirect()->back();
     }

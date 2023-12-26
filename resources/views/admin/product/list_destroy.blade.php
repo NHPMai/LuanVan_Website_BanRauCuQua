@@ -33,22 +33,19 @@
             <!-- <td style="vertical-align: middle;text-align: center; border: 1px solid LightGray;">{!! \App\Helpers\Helper::active($product->hoatdong) !!}</td> -->
 
             <td style="vertical-align: middle;text-align: center; border: 1px solid LightGray;">
-                <a class="btn btn-primary btn-sm" href="/admin/products/edit/{{ $product->id }}">
-                    <i class="fas fa-edit"></i>
-                </a>
+             
                 <!-- <a href="#" class="btn btn-danger btn-sm" onclick="removeRow( {{ $product->id }} ,'/admin/products/destroy')">
                     <i class="fas fa-trash"></i>
                 </a> -->
 
                 @if ( $product->an == 1 )
-                <a class="btn btn-danger btn-sm" href="/admin/products/unactive/{{$product->id}}" onclick='return confirm("Bạn chắc chắn xóa không?")'>
-                    <i class="fas fa-trash" ></i>
+                <a class="btn btn-success btn-sm" href="/admin/products/unactive/{{$product->id}}" onclick='return confirm("Bạn chắc chắn xóa không?")'>
+                    <i class="fas fa-lock-open"></i>
                 </a>
                 @elseif ( $product->an == 0 )
-                <!-- <a   href="/admin/products/active/{{$product->id}}" class="btn btn-danger btn-sm" onclick='return confirm("Bạn chắc chắn mở khóa không?")'>
+                <a   href="/admin/products/active/{{$product->id}}" class="btn btn-danger btn-sm" onclick='return confirm("Bạn chắc chắn mở khóa không?")'>
                     <span class="fas fa-lock" style="font-size: 15px;color: white; font-weight: bold"></span>
-                </a> -->
-
+                </a>
                 @endif
 
             </td>

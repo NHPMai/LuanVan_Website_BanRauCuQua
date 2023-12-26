@@ -36,7 +36,7 @@
     <thead style="background-color:blanchedalmond;">
         <tr>
             <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">ID</th>
-            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Tên Khách Hàng</th>
+            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Nhân viên giao hàng</th>
             <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Tổng tiền</th>
             <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Tình Trạng</th>
             <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Phương Thức Thanh Toán</th>
@@ -49,7 +49,7 @@
         @foreach($donhangs as $key => $donhang)
         <tr>
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->id }}</td>
-            <td style="vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->khachhangs->hoten}}</td>
+            <td style="vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->giaohangs->gh_hoten}}</td>
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{number_format($donhang->dh_thanhtien, 0,',','.') }} đ</td>
 
 
@@ -67,7 +67,7 @@
             </td>
             @elseif( $donhang->dh_trangthai == 4)
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
-                <span style="background-color: #68db2a; border-radius: 8px;  font-weight:600">Giao hàng thành công &nbsp <i class="fa fa-check"></i></span>
+                <span style="background-color: #68db2a; border-radius: 8px;  font-weight:600">Giao hàng thành công</span>
             </td>
             @elseif( $donhang->dh_trangthai == 5)
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
@@ -75,7 +75,7 @@
             </td>
             @elseif( $donhang->dh_trangthai == 6)
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
-                <span style="background-color:bisque;color:red;border-radius: 8px;  font-weight:600">Đã hủy đơn hàng &nbsp <i class="fa fa-times"></i> </span>
+                <span style="background-color:bisque;color:red ;border-radius: 8px;  font-weight:600">Giao hàng thất bại &nbsp <i class="fa fa-times"></i> </span>
             </td>
             @endif
 

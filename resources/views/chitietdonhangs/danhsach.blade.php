@@ -135,7 +135,7 @@
                                         @php
                                         $total_coupon = ($total*$cou['mgg_giatrigiamgia'])/100;
                                         echo '
-                                    <p> '.number_format($total_coupon,0,',','.').'đ</p>';
+                                    <p class="mtext-110"> '.number_format($total_coupon,0,',','.').'đ</p>';
 
                                     @endphp
                                     </p>
@@ -147,7 +147,7 @@
                                     Tiền thanh toán:
                                 </span>
 
-                                <div class="size-208" style="text-align: right; font-size: 20px;">
+                                <div class="size-208" style="text-align: right; font-size: 20px; margin-left: 45px;">
                                     <span class="mtext-110 cl2">
                                         {{number_format($total - $total_coupon, 0,',','.') }} đ
                                     </span>
@@ -177,7 +177,7 @@
                                         @php
                                         $total_coupon = $cou['mgg_giatrigiamgia'];
                                         echo '
-                                    <p> '.number_format($total_coupon,0,',','.').'đ</p>';
+                                    <p class="mtext-110"> '.number_format($total_coupon,0,',','.').' đ</p>';
 
                                     @endphp
                                     </p>
@@ -189,7 +189,7 @@
                                     Tiền thanh toán
                                 </div>
 
-                                <div class="col-6 mtext-110" style="text-align: right;">
+                                <div class="col-6 mtext-110" style="text-align: right; ">
                                     {{number_format($total - $total_coupon, 0,',','.') }} đ
                                 </div>
                             </div>

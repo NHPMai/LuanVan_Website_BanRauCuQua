@@ -90,7 +90,8 @@ class MenuService
     {
         $query = $menu->products()
             ->select('id', 'ten', 'gia', 'hinhanh')
-            ->where('hoatdong', 1);
+            ->where('hoatdong', 1)
+            ->where('an',1);
 
         if ($request->input('gia')) {
             $query->orderBy('gia', $request->input('gia'));

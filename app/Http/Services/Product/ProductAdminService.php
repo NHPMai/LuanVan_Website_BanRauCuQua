@@ -53,7 +53,13 @@ class ProductAdminService
     public function get()
     {
         return Product::with('menu','brand')
-        ->orderBy('id', 'desc')->paginate(10);
+        ->orderBy('id', 'desc')->where('hoatdong',1)->where('an',1)->paginate(10);
+    }
+
+    public function get_destroy()
+    {
+        return Product::with('menu','brand')
+        ->orderBy('id', 'desc')->where('hoatdong',1)->where('an',0)->paginate(10);
     }
 
     public function update($request, $product)

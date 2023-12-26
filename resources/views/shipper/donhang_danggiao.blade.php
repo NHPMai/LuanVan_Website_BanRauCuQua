@@ -7,11 +7,11 @@
     <thead style="background-color:blanchedalmond;">
         <tr>
             <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">ID</th>
-            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Tên Khách Hàng</th>
+            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray; width:105px">Tên Khách Hàng</th>
             <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Tổng tiền</th>
             <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Tình Trạng</th>
-            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Phương Thức Thanh Toán</th>
-            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Nhân Viên Duyệt Đơn</th>
+            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray; padding-left:0px; padding-right:0px">Phương Thức Thanh Toán</th>
+            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;width: 80px;">Nhân Viên Duyệt Đơn</th>
             <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Ngày Đặt</th>
             <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Hành Động</th>
         </tr>
@@ -41,7 +41,7 @@
             </td>
             @elseif( $donhang->dh_trangthai == 6)
             <td class="column-6" style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
-                <span style="background-color:bisque;color:red; border-radius: 8px; font-weight:600">Giao hàng không thành công &nbsp <i class="fas fa-check"></i></span>
+                <span style="background-color:bisque;color:red; border-radius: 8px; font-weight:600">Giao hàng thất bại</span>
             </td>
             @endif
 

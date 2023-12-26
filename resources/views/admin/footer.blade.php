@@ -261,6 +261,7 @@
     });
 </script>
 
+
 <!------------ DUYỆT BÌNH LUẬN -------------->
 <script type="text/javascript">
     $('.comment_duyet_btn').click(function() {

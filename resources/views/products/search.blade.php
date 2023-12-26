@@ -1,7 +1,7 @@
 @extends ('home')
 @section('content')
 
-<div class="container mb-5" style="margin-top:50px">
+<div class="container mb-5" style="margin-top:50px; padding-bottom:100px">
     <div class="row isotope-grid">
         <p style=" font-size: 20px; margin-bottom: 0px; margin-top:10px">Tìm kiếm: &nbsp</p>
         <h1 style="margin-top: 0px; margin-bottom: 0px;">{{ $title }}</h1>

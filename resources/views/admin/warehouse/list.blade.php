@@ -115,14 +115,15 @@
                         @endif
                       
                         <td style="text-align: center;vertical-align: middle;">
-                            @if ( $pn->pn_trangthai == 1 )
+                       
                             <a class="btn btn-primary btn-sm" href="/admin/warehouses/view/{{$pn->id}}">
                                 <i class="fas fa-eye"></i>
                             </a>
-                            @endif
+                            @if ( $pn->pn_trangthai == 0 )
                             <a href="/admin/warehouses/active/{{$pn->id}}" class="btn btn-success btn-sm" onclick='return confirm("Bạn chắc chắn muốn duyệt phiếu nhâp không?")'>
                                 <span class="fa fa-check" style="font-size: 15px;color: white; font-weight: bold"></span>
                             </a>
+                            @endif
                             <a href="#" onclick="removeRow( {{ $pn->id }} ,'/admin/warehouses/destroy')" class="btn btn-danger btn-sm">
                                 <i class="fas fa-trash"></i>
                             </a>

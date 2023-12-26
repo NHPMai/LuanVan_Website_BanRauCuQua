@@ -158,19 +158,19 @@
 
                         <div class="size-208 " style="text-align: right;">
                             <span class="mtext-110 cl2">
-                                {{ number_format($total, 0, '', '.') }}đ
+                                {{ number_format($total, 0, '', '.') }} đ
                             </span>
                         </div>
 
                         <div class="flex-w flex-t p-t-15 ">
-                            <div class="size-209 w-full-ssm m-b-10">
+                            <div class="size-209 w-full-ssm m-b-10" style="width:150px">
                                 <span style="font-size: 20px;">
                                     Phí vận chuyển:
                                 </span>
                             </div>
 
 
-                            <div class="size-208 m-b-10" style="text-align: right;">
+                            <div class="size-208 m-b-10" style="text-align: right; padding-left: 100px;">
                                 <span class="mtext-110 cl2 phivanchuyen" id="phivanchuyen">
                                     
                                 </span>
@@ -201,7 +201,7 @@
                                             @php
                                             $total_coupon = ($total*$cou['mgg_giatrigiamgia'])/100;
                                             echo '
-                                        <p> '.number_format($total_coupon,0,',','.').'đ</p>';
+                                        <p class="mtext-110"> '.number_format($total_coupon,0,',','.').' đ</p>';
 
                                         @endphp
                                         </p>
@@ -210,11 +210,11 @@
 
                                 <div class="row p-1">
                                     <div class="col-6" style="font-size: 20px;">
-                                        Tiền thanh toán
+                                        <!-- Tiền thanh toán -->
                                     </div>
 
                                     <div class="col-6 mtext-110" style="text-align: right; font-size: 20px;">
-                                        {{number_format($total - $total_coupon , 0,',','.') }} đ
+                                        <!-- {{number_format($total - $total_coupon , 0,',','.') }} đ -->
                                     </div>
                                 </div>
 
@@ -249,11 +249,11 @@
                                 <hr class="m-tb-10">
                                 <div class="row p-1">
                                     <div class="col-6" style="font-size: 20px;">
-                                        Tiền thanh toán
+                                        <!-- Tiền thanh toán -->
                                     </div>
 
                                     <div class="col-6 mtext-110" style="text-align: right;">
-                                        {{number_format($total - $total_coupon, 0,',','.') }} đ
+                                        <!-- {{number_format($total - $total_coupon, 0,',','.') }} đ -->
                                     </div>
                                 </div>
                                 @endif
@@ -263,11 +263,11 @@
 
                                 <div class="row p-1">
                                     <div class="col-6" style="font-size: 20px;">
-                                        Tiền thanh toán
+                                        <!-- Tiền thanh toán -->
                                     </div>
 
                                     <div class="col-6 mtext-110" style="text-align: right;">
-                                        {{number_format($total, 0,',','.') }} đ
+                                        <!-- {{number_format($total, 0,',','.') }} đ -->
                                     </div>
                                 </div>
                                 @endif

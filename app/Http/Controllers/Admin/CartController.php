@@ -23,7 +23,7 @@ class CartController extends Controller
     {
         return view('admin.carts.customer', [
             'title' => 'Danh Sách Đơn Đặt Hàng',
-            'donhangs' => Donhang::orderByDesc('id')->get(),
+            'donhangs' => Donhang::orderByDesc('id')->paginate(10),
         ]);
     }
 

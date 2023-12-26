@@ -291,23 +291,18 @@
                 <h3 class="mb-0"> Thông tin chi tiết của đơn hàng ID: <span class="text-primary font-weight-bold">{{$donhang->id}}</span></h>
               </div>
               @if ($donhang->dh_trangthai == 1 )
-              <!-- <div class="text-end">
-                <a href="/user/order_cancle/{{$donhang->id}}" class="btn btn-warning" data-abc="true" style="font-weight: 600;"> <i class="fa fa-remove"></i> Hủy đơn hàng</a>
-              </div> -->
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#huydon">
                 <i class="fa fa-remove"></i> Hủy đơn hàng
               </button>
 
 
               @elseif ($donhang->dh_trangthai == 3 )
-              <div class="text-end">
+              <!-- <div class="text-end">
                 <a href="/user/order_update/{{$donhang->id}}" class="btn btn-success" data-abc="true" style="font-weight: 600;"> <i class="fa fa-check"></i> Đã nhận</a>
-              </div>
+              </div> -->
 
               @elseif ($donhang->dh_trangthai == 4 && $donhang->dh_binhluan == '')
-              <!-- <div class="text-end">
-                <a href="/user/order_cancle/{{$donhang->id}}" class="btn btn-warning" data-abc="true" style="font-weight: 600;"> <i class="fa fa-remove"></i> Hủy đơn hàng</a>
-              </div> -->
+          
               <button type="button" class="btn btn-success" data-toggle="modal" data-target="#binhluandonhang" style="font-weight: 700;">
                 Bình luận đơn hàng
               </button>

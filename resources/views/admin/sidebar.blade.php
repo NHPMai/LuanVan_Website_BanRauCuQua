@@ -13,7 +13,7 @@
                 <!-- <img src="/template/admin/dist/img/logoadmin.png" class="img-circle elevation-2" alt="User Image"> -->
                 <img src="{{ Auth('admin')->user()->avata }}" style="border-radius: 50%; border: 2px solid #a1a1a1;" height="100" width="100">
             </div>
-            <div class="info" style="vertical-align: middle;margin-top: 40px; margin-left: 20px;">
+            <div class="info" style="vertical-align: middle; margin-left: 20px;">
                 <a href="#" class="d-block" style="font-size: 25px; font-weight:700">{{ Auth('admin')->user()->hoten }}</a>
             </div>
         </div>
@@ -208,6 +208,12 @@
                                 <p>Danh sách sản phẩm</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/admin/products/list_destroy" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sản phẩm đã xóa</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
@@ -289,7 +295,7 @@
                 <li class="nav-item user-panel" style="border-bottom-width: 2px; border-bottom: 2px solid  #9a9ea3; margin-bottom:5px">
                     <a href="#" class="nav-link">
                         <i class="nav-icon 		fas fa-biking" style="color:red;"></i>
-                        <p> Quản Lý Giao Hàng
+                        <p> Quản Lý Shipper
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -297,13 +303,13 @@
                         <li class="nav-item">
                             <a href="/admin/shippers/add" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm giao hàng</p>
+                                <p>Thêm Shipper</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/admin/shippers/list" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Danh Sách giao hàng</p>
+                                <p>Danh Sách Shipper</p>
                             </a>
                         </li>
                     </ul>
@@ -365,21 +371,6 @@
                 @endif
 
                 @endforeach
-
-
-
-
-
-
-
-
-
-
-
-
-                
-
-
 
             </ul>
         </nav>

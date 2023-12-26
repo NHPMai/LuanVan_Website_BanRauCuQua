@@ -64,6 +64,8 @@ class VanChuyenController extends Controller
         $phivanchuyen->save();
     }
 
+    //hiển thị danh sách phí vận chuyển
+
     public function select_feeship()
     {
         $feeship = Phivanchuyen::orderby('id', 'DESC')->get();

@@ -220,9 +220,10 @@ class ShipperController extends Controller
             $order->save();
 
             $email =  $kh->email;
-       
-            $title_mail = "Thông báo giao hàng thành công";
-             
+            $title_mail = "Thông báo giao hàng thành công"; 
+            // $kh_ten = $kh->hoten;
+            // dd($kh_ten);       
+
             // $mailData = [
             //     'id_dh' => $order->id,
             //     'kh_ten' => $kh->hoten,
@@ -232,18 +233,21 @@ class ShipperController extends Controller
             //     $message->from($email,$title_mail);
             // });
 
-            // $mailData = [
+            $name = khachhang::where('id', $id_kh)->first();
+           
+            Mail::send('emails.giaohangthanhcong', compact('name'), function ($email) use ($name) {
+                $email->subject('Cửa Hàng Vegetable Family - Xác Nhận Giao Hàng Thành Công');
+                $email->to($name->email, $name->hoten);
+            });
+
+            // Mail::send('emails.giaohangthanhcong',[
+            //     '$email' => $email,
             //     'id_dh' => $order->id,
             //     'kh_ten' => $kh->hoten,
-            // ];
-            Mail::send('emails.giaohangthanhcong',[
-                '$email' => $email,
-                'id_dh' => $order->id,
-                'kh_ten' => $kh->hoten,
-            ], function($message) use ($email, $title_mail){
-                $message->to($email)->subject($title_mail);
-                $message->from($email,$title_mail);
-            });
+            // ], function($message) use ($email, $title_mail, $kh_ten){
+            //     $message->to($email)->subject($title_mail);
+            //     $message->from($email,$title_mail);
+            // });
         }
 
         $order_date = $order->dh_thoigiandathang;
@@ -280,7 +284,7 @@ class ShipperController extends Controller
                 // dd($quantity);
                 $sales += $detail->ctdh_gia * $detail->ctdh_soluong;
                 // dd($sales);
-                $profit = $sales - 10000;
+                $profit = $sales - 100000;
                 // dd($profit);
             }
             $total_order += 1;

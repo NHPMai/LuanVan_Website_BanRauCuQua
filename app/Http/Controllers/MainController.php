@@ -63,28 +63,28 @@ class MainController extends Controller
                     ->where('hoatdong',1)
                     ->where('an',1)
                     ->where('soluongsp','!=',0)
-                    ->paginate(20);
+                    ->paginate(40);
             }
             elseif ($sort_by == 'gia_tang_dan'){
                 $products = Product::orderBy('gia','asc')
                     ->where('hoatdong',1)
                     ->where('an',1)
                     ->where('soluongsp','!=',0)
-                    ->paginate(20);
+                    ->paginate(40);
             }
             elseif ($sort_by == 'ten_a_z'){
                 $products = Product::orderBy('ten','asc')
                     ->where('hoatdong',1)
                     ->where('an',1)
                     ->where('soluongsp','!=',0)
-                    ->paginate(20);
+                    ->paginate(40);
             }
             elseif ($sort_by == 'ten_z_a'){
                 $products = Product::orderBy('ten','desc')
                     ->where('hoatdong',1)
                     ->where('an',1)
                     ->where('soluongsp','!=',0)
-                    ->paginate(20);
+                    ->paginate(40);
             }
            
 
@@ -155,7 +155,7 @@ class MainController extends Controller
         $data = $request->all();
 
         if($data['query']){
-            $product = Product::where('hoatdong',1)->where('ten','LIKE','%'.$data['query'].'%')->get();
+            $product = Product::where('hoatdong',1)->where('ten','LIKE','%'.$data['query'].'%')->where('an',1)->get();
 
             $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
 

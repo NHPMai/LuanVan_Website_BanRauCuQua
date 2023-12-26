@@ -178,7 +178,7 @@ class ProductController extends Controller
     {
 
         $search_text = $_GET['query'];
-        $products = Product::where('ten', 'LIKE', '%' . $search_text . '%')->get();
+        $products = Product::where('ten', 'LIKE', '%' . $search_text . '%')->where('hoatdong',1)->where('an',1)->get();
 
         return view('products.search', [
             'title' => $search_text,
@@ -189,7 +189,7 @@ class ProductController extends Controller
     public function searchProductMicrophone(Request $request)
     {
         $keyworks = $request->keywork;
-        $products = Product::where('ten', 'LIKE', '%' . $keyworks . '%')->get();
+        $products = Product::where('ten', 'LIKE', '%' . $keyworks . '%')->where('hoatdong',1)->where('an',1)->get();
         return view('products.search', [
             'title' => $keyworks,
         ], compact('products'));

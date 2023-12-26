@@ -72,7 +72,7 @@
 
         <div class="content-wrapper">
             <div class="row">
-                <div class="col">
+                <!-- <div class="col">
                     <div class="row">
                         <div class="col-6">
                             <form action="{{ url('shipper/search')}}" method="GET" class="form-inline pl-3 pt-3">
@@ -101,7 +101,7 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- <div class="col">
                 <div class="row">

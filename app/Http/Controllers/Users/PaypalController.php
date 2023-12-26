@@ -190,7 +190,7 @@ class PaypalController extends Controller
                     $chitietdonhang->magiamgia_id = $coupons[0]['id'];
                     $chitietdonhang->dh_ghichu = $request->dh_ghichu;
                     $chitietdonhang->dh_giamgia = $coupons[0]['mgg_magiamgia'];
-                    $chitietdonhang->dh_diachigiaohang = 'An Thành Tây, Vũng Liêm, Vĩnh Long';
+                    $chitietdonhang->dh_diachigiaohang = 'An Thành Đông';
                     // $chitietdonhang->dh_diachigiaohang = $dh_diachigiaohang;
                     $chitietdonhang->dh_thoigiandathang = $today;
                     $chitietdonhang->dh_thanhtien = $tien_end;
@@ -212,7 +212,7 @@ class PaypalController extends Controller
                     $chitietdonhang = new Donhang;
                     $chitietdonhang->khachhang_id = $idkh;
                     $chitietdonhang->dh_ghichu = $request->dh_ghichu;
-                    $chitietdonhang->dh_diachigiaohang = 'An Thành Tây, Vũng Liêm, Vĩnh Long';
+                    $chitietdonhang->dh_diachigiaohang = 'An Thành Đông';
                     // $chitietdonhang->dh_diachigiaohang = $dh_diachigiaohang;
                     $chitietdonhang->dh_thoigiandathang = $today;
                     $chitietdonhang->dh_thanhtien = $tien_end;

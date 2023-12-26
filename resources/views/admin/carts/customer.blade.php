@@ -1,17 +1,18 @@
 @extends('admin.main')
 
 @section('content')
-<p style="font-weight:bold; font-size: 20px; ">Tổng Số Đơn Hàng: {{$donhangs->count()}}</p>
+<!-- <p style="font-weight:bold; font-size: 20px; ">Tổng Số Đơn Hàng: {{$donhangs->count()}}</p> -->
 
 <table class="table pt-2">
     <thead style="background-color:blanchedalmond;">
         <tr>
             <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">ID</th>
-            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Tên Khách Hàng</th>
-            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Tổng tiền</th>
+            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray; width:105px">Tên Khách Hàng</th>
+            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Tổng tiền (vnđ)</th>
             <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Tình Trạng</th>
-            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Phương Thức Thanh Toán</th>
-            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Nhân Viên Duyệt Đơn</th>
+            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray; padding-left:0px; padding-right:0px">Phương Thức Thanh Toán</th>
+            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;width: 80px;">Nhân Viên Duyệt Đơn</th>
+            <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;width: 80px;">Nhân Viên Giao Hàng</th>
             <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Ngày Đặt</th>
             <th style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">Hành Động</th>
         </tr>
@@ -20,8 +21,8 @@
         @foreach($donhangs as $key => $donhang)
         <tr>
             <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->id }}</td>
-            <td style="vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->khachhangs->hoten}}</td>
-            <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{number_format($donhang->dh_thanhtien, 0,',','.') }} đ</td>
+            <td style="vertical-align: middle; border: 1px solid LightGray; text-align:center">{{ $donhang->khachhangs->hoten}}</td>
+            <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray; width:85px">{{number_format($donhang->dh_thanhtien, 0,',','.') }}</td>
 
 
             @if( $donhang->dh_trangthai == 1)
@@ -63,12 +64,12 @@
 
 
 
-            <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->nhanviens->hoten}}</td>
+            <td style="text-align: center; vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->nhanviens->hoten}}</td>
+            <td style="text-align: center; vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->giaohangs->gh_hoten}}</td>
 
+            <td style="text-align: center; vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->dh_thoigiandathang }}</td>
 
-            <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">{{ $donhang->dh_thoigiandathang }}</td>
-
-            <td style="text-align: center;vertical-align: middle; border: 1px solid LightGray;">
+            <td style="text-align: center; vertical-align: middle; border: 1px solid LightGray;">
                 <a class="btn btn-primary btn-sm" href="/admin/customers/view/{{ $donhang->id }}">
                     <i class="fas fa-eye"></i>
                 </a>
@@ -107,5 +108,5 @@
         </div>
     </div>
   </div> -->
-
+  {!! $donhangs->links() !!}
 @endsection
